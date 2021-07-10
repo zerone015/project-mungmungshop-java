@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.member">
+
+	<resultMap id="memResult" type="memberVO">
+		<result property="Member_ID" column="Member_ID"/>
+		<result property="Member_PW" column="Member_PW"/>
+		<result property="Member_name" column="Member_name"/>
+		<result property="Member_email" column="Member_email"/>
+		<result property="Member_Phone" column="Member_Phone"/>
+		<result property="Member_Nick" column="Member_Nick"/>
+		<result property="Member_joindate" column="Member_joindate"/>
+		<result property="Member_manager" column="Member_manager"/>
+	</resultMap>
+	
+	<select id="selectIdCnt" resultType="int">
+		<![CDATA[	
+			SELECT COUNT(*) FROM Members
+			WHERE Member_ID = #{Member_ID}
+		]]>	
+	</select>
+	
+	<select id="selectNickNameCnt" resultType="int">
+		<![CDATA[	
+			SELECT COUNT(*) FROM Members
+			WHERE Member_Nick = #{Member_Nick}
+		]]>	
+	</select>
+	
+	<select id="selectLoginMember"  resultType="memberVO" parameterType="memberVO">
+		<![CDATA[
+			select * from Members	
+			where Member_ID=#{Member_ID} and Member_PW=#{Member_PW}		
+		]]>
+  	</select>
+	
+	<select id="selectMemberId" resultType="String" parameterType="memberVO">
+		<![CDATA[
+			select Member_ID from Members 	
+			where Member_name=#{Member_name} and Member_email=#{Member_email}
+		]]>
+	</select>
+	
+	
+	<insert id="insertMember" parameterType="memberVO">
+		<![CDATA[ 
+			insert into members(Member_Num,Member_ID, Member_PW, Member_name, Member_email, Member_Phone, Member_Nick, Member_joindate)
+			values(null,#{Member_ID},#{Member_PW},#{Member_name},#{Member_email},#{Member_Phone},#{Member_Nick},default)
+		]]>
+	</insert>
+
+	
+	<update id="updateMemberPw" parameterType="memberVO">
+		<![CDATA[ 
+			update Members set Member_PW=#{Member_PW} where Member_ID=#{Member_ID} and Member_email=#{Member_email} 
+		]]>
+	</update>
+	
+</mapper>
+		

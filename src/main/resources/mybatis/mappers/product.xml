@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.product">
+	
+	<select id="selectAllProducts" resultType="productVO" parameterType="HashMap">
+		select * from products
+		<choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectProducts" resultType="productVO" parameterType="HashMap">
+		 select * from products 
+		 <choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectProductsCnt" resultType="int" parameterType="productVO">
+		select count(*) as listCnt from products 
+		<choose>
+			<when test="p_cl2.equals('전체')">
+				where p_cl1 = #{p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{p_cl1} AND p_cl2 = #{p_cl2}
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="selectLoveRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		<choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>
+		order by p_loves DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectNewRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		<choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>
+		order by p_date DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectLowPriceRanking" resultType="productVO" parameterType="HashMap">
+		 select * from products 
+		<choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>
+		order by p_price LIMIT #{pagination.startList}, #{pagination.listSize}
+		
+	</select>
+	
+	<select id="selectHighPriceRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		<choose>
+			<when test="category.p_cl2.equals('전체')">
+				where p_cl1 = #{category.p_cl1}
+			</when>
+			<otherwise>
+				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
+			</otherwise>
+		</choose>	
+		order by p_price DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<definition name="contentLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="title" value="메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
+	<definition name="/member/joinWelcome" extends="baseLayout">
+		<put-attribute name="title" value="회원가입 환영 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/joinWelcome.jsp" />
+	</definition>
+	
+	<definition name="changePw" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 변경 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/changePw.jsp" />
+	</definition>
+	
+	<definition name="findId" extends="baseLayout">
+		<put-attribute name="title" value="아이디 찾기 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findId.jsp" />
+	</definition>
+	
+	<definition name="resultId" extends="baseLayout">
+		<put-attribute name="title" value="아이디 찾기 완료 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/resultId.jsp" />
+	</definition>
+	
+	<definition name="findPw" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 변경 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findPw.jsp" />
+	</definition>
+	
+	<definition name="joinMember" extends="baseLayout">
+		<put-attribute name="title" value="회원 가입 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/joinMember.jsp" />
+	</definition>
+	
+	<definition name="login" extends="baseLayout">
+		<put-attribute name="title" value="로그인 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/login.jsp" />
+	</definition>
+	
+	<definition name="findPwCheck" extends="baseLayout">
+		<put-attribute name="title" value="이메일 인증 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/findPwCheck.jsp" />
+	</definition>
+	
+	<definition name="changePwResult" extends="baseLayout">
+		<put-attribute name="title" value="비밀번호 변경 완료 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/changePwResult.jsp" />
+	</definition>
+	
+	<definition name="/member/joinAgree" extends="baseLayout">
+		<put-attribute name="title" value="이용약관 동의 화면" />
+		<put-attribute name="body" value="/WEB-INF/views/member/joinAgree.jsp" />
+	</definition>
+	
+	<definition name="/member/listMember" extends="baseLayout">
+		<put-attribute name="title" value="회원목록창" />
+		<put-attribute name="body" value="/WEB-INF/views/member/listMember.jsp"/>
+	</definition>
+	
+</tiles-definitions>

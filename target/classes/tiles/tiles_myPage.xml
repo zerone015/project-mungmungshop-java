@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<!-- 사이드 메뉴 -->
+	<definition name="sideMenuLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	
+	
+	<definition name="order" extends="sideMenuLayout">
+		<put-attribute name="title" value="주문 내역 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/order.jsp" />
+	</definition>
+	
+	
+	
+	<definition name="love" extends="sideMenuLayout">
+		<put-attribute name="title" value="찜 리스트 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/love.jsp" />
+	</definition>
+	
+	<definition name="infoCertify" extends="sideMenuLayout">
+		<put-attribute name="title" value="비밀번호 확인 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/infoCertify.jsp" />
+	</definition>
+	
+	<definition name="pwCertify" extends="sideMenuLayout">
+		<put-attribute name="title" value="비밀번호 확인 페이지2" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/pwCertify.jsp" />
+	</definition>
+	
+	<definition name="newPW" extends="sideMenuLayout">
+		<put-attribute name="title" value="비밀번호 변경 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/newPW.jsp" />
+	</definition>
+	
+	<definition name="quit" extends="sideMenuLayout">
+		<put-attribute name="title" value="회원 탈퇴 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/quit.jsp" />
+	</definition>
+	
+	<definition name="address" extends="sideMenuLayout">
+		<put-attribute name="title" value="배송지 관리 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/address.jsp" />
+	</definition>
+	
+	<definition name="addressWrite" extends="sideMenuLayout">
+		<put-attribute name="title" value="배송지 작성 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/addressWrite.jsp" />
+	</definition>
+	
+	<definition name="infoModify" extends="sideMenuLayout">
+		<put-attribute name="title" value="회원 정보 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/infoModify.jsp" />
+	</definition>
+	
+	<definition name="orderCancle" extends="sideMenuLayout">
+		<put-attribute name="title" value="주문 취소 내역 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/orderCancle.jsp" />
+	</definition>
+
+</tiles-definitions>

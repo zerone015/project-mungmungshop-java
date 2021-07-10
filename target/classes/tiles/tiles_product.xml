@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	<!-- 사이드 메뉴 -->
+	<definition name="sideMenuLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
+	</definition>
+	
+	
+	<definition name="product" extends="baseLayout">
+		<put-attribute name="title" value="상품 상세 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/product.jsp" />
+	</definition>
+	
+	<definition name="productList" extends="baseLayout">
+		<put-attribute name="title" value="상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/productList.jsp" />
+	</definition>
+	
+	<definition name="newProduct" extends="baseLayout">
+		<put-attribute name="title" value="신상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/newProduct.jsp" />
+	</definition>
+	
+	<definition name="brandProducts" extends="baseLayout">
+		<put-attribute name="title" value="브랜드 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/brandProducts.jsp" />
+	</definition>
+	
+	<definition name="brandList" extends="baseLayout">
+		<put-attribute name="title" value="브랜드 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/brandList.jsp" />
+	</definition>
+	
+	<definition name="rankList" extends="baseLayout">
+		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/rankList.jsp" />
+	</definition>
+	
+	<definition name="searchList" extends="baseLayout">
+		<put-attribute name="title" value="검색 상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/searchList.jsp" />
+	</definition>
+	
+	
+	<definition name="review" extends="sideMenuLayout">
+		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/review.jsp" />
+	</definition>
+	
+	<definition name="reviewWrite" extends="sideMenuLayout">
+		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/reviewWrite.jsp" />
+	</definition>
+	
+	<definition name="saleList" extends="sideMenuLayout">
+		<put-attribute name="title" value="할인 상품 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/product/saleList.jsp" />
+	</definition>
+	
+</tiles-definitions>

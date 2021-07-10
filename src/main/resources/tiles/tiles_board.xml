@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+
+<definition name="noticeList" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeList.jsp" />
+</definition>
+
+<definition name="noticeWrite" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 글 내용 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeWrite.jsp" />
+</definition>
+
+<definition name="eventList" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/eventList.jsp" />
+</definition>
+
+<definition name="eventWrite" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 글 내용 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/eventWrite.jsp" />
+</definition>
+
+<definition name="faqList" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/faqList.jsp" />
+</definition>
+
+<definition name="faqWrite" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 글 내용 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/faqWrite.jsp" />
+</definition>
+
+<definition name="qnaList" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaList.jsp" />
+</definition>
+
+<definition name="qnaWrite" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 내용 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaWrite.jsp" />
+</definition>
+
+<definition name="qnaArticle" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 작성 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaArticle.jsp" />
+</definition>
+</tiles-definitions>

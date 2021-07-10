@@ -1,0 +1,73 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="email" value="${param.email }" />
+<c:if test="${email=='notExists' }">
+	<script>
+		window.onload = function() {
+			alert("입력하신 정보와 일치하는 계정이 없습니다. 다시 시도해주세요.");
+		}
+	</script>
+</c:if>
+<%
+request.setCharacterEncoding("utf-8");
+%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>비밀번호 찾기</title>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<script type="text/javascript">
+	function checkPwSelect() {
+		var form = document.findPw;
+
+		if (form.Member_ID.value == "") {
+			alert("아이디를 입력해주세요.");
+			form.Member_ID.focus();
+			return false;
+		}
+
+		if (form.Member_email.value == "") {
+			alert("이메일을 입력해주세요.");
+			form.Member_email.focus();
+			return false;
+		}
+
+		form.submit();
+	}
+</script>
+<body>
+<h1 class="h3 mb-3 font-weight-normal">
+		 <font style="vertical-align: inherit;">비밀번호 찾기 </font>
+</h1>
+	<form name="findPw" method="POST" action="${contextPath}/mail/findPwCheck.do">
+		<table style="margin-left: auto; margin-right: auto;" width="45%">
+			<tr align="center">
+				<td>
+				아이디 * <input name="Member_ID" type="text" placeholder="아이디를 입력하세요." size="30">
+				</td>
+			</tr>
+			<tr align="center">
+				<td>
+				이메일 * <input name="Member_email" placeholder="이메일을 입력하세요." type="text" size="30">
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button class="btn btn-lg btn-primary btn-block" type="button"
+						onclick="checkPwSelect()">
+						 <font style="vertical-align: inherit;">확인</font>
+					</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

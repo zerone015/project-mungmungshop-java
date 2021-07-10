@@ -1,0 +1,9 @@
+DELIMITER $$
+CREATE TRIGGER tg_orders_insert
+BEFORE INSERT ON orders
+FOR EACH ROW
+BEGIN
+  INSERT INTO orders_seq VALUES (NULL);
+  SET NEW.order_code = CONCAT('ORD', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;

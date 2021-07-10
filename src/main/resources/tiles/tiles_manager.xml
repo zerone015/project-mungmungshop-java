@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+	"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<definition name="managerMain" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 메인 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerMain.jsp" />
+	</definition>
+	
+	<definition name="managerProduct" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 상품 관리 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerProduct.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
+	<definition name="managerProductInfo" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 상품 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerProductInfo.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
+	<definition name="managerProductAdd" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 상품 등록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerProductAdd.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
+	<definition name="managerProductModify" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 상품 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerProductModify.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
+	<definition name="managerOrderList" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 주문 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerOrderList.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+
+</tiles-definitions>

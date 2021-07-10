@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.mail">
+
+	<resultMap id="mailResult" type="mailVO">
+		<result property="Member_ID" column="Member_ID"/>
+		<result property="Member_PW" column="Member_PW"/>
+		<result property="Member_name" column="Member_name"/>
+		<result property="Member_email" column="Member_email"/>
+		<result property="Member_Phone" column="Member_Phone"/>
+		<result property="Member_Nick" column="Member_Nick"/>
+		<result property="Member_joindate" column="Member_joindate"/>
+	</resultMap>
+	
+	<select id="selectEmail" resultType="String" parameterType="mailVO">
+		<![CDATA[
+			select Member_email from Members	
+			where Member_ID=#{Member_ID} and Member_email=#{Member_email}		
+		]]>
+	</select>
+	
+	<select id="selectPw" resultType="String" parameterType="mailVO">
+		<![CDATA[
+			select Member_PW from Members	
+			where Member_ID=#{Member_ID} and Member_email=#{Member_email}		
+		]]>
+	</select>
+	
+	<select id="selectEmailCnt" resultType="int" parameterType="String">
+		<![CDATA[
+			select COUNT(*) from Members where Member_email=#{Member_email}
+		]]>
+	</select>
+	
+	
+	
+</mapper>
+		
