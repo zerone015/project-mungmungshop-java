@@ -14,4 +14,5 @@ public interface ProductService {
 	public List getLowPriceRanking(HashMap productInfo) throws Exception;
 	public List getHighPriceRanking(HashMap productInfo) throws Exception;
 	public List getAllProducts(HashMap productInfo) throws Exception;
+	public ProductVO getProduct(String p_code) throws Exception;
 }

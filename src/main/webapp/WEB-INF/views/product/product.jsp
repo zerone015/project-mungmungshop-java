@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" isELIgnored="false" %>
-<!DOCTYPE html>
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%
+request.setCharacterEncoding("UTF-8");
+%>
 <html>
 <head>
 <meta charset="utf-8">
@@ -30,12 +35,12 @@ function checkWrite() {
 <div class="container">
   <div class="row" style="text-align: center">
 	<div class="col-md-6" style="display: inline-block;">
-	  <div class="card mb-4 shadow-sm" style="cursor: pointer;" onclick="location.href='#';">
-	    	<img class="productImg" src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 100%; height: 100%;"/>
+	  <div class="card mb-4 shadow-sm" style="cursor: pointer;">
+	    	<img class="productImg" src="${contextPath}/resources/image/category/${product.p_imageFileName}" style=" width: 80%; height: 80%;"/>
 	    </div>
 	  </div>
 	<div class="col-md-5" >
-		<b>네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</b>
+		<b>${product.p_name}</b>
 		<hr>
 		<div>
 		<div class = "row">
@@ -43,15 +48,15 @@ function checkWrite() {
 			  <p style="float: center;">판 매 가</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <p style="float: right;"><b>32,500</b></p>
+			  <p style="float: right;"><b><fmt:formatNumber value="${product.p_price }" pattern="###,###,###"/></b>원</p>
 			</div>
 		</div>
 		<div class = "row">
 			<div style="width: 30%; float: left;">
-			  <p style="float: center;">제 조 사</p>
+			  <p style="float: center;">브 랜 드</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <p style="float: right;">제 조 사</p>
+			  <p style="float: right;">${product.p_brand}</p>
 			</div>
 		</div>
 		<div class = "row">
@@ -59,7 +64,7 @@ function checkWrite() {
 			  <p style="float: center;">원 산 지</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <p style="float: right;">원 산 지</p>
+			  <p style="float: right;">${product.p_origin}</p>
 			</div>
 		</div>
 		<div class = "row">
@@ -67,7 +72,7 @@ function checkWrite() {
 			  <p style="float: center;">재 고 수</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <p style="float: right;">재 고 수</p>
+			  <p style="float: right;">${product.p_stock}</p>
 			</div>
 		</div>
 		<div class = "row">
@@ -89,7 +94,7 @@ function checkWrite() {
   
   <hr>
   
-  상세정보 들어가는 곳
+  ${product.p_description}
   
   <hr>
   <div>

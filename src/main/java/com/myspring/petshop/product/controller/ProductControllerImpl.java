@@ -83,4 +83,15 @@ public class ProductControllerImpl implements ProductController {
 		
 		return mav;
 	}
+	
+	@Override
+	@RequestMapping(value="/product/getProduct.do", method = RequestMethod.GET)
+	public ModelAndView getProduct(@RequestParam("p_code") String p_code) throws Exception {
+		ProductVO product = productService.getProduct(p_code);
+		
+		ModelAndView mav = new ModelAndView("product");
+		mav.addObject("product", product);
+		
+		return mav;
+	}
 }

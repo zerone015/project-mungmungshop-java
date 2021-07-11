@@ -95,4 +95,8 @@
 		</choose>	
 		order by p_price DESC LIMIT #{pagination.startList}, #{pagination.listSize}
 	</select>
+	
+	<select id="selectProduct" resultType="productVO" parameterType="String">
+		select * from products where p_code = #{p_code}
+	</select>
 </mapper>

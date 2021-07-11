@@ -17,4 +17,5 @@ public interface ProductController {
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView getProduct(@RequestParam("p_code") String p_code) throws Exception;
 }

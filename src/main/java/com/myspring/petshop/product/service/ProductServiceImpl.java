@@ -59,4 +59,10 @@ public class ProductServiceImpl implements ProductService {
 		
 		return productDAO.selectAllProducts(productInfo);
 	}
+	
+	@Override
+	public ProductVO getProduct(String p_code) throws Exception {
+		
+		return productDAO.selectProduct(p_code);
+	}
 }

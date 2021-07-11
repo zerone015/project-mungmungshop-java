@@ -95,18 +95,26 @@ request.setCharacterEncoding("UTF-8");
 		<div class="col">
 			<div class="row" >
 			<c:forEach items="${products}" var="products">
-	            <div class="product" onclick="location.href='#';">
+	            <div class="product">
 	                <div class="bd-placeholder-img card-img-top">
+	                <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">
 	                    <img
 	                        src="${contextPath}/resources/image/category/${products.p_imageFileName}"
 	                        style="width: 50%; height: 225;" alt="상품 이미지" />
+	                </a>
 	                </div>
 	                <div class="card-body">
-	                    <p style="font-size: 14px;">${products.p_name}</p>
+	                   
 	                    <p style="font-size: 14px;">
+	                    <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">${products.p_name}</a>
+	                    </p>
+	        
+	                    <p style="font-size: 14px;">
+	                     <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">
 	                        <b><fmt:formatNumber value="${products.p_price }"
 	                            pattern="###,###,###" />
 	                        </b>원
+	                     </a>
 	                    </p>
 	                    <div class="d-flex justify-content-between align-items-center">
 	                        <div class="btn-group"></div>

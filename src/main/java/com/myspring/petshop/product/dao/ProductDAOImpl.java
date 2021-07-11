@@ -58,4 +58,10 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("mapper.product.selectAllProducts", productInfo);
 	}
 	
+	@Override
+	public ProductVO selectProduct(String p_code) throws Exception {
+		
+		return sqlSession.selectOne("mapper.product.selectProduct", p_code);
+	}
+	
 }

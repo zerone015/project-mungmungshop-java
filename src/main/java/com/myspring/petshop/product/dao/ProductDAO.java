@@ -13,4 +13,5 @@ public interface ProductDAO {
 	public List selectLowPriceRanking(HashMap productInfo) throws Exception;
 	public List selectHighPriceRanking(HashMap productInfo) throws Exception;
 	public List selectAllProducts(HashMap productInfo) throws Exception;
+	public ProductVO selectProduct(String p_code) throws Exception;
 }
