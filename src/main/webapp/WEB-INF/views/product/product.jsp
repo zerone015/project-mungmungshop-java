@@ -10,10 +10,10 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="utf-8">
 <title>뭉뭉샵</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
-
-<script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script type="text/javascript">
 function checkWrite() {
 	var form=document.review;
 	if (form.reviewWrite.value == "") {
@@ -28,6 +28,25 @@ function checkWrite() {
 		return false;
 	}
 	form.submit();
+}
+
+function fn_addCart(p_code) {
+	$.ajax({
+		type : "post",
+		async : false,
+		url : "${contextPath}/cart/addProductsInCart.do",
+		data : {p_code : p_code},
+		success : function(data, textStatus) {
+			if(data.trim()=='add_success') {
+				alert("장바구니에 상품을 추가하였습니다.");
+			} else if(data.trim()=='already_existed') {
+				alert("이미 장바구니에 등록된 상품입니다.");
+			}
+		},
+		error : function(data, textStatus) {
+			alert("에러가 발생했습니다."+data);
+		}
+	});
 }
 </script>
 </head>
@@ -86,7 +105,7 @@ function checkWrite() {
 	  </div>
 	  <div  style="margin-top: 50;">
 	  	<p><button type="button" class="btn btn-outline-danger btn-block" style="height: 50px;">찜</button></p>
-	  	<p><button type="button" class="btn btn-outline-primary btn-block" style="height: 50px;">장바구니 담기</button></p>
+	  	<p><button type="button" class="btn btn-outline-primary btn-block" style="height: 50px;" onclick="javascript:fn_addCart('${product.p_code}')">장바구니 담기</button></p>
 	  	<p><button type="button" class="btn btn-danger btn-block" style="height: 50px;">바로 구매하기</button></p>
 	  </div>
 	</div>
@@ -153,9 +172,5 @@ function checkWrite() {
 	</form>
   </div>
  </div>
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

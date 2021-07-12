@@ -8,5 +8,6 @@
 		<typeAlias type="com.myspring.petshop.mail.vo.MailVO" alias="mailVO"/>
 		<typeAlias type="com.myspring.petshop.manager.vo.ManagerVO" alias="managerVO"/>
 		<typeAlias type="com.myspring.petshop.product.vo.ProductVO" alias="productVO"/>
+		<typeAlias type="com.myspring.petshop.cart.vo.CartVO" alias="cartVO"/>
 	</typeAliases>
 </configuration>

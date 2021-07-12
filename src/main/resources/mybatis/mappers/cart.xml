@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.cart">
+	
+	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
+		<![CDATA[	
+			select IF(count(*) = 0, 'false', 'true') from cart
+			where p_code = #{p_code} AND member_num = #{member_num}
+		]]>	
+	</select>	
+	
+	<insert id="insertProductsInCart" parameterType="cartVO">
+		<![CDATA[
+			insert into cart(cart_code,member_num,p_code) 
+			values(null, #{member_num}, #{p_code})
+		]]>
+	</insert>
+
+	<select id="selectMaxCartId" resultType="int">
+		<![CDATA[	
+			select IFNULL(max(cart_code), 0) + 1 from cart
+		]]>	
+	</select>	
+	
+	<select id="selectCartList" resultType="cartVO" >
+		<![CDATA[	
+			select * from cart
+		]]>	
+	</select>
+	
+	<select id="selectsProductsList" resultType="productVO" parameterType="java.util.Map">
+		<![CDATA[	
+			select * from products where 
+		]]>	
+	</select>
+</mapper>
