@@ -3,27 +3,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="myCartList" value="${cartMap.myCartList}" />
+<c:set var="myProductsList" value="${cartMap.myProductsList}" />
 <%
 request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
 <link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
-<meta charset="utf-8">
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <title>장바구니</title>
 </head>
 <script>
@@ -96,50 +84,42 @@ function delCheck() {
 						onclick="selectAll(this)"><label class="form-check-label"
 						for="same-address">전체 선택</label>
 					</th>
-
+					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 					<th><button type="button" class="btn btn-outline-dark"
 							onclick="delCheck()">선택 삭제</button></th>
 				</tr>
+				<tr>
+					<th>&nbsp;&nbsp;&nbsp;상품이미지</th>
+					<th>상품명</th>
+					<th>상품 수량</th>
+					<th>상품 가격</th>
 			</thead>
 
 			<tbody>
+				<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
 				<tr>
 					<td>&nbsp;&nbsp;&nbsp;<input type="checkbox"
 						class="form-check-input" id="same-address" name="productCheck"
 						onclick="checkSelectAll()" /> <img
-						src="${contextPath}/resources/image/gaebab.jpg" />
+						src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}"/>
 					</td>
-					<td><a href="#">상품명입니다123</a></td>
-					<td>99,999원</td>
+					<td><a href="#">${myProductsList.p_name}</a></td>
+					<td><input type="number" style="text-align: center; width: 80;" class="form-control mr-sm-3" id="quantity" min='1' max='99' value="${myCartList[status.index].cart_quantity}"  /></td>
+					<td><b><fmt:formatNumber value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" pattern="###,###,###"/></b>원</td>
 				</tr>
-				<tr>
-					<td>&nbsp;&nbsp;&nbsp;<input type="checkbox"
-						class="form-check-input" id="same-address" name="productCheck"
-						onclick="checkSelectAll()" /> <img
-						src="${contextPath}/resources/image/gaebab.jpg" />
-					</td>
-					<td><a href="#">상품명입니다123</a></td>
-					<td>99,999원</td>
-				</tr>
-				<tr>
-					<td>&nbsp;&nbsp;&nbsp;<input type="checkbox"
-						class="form-check-input" id="same-address" name="productCheck"
-						onclick="checkSelectAll()" /> <img
-						src="${contextPath}/resources/image/gaebab.jpg" />
-					</td>
-					<td><a href="#">상품명입니다123</a></td>
-					<td>99,999원</td>
-				</tr>
-				<tr>
+				</c:forEach>
+				<tr class="table-danger">
 					<td><b>총 상품금액</b><br>20,000원</td>
-					<td><b>총 결제금액</b><br>20,000원</td>
+					<td><b>배송비</b><br>0원</td>
+					<td><b>총 할인 금액</b><br>0원</td>
 					<td><h3>
 							<b>합계:</b>20,000원
 						</h3></td>
 				</tr>
 			</tbody>
 		</table>
+		<br>
 		<hr width="100%">
 		<div class="bd-example" align="center">
 			<input type="button" class="btn btn-danger" onclick="buyCheck()"

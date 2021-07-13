@@ -1,6 +1,10 @@
 package com.myspring.petshop.cart.vo;
 
 
+
+
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 @Component("cartVO")
@@ -9,6 +13,7 @@ public class CartVO{
 	private int member_num;
 	private String p_code;
 	private int cart_quantity;
+	private Timestamp cart_date;
 	
 	public CartVO() {
 		
@@ -43,5 +48,13 @@ public class CartVO{
 	
 	public void setCart_quantity(int cart_quantity) {
 		this.cart_quantity=cart_quantity;
+	}
+	
+	public Timestamp getCart_date() {
+		return cart_date;
+	}
+	
+	public void setCart_date(Timestamp cart_date) {
+		this.cart_date=cart_date;
 	}
 }

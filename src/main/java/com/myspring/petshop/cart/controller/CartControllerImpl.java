@@ -10,9 +10,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,14 +32,15 @@ public class CartControllerImpl implements CartController {
 	
 	@ResponseBody
 	@RequestMapping(value="/cart/addProductsInCart.do", method = RequestMethod.POST)
-	public String addProductsInCart(@RequestParam("p_code") String p_code,
+	public String addProductsInCart(@ModelAttribute("cart") CartVO cart,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("member");
 		int member_num = memberVO.getMember_Num();
 		cartVO.setMember_num(member_num);
-		cartVO.setP_code(p_code);
-		System.out.println(member_num+p_code);
+		cartVO.setP_code(cart.getP_code());
+		cartVO.setCart_quantity(cart.getCart_quantity());
+		
 		boolean isAreadyExisted = cartService.findCartProducts(cartVO);
 		
 		if(isAreadyExisted == true) {
@@ -52,13 +53,15 @@ public class CartControllerImpl implements CartController {
 	
 	@RequestMapping(value="/cart/myCartList.do", method = RequestMethod.GET)
 	public ModelAndView getMyCartList(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("cart");
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("member");
 		int member_num = memberVO.getMember_Num();
 		cartVO.setMember_num(member_num);
 		Map<String, List> cartMap = cartService.getMyCartList(cartVO);
 		session.setAttribute("cartMap", cartMap);
-		ModelAndView mav = new ModelAndView("cart");
+		
 		
 		return mav;
 	}

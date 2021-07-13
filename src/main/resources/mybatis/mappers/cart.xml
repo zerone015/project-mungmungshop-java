@@ -14,8 +14,8 @@
 	
 	<insert id="insertProductsInCart" parameterType="cartVO">
 		<![CDATA[
-			insert into cart(cart_code,member_num,p_code) 
-			values(null, #{member_num}, #{p_code})
+			insert into cart(cart_code,member_num,p_code,cart_quantity,cart_date) 
+			values(null, #{member_num}, #{p_code}, #{cart_quantity}, default)
 		]]>
 	</insert>
 
@@ -25,15 +25,18 @@
 		]]>	
 	</select>	
 	
-	<select id="selectCartList" resultType="cartVO" >
+	<select id="selectCartList" resultType="cartVO" parameterType="cartVO" >
 		<![CDATA[	
-			select * from cart
+			select * from cart where member_num = #{member_num}
 		]]>	
 	</select>
 	
-	<select id="selectsProductsList" resultType="productVO" parameterType="java.util.Map">
+	<select id="selectProductsList" resultType="productVO" parameterType="int" >
 		<![CDATA[	
-			select * from products where 
-		]]>	
+			SELECT * FROM products where p_code IN (select p_code from cart where member_num = #{member_num} order by cart_date);
+		]]>
+		
+		
+	
 	</select>
 </mapper>

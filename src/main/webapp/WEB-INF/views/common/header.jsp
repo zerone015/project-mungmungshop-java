@@ -138,7 +138,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 					style="text-align: center;">
 					<div style="display: flex;">
 						<c:if test="${member.getMember_manager() != 1}">
-							<a class="rightMenu" href="#" style="">장바구니</a><font class="divider">|</font>
+							<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
 						</c:if>
 						<c:choose>
 							<c:when test="${isLogOn == true  && member != null}">

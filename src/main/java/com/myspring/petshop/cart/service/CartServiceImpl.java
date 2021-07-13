@@ -35,9 +35,9 @@ public class CartServiceImpl implements CartService{
 		if(myCartList.size()==0) {
 			return null;
 		}
-		List<ProductVO> myProductsList = cartDAO.selectProductsList(myCartList);
+		List<ProductVO> myProductsList = cartDAO.selectProductsList(cartVO.getMember_num());
 		cartMap.put("myCartList", myCartList);
-		cartMap.put("myGoodsList", myProductsList);
+		cartMap.put("myProductsList", myProductsList);
 		return cartMap;
 	}
 }

@@ -8,11 +8,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.petshop.cart.vo.CartVO;
 import com.myspring.petshop.manager.vo.ManagerVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
 public interface CartController {
-	public String addProductsInCart(@RequestParam("p_code") String p_code,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView getMyCartList(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public String addProductsInCart(@ModelAttribute("cart") CartVO cart,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

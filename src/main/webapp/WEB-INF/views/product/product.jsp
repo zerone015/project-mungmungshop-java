@@ -35,10 +35,13 @@ function fn_addCart(p_code) {
 		type : "post",
 		async : false,
 		url : "${contextPath}/cart/addProductsInCart.do",
-		data : {p_code : p_code},
+		data : {
+			p_code : p_code,
+			cart_quantity : $("#quantity").val()
+				},
 		success : function(data, textStatus) {
 			if(data.trim()=='add_success') {
-				alert("장바구니에 상품을 추가하였습니다.");
+				alert("장바구니 등록되었습니다.")
 			} else if(data.trim()=='already_existed') {
 				alert("이미 장바구니에 등록된 상품입니다.");
 			}
@@ -99,7 +102,7 @@ function fn_addCart(p_code) {
 			  <p style="float: center;">주문 수량</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <input type="number" style="text-align: center; width: 60%; float: right; margin-right: 0px!important;" class="form-control mr-sm-3" min='1' max='99' value="1"  />
+			  <input type="number" style="text-align: center; width: 60%; float: right; margin-right: 0px!important;" class="form-control mr-sm-3" id="quantity" min='1' max='99' value="1"  />
 			</div>
 		</div>
 	  </div>
