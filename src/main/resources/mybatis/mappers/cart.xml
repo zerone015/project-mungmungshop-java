@@ -44,8 +44,11 @@
 			<when test="cartQty_btnVal.equals('minus')">
 				set cart_quantity = cart_quantity-1
 			</when>
-			<otherwise>
+			<when test="cartQty_btnVal.equals('plus')">
 				set cart_quantity = cart_quantity+1
+			</when>
+			<otherwise>
+				set cart_quantity = #{cartVO.cart_quantity}
 			</otherwise>
 		</choose>
 		where member_num = #{cartVO.member_num} 

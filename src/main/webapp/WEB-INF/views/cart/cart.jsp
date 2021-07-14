@@ -111,7 +111,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 			 if(data.trim()=='modify_success'){
 				 $("#content").load("${contextPath}/cart/myCartList.do .content");
 			 }else{
-				 alert("다시 시도해주세요.");
+				 alert("수량을 0개 이하로 설정하실 수 없습니다.");
 			 }
 		 },
 		 error : function(data, textStatus) {
@@ -161,10 +161,10 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 						<td><a href="#">${myProductsList.p_name}</a></td>
 						<td>
 						<button type="button" onclick="fn_modify_cartQty('${myProductsList.p_code}',${status.count-1},'minus');">-</button>
-						<input type="text" name="cart_quantity" maxlength=2 size=2 value="${myCartList[status.index].cart_quantity}">
+						<input type="text" name="cart_quantity" onkeyup="fn_modify_cartQty('${myProductsList.p_code}',${status.count-1},'inputKey');" maxlength=2 size=2 value="${myCartList[status.index].cart_quantity}">
 						<button type="button" onclick="fn_modify_cartQty('${myProductsList.p_code}',${status.count-1},'plus');">+</button>
 						</td>
-						<td><b><fmt:formatNumber value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" pattern="###,###,###"/></b>원</td>
+						<td class="asdf"><b><fmt:formatNumber value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" pattern="###,###,###"/></b>원</td>
 					</tr>
 					<c:set var="totalGoodsPrice" value="${totalGoodsPrice+myProductsList.p_price*myCartList[status.index].cart_quantity }"/>
 					</c:forEach>

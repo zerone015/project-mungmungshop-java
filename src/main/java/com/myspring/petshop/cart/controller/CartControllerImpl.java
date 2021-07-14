@@ -74,22 +74,27 @@ public class CartControllerImpl implements CartController {
 								@RequestParam("cart_quantity") int cart_quantity,
 								@RequestParam("cartQty_btnVal") String cartQty_btnVal,
 				HttpServletRequest request, HttpServletResponse response) throws Exception {
-		HttpSession session = request.getSession();
-		memberVO = (MemberVO)session.getAttribute("member");
-		int member_num = memberVO.getMember_Num();
-		cartVO.setMember_num(member_num);
-		cartVO.setP_code(p_code);
-		cartVO.setCart_quantity(cart_quantity);
 		
-		System.out.println("p_code = "+p_code+"cart_quantity = "+cart_quantity+"cartQty_btnVal = "+cartQty_btnVal);
+		boolean result;
 		
-		Map<String, Object> cartMap = new HashMap<String, Object>();
-		cartMap.put("cartVO", cartVO);
-		cartMap.put("cartQty_btnVal", cartQty_btnVal);
-		
-		
-		boolean result = cartService.modifyCartQty(cartMap);
-		
+		if(cart_quantity == 1 && cartQty_btnVal.equals("minus")) {
+			result = false;
+		}else {
+			HttpSession session = request.getSession();
+			memberVO = (MemberVO)session.getAttribute("member");
+			int member_num = memberVO.getMember_Num();
+			cartVO.setMember_num(member_num);
+			cartVO.setP_code(p_code);
+			cartVO.setCart_quantity(cart_quantity);
+			
+			
+			Map<String, Object> cartMap = new HashMap<String, Object>();
+			cartMap.put("cartVO", cartVO);
+			cartMap.put("cartQty_btnVal", cartQty_btnVal);
+			
+			result = cartService.modifyCartQty(cartMap);
+		}
+					
 		if(result == true) {
 			return "modify_success";
 		}else {
