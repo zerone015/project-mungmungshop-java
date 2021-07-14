@@ -40,4 +40,10 @@ public class CartServiceImpl implements CartService{
 		cartMap.put("myProductsList", myProductsList);
 		return cartMap;
 	}
+	
+	public boolean modifyCartQty(Map cartMap) throws Exception {
+		cartDAO.updateCartProductsQty(cartMap);
+		
+		return true;
+	}
 }

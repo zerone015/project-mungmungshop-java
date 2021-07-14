@@ -2,6 +2,7 @@ package com.myspring.petshop.cart.dao;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +41,10 @@ public class CartDAOImpl implements CartDAO {
 		int cart_code = selectMaxCartCode();
 		cartVO.setCart_code(cart_code);
 		sqlSession.insert("mapper.cart.insertProductsInCart", cartVO);
+	}
+	
+	public void updateCartProductsQty(Map cartMap) throws DataAccessException {
+		sqlSession.update("mapper.cart.updateCartProductsQty", cartMap);
 	}
 	
 	private int selectMaxCartCode() throws DataAccessException {

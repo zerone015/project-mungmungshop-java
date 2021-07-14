@@ -1,6 +1,7 @@
 package com.myspring.petshop.cart.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -12,4 +13,5 @@ public interface CartDAO {
 	public List<ProductVO> selectProductsList(int member_num) throws DataAccessException;
 	public boolean selectCountInCart(CartVO cartVO) throws DataAccessException;
 	public void insertProductsInCart(CartVO cartVO) throws DataAccessException;
+	public void updateCartProductsQty(Map cartMap) throws DataAccessException;
 }

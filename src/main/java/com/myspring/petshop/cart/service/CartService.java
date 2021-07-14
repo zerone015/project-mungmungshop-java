@@ -9,4 +9,5 @@ public interface CartService {
 	public boolean findCartProducts(CartVO cartVO) throws Exception;
 	public void addProductsInCart(CartVO cartVO) throws Exception;
 	public Map<String, List> getMyCartList(CartVO cartVO) throws Exception;
+	public boolean modifyCartQty(Map cartMap) throws Exception;
 }

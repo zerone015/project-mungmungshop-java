@@ -36,7 +36,19 @@
 			SELECT * FROM products where p_code IN (select p_code from cart where member_num = #{member_num} order by cart_date);
 		]]>
 		
-		
+	</select>
 	
+	<select id="updateCartProductsQty" parameterType="java.util.Map" >
+		update cart
+		<choose>
+			<when test="cartQty_btnVal.equals('minus')">
+				set cart_quantity = cart_quantity-1
+			</when>
+			<otherwise>
+				set cart_quantity = cart_quantity+1
+			</otherwise>
+		</choose>
+		where member_num = #{cartVO.member_num} 
+		AND p_code = #{cartVO.p_code}
 	</select>
 </mapper>
