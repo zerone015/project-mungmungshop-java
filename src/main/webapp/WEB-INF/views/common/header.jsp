@@ -133,39 +133,18 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	      	<button class="row btn btn-outline-success my-2 my-sm-0" type="submit" style="text-align: left; margin-left: -50;">Search</button>
 	      </div>
 	      
-	     <!-- 상단 오른쪽 -->
-				<div class="col-4 d-flex justify-content-end align-items-center"
-					style="text-align: center;">
-					<div style="display: flex;">
-						<c:if test="${member.getMember_manager() != 1}">
-							<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
-						</c:if>
-						<c:choose>
-							<c:when test="${isLogOn == true  && member != null}">
-								<a class="rightMenu"
-									href="${contextPath}/member/logout.do"
-									style="margin-left: 2px;">logout</a> <font class="divider">|</font>
-							</c:when>
-							<c:otherwise>
-								<a class="rightMenu"
-									href="${contextPath}/login.do" style="margin-left: 2px;">Sign
-									up</a> <font class="divider">|</font>
-							</c:otherwise>
-						</c:choose>
-						<c:if test="${member.getMember_manager() == 1}">
-							<a class="rightMenu"
-								href="${contextPath}/managerMain.do"
-								style="margin-left: 2px;">관리자 모드</a> <font class="divider">|</font>
-						</c:if>
-						<a class="rightMenu"
-							href="${contextPath}/order.do" style="margin-left: 2px;">myPage</a> <font class="divider">|</font>
-						<div class="dropdown">
-							<a class="dropdown-toggle"
-								data-toggle="dropdown" href="#" style="margin-left: 2px;">고객센터</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">공지사항</a> <a
-									class="dropdown-item" href="#">자주 묻는 질문</a> <a
-									class="dropdown-item" href="#">1:1 문의</a>
+	      <!-- 상단 오른쪽 -->
+	      <div class="col-4 d-flex justify-content-end align-items-center" style="text-align: center;margin-right: 20;margin-left: 0px;padding-left: 0px;padding-right: 00px;">
+	       <div style="display: flex;">
+	        <a href="#" class="rightMenu">장바구니</a> <font class="divider">|</font> 
+	        <a href="#" class="rightMenu">Sign In</a> <font class="divider">|</font> 
+	        <a href="#" class="rightMenu">myPage</a> <font class="divider">|</font> 
+	        <div class="dropdown">
+	        	<a class="dropdown-toggle" data-toggle="dropdown" href="#" style="margin-left: 2px;">고객센터</a>
+		        <div class="dropdown-menu">
+		        	<a class="dropdown-item" href="#">공지사항</a>
+		        	<a class="dropdown-item" href="${contextPath}/board/faqList.do">자주 묻는 질문</a>
+		        	<a class="dropdown-item" href="#">1:1 문의</a>
 		        </div>
 	      	</div>
 	       </div>
@@ -182,67 +161,71 @@ pageEncoding="utf-8" isELIgnored="false" %>
             <ul class="main2">
                 <li><a href="#">사료</a>
 					<ul class="main3">
-						<li><a href="${contextPath}/product/productList.do?p_cl1=사료&p_cl2=전체">전체</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=사료&p_cl2=퍼피">퍼피</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=사료&p_cl2=어덜트">어덜트</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=사료&p_cl2=시니어">시니어</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=사료&p_cl2=전연령">전연령</a></li>
+						<li><a href="#">전체</a></li>
+						<li><a href="#">퍼피</a></li>
+						<li><a href="#">어덜트</a></li>
+						<li><a href="#">시니어</a></li>
+						<li><a href="#">전연령</a></li>
 					</ul>
 				</li>
                 <li><a href="#">간식</a>
                     <ul class="main3">
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=전체">전체</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=사사미">사사미</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=껌">껌</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=건조">건조</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=비스킷">비스킷</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=수제">수제</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=간식&p_cl2=캔">캔</a></li>
+                        <li><a href="#">전체</a></li>
+						<li><a href="#">사사미</a></li>
+						<li><a href="#">껌</a></li>
+						<li><a href="#">건조</a></li>
+						<li><a href="#">비스킷</a></li>
+                        <li><a href="#">수제</a></li>
+                        <li><a href="#">캔</a></li>
                     </ul>
                 </li>
                 <li><a href="#">리빙</a>
                     <ul class="main3">
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=리빙&p_cl2=전체">전체</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=리빙&p_cl2=하우스/방석">하우스/방석</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=리빙&p_cl2=급식기/급수기">급식기/급수기</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=리빙&p_cl2=울타리/안전문">울타리/안전문</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=리빙&p_cl2=계단">계단</a></li>
+                        <li><a href="#">전체</a></li>
+						<li><a href="#">하우스/방석</a></li>
+						<li><a href="#">급식기/급수기</a></li>
+						<li><a href="#">울타리/안전문</a></li>
+						<li><a href="#">계단</a></li>
                     </ul>
                 </li>
 				<li><a href="#">케어</a>
                     <ul class="main3">
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=케어&p_cl2=전체">전체</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=케어&p_cl2=배변">배변</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=케어&p_cl2=영양제">영양제</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=케어&p_cl2=미용">미용</a></li>
+                        <li><a href="#">전체</a></li>
+                        <li><a href="#">배변</a></li>
+                        <li><a href="#">위생</a></li>
+						<li><a href="#">영양제</a></li>
+						<li><a href="#">미용</a></li>
+						<li><a href="#">눈</a></li>
+						<li><a href="#">귀</a></li>
                     </ul>
                 </li>
 				<li><a href="#">외출</a>
                     <ul class="main3">
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=전체">전체</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=이동 가방">이동 가방</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=유모차">유모차</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=차량용 이동장">차량용 이동장</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=목줄">목줄</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=이름표/인식표">이름표/인식표</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=가슴줄">가슴줄</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=외출&p_cl2=리드줄">리드줄</a></li>
+						<li><a href="#">전체</a></li>
+						<li><a href="#">이동 가방</a></li>
+                        <li><a href="#">유모차</a></li>
+                        <li><a href="#">차량용 이동장</a></li>
+						<li><a href="#">목줄</a></li>
+						<li><a href="#">이름표/인식표</a></li>
+						<li><a href="#">가슴줄</a></li>
+						<li><a href="#">리드줄</a></li>
                     </ul>
                 </li>
 				<li><a href="#">패션</a>
                     <ul class="main3">
-						<li><a href="${contextPath}/product/productList.do?p_cl1=패션&p_cl2=전체">전체</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=패션&p_cl2=의류">의류</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=패션&p_cl2=액세서리">액세서리</a></li>
-						<li><a href="${contextPath}/product/productList.do?p_cl1=패션&p_cl2=디자인/소품">디자인/소품</a></li>
+						<li><a href="#">전체</a></li>
+                        <li><a href="#">의류</a></li>
+                        <li><a href="#">액세서리</a></li>
+                        <li><a href="#">가방</a></li>
+						<li><a href="#">디자인/소품</a></li>
                     </ul>
                 </li>
 				<li><a href="#">장난감</a>
                     <ul class="main3">
-						<li><a href="${contextPath}/product/productList.do?p_cl1=장난감&p_cl2=전체">전체</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=장난감&p_cl2=노즈워크">노즈워크</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=장난감&p_cl2=훈련">훈련</a></li>
-                        <li><a href="${contextPath}/product/productList.do?p_cl1=장난감&p_cl2=장난감/토이">장난감/토이</a></li>
+						<li><a href="#">전체</a></li>
+                        <li><a href="#">노즈워크</a></li>
+                        <li><a href="#">훈련</a></li>
+                        <li><a href="#">장난감/토이</a></li>
                     </ul>
                 </li>
             </ul>

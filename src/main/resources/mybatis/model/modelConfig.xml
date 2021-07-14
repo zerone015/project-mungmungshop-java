@@ -9,5 +9,9 @@
 		<typeAlias type="com.myspring.petshop.manager.vo.ManagerVO" alias="managerVO"/>
 		<typeAlias type="com.myspring.petshop.product.vo.ProductVO" alias="productVO"/>
 		<typeAlias type="com.myspring.petshop.cart.vo.CartVO" alias="cartVO"/>
+		<typeAlias type="com.myspring.petshop.board.event.vo.EventVO" alias="eventVO" />
+		<typeAlias type="com.myspring.petshop.board.faq.vo.FaqVO" alias="FaqVO" />
+		<typeAlias type="com.myspring.petshop.board.qna.vo.QnaVO" alias="QnaVO" />
+		<typeAlias type="com.myspring.petshop.Pagination" alias="pagination" />
 	</typeAliases>
 </configuration>

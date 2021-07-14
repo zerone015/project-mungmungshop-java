@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8" isELIgnored="false"	%>
-<%@page import="java.sql.Timestamp"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8"	isELIgnored="false"	%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
@@ -31,16 +30,12 @@
 		background: #e6e6e6;
 	}
 </style>
-
-<%
-	Timestamp nowTime = new Timestamp(System.currentTimeMillis());
-%>
 <script type="text/javascript">
 function checkBoard() {
-	var form=document.eventWrite;		
+	var form=document.faqModify;		
 
-	var title = form.event_title;
-	var content = form.event_content;
+	var title = form.faq_title;
+	var content = form.faq_content;
 	
 	if (title.value == "") {
 		alert("제목을 입력해주세요.");
@@ -57,31 +52,32 @@ function checkBoard() {
 </script>
 </head>
 <body>
-	<form action="${contextPath}/eventWrite.do" method="POST" name="eventWrite" >
+	<form name="faqModify" method="POST" action="${contextPath}/faqMod.do?faq_no=${faqVO.faq_no}">
 		<table class="table table-sm table-bordered" border="1" >
 			<tr>
-				<th style="background: #e6e6e6;">제목</th>
+				<th>제목</th>
 				<td colspan="3">
-					<input type="text" id="event_title" maxlength = "45" name="event_title" placeholder="이벤트 제목을 작성하세요."/>
+					<input type="text" value="${faqVO.faq_title}" id="faq_title" name="faq_title" />
 				</td>
 			</tr>
 			<tr>
-				<th style="background: #e6e6e6;">작성자</th>
+				<th>작성자</th>
 				<td>
-					<input type="text" id = "event_writer" name = "event_writer" />
+					<input type="text" id = "faq_writer" name = "faq_writer" value="${faqVO.faq_writer}" readonly/>
 				</td>
-				<th style="background: #e6e6e6;">날짜</th>
+				<th >날짜</th>
 				<td>
-					<input type="text" id = "event_date" name = "event_date" value="<%=nowTime %>" readonly>
+					<input type="text" id = "faq_date" name = "faq_date" value="${faqVO.faq_date}" readonly>
 				</td>
 			</tr>
 		</table>
 		<hr width="100%">
-		<textarea name="event_content" rows="10" id="event_content" name="event_content" placeholder="이벤트 내용을 작성하세요."></textarea>
+		<textarea rows="10" id="faq_content" name="faq_content">${faqVO.faq_content}</textarea>
 		
-		<div class="bd-example" align="right">
-			<button type="reset" class="btn btn-outline-dark">다시쓰기</button>
-			<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">작성</button>
+		<div class="bd-example" align="center">
+			<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">수정</button>
+			<button class= "btn btn-outline-danger"
+				type="button" onclick="javascript:history.back();">취소</button>
 		</div>
 	</form>
 	

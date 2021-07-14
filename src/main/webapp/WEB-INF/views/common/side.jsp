@@ -36,6 +36,8 @@ pageEncoding="utf-8" isELIgnored="false" %>
             <li class="sideMenu2"><a href="#">회원 정보 수정</a></li>
            </ul>
 	</div>
+		
 
+	
 </body>
 </html>
