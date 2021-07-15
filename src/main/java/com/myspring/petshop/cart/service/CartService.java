@@ -11,4 +11,5 @@ public interface CartService {
 	public Map<String, List> getMyCartList(CartVO cartVO) throws Exception;
 	public String modifyCartQty(Map cartMap) throws Exception;
 	public int getProductsStock(String p_code) throws Exception;
+	public void removeCartProducts(String p_code) throws Exception;
 }

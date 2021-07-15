@@ -108,20 +108,44 @@ function buyCheck() {
 		}
 }
 
-function delCheck() {
-	var check=document.cartForm.productCheck;
-	var num=0;
-	
-	for(var i=0; i<check.length; i++) {
-		if (check[i].checked) {
-			num++;
+function cart_delete() {
+	var valueArr = new Array();
+	var list = $("input[name='productCheck']");
+	for(var i=0; i<list.length; i++){
+		if(list[i].checked){
+			valueArr.push(list[i].getAttribute('value2'));
 		}
 	}
-	if(!num){
-		alert("삭제하려는 상품을 선택해주세요.")
-		return false;
+	
+	if (valueArr.length == 0) {
+		alert("선택된 상품이 없습니다.");
+	}
+	else{
+		if(confirm('정말 삭제하시겠습니까?')) {
+			$.ajax({
+				url : "${contextPath}/cart/removeCartProducts.do",
+				type : "POST",
+				traditional : true,
+				data : {
+					valueArr : valueArr
+				},
+				success: function(jdata){
+					if(jdata = 1) {
+						alert("상품을 장바구니에서 삭제했습니다.");
+						$("#content").load("${contextPath}/cart/myCartList.do .content");
+					}
+					else {
+						alert("삭제 실패");
+					}
+				}
+				
+			});
+		}else {
+			return false;
 		}
+	}
 }
+
 
 function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 	var length = document.cartForm.cart_quantity.length;
@@ -175,7 +199,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 		<span style="margin-right: 900px;">
 				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked >전체 선택
 		</span>	
-		<button type="button" class="btn btn-danger" onclick="delCheck()" style="margin-bottom: 5px;">선택 삭제</button>
+		<button type="button" class="btn btn-danger" onclick="cart_delete();" style="margin-bottom: 5px;">선택 삭제</button>
 		<form name="cartForm" method="GET" action="">			
 			<table class="table table-striped">
 				<thead>
@@ -189,7 +213,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 					<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
 						<tr>
 							<td>
-								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" checked/> 
+								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" value2="${myProductsList.p_code}" checked/> 
 								<img src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}" alt="상품 이미지"/>
 							</td>
 							<td>

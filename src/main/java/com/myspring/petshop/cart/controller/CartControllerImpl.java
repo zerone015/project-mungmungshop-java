@@ -117,4 +117,15 @@ public class CartControllerImpl implements CartController {
 		
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/cart/removeCartProducts.do", method=RequestMethod.POST)
+	public String removeCartProducts(HttpServletRequest request) throws Exception {
+		
+		String[] del_p_code = request.getParameterValues("valueArr");
+		for(int i=0; i<del_p_code.length; i++) {
+			cartService.removeCartProducts(del_p_code[i]);
+		}
+		return "asdf";
+	}
+	
 }

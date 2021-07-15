@@ -50,4 +50,8 @@ public class CartServiceImpl implements CartService{
 	public int getProductsStock(String p_code) throws Exception {
 		return cartDAO.selectProductsStock(p_code);
 	}
+	
+	public void removeCartProducts(String p_code) throws Exception {
+		cartDAO.deleteCartProducts(p_code);
+	}
 }

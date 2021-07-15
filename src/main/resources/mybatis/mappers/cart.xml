@@ -61,4 +61,8 @@
 		]]>
 		
 	</select>
+	
+	<delete id="deleteCartProducts" parameterType="String">
+		delete from cart where p_code = #{p_code}
+	</delete>
 </mapper>
