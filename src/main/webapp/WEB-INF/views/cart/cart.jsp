@@ -42,6 +42,36 @@ window.onload = function () {
     }
 }
 
+function checkSelectAll()  {
+	  // 전체 체크박스
+	  const checkboxes 
+	    = document.querySelectorAll('input[name="productCheck"]');
+	  // 선택된 체크박스
+	  const checked 
+	    = document.querySelectorAll('input[name="productCheck"]:checked');
+	  // select all 체크박스
+	  const selectAll 
+	    = document.querySelector('input[name="selectall"]');
+	  
+	  if(checkboxes.length === checked.length)  {
+	    selectAll.checked = true;
+	  }else {
+	    selectAll.checked = false;
+	  }
+	  productSum();
+	}
+
+function selectAll(selectAll)  {
+	  const checkboxes 
+	     = document.getElementsByName('productCheck');
+	  
+	  checkboxes.forEach((checkbox) => {
+	    checkbox.checked = selectAll.checked
+	  })
+	  
+	  productSum();
+	}
+
 function productSum()  {
   
 	var str = "";
@@ -50,10 +80,16 @@ function productSum()  {
 	for(var i=0; i<count; i++){
 		if($(".chkbox")[i].checked == true){
 			sum += parseInt($(".chkbox")[i].value);
+			sum.toLocaleString();
 		}
 	}
-	$(".total_sum").html(sum+" 원");
+	sum = numberWithCommas(sum);
+	$(".total_sum").html(sum);
 	//$("#amount").val(sum);
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 
@@ -130,14 +166,14 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 	 })
 }
 </script>
-<body>
+<body> 
 <div class="content">
 	<div class="container">
 		<div>
 			<h1>장바구니</h1>
 		</div>
-		<span style="margin-right: 915px;">
-				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="productSum()" style="margin-top: 14px;" checked >전체 선택
+		<span style="margin-right: 900px;">
+				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked >전체 선택
 		</span>	
 		<button type="button" class="btn btn-danger" onclick="delCheck()" style="margin-bottom: 5px;">선택 삭제</button>
 		<form name="cartForm" method="GET" action="">			
@@ -152,8 +188,8 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 				<tbody>
 					<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
 						<tr>
-							<td>&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" class="chkbox" name="productCheck" onclick="productSum()" value="${myProductsList.p_price}" checked/> 
+							<td>
+								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" checked/> 
 								<img src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}" alt="상품 이미지"/>
 							</td>
 							<td>
@@ -170,7 +206,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 					</c:forEach>
 					<tr class="table-danger">
 						<td>
-							<h4>총 상품금액<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" type="number" var="total_price"/></b></h4>
+							<h4>총 상품금액<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" type="number"/></b>원</h4>
 						</td>
 						<td>
 							<h4>배송비<br><b>0원</b></h4>
@@ -179,7 +215,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 							<h4>총 할인 금액<br><b>0원</b></h4>
 						</td>
 						<td>
-							<h2>합계:<b class="total_sum"><br><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b></h2>
+							<h2>합계:<b class="total_sum"><br><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b>원</h2>
 						</td>
 					</tr>
 				</tbody>
@@ -193,22 +229,3 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 </div>
 </body>
 </html>
-  <!-- 체크박스를 하나라도 풀면 전체선택 체크박스를 푸는 스크립트 -->
-    	 <script>
-      		 $(".chkbox").click(function(){
-       		 $("#allCheck").prop("checked", false);
-     		 });
-    	 </script>
- <!-- 전체선택 -->
-    	 <script>
-            $("#allCheck").click(function(){
-            var chk = $("#allCheck").prop("checked");
-            if(chk) {
-                $(".chkbox").prop("checked", true);
-                productSum();
-            } else {
-                 $(".chkbox").prop("checked", false);
-                productSum();
-            }
-        });
-    </script>
