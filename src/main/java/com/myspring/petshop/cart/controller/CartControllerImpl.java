@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.cart.service.CartService;
 import com.myspring.petshop.cart.vo.CartVO;
 import com.myspring.petshop.member.vo.MemberVO;
+import com.myspring.petshop.product.service.ProductService;
 
 
 @Controller
@@ -31,6 +32,7 @@ public class CartControllerImpl implements CartController {
 	private CartVO cartVO;
 	@Autowired
 	private MemberVO memberVO;
+
 	
 	@ResponseBody
 	@RequestMapping(value="/cart/addProductsInCart.do", method = RequestMethod.POST)
@@ -43,9 +45,9 @@ public class CartControllerImpl implements CartController {
 		cartVO.setP_code(cart.getP_code());
 		cartVO.setCart_quantity(cart.getCart_quantity());
 		
-		boolean isAreadyExisted = cartService.findCartProducts(cartVO);
+		String isAreadyExisted = cartService.findCartProducts(cartVO);
 		
-		if(isAreadyExisted == true) {
+		if(isAreadyExisted.equals("true")) {
 			return "already_existed";
 		}else {
 			cartService.addProductsInCart(cartVO);
@@ -75,18 +77,25 @@ public class CartControllerImpl implements CartController {
 								@RequestParam("cartQty_btnVal") String cartQty_btnVal,
 				HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		boolean result;
+		int p_stock = cartService.getProductsStock(p_code);
+		String result;
 		
 		if(cart_quantity == 1 && cartQty_btnVal.equals("minus")) {
-			result = false;
-		}else {
+			result = "false";
+		}
+		else if(cart_quantity == 0 && cartQty_btnVal.equals("inputKey")) {
+			result = "false";
+		}
+		else if(p_stock <= cart_quantity && !cartQty_btnVal.equals("minus")) {
+			result = "stockExcess";
+		}
+		else {
 			HttpSession session = request.getSession();
 			memberVO = (MemberVO)session.getAttribute("member");
 			int member_num = memberVO.getMember_Num();
 			cartVO.setMember_num(member_num);
 			cartVO.setP_code(p_code);
 			cartVO.setCart_quantity(cart_quantity);
-			
 			
 			Map<String, Object> cartMap = new HashMap<String, Object>();
 			cartMap.put("cartVO", cartVO);
@@ -95,10 +104,15 @@ public class CartControllerImpl implements CartController {
 			result = cartService.modifyCartQty(cartMap);
 		}
 					
-		if(result == true) {
+		if(result.equals("true")) {
 			return "modify_success";
-		}else {
+		}
+		else if(result.equals("false")) {
 			return "modify_failed";
+		}
+		else {	
+			String stock = Integer.toString(p_stock);
+			return stock;
 		}
 		
 	}

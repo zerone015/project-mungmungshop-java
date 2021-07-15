@@ -21,7 +21,7 @@ public class CartServiceImpl implements CartService{
 	@Autowired
 	private CartDAO cartDAO;
 	
-	public boolean findCartProducts(CartVO cartVO) throws Exception {
+	public String findCartProducts(CartVO cartVO) throws Exception {
 		return cartDAO.selectCountInCart(cartVO);
 	}
 	
@@ -41,9 +41,13 @@ public class CartServiceImpl implements CartService{
 		return cartMap;
 	}
 	
-	public boolean modifyCartQty(Map cartMap) throws Exception {
+	public String modifyCartQty(Map cartMap) throws Exception {
 		cartDAO.updateCartProductsQty(cartMap);
 		
-		return true;
+		return "true";
+	}
+	
+	public int getProductsStock(String p_code) throws Exception {
+		return cartDAO.selectProductsStock(p_code);
 	}
 }

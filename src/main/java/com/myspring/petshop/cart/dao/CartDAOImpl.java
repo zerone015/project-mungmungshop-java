@@ -32,9 +32,9 @@ public class CartDAOImpl implements CartDAO {
 		return myProductsList;
 	}
 	
-	public boolean selectCountInCart(CartVO cartVO) throws DataAccessException {
+	public String selectCountInCart(CartVO cartVO) throws DataAccessException {
 		String result = sqlSession.selectOne("mapper.cart.selectCountInCart", cartVO);
-		return Boolean.parseBoolean(result);
+		return result;
 	}
 	
 	public void insertProductsInCart(CartVO cartVO) throws DataAccessException {
@@ -45,6 +45,11 @@ public class CartDAOImpl implements CartDAO {
 	
 	public void updateCartProductsQty(Map cartMap) throws DataAccessException {
 		sqlSession.update("mapper.cart.updateCartProductsQty", cartMap);
+	}
+	
+	public int selectProductsStock(String p_code) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.cart.selectProductsStock", p_code);
 	}
 	
 	private int selectMaxCartCode() throws DataAccessException {

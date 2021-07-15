@@ -33,7 +33,7 @@
 	
 	<select id="selectProductsList" resultType="productVO" parameterType="int" >
 		<![CDATA[	
-			SELECT * FROM products where p_code IN (select p_code from cart where member_num = #{member_num} order by cart_date);
+			SELECT * FROM products where p_code IN (select p_code from cart where member_num = #{member_num} order by cart_date)
 		]]>
 		
 	</select>
@@ -53,5 +53,12 @@
 		</choose>
 		where member_num = #{cartVO.member_num} 
 		AND p_code = #{cartVO.p_code}
+	</select>
+	
+	<select id="selectProductsStock" resultType="int" parameterType="String" >
+		<![CDATA[	
+			SELECT p_stock FROM products where p_code = #{p_code} 
+		]]>
+		
 	</select>
 </mapper>
