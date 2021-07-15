@@ -31,29 +31,31 @@ request.setCharacterEncoding("UTF-8");
 </style>
 </head>
 <script>
-function checkSelectAll()  {
-  // 전체 체크박스
-  const checkboxes = document.querySelectorAll('input[name="productCheck"]');
-  // 선택된 체크박스
-  const checked = document.querySelectorAll('input[name="productCheck"]:checked');
-  // select all 체크박스
-  const selectAll = document.querySelector('input[name="selectall"]');
-  
-  if(checkboxes.length === checked.length)  {
-    selectAll.checked = true;
-  }else {
-    selectAll.checked = false;
-  }
-
+window.onload = function () {
+    var tt = "${myProductsList}";
+    if (tt == 'false') {
+        $("#allCheck").prop("checked", false);
+    } else {
+        $("#allCheck").prop("checked", true);
+        $(".chkbox").prop("checked", true);
+        productSum();
+    }
 }
 
-function selectAll(selectAll)  {
-  const checkboxes = document.getElementsByName('productCheck');
+function productSum()  {
   
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = selectAll.checked
-  })
+	var str = "";
+	var sum = 0;
+	var count = $(".chkbox").length;
+	for(var i=0; i<count; i++){
+		if($(".chkbox")[i].checked == true){
+			sum += parseInt($(".chkbox")[i].value);
+		}
+	}
+	$(".total_sum").html(sum+" 원");
+	//$("#amount").val(sum);
 }
+
 
 function buyCheck() {
 	var check=document.cartForm.productCheck;
@@ -135,7 +137,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 			<h1>장바구니</h1>
 		</div>
 		<span style="margin-right: 915px;">
-				<input type="checkbox" class="form-check-input" id="same-address" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked >전체 선택
+				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="productSum()" style="margin-top: 14px;" checked >전체 선택
 		</span>	
 		<button type="button" class="btn btn-danger" onclick="delCheck()" style="margin-bottom: 5px;">선택 삭제</button>
 		<form name="cartForm" method="GET" action="">			
@@ -147,12 +149,11 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 						<th>상품 수량</th>
 						<th>상품 가격</th>
 				</thead>
-	
 				<tbody>
 					<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
 						<tr>
 							<td>&nbsp;&nbsp;&nbsp;
-								<input type="checkbox" class="form-check-input" id="same-address" name="productCheck" onclick="checkSelectAll()" checked/> 
+								<input type="checkbox" class="chkbox" name="productCheck" onclick="productSum()" value="${myProductsList.p_price}" checked/> 
 								<img src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}" alt="상품 이미지"/>
 							</td>
 							<td>
@@ -163,13 +164,13 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 								<input type="text" name="cart_quantity" onkeyup="fn_modify_cartQty('${myProductsList.p_code}',${status.count-1},'inputKey');" maxlength=2 size=2 value="${myCartList[status.index].cart_quantity}">
 								<button type="button" onclick="fn_modify_cartQty('${myProductsList.p_code}',${status.count-1},'plus');">+</button>
 							</td>
-							<td><b><fmt:formatNumber value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" pattern="###,###,###"/></b>원</td>
+							<td><b><fmt:formatNumber value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" pattern="###,###,###" var="p_price"/></b>${p_price}원</td>
 						</tr>
 						<c:set var="totalGoodsPrice" value="${totalGoodsPrice+myProductsList.p_price*myCartList[status.index].cart_quantity }"/>
 					</c:forEach>
 					<tr class="table-danger">
 						<td>
-							<h4>총 상품금액<br><b><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/>원</b></h4>
+							<h4>총 상품금액<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" type="number" var="total_price"/></b></h4>
 						</td>
 						<td>
 							<h4>배송비<br><b>0원</b></h4>
@@ -178,7 +179,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 							<h4>총 할인 금액<br><b>0원</b></h4>
 						</td>
 						<td>
-							<h2>합계:<b><br><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b>원</h2>
+							<h2>합계:<b class="total_sum"><br><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b></h2>
 						</td>
 					</tr>
 				</tbody>
@@ -192,3 +193,22 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 </div>
 </body>
 </html>
+  <!-- 체크박스를 하나라도 풀면 전체선택 체크박스를 푸는 스크립트 -->
+    	 <script>
+      		 $(".chkbox").click(function(){
+       		 $("#allCheck").prop("checked", false);
+     		 });
+    	 </script>
+ <!-- 전체선택 -->
+    	 <script>
+            $("#allCheck").click(function(){
+            var chk = $("#allCheck").prop("checked");
+            if(chk) {
+                $(".chkbox").prop("checked", true);
+                productSum();
+            } else {
+                 $(".chkbox").prop("checked", false);
+                productSum();
+            }
+        });
+    </script>
