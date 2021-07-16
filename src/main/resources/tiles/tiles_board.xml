@@ -65,6 +65,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/qnaWrite.jsp" />
 </definition>
 
+<definition name="qnaReply" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 답변 작성 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaReply.jsp" />
+</definition>
+
 <definition name="/board/qnaView" extends="baseLayout">
 		<put-attribute name="title" value="1:1 문의 글 조회 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/qnaView.jsp" />

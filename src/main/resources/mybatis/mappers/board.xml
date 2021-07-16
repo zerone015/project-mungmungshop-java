@@ -85,21 +85,6 @@
 	]]>
 	</delete> 
 	
-	<!-- 페이징 처리 후 게시글 조회 -->
-	<select id="selectBoard" resultType="eventVO">
-		SELECT * FROM (
-			SELECT ROWNUM RN, A.* 
-			FROM (SELECT * 
-				  FROM eventBoard 
-				  ORDER BY event_date DESC) A
-				 )
-			WHERE RN BETWEEN #{start} AND #{end}
-	</select>
-	
-	
-	
-	
-	
 	
 	
 	
@@ -195,8 +180,8 @@
 	<!-- 게시글 등록 -->
 	<insert id="qnaInsert" parameterType="qnaVO">
 	<![CDATA[
-		insert into qnaBoard(qna_no, qna_originNo, qna_title, qna_writer, qna_content, qna_date, qna_hits)
-						values(null, 0, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date}, 0)
+		insert into qnaBoard(qna_no, qna_originNo, qna_title, qna_writer, qna_content, qna_date, qna_secret,qna_hits)
+						values(null, #{qna_originNo}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date}, #{qna_secret} , 0)
 	]]>
 	</insert>
 	
@@ -227,4 +212,22 @@
 	]]>
 	</select> 
 	
+	<!-- 게시글 삭제 -->
+	<select id="qnaDelete" parameterType="int">
+	<![CDATA[
+		delete from qnaBoard 
+		where qna_no = #{qna_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 번호 Max -->
+	<select id="qnaMaxNo" resultType="Integer">
+		select Max(qna_no) as maxId from qnaBoard
+	</select>
+	
+	<!-- 게시글 답변 등록 -->
+	<insert id = "qnaReplyInsert" parameterType="qnaVO">
+		insert into qnaBoard(qna_no, qna_originNo, qna_groupOrd, qna_groupLayer, qna_title, qna_writer, qna_content, qna_date, qna_secret, qna_hits)
+						values(null, #{qna_originNo}, #{qna_groupOrd}, #{qna_groupLayer}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date},  #{qna_secret}, 0)
+	</insert>
 </mapper>

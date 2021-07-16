@@ -1,6 +1,7 @@
 package com.myspring.petshop.board.qna.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,15 @@ public class QnaDAOImpl implements QnaDAO{
 	public int qnaUpdate(QnaVO qnaVO) throws DataAccessException {
 		int result = sqlSession.update("mapper.board.qnaUpdate", qnaVO);
 		return result;
+	}
+
+	@Override
+	public Integer qnaMaxNo() throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.qnaMaxNo");
+	}
+
+	@Override
+	public int qnaReply(QnaVO qnaVO) throws DataAccessException {
+		return sqlSession.insert("mapper.board.qnaReplyInsert", qnaVO);
 	}
 }

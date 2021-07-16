@@ -1,6 +1,7 @@
 package com.myspring.petshop.board.qna.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -22,7 +23,10 @@ public interface QnaDAO {
 	public int qnaUpdate(QnaVO qnaVO) throws DataAccessException;
 
 	public int qnaCnt() throws DataAccessException;
-	
-	
+
+	public Integer qnaMaxNo() throws DataAccessException;
+
+	public int qnaReply(QnaVO qnaVO) throws DataAccessException;
+
 	
 }

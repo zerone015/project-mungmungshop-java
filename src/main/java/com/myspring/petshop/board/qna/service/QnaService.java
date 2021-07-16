@@ -25,4 +25,9 @@ public interface QnaService {
 
 	public int qnaCnt() throws DataAccessException;
 
+	public Integer qnaMaxNo() throws DataAccessException;
+
+	public int qnaReply(QnaVO qnaVO)throws DataAccessException;
+
+
 }

@@ -12,6 +12,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>1:1 문의글 작성</title>
 
@@ -20,7 +21,7 @@
 		outline: none; 
 	} 
 	input {
-		width:100%; border: 0;
+		width:70%; border: 0;
 	}
 	
 	textarea {
@@ -52,41 +53,45 @@ function checkBoard() {
 		content.focus();
 		return false;
 	}
+	
 	form.submit();
 }
+
 </script>
 </head>
 <body>
-	<form action="${contextPath}/qnaWrite.do" method="POST" name="qnaWrite" >
-		<table class="table table-sm table-bordered" border="1" >
-			<tr>
-				<th style="background: #e6e6e6;">제목</th>
-				<td colspan="3">
-					<input type="text" id="qna_title" name="qna_title" maxlength = "45" placeholder="이벤트 제목을 작성하세요."/>
-				</td>
-			</tr>
-			<tr>
-				<th style="background: #e6e6e6;">작성자</th>
-				<td>
-					<input type="text" id = "qna_writer" name = "qna_writer" />
-				</td>
-				<th style="background: #e6e6e6;">날짜</th>
-				<td>
-					<input type="text" id = "qna_date" name = "qna_date" value="<%=nowTime%>" readonly>
-				</td>
-			</tr>
-		</table>
-		<hr width="100%">
-		<textarea name="qna_content" rows="10" id="qna_content" name="qna_content" placeholder="내용을 작성하세요."></textarea>
+	<div class="container">
+		<form action="${contextPath}/qnaWrite.do" method="POST" name="qnaWrite" >
+			<table class="table table-sm table-bordered" border="1" >
+				<tr>
+					<th style="background: #e6e6e6;">제목</th>
+					<td colspan="3">
+						<input type="text" id="qna_title" name="qna_title" maxlength = "45" placeholder="제목을 작성하세요."/>
+						<input type="checkbox" id = "qna_secret" name="qna_secret" value="Y" style="width: 30px;"/> 비밀글
+					</td>
+				</tr>
+				<tr>
+					<th style="background: #e6e6e6;">작성자</th>
+					<td>
+						<input type="text" id = "qna_writer" name = "qna_writer" />
+					</td>
+					<th style="background: #e6e6e6;">날짜</th>
+					<td>
+						<input type="text" id = "qna_date" name = "qna_date" value="<%=nowTime%>" readonly>
+					</td>
+				</tr>
+			</table>
+			<hr width="100%">
+			<textarea name="qna_content" rows="10" id="qna_content" name="qna_content" placeholder="내용을 작성하세요."></textarea>
+			
+			<div class="bd-example" align="right">
+				<button type="reset" class="btn btn-outline-dark">다시쓰기</button>
+				<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">작성</button>
+			</div>
+		</form>
 		
-		<div class="bd-example" align="right">
-			<button type="reset" class="btn btn-outline-dark">다시쓰기</button>
-			<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">작성</button>
-		</div>
-	</form>
-	
-	<hr width="100%">
-	
+		<hr width="100%">
+	</div>
 	
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.myspring.petshop.board.qna.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -23,6 +24,13 @@ public interface QnaController {
 	public ModelAndView qnaMod(int qna_no, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 	public ModelAndView qnaRemove(int qna_no, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView qnaReply(@ModelAttribute("qnaVO") QnaVO qnaVO,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	public ModelAndView qnaRe(int qna_no, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+
 
 	
 }

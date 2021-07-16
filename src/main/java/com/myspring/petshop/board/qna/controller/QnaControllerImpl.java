@@ -1,7 +1,9 @@
 package com.myspring.petshop.board.qna.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +29,9 @@ import com.myspring.petshop.board.qna.vo.QnaVO;
 public class QnaControllerImpl implements QnaController {
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private QnaVO qnaVO;
+	
 
 	private static final Logger logger = LoggerFactory.getLogger(QnaControllerImpl.class);
 	
@@ -62,8 +67,15 @@ public class QnaControllerImpl implements QnaController {
 	@RequestMapping(value="/qnaWrite.do", method=RequestMethod.POST)
 	public ModelAndView qnaWrite(@ModelAttribute("qna") QnaVO qnaVO, HttpServletRequest request,
 			HttpServletResponse response)throws Exception {
-		request.setCharacterEncoding("utf-8");
 		int result=0;
+		
+//		게시글이 없을 경우 originNo = 1, 
+//		게시글 있을 경우 originNo = 게시글 번호 + 1
+		Integer qnaMaxNo = qnaService.qnaMaxNo();
+		System.out.println(qnaMaxNo);
+		int i = qnaMaxNo != null ? qnaMaxNo + 1 : 1;
+		qnaVO.setQna_originNo(i);
+		
 		result = qnaService.qnaWrite(qnaVO);
 
 		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
@@ -115,12 +127,27 @@ public class QnaControllerImpl implements QnaController {
 		return mav;
 	}
 	
-//	public ModelAndView qnaReply(@RequestParam("qna_no") int qna_no,
-//								 @RequestParam("qna_groupOrd") int qna_groupOrd,
-//								 @RequestParam("qna_groupLayer") int qna_groupLayer,
-//			HttpServletRequest request, HttpServletResponse response) throws Exception {
-//		qnaService.qnaReply(qna_no, qna_groupOrd, qna_groupLayer);
-//		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
-//		return mav;
-//	}
+	
+	// 답변 작성
+	@Override
+	@RequestMapping(value="/board/qnaReply.do", method=RequestMethod.POST)
+	public ModelAndView qnaRe(@RequestParam("qna_no") int qna_no, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+		QnaVO qnaVO = qnaService.qnaMod(qna_no);
+		ModelAndView mav = new ModelAndView("qnaReply");
+		mav.addObject("qnaVO", qnaVO);
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/qnaReply.do", method=RequestMethod.POST)
+	public ModelAndView qnaReply(@ModelAttribute("qnaVO") QnaVO qnaVO,
+				HttpServletRequest request, HttpServletResponse response) throws Exception{
+		qnaService.qnaReply(qnaVO);
+		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
+		return mav;
+	}
+	
+	
 }

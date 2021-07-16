@@ -1,6 +1,7 @@
 package com.myspring.petshop.board.qna.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -58,6 +59,18 @@ public class QnaServiceImpl implements QnaService{
 	@Override
 	public int qnaModify(QnaVO qnaVO) throws DataAccessException {
 		return qnaDAO.qnaUpdate(qnaVO);
+	}
+	
+	
+	// 게시글 번호(qna_no) Max값 + 1 = originNo
+	@Override
+	public Integer qnaMaxNo() throws DataAccessException{
+		return qnaDAO.qnaMaxNo();	
+	}
+
+	@Override
+	public int qnaReply(QnaVO qnaVO) throws DataAccessException {
+		return qnaDAO.qnaReply(qnaVO);
 	}
 
 }

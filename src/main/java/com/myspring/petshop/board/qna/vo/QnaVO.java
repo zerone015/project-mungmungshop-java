@@ -14,7 +14,7 @@ public class QnaVO {
 	private String qna_writer;
 	private String qna_content;
 	private Timestamp qna_date;
-	private char qna_secret;
+	private String qna_secret;
 	private int qna_hits;
 	
 	public QnaVO () {
@@ -46,7 +46,7 @@ public class QnaVO {
 	public Timestamp getQna_date() {
 		return qna_date;
 	}
-	public char getQna_secret() {
+	public String getQna_secret() {
 		return qna_secret;
 	}
 	public int getQna_hits() {
@@ -78,7 +78,7 @@ public class QnaVO {
 	public void setQna_date(Timestamp qna_date) {
 		this.qna_date = qna_date;
 	}
-	public void setQna_secret(char qna_secret) {
+	public void setQna_secret(String qna_secret) {
 		this.qna_secret = qna_secret;
 	}
 	public void setQna_hits(int qna_hits) {

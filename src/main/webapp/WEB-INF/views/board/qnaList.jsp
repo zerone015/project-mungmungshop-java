@@ -10,13 +10,19 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet" href="${contextPath}/resources/css/board.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 <title>1:1 문의 목록</title>
-
+<style>
+	.reply1 {
+		text-indent: 1em;
+	}
+	.reply2 {
+		text-indent: 2em;
+	}
+</style>
 <script>
 
 	//이전 버튼 이벤트
@@ -76,26 +82,48 @@
 					<th>조회수</th>
 				</tr>
 			</thead>
+
 			<tbody>
-				<c:forEach items="${qnaList}" var="qnaVO">
-					<c:if test="${qnaVO.qnaGroupLayer} = 0">
-					    <tr>
-					      <td>${qnaVO.qna_no}</td>
+				<c:forEach items="${qnaList}" var="qnaVO">						
+				    <tr>
+				      <!-- 글번호 -->
+				      <td>${qnaVO.qna_no}</td>
+				      
+				      
+				      <!-- 제목 -->
+				      <c:choose>
+				      	<c:when test="${qnaVO.qna_secret == 'Y'}">
+					      <c:if test="${qnaVO.qna_groupLayer == 0}">
+					      	<td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">비밀글 입니다.</a></td>
+					      </c:if>
+					      <c:if test="${qnaVO.qna_groupLayer == 1}">
+					      	<td class="reply1"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">ㄴ[답변] 비밀글 입니다.</a></td>
+					      </c:if>
+					      <c:if test="${qnaVO.qna_groupLayer == 2}">
+					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}"> ㄴ[답변] 비밀글 입니다.</a></td>
+					      </c:if>
+					    </c:when>
+					    <c:otherwise>
+					      <c:if test="${qnaVO.qna_groupLayer == 0}">
 					      <td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">${qnaVO.qna_title}</a></td>
-					      <td>${qnaVO.qna_writer}</td>
-					      <td>${qnaVO.qna_date}</td>
-					      <td>${qnaVO.qna_hits}</td>
-					    </tr>
-				    </c:if>
-					<c:if test="${qnaVO.qnaGroupLayer} = 1">
-					    <tr>
-					      <td>${qnaVO.qna_no}</td>
-					      <td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}"> [답변]${qnaVO.qna_title}</a></td>
-					      <td>${qnaVO.qna_writer}</td>
-					      <td>${qnaVO.qna_date}</td>
-					      <td>${qnaVO.qna_hits}</td>
-					    </tr>
-				    </c:if>
+					      </c:if>
+					      <c:if test="${qnaVO.qna_groupLayer == 1}">
+					      	<td class="reply1"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">ㄴ${qnaVO.qna_title}</a></td>
+					      </c:if>
+					      <c:if test="${qnaVO.qna_groupLayer == 2}">
+					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}"> ㄴ${qnaVO.qna_title}</a></td>
+					      </c:if>
+					    </c:otherwise>
+					  </c:choose>
+				      
+				      
+				      <!-- 작성자 -->
+				      <td>${qnaVO.qna_writer}</td>
+				      <!-- 작성일 --> 
+				      <td><fmt:formatDate value="${qnaVO.qna_date}" pattern="YYYY-MM-dd"/></td>
+				      <!-- 조회수 -->
+				      <td>${qnaVO.qna_hits}</td>
+				    </tr>
 				</c:forEach>							
 			</tbody>
 		</table>
