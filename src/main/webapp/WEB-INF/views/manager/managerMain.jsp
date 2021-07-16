@@ -51,7 +51,7 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<div class="col-md-5" style="float: left;">
 		<h4>
-			<a href="#">회원 관리</a>
+			<a href="${contextPath}/manager/getMembersList.do">회원 관리</a>
 		</h4>
 	</div>
 	<br>

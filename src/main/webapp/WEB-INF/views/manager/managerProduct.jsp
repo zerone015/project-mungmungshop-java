@@ -27,7 +27,6 @@ request.setCharacterEncoding("UTF-8");
 <title>관리자 상품 관리 페이지</title>
 </head>
 <script>
-
 	//이전 버튼 이벤트
 	function fn_prev(page, range, rangeSize) {
 
@@ -81,12 +80,12 @@ request.setCharacterEncoding("UTF-8");
 	<table class="table table-striped" style="margin-top: 10;">
 		<thead>
 			<tr>
-				<td>상품 번호</td>
-				<td>상품명</td>
-				<td>카테고리</td>
-				<td>판매가</td>
-				<td>재고 수</td>
-				<td>등록 날짜</td>
+				<th>상품 번호</th>
+				<th>상품명</th>
+				<th>카테고리</th>
+				<th>판매가</th>
+				<th>재고 수</th>
+				<th>등록 날짜</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -101,7 +100,7 @@ request.setCharacterEncoding("UTF-8");
 				<fmt:formatNumber value="${products.p_price }" pattern="###,###,###"/>원
 				</td>
 				<td>${products.p_stock}</td>
-				<td>${products.p_date}</td>
+				<td><fmt:formatDate value="${products.p_date}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
 			</tr>
 			</c:forEach>
 		</tbody>

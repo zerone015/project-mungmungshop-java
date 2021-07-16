@@ -33,6 +33,12 @@ public class ManagerDAOImpl implements ManagerDAO {
 	}
 	
 	@Override
+	public int selectMembersCnt() throws Exception {
+		
+		return sqlSession.selectOne("mapper.manager.selectMembersCnt");
+	}
+	
+	@Override
 	public ProductVO selectProduct(String p_code) throws Exception {
 		
 		return sqlSession.selectOne("mapper.manager.selectProduct", p_code);
@@ -48,4 +54,33 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public void deleteProduct(String p_code) throws Exception {
 		sqlSession.delete("mapper.manager.deleteProduct", p_code);
 	}
+	
+	@Override
+	public List selectMembers(Pagination pagination) throws Exception {
+		
+		return sqlSession.selectList("mapper.manager.selectMembers", pagination);
+	}
+	
+	@Override
+	public void deleteMembers(int member_num) throws Exception {
+		sqlSession.delete("mapper.manager.deleteMembers", member_num);
+	}
+	
+	@Override
+	public void updateMemberGrant(int member_num) throws Exception {
+		sqlSession.update("mapper.manager.updateMemberGrant", member_num);
+	}
+	
+	@Override
+	public void updateMemberRevoke(int member_num) throws Exception {
+		sqlSession.update("mapper.manager.updateMemberRevoke", member_num);
+	}
+	
+	@Override
+	public int selectMemberManager(int member_num) throws Exception {
+		
+		return sqlSession.selectOne("mapper.manager.selectMemberManager", member_num);
+	}
+	
+
 }

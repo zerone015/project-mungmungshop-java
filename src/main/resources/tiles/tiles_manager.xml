@@ -37,5 +37,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/manager/managerOrderList.jsp" />
 		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
 	</definition>
+	
+	<definition name="managerMember" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 회원 관리 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerMember.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
 
 </tiles-definitions>

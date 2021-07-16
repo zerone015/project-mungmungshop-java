@@ -41,13 +41,13 @@ request.setCharacterEncoding("utf-8");
 		var idDuplication = form.idDuplication;
 		var nickDuplication = form.nickDuplication;
 
-		var id = form.Member_ID;
-		var pw = form.Member_PW;
+		var id = form.member_id;
+		var pw = form.member_pw;
 		var checkPw = form.joinPwCheck;
-		var email = form.Member_email;
-		var name = form.Member_name;
-		var nickName = form.Member_Nick;
-		var phoneNumb = form.Member_Phone;
+		var email = form.member_email;
+		var name = form.member_name;
+		var nickName = form.member_nick;
+		var phoneNumb = form.member_phone;
 		var passcode = form.passcode;
 
 		if (id.value == "") {
@@ -174,7 +174,7 @@ request.setCharacterEncoding("utf-8");
 	function fn_idChk() {
 		var form = document.userInfo;
 
-		var id = form.Member_ID;
+		var id = form.member_id;
 		var regExpId = /^[A-Za-z0-9+]*$/; // 영문,숫자만 사용 가능
 
 		if (id.value == "") {
@@ -201,7 +201,7 @@ request.setCharacterEncoding("utf-8");
 				type : "post",
 				dataType : "json",
 				data : {
-					"Member_ID" : $("#Member_ID").val()
+					"member_id" : $("#Member_ID").val()
 				},
 				success : function(data) {
 					if (data == 1) {
@@ -212,14 +212,14 @@ request.setCharacterEncoding("utf-8");
 						alert("사용 가능한 아이디입니다.");
 					}
 				}
-			})
+			});
 		}
 	}
 
 	function fn_nickChk() {
 		var form = document.userInfo;
 
-		var nickName = form.Member_Nick;
+		var nickName = form.member_nick;
 		var regExpNickName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/; //한글,영문,숫자만 사용 가능
 
 		if (nickName.value == "") {
@@ -247,7 +247,7 @@ request.setCharacterEncoding("utf-8");
 				type : "post",
 				dataType : "json",
 				data : {
-					"Member_Nick" : $("#Member_Nick").val()
+					"member_nick" : $("#Member_Nick").val()
 				},
 				success : function(data) {
 					if (data == 1) {
@@ -270,15 +270,15 @@ request.setCharacterEncoding("utf-8");
 		
 		var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 		
-		if (form.Member_email.value == "") {
+		if (form.member_email.value == "") {
 			alert("이메일을 입력해주세요.");
 			email.focus();
 			return false;
 		}
 		
-		if (!regExpEmail.test(form.Member_email.value)) {
+		if (!regExpEmail.test(form.member_email.value)) {
 			alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
-			form.Member_email.select();
+			form.member_email.select();
 			return false;
 		}
 		
@@ -325,7 +325,7 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td>아이디</td>
 					<td><input type="text" maxlength="11"
-						placeholder="5~11자 이내 입력" name="Member_ID" id="Member_ID"
+						placeholder="5~11자 이내 입력" name="member_id" id="Member_ID"
 						onkeydown="inputIdChk()">
 						<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 						<input type="hidden" name="idDuplication" value="idUncheck">
@@ -334,7 +334,7 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td>비밀번호</td>
 					<td><input type="password" maxlength="20"
-						placeholder="영문,숫자,특수문자 포함 8자 이상" name="Member_PW"></td>
+						placeholder="영문,숫자,특수문자 포함 8자 이상" name="member_pw"></td>
 				</tr>
 				<tr>
 					<td>비밀번호 확인</td>
@@ -344,7 +344,7 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td>이메일</td>
 					<td><input type="text" maxlength="50"
-						placeholder="@을 포함한 이메일 주소" id="mail_input" name="Member_email">
+						placeholder="@을 포함한 이메일 주소" id="mail_input" name="member_email">
 						<button type="button" onclick="fn_mailSend();">인증번호 전송</button></td>
 				</tr>
 				<tr>
@@ -358,12 +358,12 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td>이름</td>
 					<td><input type="text" maxlength="45" placeholder="이름"
-						name="Member_name"></td>
+						name="member_name"></td>
 				</tr>
 				<tr>
 					<td>닉네임</td>
 					<td><input type="text" maxlength="20" placeholder="닉네임"
-						id="Member_Nick" name="Member_Nick" onkeydown="inputNickChk()">
+						id="Member_Nick" name="member_nick" onkeydown="inputNickChk()">
 						<button type="button" id="nickChk" onclick="fn_nickChk();"
 							value="N">중복확인</button> <input type="hidden"
 						name="nickDuplication" value="nickUncheck"></td>
@@ -371,7 +371,7 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td>휴대전화</td>
 					<td><input type="text" placeholder="-를 포함한 휴대폰 번호"
-						name="Member_Phone" /></td>
+						name="member_phone" /></td>
 				</tr>
 			</table>
 			<br> <input type="button" value="회원가입" onclick="fn_checkJoin()" />

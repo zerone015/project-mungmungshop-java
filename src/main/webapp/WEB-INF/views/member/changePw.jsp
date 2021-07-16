@@ -21,7 +21,7 @@ request.setCharacterEncoding("utf-8");
 
 		var regExpPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/ //8자이상 영문,슛자,특수문자 포함 필수
 
-		var newPw = form.Member_PW;
+		var newPw = form.member_pw;
 		var checkPw = form.checkPw;
 		
 		var originalPw = "${originalPw}";
@@ -74,7 +74,7 @@ request.setCharacterEncoding("utf-8");
 	<form name="changePw" method="POST" action="${contextPath}/member/updatePw.do">
 		<table style="margin-left: auto; margin-right: auto;">
 			<tr align="center">
-				<td>새로운 비밀번호 * <input name="Member_PW"
+				<td>새로운 비밀번호 * <input name="member_pw"
 					placeholder="새로운 비밀번호를 입력하세요." type="password" size="30"
 					maxlength="20"></td>
 			</tr>
@@ -86,8 +86,8 @@ request.setCharacterEncoding("utf-8");
 			<tr>
 				<td>
 				<input class="btn btn-lg btn-primary btn-block" type="button" onclick="checkChangePw()" value="확인">
-				<input type="hidden" name="Member_ID" value="${id}">
-				<input type="hidden" name="Member_email" value="${email}">
+				<input type="hidden" name="member_id" value="${id}">
+				<input type="hidden" name="nember_email" value="${email}">
 				</td>
 			</tr>
 		</table>

@@ -40,7 +40,7 @@ public class CartControllerImpl implements CartController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("member");
-		int member_num = memberVO.getMember_Num();
+		int member_num = memberVO.getMember_num();
 		cartVO.setMember_num(member_num);
 		cartVO.setP_code(cart.getP_code());
 		cartVO.setCart_quantity(cart.getCart_quantity());
@@ -61,7 +61,7 @@ public class CartControllerImpl implements CartController {
 		ModelAndView mav = new ModelAndView("cart");
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("member");
-		int member_num = memberVO.getMember_Num();
+		int member_num = memberVO.getMember_num();
 		cartVO.setMember_num(member_num);
 		Map<String, List> cartMap = cartService.getMyCartList(cartVO);
 		session.setAttribute("cartMap", cartMap);
@@ -92,7 +92,7 @@ public class CartControllerImpl implements CartController {
 		else {
 			HttpSession session = request.getSession();
 			memberVO = (MemberVO)session.getAttribute("member");
-			int member_num = memberVO.getMember_Num();
+			int member_num = memberVO.getMember_num();
 			cartVO.setMember_num(member_num);
 			cartVO.setP_code(p_code);
 			cartVO.setCart_quantity(cart_quantity);

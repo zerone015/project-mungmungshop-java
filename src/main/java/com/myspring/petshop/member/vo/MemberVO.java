@@ -6,89 +6,98 @@ import org.springframework.stereotype.Component;
 
 @Component("memberVO")
 public class MemberVO{
-	private int Member_Num;
-	private String Member_ID;
-	private String Member_PW;
-	private String Member_name;
-	private String Member_email;
-	private String Member_Phone;
-	private String Member_Nick;
-	private Timestamp Member_joindate;
-	private int Member_manager;
+	private int member_num;
+	private String member_id;
+	private String member_pw;
+	private String member_name;
+	private String member_email;
+	private String member_phone;
+	private String member_nick;
+	private Timestamp member_joindate;
+	private int member_manager;
+	private Timestamp member_logindate;
 	
 	public MemberVO() {
 		
 	}
 	
-	public int getMember_Num() {
-		return Member_Num;
+	public int getMember_num() {
+		return member_num;
 	}
 	
-	public void setMember_Num(int Member_Num) {
-		this.Member_Num = Member_Num;
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
 	}
 	
-	public String getMember_ID() {
-		return Member_ID;
+	public String getMember_id() {
+		return member_id;
 	}
 	
-	public void setMember_ID(String Member_ID) {
-		this.Member_ID = Member_ID;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
 	
-	public String getMember_PW() {
-		return Member_PW;
+	public String getMember_pw() {
+		return member_pw;
 	}
 	
-	public void setMember_PW(String Member_PW) {
-		this.Member_PW=Member_PW;
+	public void setMember_pw(String member_pw) {
+		this.member_pw=member_pw;
 	}
 	
 	public String getMember_name() {
-		return Member_name;
+		return member_name;
 	}
 	
-	public void setMember_name(String Member_name) {
-		this.Member_name=Member_name;
+	public void setMember_name(String member_name) {
+		this.member_name=member_name;
 	}
 	
 	public String getMember_email() {
-		return Member_email;
+		return member_email;
 	}
 	
-	public void setMember_email(String Member_email) {
-		this.Member_email=Member_email;
+	public void setMember_email(String member_email) {
+		this.member_email=member_email;
 	}
 	
-	public String getMember_Phone() {
-		return Member_Phone;
+	public String getMember_phone() {
+		return member_phone;
 	}
 	
-	public void setMember_Phone(String Member_Phone) {
-		this.Member_Phone=Member_Phone;
+	public void setMember_phone(String member_phone) {
+		this.member_phone=member_phone;
 	}
 	
-	public String getMember_Nick() {
-		return Member_Nick;
+	public String getMember_nick() {
+		return member_nick;
 	}
 	
-	public void setMember_Nick(String Member_Nick) {
-		this.Member_Nick=Member_Nick;
+	public void setMember_nick(String member_nick) {
+		this.member_nick=member_nick;
 	}
 	
 	public Timestamp getMember_joindate() {
-		return Member_joindate;
+		return member_joindate;
 	}
 	
-	public void setMember_joindate(Timestamp Member_joindate) {
-		this.Member_joindate = Member_joindate;
+	public void setMember_joindate(Timestamp member_joindate) {
+		this.member_joindate = member_joindate;
 	}
 	
 	public int getMember_manager() {
-		return Member_manager;
+		return member_manager;
 	}
 	
-	public void setMember_manager(int Member_manager) {
-		this.Member_manager = Member_manager;
+	public void setMember_manager(int member_manager) {
+		this.member_manager = member_manager;
+	}
+	
+	public Timestamp getMember_logindate() {
+		return member_logindate;
+	}
+	
+	public void setMember_logindate(Timestamp member_logindate) {
+		this.member_logindate = member_logindate;
 	}
 }

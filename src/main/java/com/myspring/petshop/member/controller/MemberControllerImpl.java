@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,8 @@ public class MemberControllerImpl implements MemberController{
 	private MemberService memberService;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	BCryptPasswordEncoder passEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
 	
@@ -54,31 +57,36 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
-		if(memberVO != null) {
+		
+		boolean passMatch = passEncoder.matches(member.getMember_pw(), memberVO.getMember_pw());
+		
+		if(memberVO != null && passMatch) {
+			
 			String remember_userId = request.getParameter("remember_userId");
-			Cookie cookie = new Cookie("rememberId", memberVO.getMember_ID());
+			Cookie cookie = new Cookie("rememberId", memberVO.getMember_id());
+			HttpSession session = request.getSession();
+			session.setAttribute("member", memberVO);
+			session.setAttribute("isLogOn", true);
+			cookie.setPath("/");
+			
 			if(remember_userId == null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("member", memberVO);
-				session.setAttribute("isLogOn", true);
-				cookie.setPath("/");	
 				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-				mav.setViewName("redirect:/main.do");
 			} 
 			else if(remember_userId != null && remember_userId.trim().equals("checked")) {	
-				HttpSession session = request.getSession();
-				session.setAttribute("member", memberVO);
-				session.setAttribute("isLogOn", true);
-				cookie.setPath("/");
 				cookie.setMaxAge(60*60*24*30);
-				response.addCookie(cookie);
-				mav.setViewName("redirect:/main.do");
 			}
-		}else {
+			
+			response.addCookie(cookie);
+			
+			memberService.modLoginDate(memberVO.getMember_num());
+			mav.setViewName("redirect:/main.do");
+		}
+		
+		else {
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/login.do");
 		}
+		
 		return mav;
 	}
 	
@@ -106,8 +114,15 @@ public class MemberControllerImpl implements MemberController{
 	public ModelAndView addMember(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		request.setCharacterEncoding("utf-8");
+		
+		String inputPass = member.getMember_pw();
+		String pass = passEncoder.encode(inputPass);
+		member.setMember_pw(pass);
+		
 		memberService.addMember(member);
+		
 		ModelAndView mav = new ModelAndView("redirect:/member/joinWelcome.do");
+		
 		return mav;
 	}
 	
@@ -140,9 +155,9 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value="/member/changePw.do", method = RequestMethod.POST)
 	public ModelAndView changePwView(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception {
-		String id = member.getMember_ID();
+		String id = member.getMember_id();
 		String email = member.getMember_email();
-		String originalPw = member.getMember_PW();
+		String originalPw = member.getMember_pw();
 		ModelAndView mav = new ModelAndView("changePw");
 		mav.addObject("id", id);
 		mav.addObject("email", email);

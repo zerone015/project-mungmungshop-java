@@ -13,4 +13,5 @@ public interface MemberService{
 	public int addMember(MemberVO memberVO) throws DataAccessException;
 	public List findId(MemberVO member) throws Exception;
 	public void changePw(MemberVO member) throws Exception;
+	public void modLoginDate(int member_num) throws Exception;
 }

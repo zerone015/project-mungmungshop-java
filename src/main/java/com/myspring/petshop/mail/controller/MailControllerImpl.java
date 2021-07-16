@@ -90,7 +90,7 @@ public class MailControllerImpl implements MailController {
 		String originalPw = mailService.getPw(member);
 		ModelAndView mav = new ModelAndView();
 		if(email != null && email != "") {
-			String id = member.getMember_ID();
+			String id = member.getMember_id();
 			Random random = new Random();
 			int checkNum = random.nextInt(888888) + 111111;
 			String setFrom = "mungmungshop12@gmail.com";

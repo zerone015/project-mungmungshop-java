@@ -34,9 +34,21 @@
 		]]>
 	</select>
 	
+	<select id="selectMembers" resultType="memberVO">
+		<![CDATA[ 
+			select * from members order by Member_joindate desc LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
 	<select id="selectProductsCnt" resultType="int">
 		<![CDATA[ 
 			select count(*) as listCnt from products
+		]]>
+	</select>
+	
+	<select id="selectMembersCnt" resultType="int">
+		<![CDATA[ 
+			select count(*) as listCnt from members
 		]]>
 	</select>
 	
@@ -59,5 +71,31 @@
 			delete from products where p_code = #{p_code}
 		]]>
 	</delete>
+	
+	<delete id="deleteMembers" parameterType="int">
+		<![CDATA[ 
+			delete from members where member_num = #{member_num}
+		]]>
+	</delete>
+	
+	<update id="updateMemberGrant" parameterType="int">
+		<![CDATA[ 
+			update members set member_manager = 1
+			where member_num = #{member_num}
+		]]>
+	</update>
+	
+	<update id="updateMemberRevoke" parameterType="int">
+		<![CDATA[ 
+			update members set member_manager = 0
+			where member_num = #{member_num}
+		]]>
+	</update>
+	
+	<select id="selectMemberManager" resultType="int" parameterType="int">
+		<![CDATA[ 
+			select member_manager from members
+			where member_num = #{member_num}
+		]]>
+	</select>
 </mapper>
-		

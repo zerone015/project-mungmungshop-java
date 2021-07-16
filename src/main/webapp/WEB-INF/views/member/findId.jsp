@@ -29,8 +29,8 @@ request.setCharacterEncoding("utf-8");
 	function checkIdSelect() {
 		var form = document.findId;
 
-		var name = form.Member_name;
-		var email = form.Member_email;
+		var name = form.member_name;
+		var email = form.member_email;
 
 		if (name.value == "") {
 			alert("이름을 입력해주세요.");
@@ -55,11 +55,11 @@ request.setCharacterEncoding("utf-8");
 		name="findId">
 		<table style="margin-left: auto; margin-right: auto;" width="45%">
 			<tr align="center">
-				<td>이 름 * <input type="text" name="Member_name"
+				<td>이 름 * <input type="text" name="member_name"
 					placeholder="이름을 입력하세요." size="30"></td>
 			</tr>
 			<tr align="center">
-				<td>이메일 * <input type="text" name="Member_email"
+				<td>이메일 * <input type="text" name="member_email"
 					placeholder="이메일을 입력하세요." size="30"></td>
 			</tr>
 			<tr>

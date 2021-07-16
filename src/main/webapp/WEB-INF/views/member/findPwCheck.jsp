@@ -49,9 +49,9 @@ request.setCharacterEncoding("utf-8");
 	<p><input name="passcode_input" type="text" placeholder="인증번호를 입력해주세요."></p>
 	<button type="button" class="btn btn-primary" onclick="fn_passcodeChk();">다음</button>
 	<button type="button" class="btn btn-dark" onclick="javascript: history.back();">취소</button>
-	   <input type="hidden" name="Member_ID" value="${id}">
-	   <input type="hidden" name="Member_email" value="${email}">
-	   <input type="hidden" name="Member_PW" value="${originalPw}">
+	   <input type="hidden" name="member_id" value="${id}">
+	   <input type="hidden" name="member_email" value="${email}">
+	   <input type="hidden" name="member_pw" value="${originalPw}">
 </form>
 </body>
 </html>

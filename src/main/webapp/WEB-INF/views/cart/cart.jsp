@@ -80,7 +80,7 @@ function productSum()  {
 	for(var i=0; i<count; i++){
 		if($(".chkbox")[i].checked == true){
 			sum += parseInt($(".chkbox")[i].value);
-			sum.toLocaleString();
+			
 		}
 	}
 	sum = numberWithCommas(sum);
@@ -197,7 +197,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 			<h1>장바구니</h1>
 		</div>
 		<span style="margin-right: 900px;">
-				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked >전체 선택
+				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked>전체 선택
 		</span>	
 		<button type="button" class="btn btn-danger" onclick="cart_delete();" style="margin-bottom: 5px;">선택 삭제</button>
 		<form name="cartForm" method="GET" action="">			
@@ -207,7 +207,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 						<th>&nbsp;&nbsp;&nbsp;상품이미지</th>
 						<th>상품명</th>
 						<th>상품 수량</th>
-						<th>상품 가격</th>
+						<th style="width: 300px;">상품 가격</th>
 				</thead>
 				<tbody>
 					<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
@@ -234,12 +234,12 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 						</td>
 						<td>
 							<h4>배송비<br><b>0원</b></h4>
-						</td>
+						</td>	
 						<td>
 							<h4>총 할인 금액<br><b>0원</b></h4>
 						</td>
-						<td>
-							<h2>합계:<b class="total_sum"><br><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b>원</h2>
+						<td style="width: 300px;">
+							<h4>합계:<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b>원</h4>
 						</td>
 					</tr>
 				</tbody>

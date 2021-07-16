@@ -12,5 +12,5 @@ public interface MemberDAO{
 	public List selectMemberId(MemberVO member) throws Exception;
 	public int insertMember(MemberVO memberVO)throws DataAccessException;
 	public void updateMemberPw(MemberVO memberVO)throws DataAccessException;
-
+	public void updateLoginDate(int member_num) throws Exception;
 }

@@ -29,4 +29,7 @@ public interface ManagerController {
 	
 	public ModelAndView removeProduct(@RequestParam("p_code") String p_code,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
+	public ModelAndView getMembersList(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range) throws Exception;
 }

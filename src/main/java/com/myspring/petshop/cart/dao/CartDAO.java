@@ -16,4 +16,5 @@ public interface CartDAO {
 	public void updateCartProductsQty(Map cartMap) throws DataAccessException;
 	public int selectProductsStock(String p_code) throws DataAccessException;
 	public void deleteCartProducts(String p_code) throws DataAccessException;
+
 }

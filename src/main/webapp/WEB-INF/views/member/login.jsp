@@ -14,7 +14,6 @@
 			}
 		</script>
 	</c:if>
-
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -33,34 +32,40 @@ request.setCharacterEncoding("utf-8");
 	function fn_checkLogin() {
 		var form = document.login;
 
-		if (form.Member_ID.value == "") {
+		if (form.member_id.value == "") {
 			alert("아이디를 입력해주세요.");
-			form.Member_ID.focus();
+			form.member_id.focus();
 			return false;
 		}
-		if (form.Member_PW.value == "") {
+		if (form.member_pw.value == "") {
 			alert("비밀번호를 입력해주세요.");
-			form.Member_PW.focus();
+			form.member_pw.focus();
 			return false;
 		}
 
 		form.submit();
 	}
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	 fn_checkLogin();
+        }
+}
 </script>
 <body>
-	<form name="login" method="POST"
+	<form id="login" name="login" method="POST"
 		action="${contextPath}/member/login.do">
 		<table style="border: 0; width: 400; align: center;">
 			<tr align="center">
 				<td><h4>로그인</h4></td>
 			</tr>
 			<tr align="center">
-				<td>ID<input type="text" name="Member_ID"
-					value="${cookie.rememberId.value}" size="30"
+				<td>ID<input type="text" name="member_id"
+					value="${cookie.rememberId.value}" size="30" onkeyup="enterkey();"
 					style="margin-left: 12; margin-top: 20;" placeholder="아이디 입력"></td>
 			</tr>
 			<tr align="center">
-				<td>PW<input type="password" name="Member_PW" size="30"
+				<td>PW<input type="password" name="member_pw" size="30" onkeyup="enterkey();"
 					style="margin-left: 5;" placeholder="비밀번호 입력"></td>
 			</tr>
 			<tr align="center">

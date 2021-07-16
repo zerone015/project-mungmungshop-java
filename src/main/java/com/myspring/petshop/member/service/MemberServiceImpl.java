@@ -31,6 +31,7 @@ public class MemberServiceImpl implements MemberService{
 	
 	@Override
 	public MemberVO login(MemberVO memberVO) throws Exception{
+		
 		return memberDAO.selectLoginMember(memberVO);
 	}
 	
@@ -49,6 +50,11 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void changePw(MemberVO member) throws Exception {
 		memberDAO.updateMemberPw(member);
+	}
+	
+	@Override
+	public void modLoginDate(int member_num) throws Exception {
+		memberDAO.updateLoginDate(member_num);
 	}
 	
 }

@@ -43,9 +43,13 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.insert("mapper.member.insertMember", memberVO);
 	}
 	
-	
 	@Override
 	public void updateMemberPw(MemberVO memberVO)throws DataAccessException {
 		sqlSession.update("mapper.member.updateMemberPw", memberVO);
+	}
+	
+	@Override
+	public void updateLoginDate(int member_num) throws Exception {
+		sqlSession.update("mapper.member.updateLoginDate", member_num);
 	}
 }

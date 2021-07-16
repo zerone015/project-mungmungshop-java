@@ -37,6 +37,12 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 	
 	@Override
+	public int membersCnt() throws Exception {
+	
+		return managerDAO.selectMembersCnt();
+	}
+	
+	@Override
 	public ProductVO getProduct(String p_code) throws Exception {
 		 
 		return managerDAO.selectProduct(p_code);
@@ -56,5 +62,49 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public void removeProduct(String p_code) throws Exception {
 		managerDAO.deleteProduct(p_code);
+	}
+	
+	@Override
+	public List getMembersList(Pagination pagination) throws Exception {
+		
+		return managerDAO.selectMembers(pagination);
+	}
+	
+	@Override
+	public boolean removeMembers(int member_num) throws Exception {
+		managerDAO.deleteMembers(member_num);
+		
+		return true;
+	}
+	
+	@Override
+	public boolean modMemberGrant(int member_num) throws Exception {
+		int result = getMemberManager(member_num);
+		
+		if(result == 0) {
+			managerDAO.updateMemberGrant(member_num);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@Override
+	public boolean modMemberRevoke(int member_num) throws Exception {
+		int result = getMemberManager(member_num);
+		
+		if(result == 1) {
+			managerDAO.updateMemberRevoke(member_num);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	private int getMemberManager(int member_num) throws Exception {
+		
+		return managerDAO.selectMemberManager(member_num);
 	}
 }

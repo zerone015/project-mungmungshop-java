@@ -28,15 +28,15 @@ request.setCharacterEncoding("utf-8");
 	function checkPwSelect() {
 		var form = document.findPw;
 
-		if (form.Member_ID.value == "") {
+		if (form.member_id.value == "") {
 			alert("아이디를 입력해주세요.");
-			form.Member_ID.focus();
+			form.member_id.focus();
 			return false;
 		}
 
-		if (form.Member_email.value == "") {
+		if (form.member_email.value == "") {
 			alert("이메일을 입력해주세요.");
-			form.Member_email.focus();
+			form.member_email.focus();
 			return false;
 		}
 
@@ -51,12 +51,12 @@ request.setCharacterEncoding("utf-8");
 		<table style="margin-left: auto; margin-right: auto;" width="45%">
 			<tr align="center">
 				<td>
-				아이디 * <input name="Member_ID" type="text" placeholder="아이디를 입력하세요." size="30">
+				아이디 * <input name="member_id" type="text" placeholder="아이디를 입력하세요." size="30">
 				</td>
 			</tr>
 			<tr align="center">
 				<td>
-				이메일 * <input name="Member_email" placeholder="이메일을 입력하세요." type="text" size="30">
+				이메일 * <input name="member_email" placeholder="이메일을 입력하세요." type="text" size="30">
 				</td>
 			</tr>
 			<tr>
