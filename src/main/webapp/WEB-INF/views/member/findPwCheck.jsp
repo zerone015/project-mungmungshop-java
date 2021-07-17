@@ -38,6 +38,11 @@ request.setCharacterEncoding("utf-8");
 		form.submit();
 	}
 	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	fn_passcodeChk();
+        }
+}
 </script>
 <body>
 <div align="center">
@@ -48,7 +53,8 @@ request.setCharacterEncoding("utf-8");
 	<p class="fs-5 text-muted">아래에 인증번호를 입력하신 후 다음 버튼을 눌러주세요.</p>
 </div>
 <form method="POST" action="${contextPath}/member/changePw.do" name="findPwChk_form">
-	<p><input name="passcode_input" type="text" placeholder="인증번호를 입력해주세요."></p>
+	<input type="text" style="display:none;">
+	<p><input name="passcode_input" type="text" placeholder="인증번호를 입력해주세요." onkeyup="enterkey();"></p>
 	<button type="button" class="btn btn-primary" onclick="fn_passcodeChk();">다음</button>
 	<button type="button" class="btn btn-dark" onclick="javascript: history.back();">취소</button>
 	   <input type="hidden" name="member_id" value="${id}">
