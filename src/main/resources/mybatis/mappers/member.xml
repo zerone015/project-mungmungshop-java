@@ -53,5 +53,5 @@
 			update Members set member_logindate=default where member_num = #{member_num}
 		]]>
 	</update>
-	
+
 </mapper>

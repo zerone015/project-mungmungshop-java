@@ -67,7 +67,7 @@ public class HomeController {
 		return "resultId";
 	}
 	
-	@RequestMapping(value = "/joinMember.do", method = RequestMethod.GET)
+	@RequestMapping(value = "/joinMember.do", method = RequestMethod.POST)
 	public String joinMember(Locale locale, Model model) {
 		
 		

@@ -32,12 +32,6 @@ public class MailServiceImpl implements MailService {
 	}
 	
 	@Override
-	public String getPw(MemberVO member) throws Exception {
-		
-		return mailDAO.selectPw(member);
-	}
-	
-	@Override
 	public int getEmailCnt(String email) throws Exception {
 		
 		return mailDAO.selectEmailCnt(email);

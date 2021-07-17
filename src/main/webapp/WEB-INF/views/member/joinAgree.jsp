@@ -64,7 +64,7 @@ function fn_agreeChk(){
 }
 </script>
 <body>
-<form method="GET" id="agree_form" action="${contextPath}/joinMember.do">
+<form method="POST" id="agree_form" action="${contextPath}/joinMember.do">
 	<div align="center" style="margin-top: 20;">
 		<input type="checkbox" class="form-check-input"	name="selectall" onclick="selectAll(this)">
 		<b>뭉뭉샵 이용약관,개인정보 수집 및 이용에 모두 동의합니다.</b>

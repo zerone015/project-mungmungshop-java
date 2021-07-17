@@ -12,7 +12,6 @@ import com.myspring.petshop.member.vo.MemberVO;
 
 public interface MailService{
 	public String getEmail(MemberVO member) throws Exception;
-	public String getPw(MemberVO member) throws Exception;
 	public int getEmailCnt(String email) throws Exception;
 	
 	

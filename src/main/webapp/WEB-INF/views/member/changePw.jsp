@@ -2,6 +2,7 @@
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="result" value="${param.result }" />
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -10,11 +11,13 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="utf-8">
 <title>비밀번호 변경</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
+<script>
+	window.onload = function() {
+		document.changePw.member_pw.focus();
+	}
+</script>
 <script type="text/javascript">
 	function checkChangePw() {
 		var form = document.changePw;
@@ -24,10 +27,9 @@ request.setCharacterEncoding("utf-8");
 		var newPw = form.member_pw;
 		var checkPw = form.checkPw;
 		
-		var originalPw = "${originalPw}";
 
 		if (newPw.value == "") {
-			alert("새로운 비밀번호를 입력해주세요.");
+			alert("변경하실 비밀번호를 입력해주세요.");
 			newPw.focus();
 			return false;
 		}
@@ -49,14 +51,15 @@ request.setCharacterEncoding("utf-8");
 			return false;
 		}
 		
-		if (newPw.value == originalPw){
-			alert("기존 비밀번호와 다른 비밀번호로 다시 시도해주세요.");
-			newPw.select();
-			return false;
-		}
 		
 		form.submit();
 	}
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	checkChangePw();
+        }
+}
 </script>
 <body>
 	<br>
@@ -76,18 +79,18 @@ request.setCharacterEncoding("utf-8");
 			<tr align="center">
 				<td>새로운 비밀번호 * <input name="member_pw"
 					placeholder="새로운 비밀번호를 입력하세요." type="password" size="30"
-					maxlength="20"></td>
+					maxlength="20" onkeyup="enterkey();"></td>
 			</tr>
 			<tr align="center">
 				<td>비밀번호 확인 * <input name="checkPw"
 					placeholder="새로운 비밀번호를 입력하세요." type="password" size="30"
-					maxlength="20"></td>
+					maxlength="20" onkeyup="enterkey();"></td>
 			</tr>
 			<tr>
 				<td>
 				<input class="btn btn-lg btn-primary btn-block" type="button" onclick="checkChangePw()" value="확인">
 				<input type="hidden" name="member_id" value="${id}">
-				<input type="hidden" name="nember_email" value="${email}">
+				<input type="hidden" name="member_email" value="${email}">
 				</td>
 			</tr>
 		</table>

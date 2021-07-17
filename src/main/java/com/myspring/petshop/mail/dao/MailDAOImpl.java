@@ -19,13 +19,7 @@ public class MailDAOImpl implements MailDAO{
 		
 		return sqlSession.selectOne("mapper.mail.selectEmail", member);
 	}
-	
-	@Override
-	public String selectPw(MemberVO member) throws Exception {
 		
-		return sqlSession.selectOne("mapper.mail.selectPw", member);
-	}
-	
 	@Override
 	public int selectEmailCnt(String email) throws Exception{
 		

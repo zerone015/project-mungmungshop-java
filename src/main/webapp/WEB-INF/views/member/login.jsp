@@ -7,13 +7,38 @@
 	<c:if test="${not empty cookie.rememberId }">
 		<c:set value="checked" var="checked" />
 	</c:if>
-	<c:if test="${result=='loginFailed' }">
+	<c:choose>
+		<c:when test="${result=='loginFailed' }">
 		<script>
 			window.onload = function() {
-				alert("아이디나 비밀번호가 틀립니다.다시 로그인 해주세요.");
+				var cookie = "${cookie.rememberId}";
+				
+				if(cookie){
+					alert("아이디나 비밀번호가 틀립니다.다시 로그인 해주세요.");
+					document.login.member_pw.focus();
+				}
+				else{
+					alert("아이디나 비밀번호가 틀립니다.다시 로그인 해주세요.");
+					document.login.member_id.focus();
+				}
 			}
 		</script>
-	</c:if>
+	</c:when>
+	<c:otherwise>
+		<script>
+			window.onload = function() {
+				var cookie = "${cookie.rememberId}";
+				
+				if(cookie){
+					document.login.member_pw.focus();
+				}
+				else{
+					document.login.member_id.focus();
+				}
+			}
+		</script>
+	</c:otherwise>
+	</c:choose>
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -69,7 +94,7 @@ request.setCharacterEncoding("utf-8");
 					style="margin-left: 5;" placeholder="비밀번호 입력"></td>
 			</tr>
 			<tr align="center">
-				<td><input type="checkbox" name="remember_userId"
+				<td><input type="checkbox" name="remember_userId" onkeyup="enterkey();"
 					value="checked" ${checked}> 아이디 기억</td>
 			</tr>
 			<tr align="center">

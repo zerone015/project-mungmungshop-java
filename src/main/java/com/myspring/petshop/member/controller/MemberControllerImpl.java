@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -57,11 +58,13 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
+		boolean passMatch = false;
 		
-		boolean passMatch = passEncoder.matches(member.getMember_pw(), memberVO.getMember_pw());
+		if(memberVO != null) {
+			passMatch = passEncoder.matches(member.getMember_pw(), memberVO.getMember_pw());
+		}
 		
 		if(memberVO != null && passMatch) {
-			
 			String remember_userId = request.getParameter("remember_userId");
 			Cookie cookie = new Cookie("rememberId", memberVO.getMember_id());
 			HttpSession session = request.getSession();
@@ -77,7 +80,6 @@ public class MemberControllerImpl implements MemberController{
 			}
 			
 			response.addCookie(cookie);
-			
 			memberService.modLoginDate(memberVO.getMember_num());
 			mav.setViewName("redirect:/main.do");
 		}
@@ -153,27 +155,26 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value="/member/changePw.do", method = RequestMethod.POST)
-	public ModelAndView changePwView(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
-			HttpServletResponse response)throws Exception {
-		String id = member.getMember_id();
-		String email = member.getMember_email();
-		String originalPw = member.getMember_pw();
+	public ModelAndView changePwView(@RequestParam("member_id") String id,
+									 @RequestParam("member_email") String email,
+							HttpServletRequest request,HttpServletResponse response)throws Exception {
 		ModelAndView mav = new ModelAndView("changePw");
 		mav.addObject("id", id);
 		mav.addObject("email", email);
-		mav.addObject("originalPw", originalPw);
 		
 		return mav;
 	}
 	
 	@Override
 	@RequestMapping(value="/member/updatePw.do", method = RequestMethod.POST)
-	public ModelAndView changePw(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
-			HttpServletResponse response)throws Exception {
-		memberService.changePw(member);
-		ModelAndView mav = new ModelAndView("redirect:/changePwResult.do");
+	public ModelAndView changePw(@ModelAttribute("member")MemberVO member, RedirectAttributes rAttr,
+			HttpServletRequest request, HttpServletResponse response)throws Exception {
+		String inputPass = member.getMember_pw();
+		String pass = passEncoder.encode(inputPass);
+		member.setMember_pw(pass);
 		
-		return mav;
+		memberService.changePw(member);
+		
+		return new ModelAndView("redirect:/changePwResult.do");
 	}
-	
 }

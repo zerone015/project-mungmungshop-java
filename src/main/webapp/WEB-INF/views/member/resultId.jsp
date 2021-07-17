@@ -22,7 +22,7 @@ request.setCharacterEncoding("utf-8");
 	<label>아이디 찾기를 완료하였습니다.</label>
 	<div class="box6" style="text-align: center">
 		<c:forEach var="memberId" items="${memberId}" varStatus="status">
-			<p>${status.count}
+			<p>ID
 				: <strong><c:out value="${memberId}" /></strong>
 			</p>
 		</c:forEach>

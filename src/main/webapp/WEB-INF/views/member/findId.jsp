@@ -11,18 +11,23 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="utf-8">
 <title>아이디 찾기</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <c:choose>
 	<c:when test="${memberId=='notExists'}">
 		<script>
 			window.onload = function() {
 				alert("입력하신 정보와 일치하는 아이디가 없습니다.다시 시도해주세요.");
+				document.findId.member_name.focus();
 			}
 		</script>
 	</c:when>
+	<c:otherwise>
+		<script>
+			window.onload = function() {
+				document.findId.member_name.focus();
+			}
+		</script>
+	</c:otherwise>
 </c:choose>
 </head>
 <script type="text/javascript">
@@ -46,6 +51,12 @@ request.setCharacterEncoding("utf-8");
 
 		form.submit();
 	}
+	
+	function enterkey() {
+        if (window.event.keyCode == 13) {
+        	checkIdSelect();
+        }
+	}
 </script>
 <body>
 	<h1 class="h3 mb-3 font-weight-normal">
@@ -56,11 +67,11 @@ request.setCharacterEncoding("utf-8");
 		<table style="margin-left: auto; margin-right: auto;" width="45%">
 			<tr align="center">
 				<td>이 름 * <input type="text" name="member_name"
-					placeholder="이름을 입력하세요." size="30"></td>
+					placeholder="이름을 입력하세요." size="30" onkeyup="enterkey();"></td>
 			</tr>
 			<tr align="center">
 				<td>이메일 * <input type="text" name="member_email"
-					placeholder="이메일을 입력하세요." size="30"></td>
+					placeholder="이메일을 입력하세요." size="30" onkeyup="enterkey();"></td>
 			</tr>
 			<tr>
 				<td>

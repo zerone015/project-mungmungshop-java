@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,7 +33,6 @@ import com.myspring.petshop.member.vo.MemberVO;
 public class MailControllerImpl implements MailController {
 	@Autowired
 	private MailServiceImpl mailService;
-	
 	@Autowired
 	private JavaMailSender mailSender;
 	
@@ -87,7 +87,6 @@ public class MailControllerImpl implements MailController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
 		String email = mailService.getEmail(member);
-		String originalPw = mailService.getPw(member);
 		ModelAndView mav = new ModelAndView();
 		if(email != null && email != "") {
 			String id = member.getMember_id();
@@ -118,7 +117,6 @@ public class MailControllerImpl implements MailController {
 			mav.addObject("passcode", checkNum);
 			mav.addObject("id", id);
 			mav.addObject("email", email);
-			mav.addObject("originalPw", originalPw);
 		}else {
 			rAttr.addAttribute("email", "notExists");
 			mav.setViewName("redirect:/findPw.do");

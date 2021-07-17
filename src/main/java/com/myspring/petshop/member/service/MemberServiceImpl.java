@@ -56,5 +56,5 @@ public class MemberServiceImpl implements MemberService{
 	public void modLoginDate(int member_num) throws Exception {
 		memberDAO.updateLoginDate(member_num);
 	}
-	
+
 }
