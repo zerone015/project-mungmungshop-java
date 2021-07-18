@@ -29,6 +29,16 @@ request.setCharacterEncoding("utf-8");
 		</script>
 	</c:otherwise>
 </c:choose>
+<style>
+	input[type="text"] {
+		width: 400px; height: 50px; display:inline-block;
+	}
+	td > font {
+		color: red;
+		font-weight: bold;
+		margin-left: 2px;
+	}
+</style>
 </head>
 <script type="text/javascript">
 	function checkIdSelect() {
@@ -59,25 +69,25 @@ request.setCharacterEncoding("utf-8");
 	}
 </script>
 <body>
-	<h1 class="h3 mb-3 font-weight-normal">
-		<font style="vertical-align: inherit;">아이디 찾기</font>
-	</h1>
+	<h4 style="margin-bottom: 55px; margin-left: 38px;">
+		<b>아이디 찾기</b>
+	</h4>
 	<form method="POST" action="${contextPath}/member/resultId.do"
 		name="findId">
-		<table style="margin-left: auto; margin-right: auto;" width="45%">
+		<table>
 			<tr align="center">
-				<td>이 름 * <input type="text" name="member_name"
+				<td><b style="font-size: 13px;">이 름</b><font>*</font><input style="margin-left: 12px; margin-bottom: 15px;" class="form-control" type="text" name="member_name"
 					placeholder="이름을 입력하세요." size="30" onkeyup="enterkey();"></td>
 			</tr>
 			<tr align="center">
-				<td>이메일 * <input type="text" name="member_email"
+				<td><b style="font-size: 13px;">이메일</b><font style="margin-right: 7px;">*</font><input style="margin-right: 5px; margin-bottom: 15px;" class="form-control" type="text" name="member_email"
 					placeholder="이메일을 입력하세요." size="30" onkeyup="enterkey();"></td>
 			</tr>
-			<tr>
+			<tr align="center">
 				<td>
-					<button class="btn btn-lg btn-primary btn-block" type="button"
+					<button style="width: 400px; margin-left: 55px;" class="btn btn-lg btn-primary btn-block" type="button"
 						onclick="checkIdSelect()">
-						<font style="vertical-align: inherit;">다음</font>
+						다음
 					</button>
 				<td>
 			</tr>
