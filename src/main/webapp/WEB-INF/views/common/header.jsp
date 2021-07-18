@@ -144,12 +144,12 @@ pageEncoding="utf-8" isELIgnored="false" %>
 							<c:when test="${isLogOn == true  && member != null}">
 								<a class="rightMenu"
 									href="${contextPath}/member/logout.do"
-									style="margin-left: 2px;">logout</a> <font class="divider">|</font>
+									style="margin-left: 2px;">로그아웃</a> <font class="divider">|</font>
 							</c:when>
 							<c:otherwise>
 								<a class="rightMenu"
-									href="${contextPath}/login.do" style="margin-left: 2px;">Sign
-									up</a> <font class="divider">|</font>
+									href="${contextPath}/login.do" style="margin-left: 2px;">로그인
+									</a> <font class="divider">|</font>
 							</c:otherwise>
 						</c:choose>
 						<c:if test="${member.getMember_manager() == 1}">
