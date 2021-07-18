@@ -46,7 +46,7 @@ request.setCharacterEncoding("utf-8");
 </script>
 <body>
 <div align="center">
-	<h1 class="display-5 fw-bold">인증을 완료해주세요.</h1>
+	<h3 style="margin-bottom: 40px;"><b>인증을 완료해주세요.</b></h3>
 </div>
 <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
 	<p class="fs-5 text-muted">입력하신 이메일로 인증번호를 전송했습니다.</p>
@@ -54,7 +54,7 @@ request.setCharacterEncoding("utf-8");
 </div>
 <form method="POST" action="${contextPath}/member/changePw.do" name="findPwChk_form">
 	<input type="text" style="display:none;">
-	<p><input name="passcode_input" type="text" placeholder="인증번호를 입력해주세요." onkeyup="enterkey();"></p>
+	<p align="center"><input style="width: 270px;" class="form-control" name="passcode_input" type="text" placeholder="인증번호를 입력해주세요." onkeyup="enterkey();"></p>
 	<button type="button" class="btn btn-primary" onclick="fn_passcodeChk();">다음</button>
 	<button type="button" class="btn btn-dark" onclick="javascript: history.back();">취소</button>
 	   <input type="hidden" name="member_id" value="${id}">
