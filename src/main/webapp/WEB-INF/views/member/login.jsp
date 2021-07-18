@@ -46,10 +46,16 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="utfo-8">
 <title>로그인</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+	input[type="text"] {
+		width: 400px; height: 50px; display:inline-block;
+	}
+	
+	input[type="password"] {
+		width: 400px; height: 50px; display:inline-block;
+	}
+</style>
 </head>
 <script
 	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -82,29 +88,34 @@ request.setCharacterEncoding("utf-8");
 		action="${contextPath}/member/login.do">
 		<table style="border: 0; width: 400; align: center;">
 			<tr align="center">
-				<td><h4>로그인</h4></td>
+				<td><h4 style="margin-bottom: 50px; font-weight: bold;">로그인</h4></td>
 			</tr>
 			<tr align="center">
-				<td>ID<input type="text" name="member_id"
+				<td><input style="margin-bottom: 15px;" class="form-control" type="text" name="member_id"
 					value="${cookie.rememberId.value}" size="30" onkeyup="enterkey();"
-					style="margin-left: 12; margin-top: 20;" placeholder="아이디 입력"></td>
+					 placeholder="아이디 입력"></td>
 			</tr>
 			<tr align="center">
-				<td>PW<input type="password" name="member_pw" size="30" onkeyup="enterkey();"
-					style="margin-left: 5;" placeholder="비밀번호 입력"></td>
+				<td><input class="form-control" type="password" name="member_pw" size="30" onkeyup="enterkey();"
+					 placeholder="비밀번호 입력"></td>
 			</tr>
-			<tr align="center">
-				<td><input type="checkbox" name="remember_userId" onkeyup="enterkey();"
+			<tr align="left">
+				<td><input style="margin-top: 15px;" type="checkbox" name="remember_userId" onkeyup="enterkey();"
 					value="checked" ${checked}> 아이디 기억</td>
 			</tr>
 			<tr align="center">
 				<td><button class="btn btn-primary" type="button"
-						onclick="fn_checkLogin();" style="margin: 10; width: 310;">로그인</button></td>
+						onclick="fn_checkLogin();" style="width: 400; height:50px; margin-top: 35px;">로그인</button></td>
+			</tr>
+			<tr align="center">
+				<td><button class="btn btn-outline-primary" type="button"
+						onclick="location.href='${contextPath}/member/joinAgree.do'" style="width: 400; height:50px; margin-top: 10px; margin-bottom: 10px;">회원가입</button></td>
 			</tr>
 		</table>
 	</form>
-	<a href="${contextPath}/findId.do">아이디 찾기</a> |
-	<a href="${contextPath}/findPw.do">비밀번호 찾기</a> |
-	<a href="${contextPath}/member/joinAgree.do">회원가입</a>
+	<div style="margin-top: 15px;">
+		<a href="${contextPath}/findId.do">아이디 찾기</a> |
+		<a href="${contextPath}/findPw.do">비밀번호 찾기</a>
+	</div>
 </body>
 </html>
