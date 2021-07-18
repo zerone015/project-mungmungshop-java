@@ -14,9 +14,9 @@ request.setCharacterEncoding("utf-8");
 </head>
 <body>
 <div align="center">
-<h1 class="display-5 fw-bold">비밀번호 변경이 완료되었습니다.</h1>
+<h1 style="margin-bottom: 50px;" class="display-5 fw-bold">비밀번호 변경이 완료되었습니다.</h1>
 </div>
-<button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/login.do'">로그인 하기</button>
-<button type="button" class="btn btn-light" onclick="location.href='${contextPath}/main.do'">메인 화면으로</button>
+<p><button style="width: 400px; height: 50px;" type="button" class="btn btn-primary" onclick="location.href='${contextPath}/login.do'">로그인 하기</button>
+<p><button style="width: 400px; height: 50px;" type="button" class=" btn btn-outline-primary" onclick="location.href='${contextPath}/main.do'">메인 화면으로</button>
 </body>
 </html>
