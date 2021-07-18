@@ -10,6 +10,24 @@ request.setCharacterEncoding("utf-8");
 <meta charset="utf-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<style>
+	td > b{
+		font-size: 15px;
+	}
+	
+	input[type="text"] {
+		width: 400px; height: 50px; display:inline-block;
+	}
+	
+	input[type="password"] {
+		width: 400px; height: 50px; display:inline-block;
+	}
+	td > font {
+		color: red;
+		font-weight: bold;
+		margin-left: 2px;
+	}
+</style>
 </head>
 <script>
 	window.onload = function() {
@@ -319,63 +337,63 @@ request.setCharacterEncoding("utf-8");
 </script>
 <body>
 	<div>
-		<h2 style="margin-top: 20px; margin-bottom: 30px;">회원 가입</h2>
+		<h4 style="margin-bottom: 60px;"><b>회원 가입</b></h4>
 		<form method="POST" action="${contextPath}/member/addMember.do"
 			name="userInfo">
 			<table>
 				<tr>
-					<td>아이디</td>
-					<td><input type="text" maxlength="11"
+					<td><b>아이디</b><font>*</font></td>
+					<td><input class="form-control" type="text" maxlength="11"
 						placeholder="5~11자 이내 입력" name="member_id" id="Member_ID"
 						onkeydown="inputIdChk()">
-						<button type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
+						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 						<input type="hidden" name="idDuplication" value="idUncheck">
 					</td>
 				</tr>
 				<tr>
-					<td>비밀번호</td>
-					<td><input type="password" maxlength="20"
+					<td><b>비밀번호</b><font>*</font></td>
+					<td><input class="form-control" type="password" maxlength="20"
 						placeholder="영문,숫자,특수문자 포함 8자 이상" name="member_pw"></td>
 				</tr>
 				<tr>
-					<td>비밀번호 확인</td>
-					<td><input type="password" maxlength="20"
+					<td><b>비밀번호 확인</b><font>*</font></td>
+					<td><input class="form-control" type="password" maxlength="20"
 						placeholder="다시 한번 입력해주세요." name="joinPwCheck"></td>
 				</tr>
 				<tr>
-					<td>이메일</td>
-					<td><input type="text" maxlength="50"
+					<td><b>이메일</b><font>*</font></td>
+					<td><input class="form-control" type="text" maxlength="50"
 						placeholder="@을 포함한 이메일 주소" id="mail_input" name="member_email">
-						<button type="button" onclick="fn_mailSend();">인증번호 전송</button></td>
+						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" onclick="fn_mailSend();">인증번호 전송</button></td>
 				</tr>
 				<tr>
-					<td>인증번호</td>
-					<td><input type="text" maxlength="6"
+					<td><b>인증번호</b><font>*</font></td>
+					<td><input class="form-control" type="text" maxlength="6"
 						placeholder="인증번호를 입력하세요." id="mail_check_input" name="passcode"
 						disabled="disabled">
-						<button type="button" onclick="fn_codeCheck();">인증</button></td>
+						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" onclick="fn_codeCheck();">인증</button></td>
 
 				</tr>
 				<tr>
-					<td>이름</td>
-					<td><input type="text" maxlength="45" placeholder="이름"
+					<td><b>이름</b><font>*</font></td>
+					<td><input class="form-control" type="text" maxlength="45" placeholder="이름"
 						name="member_name"></td>
 				</tr>
 				<tr>
-					<td>닉네임</td>
-					<td><input type="text" maxlength="20" placeholder="닉네임"
-						id="Member_Nick" name="member_nick" onkeydown="inputNickChk()">
-						<button type="button" id="nickChk" onclick="fn_nickChk();"
+					<td><b>닉네임</b><font>*</font></td>
+					<td><input class="form-control" type="text" maxlength="20" placeholder="닉네임"
+						id="Member_Nick" name="m	mber_nick" onkeydown="inputNickChk()">
+						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"
 							value="N">중복확인</button> <input type="hidden"
 						name="nickDuplication" value="nickUncheck"></td>
 				</tr>
 				<tr>
-					<td>휴대전화</td>
-					<td><input type="text" placeholder="-를 포함한 휴대폰 번호"
+					<td><b>휴대전화</b><font>*</font></td>
+					<td><input class="form-control" type="text" placeholder="-를 포함한 휴대폰 번호"
 						name="member_phone" /></td>
 				</tr>
 			</table>
-			<br> <input type="button" value="회원가입" onclick="fn_checkJoin()" />
+			<br> <button class="btn btn-dark btn-lg" type="button" onclick="fn_checkJoin()">회원가입</button>
 		</form>
 	</div>
 </body>
