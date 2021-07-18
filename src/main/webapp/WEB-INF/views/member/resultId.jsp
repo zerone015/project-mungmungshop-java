@@ -10,16 +10,13 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="utf-8">
 <title>아이디 안내</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-	<h1 class="h3 mb-3 font-weight-normal">
-		<font style="vertical-align: inherit;">아이디 안내</font>
-	</h1>
-	<label>아이디 찾기를 완료하였습니다.</label>
+	<h4 style="margin-bottom: 40px;">
+		<b>아이디 안내</b>
+	</h4>
+	<label style="margin-bottom: 35px;">아이디 찾기를 완료하였습니다.</label>
 	<div class="box6" style="text-align: center">
 		<c:forEach var="memberId" items="${memberId}" varStatus="status">
 			<p>ID
@@ -30,7 +27,7 @@ request.setCharacterEncoding("utf-8");
 	<table style="margin-left: auto; margin-right: auto;" width="25%">
 		<tr>
 			<td>
-				<button class="btn btn-lg btn-primary btn-block" type="submit"
+				<button style="margin-top: 30px;" class="btn btn-lg btn-primary btn-block" type="submit"
 					onclick="location.href='${contextPath}/login.do'">
 					<font style="vertical-align: inherit;">로그인 하기</font>
 				</button>
@@ -38,7 +35,7 @@ request.setCharacterEncoding("utf-8");
 		</tr>
 		<tr>
 			<td>
-				<button class="btn btn-lg btn-primary btn-block" type="submit"
+				<button style="margin-top: 10px;" class="btn btn-lg btn-outline-primary btn-block" type="submit"
 					onclick="location.href='${contextPath}/findPw.do'">
 					<font style="vertical-align: inherit;">비밀번호 찾기</font>
 				</button>
