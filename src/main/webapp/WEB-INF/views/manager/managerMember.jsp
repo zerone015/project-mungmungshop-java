@@ -11,7 +11,7 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
-<title>관리자 회원 목록 페이지</title>
+<title>관리자 회원 관리</title>
 <style>
 	.container {
 	width: 100%;
@@ -158,9 +158,9 @@ request.setCharacterEncoding("UTF-8");
 <body>
 <div class="content">
 	<div class="container">
-<h1>
-<b>회원 목록</b>
-</h1>
+<h4 style="margin-bottom: 40px;">
+<b>회원 관리</b>
+</h4>
 <br>
 	<table class="table table-sm table-bordered">
 		<thead>
@@ -171,10 +171,10 @@ request.setCharacterEncoding("UTF-8");
 				<td>닉네임</td>
 				<td>휴대폰 번호</td>
 				<td>이메일</td>
-				<td style="width: 280px">가입 날짜</td>
-				<td style="width: 280px">최근 접속 날짜</td>
+				<td>가입 날짜</td>
+				<td>최근 접속 날짜</td>
 				<td>관리자 여부</td>
-				<td style="width: 280px">관리 하기</td>
+				<td>관리 하기</td>
 			</tr>
 		</thead>
 		<tbody>
