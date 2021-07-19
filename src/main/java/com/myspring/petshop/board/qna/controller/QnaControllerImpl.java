@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.qna.service.QnaService;
 import com.myspring.petshop.board.qna.vo.QnaVO;
+import com.myspring.petshop.member.vo.MemberVO;
 
 @Controller("qnaController")
 @EnableAspectJAutoProxy
@@ -31,6 +33,10 @@ public class QnaControllerImpl implements QnaController {
 	private QnaService qnaService;
 	@Autowired
 	private QnaVO qnaVO;
+	@Autowired
+	private MemberVO memberVO; 
+	@Autowired
+	private HttpSession session;
 	
 
 	private static final Logger logger = LoggerFactory.getLogger(QnaControllerImpl.class);
@@ -90,8 +96,22 @@ public class QnaControllerImpl implements QnaController {
 		String viewName = (String)request.getAttribute("viewName");
 		QnaVO qnaVO = qnaService.qnaView(qna_no);
 		ModelAndView mav = new ModelAndView();
+		
+		session = request.getSession();
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		int manager;
+		
+		if(memberVO != null) {
+			 manager = memberVO.getMember_manager();
+		}
+		else {
+			 manager = 1234;
+		}
+
 		mav.setViewName(viewName);
 		mav.addObject("qnaVO", qnaVO);
+		mav.addObject("manager", manager);
 		// 조회수 증가
 		qnaService.increaseHits(qna_no);
 		return mav;

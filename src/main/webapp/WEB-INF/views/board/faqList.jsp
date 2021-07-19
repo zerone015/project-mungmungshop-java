@@ -16,14 +16,24 @@
 <title>자주 묻는 질문 목록</title>
 </head> 
 <body>
+<div class="container">
 	<div>
-	<h1 class="display-5 fw-bold">자주 묻는 질문</h1>
-	<a href="#">
-		<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;margin-left: 10;">1:1 문의내역</button>
-	</a>
-	<a href="${contextPath }/board/faqWrite.do">
-		<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">1:1 문의하기</button>
-	</a>
+		<h3 class="mb-3">자주 묻는 질문</h3>
+		<c:choose>
+			<c:when test="${manager == 1}">
+				<a href="${contextPath }/board/faqWrite.do">
+					<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">FaQ 등록</button>
+				</a> 
+			</c:when>
+			<c:otherwise>
+			<a href="#">
+				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;margin-left: 10;">1:1 문의내역</button>
+			</a>
+			<a href="${contextPath }/board/qnaWrite.do">
+				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">1:1 문의하기</button>
+			</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
 		<table class="table table-striped">
@@ -51,5 +61,6 @@
 		</table>
 		
 	</div>
+</div>
 </body>
 </html>

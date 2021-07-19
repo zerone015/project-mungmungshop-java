@@ -1,11 +1,11 @@
 package com.myspring.petshop.board.event.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.event.service.EventService;
 import com.myspring.petshop.board.event.vo.EventVO;
+import com.myspring.petshop.member.vo.MemberVO;
 
 
 
@@ -32,6 +33,10 @@ public class EventControllerImpl implements EventController {
 	private EventService eventService;
 	@Autowired
 	private EventVO eventVO;
+	@Autowired
+	private MemberVO memberVO; 
+	@Autowired
+	private HttpSession session;
 
 	private static final Logger logger = LoggerFactory.getLogger(EventControllerImpl.class);
 	
@@ -40,8 +45,22 @@ public class EventControllerImpl implements EventController {
 	public ModelAndView eventList(@RequestParam(required = false, defaultValue = "1") int page,
 								  @RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
 		String viewName = (String)request.getAttribute("viewName");
+		
 		ModelAndView mav = new ModelAndView(viewName);
+		
+		session = request.getSession();
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		int manager;
+		if(memberVO != null) {
+			 manager = memberVO.getMember_manager();
+		}
+		else {
+			 manager = 1234;
+		}
+		
 		
 		// 게시글 총 개수
 		int listCnt = eventService.eventCnt();
@@ -54,13 +73,16 @@ public class EventControllerImpl implements EventController {
 		
 		mav.addObject("pagination", pagination);
 		mav.addObject("eventList", eventList);
+		mav.addObject("manager", manager);
 		
 		return mav;
 	}
 	
 	@RequestMapping(value = "/board/eventWrite.do", method = RequestMethod.GET)
 	public String eventWrite(Locale locale, Model model) {
-
+		
+		
+		
 		return "eventWrite";
 	}
 	

@@ -34,12 +34,13 @@
 
 </head>
 <body>
+<div class="container">
 	<form action="" method="POST" name="qnaView" >
 	<table class="table table-sm table-bordered" border="1" >
 		<tr>
 			<th>제목</th>
 			<td colspan="3">
-				<input type="text" value="${qnaVO.qna_title}" id="qna_title" name="qna_title" />
+				<input type="text" value="${qnaVO.qna_title}" id="qna_title" name="qna_title" readonly/>
 			</td>
 		</tr>
 		<tr>
@@ -55,7 +56,7 @@
 	</table>
 	<hr width="100%">
 	<textarea name="qna_content" rows="10"  
-		id="qna_content" name="qna_content">${qnaVO.qna_content}</textarea>
+		id="qna_content" name="qna_content" readonly>${qnaVO.qna_content}</textarea>
 	<div class="bd-example" align="center">
 		
 		<button class= "btn btn-outline-primary"
@@ -63,9 +64,11 @@
 		
 		<button class= "btn btn-outline-warning"
 			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaMod.do?qna_no=${qnaVO.qna_no}';">수정</button>
-			
-		<button class= "btn btn-outline-dark"
+		
+		<c:if test="${manager == 1}">
+			<button class= "btn btn-outline-dark"
 			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaReply.do?qna_no=${qnaVO.qna_no}';">답변</button>
+		</c:if>
 		
 		<button class= "btn btn-outline-danger"
 			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove.do?qna_no=${qnaVO.qna_no}';">삭제</button>
@@ -74,7 +77,7 @@
 	</form>
 	
 	<hr width="100%">
-	
+</div>	
 	
 </body>
 </html>

@@ -22,6 +22,16 @@
 	.reply2 {
 		text-indent: 2em;
 	}
+	thead {
+		text-align: center;
+	}
+	.center {
+		text-align: center;
+	}
+	.secret {
+		width: 20; 
+		height: 20;
+	}
 </style>
 <script>
 
@@ -63,16 +73,17 @@
 
 
 <body>
+	<div class = "container">
 	<div class="col-md-7 col-lg-8" align="center">
-		<h4 class="mb-3">1:1 문의 게시판</h4>
+		<h3 class="mb-3">1:1 문의 게시판</h3>
 	</div>
 	<div class="bd-example" align="right">
 		<a href="${contextPath}/board/qnaWrite.do">
-			<button type="button" class="btn btn-outline-primary" >글 작성</button>		
+			<input class="btn btn-outline-dark" style="float: right; margin-bottom: 20px;" type="submit" value="글쓰기">
 		</a>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -87,20 +98,23 @@
 				<c:forEach items="${qnaList}" var="qnaVO">						
 				    <tr>
 				      <!-- 글번호 -->
-				      <td>${qnaVO.qna_no}</td>
+				      <td class="center">${qnaVO.qna_no}</td>
 				      
 				      
 				      <!-- 제목 -->
 				      <c:choose>
 				      	<c:when test="${qnaVO.qna_secret == 'Y'}">
 					      <c:if test="${qnaVO.qna_groupLayer == 0}">
-					      	<td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">비밀글 입니다.</a></td>
+					      	<td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
+					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >비밀글 입니다.</a></td>
 					      </c:if>
 					      <c:if test="${qnaVO.qna_groupLayer == 1}">
-					      	<td class="reply1"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">ㄴ[답변] 비밀글 입니다.</a></td>
+					      	<td class="reply1"> <a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
+					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >ㄴ[답변] 비밀 답글 입니다.</a></td>
 					      </c:if>
 					      <c:if test="${qnaVO.qna_groupLayer == 2}">
-					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}"> ㄴ[답변] 비밀글 입니다.</a></td>
+					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
+					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >ㄴ[답변] 비밀 답글 입니다.</a></td>
 					      </c:if>
 					    </c:when>
 					    <c:otherwise>
@@ -118,11 +132,11 @@
 				      
 				      
 				      <!-- 작성자 -->
-				      <td>${qnaVO.qna_writer}</td>
+				      <td class="center">${qnaVO.qna_writer}</td>
 				      <!-- 작성일 --> 
-				      <td><fmt:formatDate value="${qnaVO.qna_date}" pattern="YYYY-MM-dd"/></td>
+				      <td class="center"><fmt:formatDate value="${qnaVO.qna_date}" pattern="YYYY-MM-dd"/></td>
 				      <!-- 조회수 -->
-				      <td>${qnaVO.qna_hits}</td>
+				      <td class="center">${qnaVO.qna_hits}</td>
 				    </tr>
 				</c:forEach>							
 			</tbody>
@@ -148,6 +162,7 @@
 			</ul>
 		</div>
 		<!-- pagination{e} -->
+	</div>
 	</div>
 </body>
 </html>

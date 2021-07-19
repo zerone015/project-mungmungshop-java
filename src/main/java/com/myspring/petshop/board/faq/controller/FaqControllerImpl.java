@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,12 +25,17 @@ import com.myspring.petshop.board.event.service.EventService;
 import com.myspring.petshop.board.event.vo.EventVO;
 import com.myspring.petshop.board.faq.service.FaqService;
 import com.myspring.petshop.board.faq.vo.FaqVO;
+import com.myspring.petshop.member.vo.MemberVO;
 
 @Controller("faqController")
 @EnableAspectJAutoProxy
 public class FaqControllerImpl implements FaqController {
 	@Autowired
 	private FaqService faqService;
+	@Autowired
+	private MemberVO memberVO; 
+	@Autowired
+	private HttpSession session;
 
 	private static final Logger logger = LoggerFactory.getLogger(EventControllerImpl.class);
 	
@@ -37,9 +43,22 @@ public class FaqControllerImpl implements FaqController {
 	@RequestMapping(value = "/board/faqList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
+		session = request.getSession();
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		int manager;
+		
+		if(memberVO != null) {
+			 manager = memberVO.getMember_manager();
+		}
+		else {
+			 manager = 1234;
+		}
+		
 		List faqList=faqService.listFaq();
 		ModelAndView mav = new ModelAndView(viewName);
 		mav.addObject("faqList", faqList);
+		mav.addObject("manager", manager);
 		return mav;
 	}
 	

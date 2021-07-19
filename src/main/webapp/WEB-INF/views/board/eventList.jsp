@@ -53,12 +53,14 @@
 
 </head>
 <body>
+<div class="container">
 	<div>
-	<h1 class="display-5 fw-bold">이벤트</h1>
-	<a href="${contextPath }/board/eventWrite.do">
-		<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">
-		글쓰기</button>
-	</a>
+	<h3 class="mb-3">이벤트</h3>
+	<c:if test="${manager == 1}">
+		<form action="${contextPath}/board/eventWrite.do" method="GET">
+			<input class="btn btn-outline-dark" style="float: right; margin-bottom: 20px;" type="submit" value="글쓰기">
+		</form>
+	</c:if>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
 			<table class="table table-striped">
@@ -105,7 +107,8 @@
 			</ul>
 		</div>
 		<!-- pagination{e} -->
-			
+		
 	</div>
+</div>
 </body>
 </html>

@@ -56,25 +56,19 @@ public class MemberControllerImpl implements MemberController{
 		memberVO = memberService.login(member);
 		if(memberVO != null) {
 			String remember_userId = request.getParameter("remember_userId");
-			Cookie cookie = new Cookie("rememberId", memberVO.getMember_ID());
-			if(remember_userId == null) {
-				HttpSession session = request.getSession();
-				session.setAttribute("member", memberVO);
-				session.setAttribute("isLogOn", true);
-				cookie.setPath("/");	
+			Cookie cookie = new Cookie("rememberId", memberVO.getMember_ID());		
+			HttpSession session = request.getSession();
+			session.setAttribute("member", memberVO);
+			session.setAttribute("isLogOn", true);
+			cookie.setPath("/");
+			if(remember_userId == null) {	
 				cookie.setMaxAge(0);
-				response.addCookie(cookie);
-				mav.setViewName("redirect:/main.do");
 			} 
 			else if(remember_userId != null && remember_userId.trim().equals("checked")) {	
-				HttpSession session = request.getSession();
-				session.setAttribute("member", memberVO);
-				session.setAttribute("isLogOn", true);
-				cookie.setPath("/");
 				cookie.setMaxAge(60*60*24*30);
-				response.addCookie(cookie);
-				mav.setViewName("redirect:/main.do");
 			}
+			response.addCookie(cookie);
+			mav.setViewName("redirect:/main.do");
 		}else {
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/login.do");

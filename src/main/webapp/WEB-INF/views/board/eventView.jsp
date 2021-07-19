@@ -37,6 +37,7 @@
 
 </head>
 <body>
+<div class="container">
 	<form action="" method="POST" name="eventView" >
 	<table class="table table-sm table-bordered" border="1" >
 		<tr>
@@ -75,6 +76,6 @@
 	
 	<hr width="100%">
 	
-	
+</div>
 </body>
 </html>

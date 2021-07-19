@@ -57,6 +57,7 @@ function checkBoard() {
 </script>
 </head>
 <body>
+<div class="container">
 	<form action="${contextPath}/faqWrite.do" method="POST" name="faqWrite" >
 		<table class="table table-sm table-bordered" border="1" >
 			<tr>
@@ -87,6 +88,6 @@ function checkBoard() {
 	
 	<hr width="100%">
 	
-	
+</div>	
 </body>
 </html>

@@ -23,14 +23,14 @@ img{
 }
 
 #sidebar-left {
-	width: 15%;
-	height: 700px;
-	padding: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	float: left;
-	border: 0px solid #bcbcbc;
-	font-size: 10px;
+    width: 13%;
+    height: 700px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    border: 0px solid #bcbcbc;
+    font-size: 10px;
 }
 
 #content {
