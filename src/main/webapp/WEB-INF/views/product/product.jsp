@@ -13,6 +13,34 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<style>
+#layer {
+	z-index: 2;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+}
+
+#popup {
+	z-index: 3;
+	position: fixed;
+	text-align: center;
+	left: 50%;
+	top: 45%;
+	width: 300px;
+	height: 200px;
+	background-color: white;
+	border: 3px solid #787878;
+}
+
+#close {
+	z-index: 4;
+	float: right;
+	width: 30px;
+	height: 20px;
+}
+</style>
 <script type="text/javascript">
 function checkWrite() {
 	var form=document.review;
@@ -41,7 +69,7 @@ function fn_addCart(p_code) {
 				},
 		success : function(data, textStatus) {
 			if(data.trim()=='add_success') {
-				alert("장바구니 등록되었습니다.")
+				imagePopup('open', '.layer01');
 			} else if(data.trim()=='already_existed') {
 				alert("이미 장바구니에 등록된 상품입니다.");
 			}
@@ -50,6 +78,22 @@ function fn_addCart(p_code) {
 			alert("에러가 발생했습니다."+data);
 		}
 	});
+}
+
+function imagePopup(type) {
+	if (type == 'open') {
+		// 팝업창을 연다.
+		jQuery('#layer').attr('style', 'visibility:visible');
+
+		// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
+		jQuery('#layer').height(jQuery(document).height());
+	}
+
+	else if (type == 'close') {
+
+		// 팝업창을 닫는다.
+		jQuery('#layer').attr('style', 'visibility:hidden');
+	}
 }
 </script>
 </head>
@@ -175,5 +219,18 @@ function fn_addCart(p_code) {
 	</form>
   </div>
  </div>
+<div class="clear"></div>
+	<div id="layer" style="visibility: hidden">
+		<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
+		<div id="popup">
+			<!-- 팝업창 닫기 버튼 -->
+			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> <img
+				src="${contextPath}/resources/image/close.png" id="close" />
+			</a>  <br /> <font style="font-size: 20px; font-weight: bold;" id="contents">장바구니에 담았습니다.</font><br> 
+<form   action='${contextPath}/cart/myCartList.do'  >				
+		<input class="btn btn-info" style="margin-top: 60px;" type="submit" value="장바구니 보기">
+</form>
+</div>
+</div>			
 </body>
 </html>

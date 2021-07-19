@@ -16,6 +16,7 @@ public class MemberVO{
 	private Timestamp member_joindate;
 	private int member_manager;
 	private Timestamp member_logindate;
+	private int member_point;
 	
 	public MemberVO() {
 		
@@ -99,5 +100,13 @@ public class MemberVO{
 	
 	public void setMember_logindate(Timestamp member_logindate) {
 		this.member_logindate = member_logindate;
+	}
+	
+	public int getMember_point() {
+		return member_point;
+	}
+	
+	public void setMember_point(int member_point) {
+		this.member_point = member_point;
 	}
 }
