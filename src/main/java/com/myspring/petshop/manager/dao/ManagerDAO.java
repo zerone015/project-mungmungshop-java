@@ -1,9 +1,10 @@
 package com.myspring.petshop.manager.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.myspring.petshop.Pagination;
-import com.myspring.petshop.manager.vo.ManagerVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
 public interface ManagerDAO {
@@ -19,4 +20,6 @@ public interface ManagerDAO {
 	public void updateMemberGrant(int member_num) throws Exception;
 	public void updateMemberRevoke(int member_num) throws Exception;
 	public int selectMemberManager(int member_num) throws Exception;
+	public int selectSearchProductsCnt(Map searchMap) throws Exception;
+	public List selectSearchProducts(Map searchMap) throws Exception;
 }

@@ -1,6 +1,8 @@
 package com.myspring.petshop.manager.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -153,5 +155,34 @@ public class ManagerControllerImpl implements ManagerController {
 		else {
 			return "revoke_failed";
 		}
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/getSearchProducts.do", method = RequestMethod.GET)
+	public ModelAndView getSearchProducts(@RequestParam("searchBy") String searchBy,
+			@RequestParam("searchContents") String searchContents,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range ) throws Exception {
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("searchBy", searchBy);
+		searchMap.put("searchContents", searchContents);
+		
+		int	listCnt = managerService.searchProductsCnt(searchMap);
+	
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		
+		searchMap.put("pagination", pagination);
+		
+		List products = managerService.getSearchProducts(searchMap);
+		
+		ModelAndView mav = new ModelAndView("managerProduct");
+		mav.addObject("products", products);
+		mav.addObject("pagination", pagination);
+		mav.addObject("searchBy", searchBy);
+		mav.addObject("searchContents", searchContents);
+		
+		return mav;
 	}
 }

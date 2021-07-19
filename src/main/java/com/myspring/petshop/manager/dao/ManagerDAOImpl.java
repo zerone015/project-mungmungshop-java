@@ -1,13 +1,13 @@
 package com.myspring.petshop.manager.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.petshop.Pagination;
-import com.myspring.petshop.manager.vo.ManagerVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
 @Repository("managerDAO")
@@ -82,5 +82,15 @@ public class ManagerDAOImpl implements ManagerDAO {
 		return sqlSession.selectOne("mapper.manager.selectMemberManager", member_num);
 	}
 	
-
+	@Override
+	public int selectSearchProductsCnt(Map searchMap) throws Exception {
+		
+		return sqlSession.selectOne("mapper.manager.selectSearchProductsCnt", searchMap);
+	}
+	
+	@Override
+	public List selectSearchProducts(Map searchMap) throws Exception {
+		
+		return sqlSession.selectList("mapper.manager.selectSearchProducts", searchMap);
+	}
 }

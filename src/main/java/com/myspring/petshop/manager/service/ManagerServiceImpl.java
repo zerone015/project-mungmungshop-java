@@ -1,16 +1,15 @@
 package com.myspring.petshop.manager.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.Pagination;
 import com.myspring.petshop.manager.dao.ManagerDAO;
-import com.myspring.petshop.manager.vo.ManagerVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
 @Service("managerService")
@@ -103,8 +102,21 @@ public class ManagerServiceImpl implements ManagerService{
 		}
 	}
 	
+	@Override
+	public int searchProductsCnt(Map searchMap) throws Exception {
+		
+		return managerDAO.selectSearchProductsCnt(searchMap);
+	}
+	
+	@Override
+	public List getSearchProducts(Map searchMap) throws Exception {
+		
+		return managerDAO.selectSearchProducts(searchMap);
+	}
+	
 	private int getMemberManager(int member_num) throws Exception {
 		
 		return managerDAO.selectMemberManager(member_num);
 	}
+	
 }

@@ -8,21 +8,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <meta charset="utf-8">
 <title>관리자 상품 관리 페이지</title>
 </head>
@@ -32,11 +18,24 @@ request.setCharacterEncoding("UTF-8");
 
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
-
 		
-		var url = "${contextPath}/manager/managerProduct.do";
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
 		
-		url = url + "?page=" + page;
+		if(searchBy == "p_code" || searchBy == "p_name"){
+			var url = "${contextPath}/manager/getSearchProducts.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+		}
+		else {
+			var url = "${contextPath}/manager/managerProduct.do";	
+			
+			url = url + "?page=" + page;
+		}
+		
 		url = url + "&range=" + range;
 
 		location.href = url;
@@ -44,10 +43,24 @@ request.setCharacterEncoding("UTF-8");
 
 	//페이지 번호 클릭
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
+		
+		if(searchBy == "p_code" || searchBy == "p_name"){
+			var url = "${contextPath}/manager/getSearchProducts.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+		}
+		else {
+			var url = "${contextPath}/manager/managerProduct.do";	
+			
+			url = url + "?page=" + page;
+		}
 
-		var url = "${contextPath}/manager/managerProduct.do";
-
-		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 
 		location.href = url;	
@@ -56,13 +69,26 @@ request.setCharacterEncoding("UTF-8");
 	//다음 버튼 이벤트
 	function fn_next(page, range, rangeSize) {
 
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
+		
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 
-		
-		var url = "${contextPath}/manager/managerProduct.do";
+		if(searchBy == "p_code" || searchBy == "p_name"){
+			var url = "${contextPath}/manager/getSearchProducts.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+		}
+		else {
+			var url = "${contextPath}/manager/managerProduct.do";	
+			
+			url = url + "?page=" + page;
+		}
 
-		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 
 		location.href = url;
@@ -75,7 +101,7 @@ request.setCharacterEncoding("UTF-8");
 <br>
 <form method="GET" action="${contextPath}/managerProductAdd.do">	
 <div class="bd-example" align="right">
-		<button type="submit" class="btn btn-outline-primary btn-lg">상품 등록</button>
+		<button type="submit" class="btn btn-primary btn-lg">상품 등록</button>
 </div>
 	<table class="table table-striped" style="margin-top: 10;">
 		<thead>
@@ -89,6 +115,11 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 		</thead>
 		<tbody>
+		<c:if test="${products.size() == 0 && searchBy.length() != 0}">
+			<tr>
+				<td align="center" colspan="6">상품 검색 결과가 없습니다.</td>
+			</tr>
+		</c:if>
 			<c:forEach items="${products}" var="products">
 			<tr>
 				<td>${products.p_code}</td>
@@ -105,7 +136,17 @@ request.setCharacterEncoding("UTF-8");
 			</c:forEach>
 		</tbody>
 	</table>
+</form>
 	<hr width="100%">
+	<form method="GET" action="${contextPath}/manager/getSearchProducts.do">
+	<select style="height: 35px;" name="searchBy">
+		<option value="p_name">상품명</option>
+		<option value="p_code">상품 번호</option>
+	</select>
+	<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
+	<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
+	</form> <br>
+	
 	
 	<!-- pagination{s} -->
 		<ul class="pagination" style="width: 0%; justify-content: center;">
@@ -126,6 +167,5 @@ request.setCharacterEncoding("UTF-8");
 			</c:if>
 		</ul>
 	<!-- pagination{e} -->
-</form>
 </body>
 </html>
