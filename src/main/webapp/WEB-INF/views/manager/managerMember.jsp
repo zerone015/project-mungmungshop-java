@@ -28,7 +28,7 @@ request.setCharacterEncoding("UTF-8");
 		border: 0px solid #bcbcbc;
 	}
 	table {
-		font-size: 14px;
+		font-size: 13px;
 		text-align: center;
 	}
 	
@@ -89,7 +89,7 @@ request.setCharacterEncoding("UTF-8");
 				success: function(data) {
 					if(data == "remove_success"){
 						alert("해당 회원이 회원탈퇴 되었습니다.");
-						$("#content").load("${contextPath}/manager/getMembersList.do .content");
+						location.href = "${contextPath}/manager/getMembersList.do";
 					}
 					else {
 						alert("시도 실패");
@@ -114,7 +114,7 @@ request.setCharacterEncoding("UTF-8");
 				success: function(data) {
 					if(data == "grant_success"){
 						alert(id+" 회원을 관리자로 지정하였습니다.");
-						$("#content").load("${contextPath}/manager/getMembersList.do .content");
+						location.href = "${contextPath}/manager/getMembersList.do";
 					}
 					else {
 						alert("해당 회원은 이미 관리자입니다.");
@@ -139,7 +139,7 @@ request.setCharacterEncoding("UTF-8");
 				success: function(data) {
 					if(data == "revoke_success"){
 						alert(id+" 회원의 관리자 권한을 회수했습니다.");
-						$("#content").load("${contextPath}/manager/getMembersList.do .content");
+						location.href = "${contextPath}/manager/getMembersList.do";
 					}
 					else {
 						alert("해당 회원은 이미 관리자가 아닙니다.");
@@ -173,11 +173,16 @@ request.setCharacterEncoding("UTF-8");
 				<td>이메일</td>
 				<td>가입 날짜</td>
 				<td>최근 접속 날짜</td>
-				<td>관리자 여부</td>
-				<td>관리 하기</td>
+				<td>권한</td>
+				<td>관리하기</td>
 			</tr>
 		</thead>
 		<tbody>
+		<c:if test="${members.size() == 0 && searchBy.length() != 0}">
+			<tr>
+				<td align="center" colspan="10">회원 검색 결과가 없습니다.</td>
+			</tr>
+		</c:if>
 			<c:forEach items="${members}" var="members">
 			<tr>
 				<td>${members.member_num}</td>
@@ -186,7 +191,7 @@ request.setCharacterEncoding("UTF-8");
 				<td>${members.member_nick}</td>
 				<td>${members.member_phone}</td>
 				<td>${members.member_email}</td>
-				<td><fmt:formatDate value="${members.member_joindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
+				<td><fmt:formatDate value="${members.member_joindate}" type="date" dateStyle="long"></fmt:formatDate></td>
 				<td><fmt:formatDate value="${members.member_logindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
 				<c:choose>
 					<c:when test="${members.member_manager == 1}">
@@ -199,7 +204,7 @@ request.setCharacterEncoding("UTF-8");
 				<td>
 				<c:choose>
 					<c:when test="${members.member_id == 'manager' }">
-						<font style="color: red">해당 아이디는 권한 회수 및 삭제 불가</font>
+						<font style="color: red">해당 아이디는 권한 회수 및 탈퇴 불가</font>
 					</c:when>
 					<c:otherwise>
 						<button class="btn btn-primary" type="button" onclick="manager_grant(${members.member_num},'${members.member_id}');"><font style="font-size: 11px">관리자 지정</font></button>
@@ -212,6 +217,19 @@ request.setCharacterEncoding("UTF-8");
 			</c:forEach>
 		</tbody>
 	</table>
+	<form method="GET" action="${contextPath}/manager/getSearchMembers.do">
+		<select style="height: 35px;" name="searchBy">
+			<option value="member_id">ID</option>
+			<option value="member_num">회원 번호</option>
+			<option value="member_name">이름</option>
+			<option value="member_nick">닉네임</option>
+			<option value="member_email">이메일</option>
+			<option value="member_phone">휴대폰 번호</option>
+		</select>
+		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
+		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
+	</form><br>
+	
 	<!-- pagination{s} -->
 		<ul class="pagination" style="width: 0%; justify-content: center;">
 			<c:if test="${pagination.prev}">

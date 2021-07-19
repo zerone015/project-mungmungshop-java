@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.dao.ManagerDAO;
 import com.myspring.petshop.product.vo.ProductVO;
 
@@ -112,6 +112,18 @@ public class ManagerServiceImpl implements ManagerService{
 	public List getSearchProducts(Map searchMap) throws Exception {
 		
 		return managerDAO.selectSearchProducts(searchMap);
+	}
+	
+	@Override
+	public int searchMembersCnt(Map searchMap) throws Exception {
+		
+		return managerDAO.selectSearchMembersCnt(searchMap);
+	}
+	
+	@Override
+	public List getSearchMembers(Map searchMap) throws Exception {
+		
+		return managerDAO.selectSearchMembers(searchMap);
 	}
 	
 	private int getMemberManager(int member_num) throws Exception {

@@ -7,7 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.product.vo.ProductVO;
 
 @Repository("managerDAO")
@@ -92,5 +92,17 @@ public class ManagerDAOImpl implements ManagerDAO {
 	public List selectSearchProducts(Map searchMap) throws Exception {
 		
 		return sqlSession.selectList("mapper.manager.selectSearchProducts", searchMap);
+	}
+	
+	@Override
+	public int selectSearchMembersCnt(Map searchMap) throws Exception {
+		
+		return sqlSession.selectOne("mapper.manager.selectSearchMembersCnt", searchMap);
+	}
+	
+	@Override
+	public List selectSearchMembers(Map searchMap) throws Exception {
+		
+		return sqlSession.selectList("mapper.manager.selectSearchMembers", searchMap);
 	}
 }

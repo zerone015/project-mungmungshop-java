@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.petshop.Pagination;
-import com.myspring.petshop.manager.service.ManagerService;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.product.service.ProductService;
 import com.myspring.petshop.product.vo.ProductVO;
 
@@ -94,4 +93,15 @@ public class ProductControllerImpl implements ProductController {
 		
 		return mav;
 	}
+	
+	/*
+	@Override
+	@RequestMapping(value="/product/getPayment.do", method = RequestMethod.GET)
+	public ModelAndView getPayment(@RequestParam("p_code") String p_code, HttpServletRequest request) throws Exception {
+		
+		if(session==null)
+		ModelAndView mav = new ModelAndView();
+		
+		return mav;
+	} */
 }

@@ -95,6 +95,7 @@ function imagePopup(type) {
 		jQuery('#layer').attr('style', 'visibility:hidden');
 	}
 }
+
 </script>
 </head>
 <body>
@@ -146,14 +147,17 @@ function imagePopup(type) {
 			  <p style="float: center;">주문 수량</p>
 			</div>
 			<div style = "width: 30%; float:right;">
-			  <input type="number" style="text-align: center; width: 60%; float: right; margin-right: 0px!important;" class="form-control mr-sm-3" id="quantity" min='1' max='99' value="1"  />
+			  <input type="number" style="text-align: center; width: 60%; float: right; margin-right: 0px!important;" class="form-control mr-sm-3" id="quantity" min='1' max='${product.p_stock}' value="1"  />
 			</div>
 		</div>
 	  </div>
 	  <div  style="margin-top: 50;">
 	  	<p><button type="button" class="btn btn-outline-danger btn-block" style="height: 50px;">찜</button></p>
 	  	<p><button type="button" class="btn btn-outline-primary btn-block" style="height: 50px;" onclick="javascript:fn_addCart('${product.p_code}')">장바구니 담기</button></p>
-	  	<p><button type="button" class="btn btn-danger btn-block" style="height: 50px;">바로 구매하기</button></p>
+	  	<form method="GET" action="${contextPath}/product/getPayment.do">
+	  	<input type="hidden" name="p_code" value="${product.p_code}">
+	  	<p><input type="submit" class="btn btn-danger btn-block" style="height: 50px;" value="바로 구매하기"></p>
+	  	</form>
 	  </div>
 	</div>
   </div>
@@ -207,7 +211,7 @@ function imagePopup(type) {
     
     <hr>
     <!-- 후기 작성 -->
-    <form name="review" method="GET" action="">
+    <form name="review" method="GET" action="" enctype="multipart/form-data">
 	    <div class="row g-3">
 	      <div class="col-12">
 	        <textarea class="form-control" style="height:150; resize:none;" id="" placeholder="후기를 작성해주세요." name="reviewWrite"></textarea>

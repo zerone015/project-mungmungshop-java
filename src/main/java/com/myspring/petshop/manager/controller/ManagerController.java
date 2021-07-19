@@ -37,4 +37,9 @@ public interface ManagerController {
 			@RequestParam("searchContents") String searchContents,
 			@RequestParam(required = false, defaultValue = "1") int page,
 			@RequestParam(required = false, defaultValue = "1") int range ) throws Exception;
+	
+	public ModelAndView getSearchMembers(@RequestParam("searchBy") String searchBy,
+			@RequestParam("searchContents") String searchContents,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range ) throws Exception;
 }

@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.vo.ManagerVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
@@ -25,4 +25,6 @@ public interface ManagerService {
 	public boolean modMemberRevoke(int member_num) throws Exception;
 	public int searchProductsCnt(Map searchMap) throws Exception;
 	public List getSearchProducts(Map searchMap) throws Exception;
+	public int searchMembersCnt(Map searchMap) throws Exception;
+	public List getSearchMembers(Map searchMap) throws Exception;
 }

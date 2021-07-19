@@ -45,7 +45,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	}
 	.main1>li {
 	    float: left;
-	    width: 15%;
+	    width: 13%;
 	    line-height: 50px;
 	    position: relative;
 	}
@@ -58,7 +58,6 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	.main1>li a:hover {
 	    background: #f6efef;
 	    font-weight: bold;
-/* 	    color: white!important; */
 	}
 	.main2 {
 	    position: absolute;
@@ -98,81 +97,65 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	.divider {
 		margin-left: 10;
 		margin-right: 10;
+		color: #eddede;
 	}
-	#sidebar-left {
-    width: 10%;
-    height: 700px;
-    padding: 5px;
-    margin-right: 5px;
-    margin-bottom: 5px;
-    float: left;
-    border: 0px solid #bcbcbc;
-    font-size: 10px;
-	}
+	
 	.rightMenu:hover {
+		text-align: center;
 		font-weight: bold;
 	}
 </style>
-<body>
 <div id="header">
 
 <header class="blog-header py-3">
 	<div class="container">
-	    <div class="row flex-nowrap justify-content-between align-items-center" style="padding-left: -300;width: 1200px;">
-	      <!-- 상단 로고 -->
-	      <div class="col-4 pt-1" style="margin-left: -10%;">
-	        <a class="blog-header-logo text-dark" href="${contextPath}/main.do"><img src="${contextPath}/resources/image/logo.png" style="width: 200; height: 80;" alt="이미지"></a>
-	      </div>
-	      
-	      <!-- 검색창 -->
-	      <div class="col-4" style="padding-right: 0;margin-left: -50;">
-	        <input class="row form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="margin-left: 0;">
-	      </div>
-	      <div class="col-1" style="padding-left: 0;">
-	      	<button class="row btn btn-outline-success my-2 my-sm-0" type="submit" style="text-align: left; margin-left: -50;">Search</button>
-	      </div>
-	      
-	     <!-- 상단 오른쪽 -->
-				<div class="col-4 d-flex justify-content-end align-items-center"
-					style="text-align: center;">
+		<div class="row flex-nowrap justify-content-around align-items-center" style="width: 1200px;">
+			<!-- 상단 로고 -->
+			<div style="margin : 0;">
+				<a class="blog-header-logo text-dark" href="${contextPath}/main.do"><img src="${contextPath}/resources/image/logo.png" style="width: 200; height: 80;" alt="이미지"></a>
+			</div>
+			
+			<!-- 검색창 -->
+			<div class="row">
+				<input class="form-control" type="text" placeholder="Search" aria-label="Search" style="width: 350px;">
+				<button class=" btn btn-outline-success " type="submit" style="text-align: left; margin-left: 5;">Search</button>
+			</div>
+		      
+		     <!-- 상단 오른쪽 -->
+		     
+		
+		  	
+			<div class="col-4 d-flex justify-content-end align-items-center" style="text-align: center; margin:0;">
+				<div class="col" >
+					<div style="text-align: center; margin-bottom: 5;">
+						<c:if test="${isLogOn == true  && member != null}">
+							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 !</font>
+						</c:if>
+					</div>
 					<div style="display: flex;">
 						<c:if test="${member.getMember_manager() != 1}">
 							<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
 						</c:if>
 						<c:choose>
 							<c:when test="${isLogOn == true  && member != null}">
-								<a class="rightMenu"
-									href="${contextPath}/member/logout.do"
-									style="margin-left: 2px;">로그아웃</a> <font class="divider">|</font>
+								<a class="rightMenu" href="${contextPath}/member/logout.do" >로그아웃</a> 
+								<font class="divider">|</font>
 							</c:when>
 							<c:otherwise>
-								<a class="rightMenu"
-									href="${contextPath}/login.do" style="margin-left: 2px;">로그인
-									</a> <font class="divider">|</font>
+								<a class="rightMenu" href="${contextPath}/login.do">로그인</a> 
+								<font class="divider">|</font>
 							</c:otherwise>
 						</c:choose>
 						<c:if test="${member.getMember_manager() == 1}">
-							<a class="rightMenu"
-								href="${contextPath}/managerMain.do"
-								style="margin-left: 2px;">관리자 모드</a> <font class="divider">|</font>
+							<a class="rightMenu" href="${contextPath}/managerMain.do">관리자 모드</a> 
+							<font class="divider">|</font>
 						</c:if>
-						<a class="rightMenu"
-							href="${contextPath}/order.do" style="margin-left: 2px;">myPage</a> <font class="divider">|</font>
-						<div class="dropdown">
-							<a class="dropdown-toggle"
-								data-toggle="dropdown" href="#" style="margin-left: 2px;">고객센터</a>
-							<div class="dropdown-menu">
-								<a class="dropdown-item" href="#">공지사항</a> <a
-									class="dropdown-item" href="#">자주 묻는 질문</a> <a
-									class="dropdown-item" href="#">1:1 문의</a>
-		        </div>
-	      	</div>
-	       </div>
-	      </div>
-	    </div>
-   </div>
-
-
+						<a class="rightMenu" href="${contextPath}/order.do">마이페이지</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <nav>
 <div id="menu" style="position:relative; z-index: 99; background-color: white;">
@@ -251,6 +234,13 @@ pageEncoding="utf-8" isELIgnored="false" %>
         <li><a href="#">브랜드</a></li>
 		<li><a href="#">랭킹</a></li>
 		<li><a href="#">할인</a></li>
+		<li><a href="#">고객센터</a>
+            <ul class="main2">
+				<li><a href="${contextPath}/board/noticeList.do">공지사항</a></li>
+				<li><a href="${contextPath}/board/faqList.do">자주 묻는 질문</a></li>
+				<li><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
+			</ul>
+		</li>
     </ul>
 </div>
 </nav>
@@ -260,10 +250,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 </div>
 
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     
-
-</body>
-
 </html>

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.service.ManagerService;
 import com.myspring.petshop.product.vo.ProductVO;
 
@@ -179,6 +179,35 @@ public class ManagerControllerImpl implements ManagerController {
 		
 		ModelAndView mav = new ModelAndView("managerProduct");
 		mav.addObject("products", products);
+		mav.addObject("pagination", pagination);
+		mav.addObject("searchBy", searchBy);
+		mav.addObject("searchContents", searchContents);
+		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/getSearchMembers.do", method = RequestMethod.GET)
+	public ModelAndView getSearchMembers(@RequestParam("searchBy") String searchBy,
+			@RequestParam("searchContents") String searchContents,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range ) throws Exception {
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("searchBy", searchBy);
+		searchMap.put("searchContents", searchContents);
+		
+		int	listCnt = managerService.searchMembersCnt(searchMap);
+	
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		
+		searchMap.put("pagination", pagination);
+		
+		List members = managerService.getSearchMembers(searchMap);
+		
+		ModelAndView mav = new ModelAndView("managerMember");
+		mav.addObject("members", members);
 		mav.addObject("pagination", pagination);
 		mav.addObject("searchBy", searchBy);
 		mav.addObject("searchContents", searchContents);

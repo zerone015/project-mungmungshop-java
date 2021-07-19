@@ -1,4 +1,4 @@
-package com.myspring.petshop;
+package com.myspring.petshop.common.pagination;
 
 
 public class Pagination {

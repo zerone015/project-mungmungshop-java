@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
-<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <title><tiles:insertAttribute name="title" /></title>
@@ -12,26 +12,25 @@
 	text-align: center;
 	border: 0px solid #bcbcbc;
 }
-
-img {
+img{
 	height: 100px;
 }
-
 #header {
 	padding: 5px;
 	margin-bottom: 5px;
 	border: 0px solid #bcbcbc;
+	
 }
 
 #sidebar-left {
-	width: 15%;
-	height: 700px;
-	padding: 5px;
-	margin-right: 5px;
-	margin-bottom: 5px;
-	float: left;
-	border: 0px solid #bcbcbc;
-	font-size: 10px;
+    width: 13%;
+    height: 700px;
+    padding: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+    border: 0px solid #bcbcbc;
+    font-size: 10px;
 }
 
 #content {
@@ -41,12 +40,12 @@ img {
 	float: left;
 	border: 0px solid #bcbcbc;
 }
-
 #footer {
 	clear: both;
 	padding: 5px;
 	border: 0px solid #bcbcbc;
 }
+
 </style>
 </head>
 <body>

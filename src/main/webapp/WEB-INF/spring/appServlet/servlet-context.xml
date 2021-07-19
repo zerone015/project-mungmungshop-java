@@ -39,8 +39,8 @@
 	
 	<mvc:interceptors>
 	  <mvc:interceptor>
-	    <mvc:mapping path="/*/*.do"/>
-	    <beans:bean class="com.myspring.petshop.member.interceptor.ViewNameInterceptor"/>
+	    <mvc:mapping path="/cart/addProductsInCart.do"/>
+	    <beans:bean class="com.myspring.petshop.common.interceptor.SessionInterceptor"/>
 	   </mvc:interceptor>
 	</mvc:interceptors>
 	
