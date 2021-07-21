@@ -88,7 +88,7 @@ function checkinfoModify() {
 </script>
 <body>
  <h1 class="cls1">회원 정보 수정창</h1>
-<form name="infoModify" method="post" action="#">
+<form name="infoModify" method="post" action="${contextPath}/MemInfo/modifyInfo.do">
  <table align="center" >
    <tr>
      <td width="200"><p align="right" >아이디</td>
@@ -111,9 +111,9 @@ function checkinfoModify() {
      <td width="400"><input   type="text" name="telNum" value="${memInfo.telNum}" ></td>
    </tr>
    <tr align="center" >
-    <td colspan="2" width="400"><input type="button" value="수정하기" onclick="checkinfoModify()" >
+    <td colspan="2" width="400"><input type="button" value="수정하기" onclick="checkinfoModify(${MemInfoVO.memInfo_num });" >
     <h1></h1>
-    <a href="">회원 탈퇴</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="fn_exit(${MemInfoVO.memInfo_num });">회원 탈퇴</a>&nbsp;&nbsp;&nbsp;&nbsp;
    </tr>
  </table>
 </form>

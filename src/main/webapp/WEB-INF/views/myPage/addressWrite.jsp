@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>로그인창</title>
+<title>배송지 입력창</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
@@ -71,21 +71,21 @@
 </script>
 <script type="text/javascript">
 function checkAddress() {
-	var form=document.userInfo;
+	var form=document.addressInfo;
 	
 	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/; 				//한글,영어만 사용 가능
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	
-	var id = form.id;
-	var recipent = form.recipent;
-	var phoneNumb = form.PhoneNum;
-	var address = form.addressNumb;
-	var detailAddress = form.detailAddress;
+	var addressName = form.address_name;
+	var recipent = form.address_recipent;
+	var phoneNumb = form.address_phone;
+	var address = form.address_1;
+	var detailAddress = form.address_3;
 	
 	
-	if (id.value == "") {
+	if (addressName.value == "") {
 		alert("배송지 명칭을 입력해주세요.");
-		id.focus();
+		addressName.focus();
 		return false;
 	} 
 	
@@ -127,48 +127,56 @@ function checkAddress() {
 	form.submit();
 }
 </script>
+<script type="text/javascript">
+function cancle(){
+	if(confirm('배송지 주소 등록을 취소하시겠습니까?'))
+		window.location = "/petshop/address/addressList.do"
+}
+</script>
 </head>
 <body>
 <div class="addressWrite">
 <h2> 배송지 입력 </h2><br>
-<form method="GET" action="#" name="userInfo">
-	<div style="margin-left:300px;">
+<form method="POST" action="${contextPath}/address/addAddress.do" name="addressInfo"> 
+	
+	<div>
             <table>
                 <tr>
                <td id="title">배송지 명칭&nbsp;</td>
                     <td>
-                        <input type="text" name="id" maxlength="20" style="width:200px;" placeholder="배송지 명칭을 입력해주세요.">
+                        <input type="text" name="address_name" maxlength="20" style="width:200px;" placeholder="배송지 명칭을 입력해주세요.">
                     </td>
                 </tr>                        
                 <tr>
                     <td id="title">수령인</td>
                     <td>
-                        <input type="text" name="recipent" maxlength="45" style="width:200px;" placeholder="수령인을 입력해주세요.">
+                        <input type="text" name="address_recipent" maxlength="45" style="width:200px;" placeholder="수령인을 입력해주세요.">
                     </td>
                 </tr>                
                 <tr>
                     <td id="title">휴대폰 번호</td>
                     <td>
-                        <input type="text" name="PhoneNum" maxlength="50" placeholder="-없이 번호만 입력해주세요" style="width:200px;">
+                        <input type="text" name="address_phone" maxlength="50" placeholder="-없이 번호만 입력해주세요" style="width:200px;">
                     </td>
                 </tr>
                 <tr>                 
- 					<td id=address" style="vertical-align:top"/">배송지 주소</td>
+ 					<td style="vertical-align:top">배송지 주소</td>
 					<td>
-						<input type="text" id="sample4_postcode" placeholder="우편번호" readonly name="addressNumb">
+						<input type="text" id="sample4_postcode" placeholder="우편번호" readonly name="address_1">
 						<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="btn btn-dark"><br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명주소" size="30" readonly><br>
-						<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="30">
+						<input type="text" id="sample4_roadAddress" placeholder="도로명,지번주소" size="30" name="address_2" readonly><br>
+                        <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="30">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="detailAddress" maxlength="50" ><br>
-						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="30">
+						<input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="address_3" maxlength="50" ><br>
+                        <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="30">
 						<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="30" ><br>
+
 					</td>
                </table>
 	</div>          
-	<button type="button" onclick="checkAddress()" class="btn btn-dark">확인</button>
+	<button type="button" onclick="checkAddress()" class="btn btn-dark">등록</button>
 	&nbsp;
-	<button type="button" onclick="cancle()" class="btn btn-dark">취소</button>
+	<button type="button" onclick="cancle()" class="btn btn-dark" >취소</button>
 </form>
 	</div>
   	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
