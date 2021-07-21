@@ -7,10 +7,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -86,7 +88,6 @@ public class EventControllerImpl implements EventController {
 		return "eventWrite";
 	}
 	
-
 	@Override
 	@RequestMapping(value="/eventWrite.do", method=RequestMethod.POST)
 	public ModelAndView eventWrite(@ModelAttribute("event")EventVO event, HttpServletRequest request,
@@ -144,4 +145,6 @@ public class EventControllerImpl implements EventController {
 		ModelAndView mav = new ModelAndView("redirect:/board/eventList.do");
 		return mav;
 	}
+	
+
 }

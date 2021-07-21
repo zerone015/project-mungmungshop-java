@@ -36,10 +36,10 @@
 		</c:choose>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>글 번호</th>
+					<th>번호</th>
 					<th>제목</th>
 					<th>글쓴이</th>
 					<th>날짜</th>

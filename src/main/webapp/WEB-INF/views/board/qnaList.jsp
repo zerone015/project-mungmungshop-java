@@ -10,29 +10,13 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/board.css">
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 <title>1:1 문의 목록</title>
-<style>
-	.reply1 {
-		text-indent: 1em;
-	}
-	.reply2 {
-		text-indent: 2em;
-	}
-	thead {
-		text-align: center;
-	}
-	.center {
-		text-align: center;
-	}
-	.secret {
-		width: 20; 
-		height: 20;
-	}
-</style>
+	
 <script>
 
 	//이전 버튼 이벤트
@@ -164,5 +148,6 @@
 		<!-- pagination{e} -->
 	</div>
 	</div>
+
 </body>
 </html>
