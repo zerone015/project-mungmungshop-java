@@ -121,8 +121,63 @@ function fn_addCart(p_code) {
   <hr>
   <div>
   	<h3 style="text-align: left;">후기</h3>
-	
+	<details>
+	    <summary>더 많은 내용</summary>
+	    <p>내부에 넣을 내용을 입력해주세요</p>
+	</details>
 	<!-- 후기 목록 -->
+	<div class="table-responsive" style="margin-top:30;">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>번호</th>
+					<th>제목</th>
+					<th>글쓴이</th>
+					<th>날짜</th>
+					<th>조회수</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<c:forEach items="${reviewList}" var="reviewVO">						
+				    <tr>
+				      <!-- 글번호 -->
+				      <td class="center">${reviewVO.review_num}</td>
+				      <!-- 글내용 -->
+				      <td class="center">${reviewVO.review_content}</td>
+				      
+				      <!-- 작성자 -->
+				      <td class="center">${reviewVO.memberNick}</td>
+				      <!-- 작성일 --> 
+				      <td class="center"><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></td>
+				     
+				    </tr>
+				</c:forEach>							
+			</tbody>
+		</table>
+		<!-- pagination{s} -->
+		<div style="">
+			<ul class="pagination" style="width: 0%; justify-content:center;">
+				<c:if test="${pagination.prev}">
+					<li class="page-item">
+						<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					</li>
+				</c:if>
+				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+					</li>
+				</c:forEach>
+				<c:if test="${pagination.next}">
+					<li class="page-item">
+						<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- pagination{e} -->
+	</div>
+	
 	<div style="margin-top: 10; ">
 		<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
 	      <div class="d-flex w-100 align-items-center justify-content-between">

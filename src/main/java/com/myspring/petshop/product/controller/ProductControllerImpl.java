@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,14 +16,24 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.Pagination;
-import com.myspring.petshop.manager.service.ManagerService;
+import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.product.service.ProductService;
 import com.myspring.petshop.product.vo.ProductVO;
+import com.myspring.petshop.review.service.ReviewService;
+import com.myspring.petshop.review.vo.ReviewVO;
 
 @Controller("productController")
 public class ProductControllerImpl implements ProductController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private MemberVO memberVO;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private ReviewVO reviewVO;
+	@Autowired
+	private HttpSession session;
 	
 	@Override
 	@RequestMapping(value="/product/productList.do", method = RequestMethod.GET)
@@ -86,12 +97,35 @@ public class ProductControllerImpl implements ProductController {
 	
 	@Override
 	@RequestMapping(value="/product/getProduct.do", method = RequestMethod.GET)
-	public ModelAndView getProduct(@RequestParam("p_code") String p_code) throws Exception {
+	public ModelAndView getProduct(@RequestParam("p_code") String p_code,
+								   @RequestParam(required = false, defaultValue = "1") int page,
+								   @RequestParam(required = false, defaultValue = "1") int range, 
+						HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ProductVO product = productService.getProduct(p_code);
 		
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
 		
+		session = request.getSession();
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		
+		
+		
+		// 게시글 총 개수
+		int listCnt = reviewService.reviewCnt();
+		
+		Pagination pagination = new Pagination();
+		pagination.setListSize(10);
+		pagination.pageInfo(page, range, listCnt);
+		
+		List reviewList = reviewService.listReview(pagination, p_code);
+		
+		mav.addObject("pagination", pagination);
+		mav.addObject("reviewList", reviewList);
+		
 		return mav;
 	}
+	
+	
 }
