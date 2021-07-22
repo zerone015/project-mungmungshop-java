@@ -67,6 +67,7 @@ function fn_addCart(p_code) {
 			p_code : p_code,
 			cart_quantity : $("#quantity").val()
 				},
+		beforeSend : function(xmlHttpRequest) { xmlHttpRequest.setRequestHeader("AJAX", "true");},
 		success : function(data, textStatus) {
 			if(data.trim()=='add_success') {
 				imagePopup('open', '.layer01');
@@ -75,7 +76,13 @@ function fn_addCart(p_code) {
 			}
 		},
 		error : function(data, textStatus) {
-			alert("에러가 발생했습니다."+data);
+			if(data.status==400) {
+			     location.href='${contextPath}/login.do';
+
+			}
+			else{
+				alert("에러가 발생했습니다."+data);
+			}
 		}
 	});
 }

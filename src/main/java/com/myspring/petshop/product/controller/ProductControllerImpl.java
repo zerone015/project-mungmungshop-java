@@ -22,6 +22,8 @@ import com.myspring.petshop.product.vo.ProductVO;
 public class ProductControllerImpl implements ProductController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private ProductVO product;
 	
 	@Override
 	@RequestMapping(value="/product/productList.do", method = RequestMethod.GET)
@@ -86,7 +88,7 @@ public class ProductControllerImpl implements ProductController {
 	@Override
 	@RequestMapping(value="/product/getProduct.do", method = RequestMethod.GET)
 	public ModelAndView getProduct(@RequestParam("p_code") String p_code) throws Exception {
-		ProductVO product = productService.getProduct(p_code);
+		product = productService.getProduct(p_code);
 		
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
@@ -94,14 +96,16 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 	
+
 	/*
-	@Override
-	@RequestMapping(value="/product/getPayment.do", method = RequestMethod.GET)
-	public ModelAndView getPayment(@RequestParam("p_code") String p_code, HttpServletRequest request) throws Exception {
-		
-		if(session==null)
-		ModelAndView mav = new ModelAndView();
-		
-		return mav;
-	} */
+	 * @Override
+	 * 
+	 * @RequestMapping(value="/product/getPayment.do", method = RequestMethod.GET)
+	 * public ModelAndView getPayment(@RequestParam("p_code") String p_code) throws
+	 * Exception {
+	 * 
+	 * ModelAndView mav = new ModelAndView();
+	 * 
+	 * return mav; }
+	 */
 }

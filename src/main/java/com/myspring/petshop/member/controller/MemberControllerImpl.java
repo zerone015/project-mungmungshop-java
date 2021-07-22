@@ -105,10 +105,10 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value="/member/joinAgree.do", method=RequestMethod.GET)
-	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
+	public String joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	
+
+		return "/member/joinAgree";
 	}
 	
 	@Override
@@ -130,10 +130,10 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value="/member/joinWelcome.do", method=RequestMethod.GET)
-	public ModelAndView joinWelcome(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
-		return mav;
+	public String joinWelcome(HttpServletRequest request, HttpServletResponse response) throws Exception{
+
+
+		return "/member/joinWelcome";
 	}
 	
 	@Override

@@ -52,4 +52,16 @@ public class MemberDAOImpl implements MemberDAO{
 	public void updateLoginDate(int member_num) throws Exception {
 		sqlSession.update("mapper.member.updateLoginDate", member_num);
 	}
+	
+	@Override
+	//DB 에서 최근 접속 날짜가 1년이 지난 회원 목록 조회
+	public List<MemberVO> batchSelectMember() throws DataAccessException {
+		return sqlSession.selectList("mapper.member.batchSelectMember");
+	}
+	
+	@Override
+	//DB 에서 최근 접속 날짜가 1년이 지난 회원 목록 삭제
+	public void deleteMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.delete("mapper.member.deleteMember", memberVO);
+	}
 }

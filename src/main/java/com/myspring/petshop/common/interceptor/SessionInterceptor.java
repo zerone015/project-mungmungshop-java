@@ -4,9 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.ModelAndViewDefiningException;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.myspring.petshop.member.vo.MemberVO;
@@ -16,21 +14,23 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
-		
+		String contextPath = request.getContextPath();
 		try {
-			if (member != null && member.getMember_id() != null) {
-				return true;
+			if (member == null) {
+				if(isAjaxRequest(request)) {
+					response.sendError(400);
+				}
+				else {
+					response.sendRedirect(contextPath+"/login.do");
+				}
+				return false;
 			}
-			else {
-				ModelAndView mav = new ModelAndView("redirect:/login.do");
-				mav.addObject("returnUrl", "/login.do");
-				throw new ModelAndViewDefiningException(mav);
-			}
+			
 		}catch (Exception e) {
-			ModelAndView mav = new ModelAndView("redirect:/login.do");
-			mav.addObject("returnUrl", "/login.do");
-			throw new ModelAndViewDefiningException(mav);
+			e.printStackTrace();
 		}
+		
+		return true;
 	}
 	
 	@Override
@@ -40,6 +40,16 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
 	
+	}
+
+	private boolean isAjaxRequest(HttpServletRequest req) {
+		String header = req.getHeader("AJAX");
+	    if ("true".equals(header)){
+	    	return true;
+	   }
+	    else{
+	        return false;
+	   }
 	}
 
 }

@@ -382,7 +382,7 @@ request.setCharacterEncoding("utf-8");
 				<tr>
 					<td><b>닉네임</b><font>*</font></td>
 					<td><input class="form-control" type="text" maxlength="20" placeholder="닉네임"
-						id="Member_Nick" name="m	mber_nick" onkeydown="inputNickChk()">
+						id="Member_Nick" name="member_nick" onkeydown="inputNickChk()">
 						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"
 							value="N">중복확인</button> <input type="hidden"
 						name="nickDuplication" value="nickUncheck"></td>

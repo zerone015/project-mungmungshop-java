@@ -20,12 +20,12 @@ public interface MemberController{
 	
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public String joinAgree(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView addMember(@ModelAttribute("info")
 	MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView joinWelcome(HttpServletRequest request, HttpServletResponse response)throws Exception;
+	public String joinWelcome(HttpServletRequest request, HttpServletResponse response)throws Exception;
 	
 	public ModelAndView findId(@ModelAttribute("member")MemberVO member,RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
