@@ -10,12 +10,12 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 	
-	<definition name="paymentResult" extends="baseLayout">
+	<definition name="PaymentCompletePage" extends="baseLayout">
 		<put-attribute name="title" value="결제 완료 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/payment/paymentResult.jsp" />
 	</definition>
 	
-	<definition name="payment" extends="baseLayout">
+	<definition name="PaymentPage" extends="baseLayout">
 		<put-attribute name="title" value="결제 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/payment/payment.jsp" />
 	</definition>

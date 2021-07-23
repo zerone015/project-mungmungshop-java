@@ -1,23 +1,15 @@
 package com.myspring.petshop.payment.controller;
 
-import java.util.Locale;
+import javax.servlet.http.HttpServletRequest;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
-public class PaymentController {
-	@RequestMapping(value = "/paymentResult.do", method = RequestMethod.GET)
-	public String homeeeee(Locale locale, Model model) {
-		
-		return "paymentResult";
-	}
-	
-	@RequestMapping(value = "/payment.do", method = RequestMethod.GET)
-	public String payment(Locale locale, Model model) {
-		
-		return "payment";
-	}
+import com.myspring.petshop.payment.vo.PaymentVO;
+
+public interface PaymentController {
+	public String getPaymentCompletePage(Model model) throws Exception;
+	public String getPaymentPage(@ModelAttribute("payment") PaymentVO payment,
+			HttpServletRequest request, Model model) throws Exception;
 }

@@ -77,9 +77,10 @@ function productSum()  {
 	var str = "";
 	var sum = 0;
 	var count = $(".chkbox").length;
+	var chkbox = document.cartForm.productCheck;
 	for(var i=0; i<count; i++){
-		if($(".chkbox")[i].checked == true){
-			sum += parseInt($(".chkbox")[i].value);
+		if(chkbox[i].checked == true){
+			sum += parseInt(chkbox[i].getAttribute('value2'));
 			
 		}
 	}
@@ -94,18 +95,14 @@ function numberWithCommas(x) {
 
 
 function buyCheck() {
-	var check=document.cartForm.productCheck;
-	var num=0;
+	var list = $("input[name='productCheck']");
 	
-	for(var i=0; i<check.length; i++) {
-		if (check[i].checked) {
-			num++;
-		}
+	if (list.length == 0) {
+		alert("선택된 상품이 없습니다.");
 	}
-	if(!num){
-		alert("구매하실 상품을 선택해주세요.")
-		return false;
-		}
+	
+	document.cartForm.submit();
+	
 }
 
 function cart_delete() {
@@ -113,7 +110,7 @@ function cart_delete() {
 	var list = $("input[name='productCheck']");
 	for(var i=0; i<list.length; i++){
 		if(list[i].checked){
-			valueArr.push(list[i].getAttribute('value2'));
+			valueArr.push(list[i].getAttribute('value'));
 		}
 	}
 	
@@ -200,7 +197,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 				<input type="checkbox" class="form-check-input" id="allCheck" name="selectall" onclick="selectAll(this)" style="margin-top: 14px;" checked>전체 선택
 		</span>	
 		<button type="button" class="btn btn-danger" onclick="cart_delete();" style="margin-bottom: 5px;">선택 삭제</button>
-		<form name="cartForm" method="GET" action="">			
+		<form name="cartForm" method="GET" action="${contextPath}/payment/getPaymentPage.do">			
 			<table class="table table-striped">
 				<thead>
 					<tr>
@@ -213,7 +210,8 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 					<c:forEach var="myProductsList" items="${myProductsList}" varStatus="status">
 						<tr>
 							<td>
-								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_price*myCartList[status.index].cart_quantity}" value2="${myProductsList.p_code}" checked/> 
+								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_code}" 
+								value2="${myProductsList.p_price*myCartList[status.index].cart_quantity}" checked/>
 								<img src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}" alt="상품 이미지"/>
 							</td>
 							<td>

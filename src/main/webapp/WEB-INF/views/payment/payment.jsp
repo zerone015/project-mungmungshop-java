@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <%
 request.setCharacterEncoding("utf-8");
@@ -178,56 +179,35 @@ function checkPayment() {
 			style="width: 450px; height: 500px; float: left; margin-top: 10px; margin-right: 30px; margin-left: 30px">
 			<h3>주문결제</h3>
 			<hr width="100%" size="3">
-	<!-- 배송지 선택창 -->
 			<form method="GET" action="#" name="payment">
-				<h5>&nbsp;배송지 선택</h5>
-				<div style="margin-left: 10px;">
-					<ul>
-						<li>
-							<button>
-								<span>최근 배송지</span>
-							</button>
-						</li> 
-						<li>
-							<button type="reset">
-								<span>새로운 배송지</span>
-							</button>
-						</li>
-					</ul>
-
-				</div>
-
-				<div
-					style="width: 400px; height: 250px; border: 1px solid black; margin-left: 10px;">
-					<!--최근 배송지 : 배송지 목록 출력(외부데이터 화면에 출력해주는 방법은???)-->
-					&nbsp;
-					<!-- 새로운 배송지 : 배송지 목록 추가 가능하게 구현 -->
-					<h6>
-						<br>&nbsp;&nbsp;이름&nbsp;&nbsp;<input type="text" name="paymentName" maxlength="20">
+				<h5 style="margin-left: 9px;">배송지 선택</h5>
+				<input style="margin-left: 110px;" type="radio" name="selectBy" value="old" checked> 기본 배송지
+				<input style="margin-left: 15px;" type="radio" name="selectBy" value="new"> 신규 배송지
+				<div style="width: 400px; height: 250px; border: 1px solid black; margin-left: 10px;">
+					<h6 style="margin-bottom: 20px;">
+						<br>수령인 <input type="text" name="paymentName" maxlength="20" value="${paymentVO.address_recipent}">
 					</h6>
 					<div style="float: left;">
-						&nbsp;&nbsp;주소&nbsp;&nbsp; <input type="text"
-							id="sample4_postcode" placeholder="우편번호" name="paymentPost" readonly> <input
+						&nbsp;&nbsp;주소&nbsp; <input type="text"
+							id="sample4_postcode" placeholder="우편번호" name="paymentPost" value="${paymentVO.address_1}" readonly> <input
 							type="button" onclick="sample4_execDaumPostcode()"
 							value="우편번호 찾기"><br> <input type="text"
-							id="sample4_roadAddress" placeholder="도로명주소" size="30" name="paymentAds" readonly><br>
+							id="sample4_roadAddress" placeholder="도로명주소" size="30" name="paymentAds" value="${paymentVO.address_2}" readonly><br>
 						<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"
 							size="30"> <span id="guide"
 							style="color: #999; display: none"></span> <input type="text"
-							id="sample4_detailAddress" placeholder="상세주소" size="30" name="paymentDetailAds" maxlength="50"><br>
+							id="sample4_detailAddress" placeholder="상세주소" size="30" name="paymentDetailAds" maxlength="50" value="${paymentVO.address_3}"><br>
 						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"
 							size="30"> <input type="hidden" id="sample4_engAddress"
 							placeholder="영문주소" size="30"><br>
 					</div>
 					<div style="float: left;">
-						&nbsp;휴대폰 번호&nbsp;<input type="text" name="paymentPhoneNumb">
-					</div>
-				</div>
-
+						&nbsp;휴대폰 번호&nbsp;<input type="text" name="paymentPhoneNumb" placeholder="-을 포함한 휴대폰 번호" value="${paymentVO.address_phone}">
+					</div>	
 				<!-- 여기까지 새로운 배송지시 배송지 선택! -->
-				&nbsp;
-				<div>
-					<select id="shipmentmessage" name="shipmentmessage" size="1"
+		</div>
+		<br>
+		<select id="shipmentmessage" name="shipmentmessage" size="1"
 						style="float: left; margin-left: 20px;">
 
 						<option value="">배송시요청사항(선택사항)</option>
@@ -235,30 +215,36 @@ function checkPayment() {
 						<option value="absentcall">부재시 연락바랍니다.</option>
 						<option value="guardroom">부재시 경비실에 맡겨주세요</option>
 						<option value="frontdoor">직접 입력</option>
-					</select> <br>&nbsp;<br> <input name="paymentRequest" type="text" title="배송시 요청사항 기재"
+					</select>
+						&nbsp;
+				<div>
+				 <br>&nbsp;<br> <input name="paymentRequest" type="text" title="배송시 요청사항 기재"
 						style="float: left; margin-left: 20px;" maxlength="30" > <br> <br>
 				</div>
-		</div>
+				</div>
 		</form>
-		<div
-			style="width: 450px; height: 300px; float: right; margin-top: 30px; margin-right: 30px;">
 			<h6>주문상품정보</h6>
-			<div
-				style="width: 440px; height: 200px; border: 1px solid black; float: right; margin-top: 20px; margin-right: 8px; margin-left: 10px;">
-				<div
-					style="width: 140px; height: 140px; border: 1px solid blue; float: left; margin-top: 20px; margin-right: 20px; margin-left: 20px"></div>
-				<br>
-				<h5>제조회사</h5>
-				<h5>제품명</h5>
-				<h5>&원/&개</h5>
-
-				<p>
-					<button type="button" class="btn btn-dark"
-						style="width: 100%; height: 50px; margin-top: 38px;" disabled>총
-						& 건</button>
-				</p>
-			</div>
-		</div>
+		<table>
+			<tr>
+				<th>브랜드</th>
+				<th>상품명</th>
+				<th>수량</th>
+				<th>적립금</th>
+				<th>포인트 할인</th>
+				<th>주문 금액</th>
+			</tr>
+			<c:forEach items="${orderPrdList}" var="items">
+				<tr>
+					<td>${items.p_brand}</td>
+					<td>${items.p_name}</td>
+					<td>${items.cart_quantity}</td>
+					<td><fmt:formatNumber value="${items.p_price*items.cart_quantity/80}" pattern="###,###,###" />원</td>
+					<td>&nbsp;</td>
+					<td><fmt:formatNumber value="${items.p_price*items.cart_quantity}" pattern="###,###,###" />원
+				</tr>
+			</c:forEach>
+		</table>
+		
 		<div
 			style="width: 450px; height: 400px; float: right; margin-top: 40px; margin-right: 30px;">
 

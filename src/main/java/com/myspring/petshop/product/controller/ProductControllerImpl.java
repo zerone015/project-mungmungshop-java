@@ -95,17 +95,4 @@ public class ProductControllerImpl implements ProductController {
 		
 		return mav;
 	}
-	
-
-	/*
-	 * @Override
-	 * 
-	 * @RequestMapping(value="/product/getPayment.do", method = RequestMethod.GET)
-	 * public ModelAndView getPayment(@RequestParam("p_code") String p_code) throws
-	 * Exception {
-	 * 
-	 * ModelAndView mav = new ModelAndView();
-	 * 
-	 * return mav; }
-	 */
 }
