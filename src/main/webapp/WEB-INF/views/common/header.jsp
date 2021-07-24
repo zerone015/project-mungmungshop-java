@@ -129,13 +129,15 @@ pageEncoding="utf-8" isELIgnored="false" %>
 				<div class="col" >
 					<div style="text-align: center; margin-bottom: 5;">
 						<c:if test="${isLogOn == true  && member != null}">
-							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 !</font>
+							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 ! 포인트 : ${member.member_point}</font>
 						</c:if>
 					</div>
 					<div style="display: flex;">
-						<c:if test="${member.getMember_manager() != 1}">
-							<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
+						<c:if test="${member.getMember_manager() == 1}">
+							<a class="rightMenu" href="${contextPath}/managerMain.do">관리자</a> 
+							<font class="divider">|</font>
 						</c:if>
+						<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
 						<c:choose>
 							<c:when test="${isLogOn == true  && member != null}">
 								<a class="rightMenu" href="${contextPath}/member/logout.do" >로그아웃</a> 
@@ -146,10 +148,6 @@ pageEncoding="utf-8" isELIgnored="false" %>
 								<font class="divider">|</font>
 							</c:otherwise>
 						</c:choose>
-						<c:if test="${member.getMember_manager() == 1}">
-							<a class="rightMenu" href="${contextPath}/managerMain.do">관리자 모드</a> 
-							<font class="divider">|</font>
-						</c:if>
 						<a class="rightMenu" href="${contextPath}/order.do">마이페이지</a>
 					</div>
 				</div>
@@ -160,7 +158,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 <nav>
 <div id="menu" style="position:relative; z-index: 99; background-color: white;">
     <ul class="main1" style=" padding-left: 0px; margin-left: -100;">
-        <li><a href="#">카테고리</a>
+        <li><a href="#"><b style="font-size: 20px;"><span style="font-size: 20px;">≡</span> 카테고리</b></a>
             <ul class="main2">
                 <li><a href="#">사료</a>
 					<ul class="main3">

@@ -190,7 +190,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 <body> 
 <div class="content">
 	<div class="container">
-		<div>
+		<div style="margin-bottom: 60px;">
 			<h1>장바구니</h1>
 		</div>
 		<span style="margin-right: 900px;">
@@ -198,7 +198,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 		</span>	
 		<button type="button" class="btn btn-danger" onclick="cart_delete();" style="margin-bottom: 5px;">선택 삭제</button>
 		<form name="cartForm" method="GET" action="${contextPath}/payment/getPaymentPage.do">			
-			<table class="table table-striped">
+			<table class="table table-hover">
 				<thead>
 					<tr>
 						<th>&nbsp;&nbsp;&nbsp;상품이미지</th>
@@ -242,8 +242,9 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 					</tr>
 				</tbody>
 			</table>
+			<br>
 			<div class="bd-example" align="center">
-				<input type="button" class="btn btn-danger" onclick="buyCheck()"
+				<input type="button" style="width: 400px;" class="btn btn-danger btn-lg" onclick="buyCheck()"
 					value="구매하기">
 			</div>
 		</form>

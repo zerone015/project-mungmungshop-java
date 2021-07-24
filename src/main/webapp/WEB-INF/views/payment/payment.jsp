@@ -10,41 +10,52 @@ request.setCharacterEncoding("utf-8");
 <head>
 <meta charset="utf-8">
 <title>주문결제 화면</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<style>
-h3 {
-	text-align: left;
-}
-
-h4 {
-	text-align: left;
-}
-
-h5 {
-	text-align: left;
-}
-
-h6 {
-	text-align: left;
-}
-
-ul {
-	list-style: none;
-	padding-left: 0px;
-}
-
-ul {
-	display: -webkit-box; /* OLD - iOS 6-, Safari 3.1-6 */
-	display: -moz-box; /* OLD - Firefox 19- (거의 대부분 동작) */
-	display: -ms-flexbox; /* TWEENER - IE 10 */
-	display: -webkit-flex; /* NEW - Chrome */
-	display: flex; /* NEW, Spec - Opera 12.1, Firefox 20+ */
-}
-</style>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<style>
+	.form-control {
+		display:inline-block;
+		width: 450px;
+		height: 50px;
+		margin-left: 40px;
+	}
+	.main {
+		border: 1px solid rgba(235, 235, 235, 1);
+		padding: 30px 116px 50px;
+	}
+	.um {
+		margin-right: 600px;
+		width: 57%;
+	}
+	
+	.paymentHr {
+		border:solid 1px gray;
+	}
+	
+	.address {
+		margin-right: 30px;
+	}
+	
+	.address2 {
+		margin-top: 20px;
+	}
+	.td_payment {
+		background-color: F4F4F5;
+		height: 60px;
+		line-height: 60px;
+		width: 300px;
+	}
+	.td_payment2 {
+		line-height: 60px;
+	}
+	.td_prd {
+		height: 90px;
+		line-height: 90px;
+	}
+	.table_dcdcdc{
+		background-color: F4F4F5;
+	}
+</style>
 <script>
 	//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 	function sample4_execDaumPostcode() {
@@ -114,10 +125,10 @@ function checkPayment() {
 		
 	var form=document.payment;
 	
-	var phoneNumb=form.paymentPhoneNumb;
-	var detailAds=form.paymentDetailAds;
-	var name=form.paymentName;
-	var post=form.paymentPost;
+	var phoneNumb=form.address_phone;
+	var detailAds=form.address_3;
+	var name=form.address_recipent;
+	var post=form.address_1;
 	var postRequest=form.paymentRequest;
 	
 	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;							//한글,영어만 사용 가능							
@@ -173,114 +184,117 @@ function checkPayment() {
 </script>
 </head>
 <body>
-	<div class="container">
-
-		<div
-			style="width: 450px; height: 500px; float: left; margin-top: 10px; margin-right: 30px; margin-left: 30px">
-			<h3>주문결제</h3>
-			<hr width="100%" size="3">
-			<form method="GET" action="#" name="payment">
-				<h5 style="margin-left: 9px;">배송지 선택</h5>
-				<input style="margin-left: 110px;" type="radio" name="selectBy" value="old" checked> 기본 배송지
-				<input style="margin-left: 15px;" type="radio" name="selectBy" value="new"> 신규 배송지
-				<div style="width: 400px; height: 250px; border: 1px solid black; margin-left: 10px;">
-					<h6 style="margin-bottom: 20px;">
-						<br>수령인 <input type="text" name="paymentName" maxlength="20" value="${paymentVO.address_recipent}">
-					</h6>
-					<div style="float: left;">
-						&nbsp;&nbsp;주소&nbsp; <input type="text"
-							id="sample4_postcode" placeholder="우편번호" name="paymentPost" value="${paymentVO.address_1}" readonly> <input
-							type="button" onclick="sample4_execDaumPostcode()"
-							value="우편번호 찾기"><br> <input type="text"
-							id="sample4_roadAddress" placeholder="도로명주소" size="30" name="paymentAds" value="${paymentVO.address_2}" readonly><br>
-						<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"
-							size="30"> <span id="guide"
-							style="color: #999; display: none"></span> <input type="text"
-							id="sample4_detailAddress" placeholder="상세주소" size="30" name="paymentDetailAds" maxlength="50" value="${paymentVO.address_3}"><br>
-						<input type="hidden" id="sample4_extraAddress" placeholder="참고항목"
-							size="30"> <input type="hidden" id="sample4_engAddress"
-							placeholder="영문주소" size="30"><br>
-					</div>
-					<div style="float: left;">
-						&nbsp;휴대폰 번호&nbsp;<input type="text" name="paymentPhoneNumb" placeholder="-을 포함한 휴대폰 번호" value="${paymentVO.address_phone}">
-					</div>	
-				<!-- 여기까지 새로운 배송지시 배송지 선택! -->
+<div style="margin-right: 1300px;">
+	<h4 style="margin-bottom: 30px;"><b>주문결제</b></h4>
+</div>
+<div class="main">
+	<div style="text-align: left;">
+		<h5><b>배송정보</b></h5>
+	</div>
+	<hr class="paymentHr">
+	<div class="um">
+		<div class="address">
+		<div style="margin-left: 250px; margin-bottom: 15px;">
+			<input type="radio" name="selectBy" value="old" checked> 기본 배송지
+			<input type="radio" style="margin-left: 30px;" name="selectBy" value="new"> 신규 배송지
 		</div>
-		<br>
-		<select id="shipmentmessage" name="shipmentmessage" size="1"
-						style="float: left; margin-left: 20px;">
-
-						<option value="">배송시요청사항(선택사항)</option>
-						<option value="beforeshipment">배송전 연락바랍니다</option>
-						<option value="absentcall">부재시 연락바랍니다.</option>
-						<option value="guardroom">부재시 경비실에 맡겨주세요</option>
-						<option value="frontdoor">직접 입력</option>
-					</select>
-						&nbsp;
-				<div>
-				 <br>&nbsp;<br> <input name="paymentRequest" type="text" title="배송시 요청사항 기재"
-						style="float: left; margin-left: 20px;" maxlength="30" > <br> <br>
-				</div>
-				</div>
-		</form>
-			<h6>주문상품정보</h6>
-		<table>
+		<div>
+			수령인 <input type="text" style="margin-left: 55px;" name="address_recipent" class="form-control">
+		</div>
+		<div class="address2">
+			휴대전화 <input type="text" name="address_phone" class="form-control">
+		</div>
+		<div class="address2">
+			배송지주소 <span style="margin-right: 15px;"><input type="text" style="width: 355px;" id="sample4_postcode" placeholder="우편번호" name="address_1" class="form-control" value="${paymentVO.address_1}" readonly>
+			<input type="button" class="btn btn-outline-dark" style="height: 50px; margin-bottom: 5px;" onclick="sample4_execDaumPostcode()" value="우편번호"></span><br>
+		</div>
+		<div class="address2">
+			<input type="text" style="width: 450px; margin-left: 110px;" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" size="30" name="address_2" value="${paymentVO.address_2}" readonly><br>
+			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="30"> 
+			<span id="guide" style="color: #999; display: none"></span> 
+		</div>
+		<div class="address2">
+			 <input type="text" style="width: 450px; margin-left: 110px;" class="form-control" id="sample4_detailAddress" placeholder="상세주소" size="30" name="address_3" maxlength="50" value="${paymentVO.address_3}"><br>
+			 <input type="hidden" id="sample4_extraAddress" placeholder="참고항목" size="30"> 
+			 <input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="30"><br>
+		</div>
+		<div class="address2">
+			배송 요청사항 <select class="form-control" style="width: 450px; margin-right: 31px;">
+				<option>배송 전 연락바랍니다.</option>
+				<option>부재시 휴대전화로 연락해주세요.</option>
+				<option>부재시 경비실에 맡겨주세요.</option>
+				<option>부재시 문앞에 놓아주세요.</option>
+				<option>직접 입력</option>
+			</select>
+		</div>
+	</div>
+</div>
+<br><hr><br>
+	<div style="text-align: left;">
+		<h5><b>주문상품</b></h5>
+	</div>
+	<hr class="paymentHr">
+	<table class="table table-hover">
+		<thead>
 			<tr>
+				<th>상품 이미지</th>
 				<th>브랜드</th>
 				<th>상품명</th>
 				<th>수량</th>
-				<th>적립금</th>
-				<th>포인트 할인</th>
-				<th>주문 금액</th>
+			 	<th>적립금</th>
+			 	<th>포인트 적용</th>
+				<th>결제 금액</th>
 			</tr>
-			<c:forEach items="${orderPrdList}" var="items">
-				<tr>
-					<td>${items.p_brand}</td>
-					<td>${items.p_name}</td>
-					<td>${items.cart_quantity}</td>
-					<td><fmt:formatNumber value="${items.p_price*items.cart_quantity/80}" pattern="###,###,###" />원</td>
-					<td>&nbsp;</td>
-					<td><fmt:formatNumber value="${items.p_price*items.cart_quantity}" pattern="###,###,###" />원
-				</tr>
-			</c:forEach>
-		</table>
-		
-		<div
-			style="width: 450px; height: 400px; float: right; margin-top: 40px; margin-right: 30px;">
-
-
-			<!-- 최종결제 정보창 -->
-			<h6>최종결제 정보</h6>
-			<div
-				style="width: 440px; height: 310px; border: 1px solid black; float: right; margin-top: 5px; margin-right: 5px; margin-left: 20px;">
-				&nbsp;
-				<h4>&nbsp;상품금액</h4>
-				<span style="float: right; margin-right: 30px;">insert price
-					원</span> &nbsp;
-				<h4>&nbsp;배송비</h4>
-				<span style="float: right; margin-right: 30px;">insert price
-					원</span> &nbsp;
-				<hr width="100%" size="3">
-
-				<h4>&nbsp;결제금액</h4>
-				<span style="float: right; margin-right: 30px;">insert price
-					원</span> <br> <br> <input type="button" class="btn btn-dark"
-					style="width: 100%; height: 50px;" onclick="checkPayment()" value="결제하기">
-			</div>
-		</div>
-	<!-- 결제방식 출력 창 -->
-		<div
-			style="width: 450px; height: 150px; float: left; margin-top: 30px; margin-left: 30px;">
-			<h5>결제방식</h5>
-
-			<div
-				style="width: 300px; border: 1px solid black; margin-top: 20px; margin-left: 80px;">
-
-				<input type="checkbox" data-toggle="checkbox" name="nobank"
-					value="Id" checked="checked" disabled id="cb1"> 신한
-				123-12312-12312
-			</div>
-		</div>
+		</thead>
+		<tbody>
+			<tr>
+				<td class="td_prd"><img src="${contextPath}/resources/image/category/acana_adult_smallbrid_2kg.PNG"/></td>
+				<td class="td_prd">아카나</td>
+				<td class="td_prd">상품명이다 ㅁㅇㄻㄴㅇㄹ</td>
+				<td class="td_prd">6</td>
+				<td class="td_prd">300</td>
+				<td class="td_prd">-300</td>
+				<td class="td_prd" style="font-size: 20px;"><b>14124원</b></td>
+			</tr>
+		</tbody>
+	</table>
+<br><hr><br>
+	<div style="text-align: left;">
+		<h5><b>최종 결제금액</b></h5>
 	</div>
+	<hr class="paymentHr">
+	<table class="table table-sm table-bordered">
+		<tr>
+			<td class="td_payment">총 상품 금액</td>
+			<td class="td_payment2">12313원</td>
+		</tr>
+		<tr>
+			<td class="td_payment">포인트 할인</td>
+			<td class="td_payment2">123 원</td>
+		</tr>
+		<tr>
+			<td class="td_payment">총 적립금</td>
+			<td class="td_payment2">1231원</td>
+		</tr>
+		<tr>
+			<td class="td_payment" style="font-size: 20px;"><b>총 결제 금액</b></td>
+			<td class="td_payment2" style="font-size: 20px;"><b>123123원</b></td>
+		</tr>
+	</table>
+<br><hr><br>
+	<div style="text-align: left;">
+		<h5><b>결제방법</b></h5>
+	</div>
+	<hr class="paymentHr">
+	<div style="width: 300px; border: 1px solid black; float: left;">
+		무통장 입금 <input type="checkbox" data-toggle="checkbox" name="nobank" value="Id" checked="checked" disabled id="cb1"> 신한
+		123-12312-12312
+	</div>
+	<span> 48시간 이내에 해당 계좌로 입금해주세요.</span>
+</div>
+<br>
+<p style="font-size: 14px; font-weight: bold;">위 주문 내용을 확인하였으며 결제에 동의합니다.</p>
+<br>
+<input type="submit" style="width: 400px;" class="btn btn-danger btn-lg" value="결제하기">
 </body>
 </html>

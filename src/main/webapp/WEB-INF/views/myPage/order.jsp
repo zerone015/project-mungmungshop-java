@@ -40,7 +40,7 @@ request.setCharacterEncoding("UTF-8");
 		</h1>
 	</div>
 
-	<table class="table table-striped">
+	<table class="table table-hover">
 
 		<thead>
 			<tr>
