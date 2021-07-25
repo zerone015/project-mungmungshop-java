@@ -5,83 +5,23 @@ import java.sql.Timestamp;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PaymentVO {
-	
-	private int address_num;
-	private String address_recipent;
-	private String address_phone;
-	private String address_1;
-	private String address_2;
-	private String address_3;
-	private String address_request;
-	
+public class PaymentVO {	
 	private String p_code;
+	private String p_cl1;
+	private String p_cl2;
 	private String p_brand;
 	private String p_name;
 	private int p_price;
+	private int p_salePrice;
+	private int p_stock;
 	private String p_imageFileName;
-	
-	private int member_num;
-	
+	private String p_origin;
 	private int cart_quantity;
 	private int order_quantity;
 	
-	public int getAddress_num() {
-		return address_num;
+	public PaymentVO() {
+		
 	}
-	
-	public void setAddress_num(int address_num) {
-		this.address_num = address_num;
-	}
-	
-	public String getAddress_recipent() {
-		return address_recipent;
-	}
-	
-	public void setAddress_num(String address_recipent) {
-		this.address_recipent = address_recipent;
-	}
-	
-	public String getAddress_phone() {
-		return address_phone;
-	}
-	
-	public void setAddress_phone(String address_phone) {
-		this.address_phone = address_phone;
-	}
-	
-	public String getAddress_1() {
-		return address_1;
-	}
-	
-	public void setAddress_1(String address_1) {
-		this.address_1 = address_1;
-	}
-	
-	public String getAddress_2() {
-		return address_2;
-	}
-	
-	public void setAddress_2(String address_2) {
-		this.address_2 = address_2;
-	}
-	
-	public String getAddress_3() {
-		return address_3;
-	}
-	
-	public void setAddress_3(String address_3) {
-		this.address_3 = address_3;
-	}
-	
-	public String getAddress_request() {
-		return address_request;
-	}
-	
-	public void setAddress_request(String address_request) {
-		this.address_request = address_request;
-	}
-	
 	public String getP_code() {
 		return p_code;
 	}
@@ -90,12 +30,28 @@ public class PaymentVO {
 		this.p_code = p_code;
 	}
 	
+	public String getP_cl1() {
+		return p_cl1;
+	}
+	
+	public void setP_cl1(String p_cl1) {
+		this.p_cl1=p_cl1;
+	}
+	
+	public String getP_cl2() {
+		return p_cl2;
+	}
+	
+	public void setP_cl2(String p_cl2) {
+		this.p_cl2=p_cl2;
+	}
+	
 	public String getP_brand() {
 		return p_brand;
 	}
 	
 	public void setP_brand(String p_brand) {
-		this.p_brand = p_brand;
+		this.p_brand=p_brand;
 	}
 	
 	public String getP_name() {
@@ -103,7 +59,7 @@ public class PaymentVO {
 	}
 	
 	public void setP_name(String p_name) {
-		this.p_name = p_name;
+		this.p_name=p_name;
 	}
 	
 	public int getP_price() {
@@ -111,7 +67,23 @@ public class PaymentVO {
 	}
 	
 	public void setP_price(int p_price) {
-		this.p_price = p_price;
+		this.p_price=p_price;
+	}
+	
+	public int getP_salePrice() {
+		return p_salePrice;
+	}
+	
+	public void setP_salePrice(int p_salePrice) {
+		this.p_salePrice = p_salePrice;
+	}
+	
+	public int getP_stock() {
+		return p_stock;
+	}
+	
+	public void setP_stock(int p_stock) {
+		this.p_stock = p_stock;
 	}
 	
 	public String getP_imageFileName() {
@@ -122,12 +94,12 @@ public class PaymentVO {
 		this.p_imageFileName = p_imageFileName;
 	}
 	
-	public int getMember_num() {
-		return member_num;
+	public String getP_origin() {
+		return p_origin;
 	}
 	
-	public void setMember_num(int member_num) {
-		this.member_num = member_num;
+	public void setP_origin(String p_origin) {
+		this.p_origin = p_origin;
 	}
 	
 	public int getCart_quantity() {

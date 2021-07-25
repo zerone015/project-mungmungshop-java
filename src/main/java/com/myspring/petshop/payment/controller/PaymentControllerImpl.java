@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.myspring.petshop.member.vo.MemberVO;
+import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.service.PaymentService;
-import com.myspring.petshop.payment.vo.PaymentPrdVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Controller
@@ -27,9 +27,9 @@ public class PaymentControllerImpl implements PaymentController {
 	@Autowired
 	private PaymentService paymentService;	
 	@Autowired
-	private PaymentVO paymentVO;
+	private AddressVO addressVO;
 	@Autowired
-	private PaymentPrdVO paymentPrdVO;
+	private PaymentVO paymentVO;
 	
 	
 	@Override
@@ -41,42 +41,45 @@ public class PaymentControllerImpl implements PaymentController {
 	
 	@Override
 	@RequestMapping(value = "/payment/getPaymentPage.do", method = RequestMethod.GET)
-	public String getPaymentPage(@ModelAttribute("payment") PaymentVO payment,
+	public String getPaymentPage(@ModelAttribute("paymentVO") PaymentVO paymentVO,
 			HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		memberVO = (MemberVO) session.getAttribute("member");
 		int member_num = memberVO.getMember_num();
 		
-		paymentVO = paymentService.getAddress(member_num);
+		addressVO = paymentService.getAddress(member_num); 
 		
 		String[] p_codes = request.getParameterValues("productCheck");
 		
+		List<PaymentVO> paymentPrdList = new ArrayList<PaymentVO>();
+		
 		if(p_codes != null) {
-			List<PaymentPrdVO> orderPrdList = new ArrayList<PaymentPrdVO>();
 			for(int i=0; i<p_codes.length; i++) {
 				Map<String, Object> orderMap = new HashMap<String, Object>();
 				orderMap.put("member_num", member_num);
 				orderMap.put("p_code", p_codes[i]);
 				int cart_quantity = paymentService.getCartChkQuantity(orderMap);
-				paymentPrdVO = paymentService.getCartChkProducts(p_codes[i]);
-				paymentPrdVO.setCart_quantity(cart_quantity);
-				orderPrdList.add(paymentPrdVO);
+				paymentVO = paymentService.getCartChkProducts(p_codes[i]);
+				paymentVO.setCart_quantity(cart_quantity);
+				paymentPrdList.add(paymentVO);
 			}
-			model.addAttribute("orderPrdList", orderPrdList);
+			model.addAttribute("paymentPrdList", paymentPrdList);
 		}
 		else {
-			String p_code = payment.getP_code();
-			int order_quantity = payment.getOrder_quantity();
-			paymentPrdVO = paymentService.getCartChkProducts(p_code);
-			paymentPrdVO.setOrder_quantity(order_quantity);
+			String p_code = paymentVO.getP_code();
+			int order_quantity = paymentVO.getOrder_quantity();
+			paymentVO = paymentService.getCartChkProducts(p_code);
+			paymentVO.setOrder_quantity(order_quantity);
 			
-			model.addAttribute("paymentPrdVO", paymentPrdVO);
-		}
-		
-		if(paymentVO != null) {
 			model.addAttribute("paymentVO", paymentVO);
 		}
+		
+		if(addressVO != null) {
+			model.addAttribute("addressVO", addressVO);
+		}
 
+		model.addAttribute("memberVO", memberVO);
+		
 		return "PaymentPage";
 	}
 }

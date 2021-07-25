@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.petshop.payment.vo.PaymentPrdVO;
+import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Repository
@@ -16,7 +16,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 	SqlSession sqlSession;
 	
 	@Override
-	public PaymentVO selectAddress(int member_num) throws DataAccessException {
+	public AddressVO selectAddress(int member_num) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.payment.selectAddress", member_num); 
 	}
@@ -28,7 +28,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 	}
 	
 	@Override
-	public PaymentPrdVO selectCartChkProducts(String p_code) throws DataAccessException {
+	public PaymentVO selectCartChkProducts(String p_code) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.payment.selectCartChkProducts", p_code); 
 	}

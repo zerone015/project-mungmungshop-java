@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.dao.PaymentDAO;
-import com.myspring.petshop.payment.vo.PaymentPrdVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Service
@@ -18,7 +18,7 @@ public class PaymentServiceImpl implements PaymentService {
 	PaymentDAO paymentDAO;
 	
 	@Override
-	public PaymentVO getAddress(int member_num) throws Exception {
+	public AddressVO getAddress(int member_num) throws Exception {
 		
 		return paymentDAO.selectAddress(member_num);
 	}
@@ -30,7 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 	
 	@Override
-	public PaymentPrdVO getCartChkProducts(String p_code) throws Exception {
+	public PaymentVO getCartChkProducts(String p_code) throws Exception {
 		
 		return paymentDAO.selectCartChkProducts(p_code);
 	}

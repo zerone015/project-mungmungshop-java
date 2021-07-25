@@ -7,8 +7,8 @@
 <!-- 배송지 주소 등록 -->
 <insert id="insertAddress" parameterType="addressVO">
 <![CDATA[
-insert into address(address_num,member_num,address_recipent,address_phone,address_1,address_2,address_3)
-value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{address_2},#{address_3})
+insert into address(address_num,member_num,address_recipent,address_phone,address_1,address_2,address_3,address_request)
+value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{address_2},#{address_3},#{address_request})
 ]]>
 
 </insert>
@@ -34,7 +34,8 @@ value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{add
 				address_phone=#{address_phone},
 				address_1=#{address_1},
 				address_2=#{address_2},
-				address_3=#{address_3} 
+				address_3=#{address_3},
+				address_request=#{address_request}
 			where address_num=#{address_num}
 		]]>
 </update>

@@ -12,6 +12,7 @@ public class AddressVO {
 	private String address_1;
 	private String address_2;
 	private String address_3;
+	private String address_request;
 	
 	public AddressVO() {
 		
@@ -74,5 +75,13 @@ public class AddressVO {
 	
 	public void setAddress_3(String address_3) {
 		this.address_3 = address_3;
+	}
+	
+	public String getAddress_request() {
+		return address_request;
+	}
+	
+	public void setAddress_request(String address_request) {
+		this.address_request = address_request;
 	}
 }

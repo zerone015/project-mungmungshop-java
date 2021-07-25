@@ -161,6 +161,12 @@ function cancle(){
 						<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="30" ><br>
 						<input type="hidden" name="address_num" value="${addressVO.address_num }">
 					</td>
+				</tr>
+				<tr>
+					<td>
+						<input name="address_request" type="text" size="50" placeholder="택배 기사님께 전달할 메시지를 남겨주세요." value="${addressVO.address_request}" />
+					</td>
+				</tr>
                </table>
 	</div>          
 	<button type="button" onclick="checkAddress()" class="btn btn-dark">등록</button>

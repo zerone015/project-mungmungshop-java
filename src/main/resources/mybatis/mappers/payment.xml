@@ -5,7 +5,7 @@
 	
 <mapper namespace="mapper.payment">
 	
-	<select id="selectAddress" resultType="paymentVO" parameterType="int" >
+	<select id="selectAddress" resultType="addressVO" parameterType="int" >
 		<![CDATA[	
 			select * from address where member_num = #{member_num}
 		]]>
@@ -17,7 +17,7 @@
 		]]>
 	</select>
 	
-	<select id="selectCartChkProducts" resultType="paymentPrdVO" parameterType="String" >
+	<select id="selectCartChkProducts" resultType="paymentVO" parameterType="String" >
 		<![CDATA[	
 			select * from products where p_code = #{p_code}
 		]]>

@@ -3,6 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<c:set var="final_total_products_qty" value="0"/>
+<c:set var="final_total_addPoint" value="0" />
+<c:set var="total_payment_price" value="0"/>
+<c:set var="final_total_payment_price" value="0" />
 <%
 request.setCharacterEncoding("utf-8");
 %>
@@ -84,8 +88,8 @@ request.setCharacterEncoding("utf-8");
 						}
 
 						// 우편번호와 주소 정보를 해당 필드에 넣는다.
-						document.getElementById('sample4_postcode').value = data.zonecode;
-						document.getElementById("sample4_roadAddress").value = roadAddr;
+						document.getElementById('address_1').value = data.zonecode;
+						document.getElementById("address_2").value = roadAddr;
 						document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
 
 						document.getElementById("sample4_engAddress").value = data.addressEnglish;
@@ -124,14 +128,37 @@ function checkPayment() {
 		
 	var form=document.payment;
 	
-	var phoneNumb=form.address_phone;
-	var detailAds=form.address_3;
-	var name=form.address_recipent;
-	var post=form.address_1;
-	var postRequest=form.paymentRequest;
+	var a_phoneNumb = form.address_phone;
+	var detailAds = form.address_3;
+	var recipent = form.address_recipent;
+	var post = form.address_1;
+	var postRequest = form.paymentRequest;
+	var email = form.member_email;
+	var name = form.member_name;
+	var m_phoneNumb = form.member_phone;
 	
 	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;							//한글,영어만 사용 가능							
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
+	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
+	
+	if (recipent.value == "") {
+		alert("수령인을 입력해주세요.");
+		recipent.focus();
+		return false;
+	} 
+	
+	else if (recipent.value.length < 2) {
+		alert("수령인을 알맞게 다시 입력해주세요.")
+		recipent.select();
+		return false;
+	}
+	
+	else if (!regExpName.test(recipent.value)) {
+		alert("수령인은 한글,영문만 사용 가능합니다.");
+		recipent.select();
+		return false;
+	
+	}
 	
 	if (name.value == "") {
 		alert("이름을 입력해주세요.");
@@ -145,7 +172,7 @@ function checkPayment() {
 		return false;
 	}
 	
-	else if (!regExpName.test(name.value)) {
+	else if (!name.test(recipent.value)) {
 		alert("이름은 한글,영문만 사용 가능합니다.");
 		name.select();
 		return false;
@@ -165,21 +192,100 @@ function checkPayment() {
 	}
 	
 	
-	if (phoneNumb.value == "") {
-		alert("휴대폰 번호를 입력해주세요.");
-		phoneNumb.focus();
+	if (a_phoneNumb.value == "") {
+		alert("수령인 휴대폰 번호를 입력해주세요.");
+		a_phoneNumb.focus();
 		return false;
 	}
 	
-	else if (!regExpPhone.test(phoneNumb.value)) {
+	else if (!regExpPhone.test(a_phoneNumb.value)) {
 		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
-		phoneNumb.select();
+		a_phoneNumb.select();
+		return false;
+	}
+	
+	if (m_phoneNumb.value == "") {
+		alert("수령인 휴대폰 번호를 입력해주세요.");
+		m_phoneNumb.focus();
+		return false;
+	}
+	
+	else if (!regExpPhone.test(m_phoneNumb.value)) {
+		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
+		m_phoneNumb.select();
+		return false;
+	}
+	
+	if (email.value == "") {
+		alert("이메일을 입력해주세요.");
+		email.focus();
 		return false;
 	}
 
+	else if (!regExpEmail.test(email.value)) {
+		alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
+		email.select();
+		return false;
+	}
 	
 	form.submit();
 }
+
+function reset_all() {
+	var address_recipent = document.getElementById("address_recipent");
+
+	var address_phone = document.getElementById("address_phone");
+
+	var address_1 = document.getElementById("address_1");
+	var address_2 = document.getElementById("address_2");
+	var address_3 = document.getElementById("address_3");
+	
+	var address_request = document.getElementById("address_request");
+
+	address_recipent.value = "";
+	
+	address_phone.value = "";
+	
+	address_1.value = "";
+	address_2.value = "";
+	address_3.value = "";
+	
+	address_request.value = "";
+}
+
+function restore_all() {
+	var address_recipent = document.getElementById("address_recipent");
+
+	var address_phone = document.getElementById("address_phone");
+
+	var address_1 = document.getElementById("address_1");
+	var address_2 = document.getElementById("address_2");
+	var address_3 = document.getElementById("address_3");
+	
+	var address_request = document.getElementById("address_request");
+
+	var h_address_recipent = document.getElementById("h_address_recipent");
+
+	var h_address_phone = document.getElementById("h_address_phone");
+
+	var h_address_1 = document.getElementById("h_address_1");
+	var h_address_2 = document.getElementById("h_address_2");
+	var h_address_3 = document.getElementById("h_address_3");
+	
+	var h_address_request = document.getElementById("h_address_request");
+	
+	address_recipent.value = h_address_recipent.value;
+
+	address_phone.value = h_address_phone.value;
+	
+	address_1.value = h_address_1.value;
+	address_2.value = h_address_2.value;
+	address_3.value = h_address_3.value;
+	
+	address_request.value = h_address_request.value;
+
+}
+
 </script>
 </head>
 <body>
@@ -195,41 +301,59 @@ function checkPayment() {
 	<div class="um">
 		<div class="address">
 		<div style="margin-left: 250px; margin-bottom: 15px;">
-			<input type="radio" name="selectBy" value="old" checked> 기본 배송지
-			<input type="radio" style="margin-left: 30px;" name="selectBy" value="new"> 신규 배송지
+			<input type="radio" name="selectBy" value="old" onClick="restore_all()" checked> 기본 배송지
+			<input type="radio" style="margin-left: 30px;" name="selectBy" value="new" onClick="reset_all()"> 신규 배송지
 		</div>
 		<div>
-			수령인 <input type="text" style="margin-left: 55px;" name="address_recipent" class="form-control">
+			수령인 <input type="text" style="margin-left: 55px;" placeholder="받으실 분 성함을 입력해주세요." id="address_recipent" name="address_recipent" class="form-control" value="${addressVO.address_recipent}">
+			<input type="hidden" id="h_address_recipent" name="h_address_recipent" value="${addressVO.address_recipent}">
 		</div>
 		<div class="address2">
-			휴대전화 <input type="text" name="address_phone" class="form-control">
+			핸드폰 <input type="text" placeholder="받으실 분의 휴대폰 번호를 입력해주세요." id="address_phone" name="address_phone" class="form-control" value="${addressVO.address_phone}">
+			<input type="hidden" id="h_address_phone" name="h_address_phone" value="${addressVO.address_phone}">
 		</div>
 		<div class="address2">
-			배송지주소 <span style="margin-right: 15px;"><input type="text" style="width: 355px;" id="sample4_postcode" placeholder="우편번호" name="address_1" class="form-control" value="${paymentVO.address_1}" readonly>
+			배송지주소 <span style="margin-right: 15px;"><input type="text" style="width: 355px;" placeholder="우편번호" id="address_1" name="address_1" class="form-control" value="${addressVO.address_1}" readonly>
 			<input type="button" class="btn btn-outline-dark" style="height: 50px; margin-bottom: 5px;" onclick="sample4_execDaumPostcode()" value="우편번호"></span><br>
+			<input type="hidden" id="h_address_1" name="h_address_1" value="${addressVO.address_1}">
 		</div>
 		<div class="address2">
-			<input type="text" style="width: 450px; margin-left: 110px;" class="form-control" id="sample4_roadAddress" placeholder="도로명주소" size="30" name="address_2" value="${paymentVO.address_2}" readonly><br>
+			<input type="text" style="width: 450px; margin-left: 110px;" class="form-control" placeholder="도로명주소" size="30" id="address_2" name="address_2" value="${addressVO.address_2}" readonly><br>
 			<input type="hidden" id="sample4_jibunAddress" placeholder="지번주소" size="30"> 
-			<span id="guide" style="color: #999; display: none"></span> 
+			<span id="guide" style="color: #999; display: none"></span>
+			<input type="hidden" id="h_address_2" name="h_address_2" value="${addressVO.address_2}">
 		</div>
 		<div class="address2">
-			 <input type="text" style="width: 450px; margin-left: 110px;" class="form-control" id="sample4_detailAddress" placeholder="상세주소" size="30" name="address_3" maxlength="50" value="${paymentVO.address_3}"><br>
+			 <input type="text" style="width: 450px; margin-left: 110px;" class="form-control" placeholder="상세주소" size="30" id="address_3" name="address_3" maxlength="50" value="${addressVO.address_3}"><br>
 			 <input type="hidden" id="sample4_extraAddress" placeholder="참고항목" size="30"> 
-			 <input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="30"><br>
+			 <input type="hidden" id="sample4_engAddress" placeholder="영문주소" size="30">
+			 <input type="hidden" id="h_address_3" name="h_address_3" value="${addressVO.address_3}"><br>
 		</div>
 		<div class="address2">
-			배송 요청사항 <select class="form-control" style="width: 450px; margin-right: 31px;">
-				<option>배송 전 연락바랍니다.</option>
-				<option>부재시 휴대전화로 연락해주세요.</option>
-				<option>부재시 경비실에 맡겨주세요.</option>
-				<option>부재시 문앞에 놓아주세요.</option>
-				<option>직접 입력</option>
-			</select>
+			배송 요청사항 <input id="address_request" name="address_request" type="text" size="50" class="form-control" style="width: 450px; margin-right: 31px;" placeholder="배송 기사님께 요청할 메세지를 입력해주세요." value="${addressVO.address_request}" >
+			<input type="hidden" id="h_address_request" name="h_address_request" value="${addressVO.address_request}">
 		</div>
 	</div>
 </div>
 <br><hr><br>
+	<div style="text-align: left;">
+		<h5><b>주문고객</b></h5>
+	</div>
+	<hr class="paymentHr">
+
+	<div class="um">
+	<div class="address2">
+		이름 <input type="text" class="form-control" name="member_name" value="${memberVO.member_name}"/>
+	</div>
+	<div class="address2">
+		핸드폰 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_phone}"/>
+	</div>
+	<div class="address2">
+		이메일 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_email}"/>
+	</div>
+	</div>
+	<input type="hidden" name="member_num" value="${memberVO.member_num}"/>
+<br><hr><br>	
 	<div style="text-align: left;">
 		<h5><b>주문상품</b></h5>
 	</div>
@@ -241,21 +365,46 @@ function checkPayment() {
 				<th>브랜드</th>
 				<th>상품명</th>
 				<th>수량</th>
-			 	<th>적립금</th>
-			 	<th>포인트 적용</th>
+				<th>배송비</th>
+				<th>적립 포인트</th>
 				<th>결제 금액</th>
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td class="td_prd"><img src="${contextPath}/resources/image/category/acana_adult_smallbrid_2kg.PNG"/></td>
-				<td class="td_prd">아카나</td>
-				<td class="td_prd">상품명이다 ㅁㅇㄻㄴㅇㄹ</td>
-				<td class="td_prd">6</td>
-				<td class="td_prd">300</td>
-				<td class="td_prd">-300</td>
-				<td class="td_prd" style="font-size: 20px;"><b>14124원</b></td>
-			</tr>
+		<c:choose>
+			<c:when test="${paymentPrdList != null}">
+				<c:forEach items="${paymentPrdList}" var="item">
+					<tr>
+						<td class="td_prd"><img src="${contextPath}/resources/image/category/${item.p_imageFileName}"/></td>
+						<td class="td_prd">${item.p_brand}</td>
+						<td class="td_prd">${item.p_name}</td>
+						<td class="td_prd">${item.cart_quantity}</td>
+						<td class="td_prd">0원</td>
+						<td class="td_prd"><fmt:formatNumber value="${item.p_price * item.cart_quantity / 60}" pattern="###,###,###"/>원</td>
+						<td class="td_prd" style="font-size: 20px;"><b><fmt:formatNumber value="${item.p_price * item.cart_quantity}" pattern="###,###,###"/>원</b></td>
+					</tr>
+					<c:set var="final_total_products_qty" value="${final_total_products_qty + item.cart_quantity}"/>
+					<c:set var="final_total_addPoint" value="${final_total_addPoint + item.p_price * item.cart_quantity / 60}" />
+					<c:set var="total_payment_price" value="${total_payment_price + item.p_price * item.cart_quantity}"/>
+					<c:set var="final_total_payment_price" value="${final_total_payment_price + item.p_price * item.cart_quantity}" />
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<tr>
+					<td class="td_prd"><img src="${contextPath}/resources/image/category/${paymentVO.p_imageFileName}"/></td>
+					<td class="td_prd">${paymentVO.p_brand}</td>
+					<td class="td_prd">${paymentVO.p_name}</td>
+					<td class="td_prd">${paymentVO.order_quantity}</td>
+					<td class="td_prd">0원</td>
+					<td class="td_prd"><fmt:formatNumber value="${paymentVO.p_price * paymentVO.order_quantity / 60}" pattern="###,###,###"/>원</td>
+					<td class="td_prd" style="font-size: 20px;"><b><fmt:formatNumber value="${paymentVO.p_price * paymentVO.order_quantity}" pattern="###,###,###"/>원</b></td>
+				</tr>
+				<c:set var="final_total_products_qty" value="${final_total_products_qty + paymentVO.order_quantity}"/>
+				<c:set var="final_total_addPoint" value="${final_total_addPoint + paymentVO.p_price * paymentVO.order_quantity / 60}" />
+				<c:set var="total_payment_price" value="${total_payment_price + paymentVO.p_price * paymentVO.order_quantity}"/>
+				<c:set var="final_total_payment_price" value="${final_total_payment_price + paymentVO.p_price * paymentVO.order_quantity}" />
+			</c:otherwise>
+		</c:choose>
 		</tbody>
 	</table>
 <br><hr><br>
@@ -266,7 +415,11 @@ function checkPayment() {
 	<table class="table table-sm table-bordered">
 		<tr>
 			<td class="td_payment">총 상품 금액</td>
-			<td class="td_payment2">12313원</td>
+			<td class="td_payment2"><fmt:formatNumber value="${total_payment_price}" pattern="###,###,###"/>원</td>
+		</tr>
+		<tr>
+			<td class="td_payment">총 상품 수량</td>
+			<td class="td_payment2">${final_total_products_qty}개</td>
 		</tr>
 		<tr>
 			<td class="td_payment">포인트 할인</td>
@@ -274,11 +427,11 @@ function checkPayment() {
 		</tr>
 		<tr>
 			<td class="td_payment">총 적립금</td>
-			<td class="td_payment2">1231원</td>
+			<td class="td_payment2"><fmt:formatNumber value="${final_total_addPoint}" pattern="###,###,###"/>원</td>
 		</tr>
 		<tr>
 			<td class="td_payment" style="font-size: 20px;"><b>총 결제 금액</b></td>
-			<td class="td_payment2" style="font-size: 20px;"><b>123123원</b></td>
+			<td class="td_payment2" style="font-size: 20px;"><b><fmt:formatNumber value="${final_total_payment_price}" pattern="###,###,###"/>원</b></td>
 		</tr>
 	</table>
 <br><hr><br>

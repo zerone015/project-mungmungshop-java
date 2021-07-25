@@ -54,6 +54,7 @@ function fn_delete(address_num) {
 						<td>${addressVO.address_1}</td>
 						<td>${addressVO.address_2}</td>
 						<td>${addressVO.address_3}</td>
+						<td>${addressVO.address_request}</td>
 					
 						<td>
 							<button  type="button" class="btn btn-dark" onclick="location.href='${contextPath}/myPage/modAddress.do?address_num=${addressVO.address_num}'" >수정</button>
