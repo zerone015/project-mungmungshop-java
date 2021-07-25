@@ -14,6 +14,16 @@
 		<result property="event_image_FileName" column="event_image_FileName"/>
 	</resultMap>
 	
+	<resultMap id="NoticeResult" type="noticeVO">
+		<result property="notice_no" column="notice_no"/>
+		<result property="notice_title" column="notice_title"/>
+		<result property="notice_writer" column="notice_writer"/>
+		<result property="notice_content" column="notice_content"/>
+		<result property="notice_date" column="notice_date"/>
+		<result property="notice_hits" column="notice_hits"/>
+	</resultMap>
+	
+	
 	<resultMap id="FaqResult" type="faqVO">
 		<result property="faq_no" column="faq_no"/>
 		<result property="faq_title" column="faq_title"/>
@@ -230,4 +240,71 @@
 		insert into qnaBoard(qna_no, qna_originNo, qna_groupOrd, qna_groupLayer, qna_title, qna_writer, qna_content, qna_date, qna_secret, qna_hits)
 						values(null, #{qna_originNo}, #{qna_groupOrd}, #{qna_groupLayer}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date},  #{qna_secret}, 0)
 	</insert>
+	
+	
+	<!-- =================================================공지사항 게시판============================================================= -->
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectAllNoticeList" resultMap="NoticeResult">
+	<![CDATA[
+		select * from noticeBoard 
+		order by notice_no desc
+	]]>
+	</select> 
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertNotice" parameterType="noticeVO">
+	<![CDATA[
+		insert into noticeBoard
+		(notice_no, notice_hits, notice_date, notice_content, notice_writer, notice_title)
+		values(null, 0, #{notice_date}, #{notice_content}, #{notice_writer}, #{notice_title})
+	]]>
+	</insert>
+	
+	<!-- 공지사항 수정 -->
+	<select id="noticeUpdate" parameterType="noticeVO">
+	<![CDATA[
+		update noticeBoard
+		set notice_title = #{notice_title},
+			notice_content = #{notice_content},
+			notice_date = #{notice_date}
+		where notice_no = #{notice_no};
+	]]>
+	</select>
+	
+	<!--  공지사항 게시글 조회-->
+	<select id="noticeSelect" resultType="noticeVO" parameterType="int">
+	<![CDATA[
+		select * from noticeBoard
+		where notice_no = #{notice_no}
+	]]>
+	</select>
+	
+	<!--  조회수 증가 -->
+	<update id="noticeHits" parameterType="int">
+	<![CDATA[
+		update noticeBoard
+		set notice_hits = notice_hits +1
+		where notice_no = #{notice_no};
+	]]>
+	</update>
+	
+	<!-- 공지사항 조회 -->
+	<select id="noticeView" resultType="noticeVO" parameterType="int">
+	<![CDATA[
+		select * from noticeBoard 
+		where notice_no = #{notice_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 삭제 -->
+	<delete id="noticeDelete" parameterType="int">
+	<![CDATA[
+		delete from noticeBoard 
+		where notice_no = #{notice_no}
+	]]>
+	</delete> 
+	
+	
+	
 </mapper>

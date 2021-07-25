@@ -4,16 +4,25 @@
 
 <tiles-definitions>
 
-<definition name="noticeList" extends="baseLayout">
+<definition name="/board/noticeList" extends="baseLayout">
 		<put-attribute name="title" value="공지사항 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeList.jsp" />
 </definition>
 
-<definition name="noticeWrite" extends="baseLayout">
-		<put-attribute name="title" value="공지사항 글 내용 페이지" />
+<definition name="/board/noticeWrite" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 작성 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeWrite.jsp" />
 </definition>
 
+<definition name="/board/noticeMod" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeMod.jsp" />
+</definition>
+
+<definition name="/board/noticeView" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 글 내용 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/noticeView.jsp" />
+</definition>
 
 <definition name="/board/eventList" extends="baseLayout">
 		<put-attribute name="title" value="이벤트 목록 페이지" />

@@ -52,9 +52,8 @@ public class NoticeControllerImpl implements NoticeController {
 			 manager = 1234;
 		}
 		
-		String viewName = (String)request.getAttribute("viewName");
 		List noticeList = noticeService.listNotice();
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/board/noticeList");
 		mav.addObject("noticeList", noticeList);
 		mav.addObject("manager", manager);
 		return mav;
@@ -68,12 +67,11 @@ public class NoticeControllerImpl implements NoticeController {
 	public ModelAndView noticeWrite(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		session = request.getSession();
 		memberVO = (MemberVO)session.getAttribute("member");
-		String ID = memberVO.getMember_ID();
-		String viewName = (String)request.getAttribute("viewName");
+		String ID = memberVO.getMember_id();
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("ID", ID);
-		mav.setViewName(viewName);
+		mav.setViewName("/board/noticeWrite");
 		
 		return mav;
 	}
@@ -105,10 +103,10 @@ public class NoticeControllerImpl implements NoticeController {
 		else {
 			manager = 1234;
 		}
-		String viewName = (String)request.getAttribute("viewName");
+
 		noticeVO = noticeService.viewNotice(notice_no);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		mav.setViewName("/board/noticeView");
 		mav.addObject("noticeVO", noticeVO);
 		mav.addObject("manager", manager);
 		return mav;
