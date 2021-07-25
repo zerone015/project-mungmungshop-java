@@ -19,10 +19,10 @@
 <body>
 <div class="px-4 py-5 my-5 text-center">
     <img class="d-block mx-auto mb-4" src="${contextPath }/resources/image/cutedog.PNG" alt="" width="200" height="150">
-    <h1 class="display-5 fw-bold">주문이 완료되었습니다.</h1>
+    <h1 class="display-5 fw-bold">결제가 완료되었습니다.</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead mb-4">신한 123-12312-123123 으로 결제 금액을 입금해주세요.</p>
-      <p>3일안에 입금 안되면 주문이 자동으로 취소됩니다.</p>
+      <p class="lead mb-4">결제 방식을 무통장 입금으로 하신 경우 신한 123-12312-123123 으로 결제 금액을 입금해주세요.</p>
+      <p>48시간안에 입금 안되면 주문이 자동으로 취소됩니다.</p>
       <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         <button type="button" class="btn btn-primary" style="width: 40%; height: 50px; margin-right: 1;">메인 화면으로</button>
         

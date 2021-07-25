@@ -30,9 +30,9 @@ CREATE TABLE `address` (
   `address_1` varchar(10) NOT NULL,
   `address_2` varchar(30) NOT NULL,
   `address_3` varchar(40) NOT NULL,
-  `address_request` varchar(30) DEFAULT NULL,
+  `address_request` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`address_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -240,7 +240,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (10,'manager','$2a$10$SwcMFCH2UJ0U8vJBQDMdv.lrZyP64P152lCPrch6DfIJ1JUdWofI6','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-07-25 10:18:27',NULL),(12,'son1234','$2a$10$wBeYG2fmAs2ImYoDsqUEWuVHckxFiipJHQSwc7f4B.5ybN8VaXE/m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',NULL,'2021-07-25 10:57:52',NULL),(13,'son12341','$2a$10$RalrNL9DVhYnPrjefDd0z.sud1sUP6AwWhG7kT85w4JtwqfrM/ope','손영원','zerone015@naver.com','010-1234-1234','gkdl1','2021-07-22 05:45:09',NULL,'2021-07-22 05:45:09',NULL);
+INSERT INTO `members` VALUES (10,'manager','$2a$10$SwcMFCH2UJ0U8vJBQDMdv.lrZyP64P152lCPrch6DfIJ1JUdWofI6','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-07-25 10:18:27',NULL),(12,'son1234','$2a$10$wBeYG2fmAs2ImYoDsqUEWuVHckxFiipJHQSwc7f4B.5ybN8VaXE/m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',NULL,'2021-07-25 17:03:01',NULL),(13,'son12341','$2a$10$RalrNL9DVhYnPrjefDd0z.sud1sUP6AwWhG7kT85w4JtwqfrM/ope','손영원','zerone015@naver.com','010-1234-1234','gkdl1','2021-07-22 05:45:09',NULL,'2021-07-22 05:45:09',NULL);
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,8 +312,10 @@ CREATE TABLE `orders_detail` (
   `p_code` char(7) NOT NULL,
   `order_quantity` int(11) NOT NULL,
   `p_price` int(11) NOT NULL,
-  `order_point` int(11) DEFAULT NULL,
+  `order_usePoint` int(11) DEFAULT NULL,
+  `order_addPoint` int(11) NOT NULL,
   `order_price` int(11) NOT NULL,
+  `order_method` varchar(10) NOT NULL,
   `order_status` varchar(20) NOT NULL DEFAULT '입금 대기중',
   PRIMARY KEY (`order_detailCode`),
   KEY `fk_ordersDetail_orderCode` (`order_code`)
@@ -326,7 +328,7 @@ CREATE TABLE `orders_detail` (
 
 LOCK TABLES `orders_detail` WRITE;
 /*!40000 ALTER TABLE `orders_detail` DISABLE KEYS */;
-INSERT INTO `orders_detail` VALUES ('ODC0001','OCO0002','',0,0,NULL,20000,'상품 준비중');
+INSERT INTO `orders_detail` VALUES ('ODC0001','OCO0002','',0,0,NULL,0,20000,'','상품 준비중');
 /*!40000 ALTER TABLE `orders_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -502,4 +504,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-25 20:20:37
+-- Dump completed on 2021-07-26  2:41:36

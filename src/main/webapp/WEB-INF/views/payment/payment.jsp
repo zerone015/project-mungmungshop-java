@@ -16,6 +16,8 @@ request.setCharacterEncoding("utf-8");
 <title>주문결제 화면</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <style>
 	.form-control {
 		display:inline-block;
@@ -286,9 +288,50 @@ function restore_all() {
 
 }
 
+function fn_pay(){
+	var form = document.payForm;
+	
+	var pay_card = document.getElementById("pay_card");
+	var pay_mootong = document.getElementById("pay_mootong");
+	
+	if (pay_card.checked) {
+		IMP.init('imp27822683');
+		IMP.request_pay({
+		    pg : 'kcp',
+		    pay_method : 'card',
+		    merchant_uid : 'merchant_' + new Date().getTime(),
+		    name : '상품1' , //결제창에서 보여질 이름
+		    amount : 100, //실제 결제되는 가격
+		    buyer_email : 'iamport@siot.do',
+		    buyer_name : '구매자이름',
+		    buyer_tel : '010-1234-5678',
+		    buyer_addr : '서울 강남구 도곡동',
+		    buyer_postcode : '123-456'
+		}, function(rsp) {
+			console.log(rsp);
+		    if ( rsp.success ) {
+		    	var msg = '결제가 완료되었습니다.';
+		        msg += '고유ID : ' + rsp.imp_uid;
+		        msg += '상점 거래ID : ' + rsp.merchant_uid;
+		        msg += '결제 금액 : ' + rsp.paid_amount;
+		        msg += '카드 승인번호 : ' + rsp.apply_num;
+		    } else {
+		    	 var msg = '결제에 실패하였습니다.';
+		         msg += '에러내용 : ' + rsp.error_msg;
+		    }
+		    alert(msg);
+		});	
+	}
+	
+	if (pay_mootong.checked) {
+		
+	}
+	
+}
 </script>
 </head>
 <body>
+<form name="payForm" method="POST" action="">
 <div class="container" style="max-width: 1400px;">
 <div align="left">
 	<h4 style="margin-bottom: 30px;"><b>주문결제</b></h4>
@@ -409,6 +452,17 @@ function restore_all() {
 	</table>
 <br><hr><br>
 	<div style="text-align: left;">
+		<h5><b>결제방법</b></h5>
+	</div>
+	<hr class="paymentHr">
+	<div style="float: left;">
+		<input type="radio" name="order_method" id="pay_card" value="신용카드" checked/> 신용카드
+	</div><br><br>
+	<div style="float: left;">
+		<input type="radio" name="order_method" id="pay_mootong" value="무통장 입금" /> 무통장 입금
+	</div>
+<br><hr><br>
+	<div style="text-align: left;">
 		<h5><b>최종 결제금액</b></h5>
 	</div>
 	<hr class="paymentHr">
@@ -434,21 +488,12 @@ function restore_all() {
 			<td class="td_payment2" style="font-size: 20px;"><b><fmt:formatNumber value="${final_total_payment_price}" pattern="###,###,###"/>원</b></td>
 		</tr>
 	</table>
-<br><hr><br>
-	<div style="text-align: left;">
-		<h5><b>결제방법</b></h5>
-	</div>
-	<hr class="paymentHr">
-	<div style="width: 300px; border: 1px solid black; float: left;">
-		무통장 입금 <input type="checkbox" data-toggle="checkbox" name="nobank" value="Id" checked="checked" disabled id="cb1"> 신한
-		123-12312-12312
-	</div>
-	<span> 48시간 이내에 해당 계좌로 입금해주세요.</span>
 </div>
 <br>
 <p style="font-size: 20px; font-weight: bold;">위 주문 내용을 확인하였으며 결제에 동의합니다.</p>
 <br>
-<input type="submit" style="width: 400px;" class="btn btn-danger btn-lg" value="결제하기">
-</div> 
+<button type="button" style="width: 400px;" class="btn btn-danger btn-lg" onClick="fn_pay();">결제하기</button>
+</div>
+</form>
 </body>
 </html>
