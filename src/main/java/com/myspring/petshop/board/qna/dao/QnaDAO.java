@@ -1,12 +1,11 @@
 package com.myspring.petshop.board.qna.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.qna.vo.QnaVO;
+import com.myspring.petshop.common.pagination.Pagination;
 
 public interface QnaDAO {
 

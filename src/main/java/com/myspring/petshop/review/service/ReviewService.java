@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 
 public interface ReviewService {
 	

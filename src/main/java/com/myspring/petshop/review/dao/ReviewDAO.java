@@ -5,8 +5,6 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
-import com.myspring.petshop.Pagination;
-
 public interface ReviewDAO {
 
 	public int selectReviewCnt() throws DataAccessException;

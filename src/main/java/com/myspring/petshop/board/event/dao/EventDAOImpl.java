@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.event.vo.EventVO;
+import com.myspring.petshop.common.pagination.Pagination;
 
 @Repository("eventDAO")
 public class EventDAOImpl implements EventDAO {

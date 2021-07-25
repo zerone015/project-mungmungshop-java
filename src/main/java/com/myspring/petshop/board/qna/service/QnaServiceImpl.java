@@ -1,15 +1,14 @@
 package com.myspring.petshop.board.qna.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.qna.dao.QnaDAO;
 import com.myspring.petshop.board.qna.vo.QnaVO;
+import com.myspring.petshop.common.pagination.Pagination;
 
 @Service("qnaService")
 public class QnaServiceImpl implements QnaService{

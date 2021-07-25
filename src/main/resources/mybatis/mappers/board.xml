@@ -94,7 +94,7 @@
 	<!--================================== 자주묻는질문 게시판 ==================================-->
 	
 	<!-- 게시글 리스트 조회 -->
-	<select id="selectAllFaqList" resultType="FaqVO">
+	<select id="selectAllFaqList" resultType="faqVO">
 	<![CDATA[
 		select faq_no, faq_title, faq_writer, faq_hits, faq_date from faqBoard 
 		order by faq_no desc

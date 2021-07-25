@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.myspring.petshop.board.event.vo.EventVO;
-import com.myspring.petshop.Pagination;
+import com.myspring.petshop.common.pagination.Pagination;
 
 public interface EventService {
 	public List listEvent(Pagination pagination) throws DataAccessException;

@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.event.dao.EventDAO;
 import com.myspring.petshop.board.event.vo.EventVO;
+import com.myspring.petshop.common.pagination.Pagination;
 
 @Service("eventService")
 @Transactional(propagation = Propagation.REQUIRED)

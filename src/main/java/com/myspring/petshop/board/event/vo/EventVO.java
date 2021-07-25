@@ -7,7 +7,6 @@ import org.springframework.stereotype.Component;
 
 @Component("eventVO")
 public class EventVO {
-	private int eventNumber;
 	private int event_no;
 	private String event_title;
 	private String event_writer;

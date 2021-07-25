@@ -7,12 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -21,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.event.service.EventService;
 import com.myspring.petshop.board.event.vo.EventVO;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.member.vo.MemberVO;
 
 
@@ -48,9 +46,9 @@ public class EventControllerImpl implements EventController {
 								  @RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
-		String viewName = (String)request.getAttribute("viewName");
 		
-		ModelAndView mav = new ModelAndView(viewName);
+		
+		ModelAndView mav = new ModelAndView("/board/eventList");
 		
 		session = request.getSession();
 		
@@ -105,10 +103,9 @@ public class EventControllerImpl implements EventController {
 	@RequestMapping(value="/board/eventView.do", method= RequestMethod.GET)
 	public ModelAndView eventView(@RequestParam("event_no") int event_no, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
 		EventVO eventVO = eventService.viewEvent(event_no);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		mav.setViewName("/board/eventView");
 		mav.addObject("event", eventVO);
 		// 조회수 증가
 		eventService.increaseHits(event_no);

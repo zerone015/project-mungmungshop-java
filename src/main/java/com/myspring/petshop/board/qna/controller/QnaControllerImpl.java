@@ -1,9 +1,7 @@
 package com.myspring.petshop.board.qna.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.qna.service.QnaService;
 import com.myspring.petshop.board.qna.vo.QnaVO;
+import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.member.vo.MemberVO;
 
 @Controller("qnaController")
@@ -45,8 +43,7 @@ public class QnaControllerImpl implements QnaController {
 	public ModelAndView qnaList(@RequestParam(required = false, defaultValue = "1") int page,
 								@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String viewName = (String)request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/board/qnaList");
 		
 		// 게시글 총 개수
 		int listCnt = qnaService.qnaCnt();
@@ -93,7 +90,6 @@ public class QnaControllerImpl implements QnaController {
 	@RequestMapping(value="/board/qnaView.do", method= RequestMethod.GET)
 	public ModelAndView qnaView(@RequestParam("qna_no") int qna_no, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
 		QnaVO qnaVO = qnaService.qnaView(qna_no);
 		ModelAndView mav = new ModelAndView();
 		
@@ -109,7 +105,7 @@ public class QnaControllerImpl implements QnaController {
 			 manager = 1234;
 		}
 
-		mav.setViewName(viewName);
+		mav.setViewName("/board/qnaView");
 		mav.addObject("qnaVO", qnaVO);
 		mav.addObject("manager", manager);
 		// 조회수 증가

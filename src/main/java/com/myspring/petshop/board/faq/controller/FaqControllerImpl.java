@@ -42,7 +42,6 @@ public class FaqControllerImpl implements FaqController {
 	@Override
 	@RequestMapping(value = "/board/faqList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView faqList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
 		session = request.getSession();
 		
 		memberVO = (MemberVO)session.getAttribute("member");
@@ -56,7 +55,7 @@ public class FaqControllerImpl implements FaqController {
 		}
 		
 		List faqList=faqService.listFaq();
-		ModelAndView mav = new ModelAndView(viewName);
+		ModelAndView mav = new ModelAndView("/board/faqList");
 		mav.addObject("faqList", faqList);
 		mav.addObject("manager", manager);
 		return mav;
@@ -85,10 +84,9 @@ public class FaqControllerImpl implements FaqController {
 	@RequestMapping(value="/board/faqView.do", method= RequestMethod.GET)
 	public ModelAndView faqView(@RequestParam("faq_no") int faq_no, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = (String)request.getAttribute("viewName");
 		FaqVO faqVO = faqService.faqView(faq_no);
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
+		mav.setViewName("/board/faqView");
 		mav.addObject("faqVO", faqVO);
 		// 조회수 증가
 		faqService.increaseHits(faq_no);

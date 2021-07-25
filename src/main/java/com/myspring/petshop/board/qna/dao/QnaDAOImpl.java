@@ -1,15 +1,14 @@
 package com.myspring.petshop.board.qna.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.myspring.petshop.Pagination;
 import com.myspring.petshop.board.qna.vo.QnaVO;
+import com.myspring.petshop.common.pagination.Pagination;
 
 @Repository("qnaDAO")
 public class QnaDAOImpl implements QnaDAO{

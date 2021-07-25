@@ -184,7 +184,7 @@ function checkPayment() {
 </script>
 </head>
 <body>
-<div style="margin-right: 1300px;">
+<div align="left">
 	<h4 style="margin-bottom: 30px;"><b>주문결제</b></h4>
 </div>
 <div class="main">
