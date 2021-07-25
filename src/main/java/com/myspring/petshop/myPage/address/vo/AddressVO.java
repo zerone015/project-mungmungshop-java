@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class AddressVO {
 	
 	private int address_num;
-	private String address_name;
+	private int member_num;
 	private String address_recipent;
 	private String address_phone;
 	private String address_1;
@@ -25,13 +25,14 @@ public class AddressVO {
 	public void setAddress_num(int address_num) {
 		this.address_num = address_num;
 	}
-	
-	public String getAddress_name() {
-		return address_name;
+
+	public int getMember_num() {
+		
+		return member_num;
 	}
 	
-	public void setAddress_name(String address_name) {
-		this.address_name = address_name;
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
 	}
 	
 	public String getAddress_recipent() {

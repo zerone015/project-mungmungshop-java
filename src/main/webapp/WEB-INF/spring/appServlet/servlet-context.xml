@@ -42,6 +42,10 @@
 	  <mvc:interceptor>
 	    <mvc:mapping path="/cart/*"/>
 	    <mvc:mapping path="/payment/*"/>
+	    <mvc:mapping path="/address/*"/>
+	    <mvc:mapping path="/myPage/*"/>
+	    <mvc:mapping path="/board/qna*"/>
+	    <mvc:mapping path="/qna*"/>
 	    <beans:bean class="com.myspring.petshop.common.interceptor.SessionInterceptor"/>
 	   </mvc:interceptor>
 	</mvc:interceptors>

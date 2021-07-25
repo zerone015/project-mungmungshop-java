@@ -34,7 +34,6 @@ public class PaymentVO {
 		this.address_num = address_num;
 	}
 	
-	
 	public String getAddress_recipent() {
 		return address_recipent;
 	}

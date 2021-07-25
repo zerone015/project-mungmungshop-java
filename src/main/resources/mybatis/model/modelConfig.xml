@@ -16,5 +16,6 @@
 		<typeAlias type="com.myspring.petshop.board.faq.vo.FaqVO" alias="faqVO"/>
 		<typeAlias type="com.myspring.petshop.board.event.vo.EventVO" alias="eventVO"/>
 		<typeAlias type="com.myspring.petshop.board.notice.vo.NoticeVO" alias="noticeVO"/>
+		<typeAlias type="com.myspring.petshop.myPage.address.vo.AddressVO" alias="addressVO"/>
 	</typeAliases>
 </configuration>

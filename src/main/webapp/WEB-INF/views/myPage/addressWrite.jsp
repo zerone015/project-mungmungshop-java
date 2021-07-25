@@ -76,18 +76,11 @@ function checkAddress() {
 	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/; 				//한글,영어만 사용 가능
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	
-	var addressName = form.address_name;
 	var recipent = form.address_recipent;
 	var phoneNumb = form.address_phone;
 	var address = form.address_1;
 	var detailAddress = form.address_3;
 	
-	
-	if (addressName.value == "") {
-		alert("배송지 명칭을 입력해주세요.");
-		addressName.focus();
-		return false;
-	} 
 	
 	if (recipent.value == "") {
 		alert("수령인을 입력해주세요.");
@@ -140,13 +133,7 @@ function cancle(){
 <form method="POST" action="${contextPath}/address/addAddress.do" name="addressInfo"> 
 	
 	<div>
-            <table>
-                <tr>
-               <td id="title">배송지 명칭&nbsp;</td>
-                    <td>
-                        <input type="text" name="address_name" maxlength="20" style="width:200px;" placeholder="배송지 명칭을 입력해주세요.">
-                    </td>
-                </tr>                        
+            <table>                     
                 <tr>
                     <td id="title">수령인</td>
                     <td>
@@ -179,8 +166,5 @@ function cancle(){
 	<button type="button" onclick="cancle()" class="btn btn-dark" >취소</button>
 </form>
 	</div>
-  	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

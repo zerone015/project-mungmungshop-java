@@ -63,6 +63,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/myPage/addressWrite.jsp" />
 	</definition>
 	
+	<definition name="modAddress" extends="sideMenuLayout">
+		<put-attribute name="title" value="배송지 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/modAddress.jsp" />
+	</definition>
+	
 	<definition name="infoModify" extends="sideMenuLayout">
 		<put-attribute name="title" value="회원 정보 수정 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/infoModify.jsp" />

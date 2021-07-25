@@ -16,7 +16,7 @@ public interface AddressController {
 	
 	public ModelAndView getAddressList(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
-
+	public String addressWrite() throws Exception;
 	
 	public ModelAndView modAddress(@RequestParam("address_num") int address_num,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;

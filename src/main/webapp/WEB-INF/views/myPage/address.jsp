@@ -34,7 +34,6 @@ function fn_delete(address_num) {
 			<thead>
 				<tr>
 					<th align="center">배송지번호</th>
-					<th align="center">배송지</th>
 					<th align="center">수령인</th>
 					<th align="center">연락처</th>
 					<th align="center">주소1</th>
@@ -50,7 +49,6 @@ function fn_delete(address_num) {
 				<c:forEach items="${addressList}" var="addressVO">
 					<tr>
 						<td>${addressVO.address_num }</td>
-						<td>${addressVO.address_name }</td>
 						<td>${addressVO.address_recipent}</td>
 						<td>${addressVO.address_phone}</td>
 						<td>${addressVO.address_1}</td>
