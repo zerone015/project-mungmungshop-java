@@ -24,8 +24,7 @@ request.setCharacterEncoding("utf-8");
 		padding: 30px 116px 50px;
 	}
 	.um {
-		margin-right: 600px;
-		width: 57%;
+		margin-right: 450;
 	}
 	
 	.paymentHr {
@@ -184,6 +183,7 @@ function checkPayment() {
 </script>
 </head>
 <body>
+<div class="container" style="max-width: 1400px;">
 <div align="left">
 	<h4 style="margin-bottom: 30px;"><b>주문결제</b></h4>
 </div>
@@ -293,8 +293,9 @@ function checkPayment() {
 	<span> 48시간 이내에 해당 계좌로 입금해주세요.</span>
 </div>
 <br>
-<p style="font-size: 14px; font-weight: bold;">위 주문 내용을 확인하였으며 결제에 동의합니다.</p>
+<p style="font-size: 20px; font-weight: bold;">위 주문 내용을 확인하였으며 결제에 동의합니다.</p>
 <br>
 <input type="submit" style="width: 400px;" class="btn btn-danger btn-lg" value="결제하기">
+</div> 
 </body>
 </html>
