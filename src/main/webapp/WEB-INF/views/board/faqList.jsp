@@ -1,29 +1,42 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"	pageEncoding="utf-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
-request.setCharacterEncoding("UTF-8");
-%>
+  request.setCharacterEncoding("UTF-8");
+%>  
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/board.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 <title>자주 묻는 질문 목록</title>
-</head>
+</head> 
 <body>
-	<div class="col-md-7 col-lg-8" align="center">
-		<h4 class="mb-3">자주 묻는 질문</h4>
+<div class="container">
+	<div>
+		<h3 class="mb-3">자주 묻는 질문</h3>
+		<c:choose>
+			<c:when test="${manager == 1}">
+				<a href="${contextPath }/board/faqWrite.do">
+					<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">FaQ 등록</button>
+				</a> 
+			</c:when>
+			<c:otherwise>
+			<a href="#">
+				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;margin-left: 10;">1:1 문의내역</button>
+			</a>
+			<a href="${contextPath }/board/qnaWrite.do">
+				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">1:1 문의하기</button>
+			</a>
+			</c:otherwise>
+		</c:choose>
 	</div>
-	<div class="table-responsive">
-		<table class="table table-sm table-bordered">
+	<div class="table-responsive" style="margin-top:30;">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>번호</th>
@@ -33,85 +46,21 @@ request.setCharacterEncoding("UTF-8");
 					<th>조회수</th>
 				</tr>
 			</thead>
+			
 			<tbody>
-				<tr>
-					<td>10</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이1</td>
-					<td>2021-06-14</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이2</td>
-					<td>2021-06-14</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이3</td>
-					<td>2021-06-14</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이4</td>
-					<td>2021-06-14</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이5</td>
-					<td>2021-06-14</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이6</td>
-					<td>2021-06-14</td>
-					<td>322</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이7</td>
-					<td>2021-06-14</td>
-					<td>22</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이8</td>
-					<td>2021-06-14</td>
-					<td>77</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이9</td>
-					<td>2021-06-14</td>
-					<td>11</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="#">자주묻는질문 제목입니다.</a></td>
-					<td>글쓴이10</td>
-					<td>2021-06-14</td>
-					<td>123</td>
-				</tr>
+				<c:forEach items="${faqList}" var="faqVO">
+				    <tr>
+				      <td>${faqVO.faq_no}</td>
+				      <td><a href="${contextPath}/board/faqView.do?faq_no=${faqVO.faq_no}">${faqVO.faq_title}</a></td>
+				      <td>${faqVO.faq_writer}</td>
+				      <td>${faqVO.faq_date}</td>
+				      <td>${faqVO.faq_hits}</td>
+				    </tr>
+				</c:forEach>							
 			</tbody>
 		</table>
-		<div class="bd_example" align="center">
-			<button type="button" class="btn btn-primary btn-lg">1:1
-				문의하기</button>
-			<button type="button" class="btn btn-primary btn-lg">1:1
-				문의내역</button>
-		</div>
+		
 	</div>
+</div>
 </body>
 </html>

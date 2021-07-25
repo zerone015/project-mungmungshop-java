@@ -13,6 +13,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	 })
 
 </script>
+
 <style> 
 	.carousel-inner{
 		width: 1200!important;
@@ -34,23 +35,25 @@ pageEncoding="utf-8" isELIgnored="false" %>
 		text-align: center;
 	}
 </style>
+
 </head>
 <body>
 	<!-- 배너 -->
+
 <section>
-   <div class="container" style="z-index: 0; display: inline;"> 
-      	<div id="demo" class="carousel slide" data-ride="carousel" >
-	      	<div class="carousel-inner"> 
+   <div class="container" style="z-index: 0;"> 
+      	<div id="demo" class="carousel slide" data-ride="carousel" style="text-align: center; margin-left: -35;">
+	      	<div class="carousel-inner" style="display: inline;"> 
 	      		<!-- 슬라이드 쇼 --> 
 	      		<div class="carousel-item active"> 
 	      			<!--가로--> 
-	      			<img class="d-block w-100" src="resources/image/slide1.jpg" alt="First slide" > 
+	      			<img class="d-block" src="resources/image/slide1.jpg" alt="First slide" > 
 	      		</div> 
 	      		<div class="carousel-item"> 
-	      			<img class="d-block w-100" src="resources/image/slide2.jpg" alt="Second slide" > 
+	      			<img class="d-block " src="resources/image/slide2.jpg" alt="Second slide" > 
 	      		</div> 
 	      		<div class="carousel-item"> 
-	      			<img class="d-block w-100" src="resources/image/slide3.jpg" alt="Third slide"> 
+	      			<img class="d-block " src="resources/image/slide3.jpg" alt="Third slide"> 
 	      		</div> 
 	      		<!-- / 슬라이드 쇼 끝 --> 
 	      		<!-- 왼쪽 오른쪽 화살표 버튼 --> 

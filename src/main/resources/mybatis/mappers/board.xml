@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.board">
+	<resultMap id="EventResult" type="eventVO">
+		<result property="event_no" column="event_no"/>
+		<result property="event_title" column="event_title"/>
+		<result property="event_writer" column="event_writer"/>
+		<result property="event_content" column="event_content"/>
+		<result property="event_date" column="event_date"/>
+		<result property="event_hits" column="event_hits"/>
+		<result property="event_image_FileName" column="event_image_FileName"/>
+	</resultMap>
+	
+	<resultMap id="FaqResult" type="faqVO">
+		<result property="faq_no" column="faq_no"/>
+		<result property="faq_title" column="faq_title"/>
+		<result property="faq_writer" column="faq_writer"/>
+		<result property="faq_content" column="faq_content"/>
+		<result property="faq_date" column="faq_date"/>
+		<result property="faq_hits" column="faq_hits"/>
+	</resultMap>
+	
+	<!--================================== Event 게시판 ==================================-->
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectAllEventList" resultType="eventVO">
+	<![CDATA[
+		select event_no, event_title, event_writer, event_hits, event_date from eventBoard 
+		order by event_no desc 
+		LIMIT #{startList}, #{listSize}
+	]]>
+	</select>
+	
+	
+	<!-- 게시글 개수 -->
+	<select id="selectEventCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from eventBoard 
+	]]>
+	</select> 
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertEvent" parameterType="eventVO">
+	<![CDATA[
+		insert into eventBoard(event_no, event_title, event_writer, event_content, event_date, event_hits, event_image_FileName)
+						values(null, #{event_title}, #{event_writer}, #{event_content}, #{event_date}, 0, #{event_image_FileName})
+	]]>
+	</insert> 
+	
+	<!-- 게시글 조회 -->
+	<select id="eventView" resultType="eventVO" parameterType="int">
+	<![CDATA[
+		select * from eventBoard 
+		where event_no = #{event_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 수정 -->
+	<select id="eventUpdate" parameterType="eventVO">
+	<![CDATA[
+		update eventBoard 
+		set event_title = #{event_title},
+			event_content = #{event_content}
+		where event_no = #{event_no};
+	]]>
+	</select> 
+	
+	
+	<!-- 게시글 조회 증가 -->
+	<update id="eventHits" parameterType="int">
+		<![CDATA[
+		update eventBoard 
+		set event_hits = event_hits + 1
+		where event_no = #{event_no};
+		]]>
+	</update>	
+	
+	<!-- 게시글 삭제 -->
+	<delete id="eventDelete" parameterType="int">
+	<![CDATA[
+		delete from eventBoard 
+		where event_no = #{event_no}
+	]]>
+	</delete> 
+	
+	
+	
+	
+	
+	
+	
+	<!--================================== 자주묻는질문 게시판 ==================================-->
+	
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectAllFaqList" resultType="FaqVO">
+	<![CDATA[
+		select faq_no, faq_title, faq_writer, faq_hits, faq_date from faqBoard 
+		order by faq_no desc
+		
+	]]>
+	</select>
+	
+	
+	
+	<!-- 게시글 등록 -->
+	<insert id="faqInsert" parameterType="faqVO">
+	<![CDATA[
+		insert into faqBoard(faq_no, faq_title, faq_writer, faq_content, faq_date, faq_hits)
+						values(null, #{faq_title}, #{faq_writer}, #{faq_content}, #{faq_date}, 0)
+	]]>
+	</insert>
+	
+	<!-- 게시글 조회 -->
+	<select id="faqSelect" resultType="faqVO" parameterType="int">
+	<![CDATA[
+		select * from faqBoard 
+		where faq_no = #{faq_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 조회 증가 -->
+	<update id="faqHits" parameterType="int">
+		<![CDATA[
+		update faqBoard 
+		set faq_hits = faq_hits + 1
+		where faq_no = #{faq_no};
+		]]>
+	</update>	
+	
+	<!-- 게시글 수정 -->
+	<select id="faqUpdate" parameterType="faqVO">
+	<![CDATA[
+		update faqBoard 
+		set faq_title = #{faq_title},
+			faq_content = #{faq_content}
+		where faq_no = #{faq_no};
+	]]>
+	</select> 
+	
+	<!-- 게시글 삭제 -->
+	<delete id="faqDelete" parameterType="int">
+	<![CDATA[
+		delete from faqBoard 
+		where faq_no = #{faq_no}
+	]]>
+	</delete>
+	
+	<!-- 총 게시글 갯수 출력 -->
+	<select id="countBoard" resultType="int">
+		SELECT COUNT(*) FROM eventBoard
+	</select>
+
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--================================== Q&A 게시판 ==================================-->
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectAllQnaList" resultType="qnaVO">
+	<![CDATA[
+		select * from qnaBoard 
+		order by  qna_originNo desc, qna_groupOrd
+		LIMIT #{startList}, #{listSize}
+	]]>
+	</select>
+	
+	<!-- 게시글 개수 -->
+	<select id="selectQnaCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from qnaBoard 
+	]]>
+	</select> 
+	
+	<!-- 게시글 등록 -->
+	<insert id="qnaInsert" parameterType="qnaVO">
+	<![CDATA[
+		insert into qnaBoard(qna_no, qna_originNo, qna_title, qna_writer, qna_content, qna_date, qna_secret,qna_hits)
+						values(null, #{qna_originNo}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date}, #{qna_secret} , 0)
+	]]>
+	</insert>
+	
+	<!-- 게시글 조회 -->
+	<select id="qnaSelect" resultType="qnaVO" parameterType="int">
+	<![CDATA[
+		select * from qnaBoard 
+		where qna_no = #{qna_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 조회 증가 -->
+	<update id="qnaHits" parameterType="int">
+		<![CDATA[
+		update qnaBoard 
+		set qna_hits = qna_hits + 1
+		where qna_no = #{qna_no};
+		]]>
+	</update>	
+	
+	<!-- 게시글 수정 -->
+	<select id="qnaUpdate" parameterType="qnaVO">
+	<![CDATA[
+		update qnaBoard 
+		set qna_title = #{qna_title},
+			qna_content = #{qna_content}
+		where qna_no = #{qna_no};
+	]]>
+	</select> 
+	
+	<!-- 게시글 삭제 -->
+	<select id="qnaDelete" parameterType="int">
+	<![CDATA[
+		delete from qnaBoard 
+		where qna_no = #{qna_no}
+	]]>
+	</select> 
+	
+	<!-- 게시글 번호 Max -->
+	<select id="qnaMaxNo" resultType="Integer">
+		select Max(qna_no) as maxId from qnaBoard
+	</select>
+	
+	<!-- 게시글 답변 등록 -->
+	<insert id = "qnaReplyInsert" parameterType="qnaVO">
+		insert into qnaBoard(qna_no, qna_originNo, qna_groupOrd, qna_groupLayer, qna_title, qna_writer, qna_content, qna_date, qna_secret, qna_hits)
+						values(null, #{qna_originNo}, #{qna_groupOrd}, #{qna_groupLayer}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date},  #{qna_secret}, 0)
+	</insert>
+</mapper>

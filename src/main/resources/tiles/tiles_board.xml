@@ -14,38 +14,69 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/noticeWrite.jsp" />
 </definition>
 
-<definition name="eventList" extends="baseLayout">
+
+<definition name="/board/eventList" extends="baseLayout">
 		<put-attribute name="title" value="이벤트 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/eventList.jsp" />
 </definition>
 
 <definition name="eventWrite" extends="baseLayout">
-		<put-attribute name="title" value="이벤트 글 내용 페이지" />
+		<put-attribute name="title" value="이벤트 글 작성 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/eventWrite.jsp" />
 </definition>
 
-<definition name="faqList" extends="baseLayout">
+<definition name="eventMod" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 글 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/eventMod.jsp" />
+</definition>
+
+<definition name="/board/eventView" extends="baseLayout">
+		<put-attribute name="title" value="이벤트 글 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/eventView.jsp" />
+</definition>
+
+<definition name="/board/faqList" extends="baseLayout">
 		<put-attribute name="title" value="자주묻는질문 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/faqList.jsp" />
 </definition>
 
-<definition name="faqWrite" extends="baseLayout">
-		<put-attribute name="title" value="자주묻는질문 글 내용 페이지" />
+<definition name="/board/faqWrite" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 글 작성 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/faqWrite.jsp" />
 </definition>
 
-<definition name="qnaList" extends="baseLayout">
+<definition name="/board/faqView" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 글 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/faqView.jsp" />
+</definition>
+
+<definition name="faqMod" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 글 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/faqMod.jsp" />
+</definition>
+
+<definition name="/board/qnaList" extends="baseLayout">
 		<put-attribute name="title" value="1:1 문의 글 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/qnaList.jsp" />
 </definition>
 
-<definition name="qnaWrite" extends="baseLayout">
-		<put-attribute name="title" value="1:1 문의 글 내용 페이지" />
+<definition name="/board/qnaWrite" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 작성 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/board/qnaWrite.jsp" />
 </definition>
 
-<definition name="qnaArticle" extends="baseLayout">
-		<put-attribute name="title" value="1:1 문의 글 작성 페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/board/qnaArticle.jsp" />
+<definition name="qnaReply" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 답변 작성 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaReply.jsp" />
+</definition>
+
+<definition name="/board/qnaView" extends="baseLayout">
+		<put-attribute name="title" value="1:1 문의 글 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaView.jsp" />
+</definition>
+
+<definition name="qnaMod" extends="baseLayout">
+		<put-attribute name="title" value="자주묻는질문 글 수정 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/board/qnaMod.jsp" />
 </definition>
 </tiles-definitions>

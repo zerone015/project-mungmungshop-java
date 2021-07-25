@@ -1,108 +1,114 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8" isELIgnored="false"%>
+<%@ page import = "java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <%
-request.setCharacterEncoding("UTF-8");
+ 	request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
-<title>이벤트</title>
+<title>이벤트 목록</title>
+<script>
+
+	//이전 버튼 이벤트
+	function fn_prev(page, range, rangeSize) {
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		
+		var url = "${contextPath}/board/eventList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		
+		location.href = url;
+	}
+
+  //페이지 번호 클릭
+	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		var url = "${contextPath}/board/eventList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;	
+	}
+
+	//다음 버튼 이벤트
+	function fn_next(page, range, rangeSize) {
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		
+		var url = "${contextPath}/board/eventList.do";
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+		
+		location.href = url;
+	}
+</script>
+
 </head>
 <body>
+<div class="container">
 	<div>
-		<h1 class="display-5 fw-bold">이벤트</h1>
+	<h3 class="mb-3">이벤트</h3>
+	<c:if test="${manager == 1}">
+		<form action="${contextPath}/board/eventWrite.do" method="GET">
+			<input class="btn btn-outline-dark" style="float: right; margin-bottom: 20px;" type="submit" value="글쓰기">
+		</form>
+	</c:if>
 	</div>
-	<div class="table-responsive" style="margin-top: 30;">
-		<table class="table table-striped">
+	<div class="table-responsive" style="margin-top:30;">
+			<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>번호</th>
+					<th>No</th>
 					<th>제목</th>
 					<th>글쓴이</th>
 					<th>날짜</th>
 					<th>조회수</th>
 				</tr>
 			</thead>
+			
 			<tbody>
-				<tr>
-					<td>10</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이1</td>
-					<td>2021-06-14</td>
-					<td>10</td>
-				</tr>
-				<tr>
-					<td>9</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이2</td>
-					<td>2021-06-14</td>
-					<td>8</td>
-				</tr>
-				<tr>
-					<td>8</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이3</td>
-					<td>2021-06-14</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>7</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이4</td>
-					<td>2021-06-14</td>
-					<td>2</td>
-				</tr>
-				<tr>
-					<td>6</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이5</td>
-					<td>2021-06-14</td>
-					<td>1</td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이6</td>
-					<td>2021-06-14</td>
-					<td>322</td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이7</td>
-					<td>2021-06-14</td>
-					<td>22</td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td><a href="#">이벤트 제목입니다.</a></td>
-					<td>글쓴이8</td>
-					<td>2021-06-14</td>
-					<td>77</td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td><a href="#">공지사항 제목입니다.</a></td>
-					<td>글쓴이9</td>
-					<td>2021-06-14</td>
-					<td>11</td>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td><a href="#">공지사항 제목입니다.</a></td>
-					<td>글쓴이10</td>
-					<td>2021-06-14</td>
-					<td>123</td>
-				</tr>
+				<c:forEach items="${eventList}" var="eventVO" varStatus="status">
+				    <tr>
+				      <td>${eventVO.event_no}</td>
+				      <td><a href="${contextPath}/board/eventView.do?event_no=${eventVO.event_no}">${eventVO.event_title}</a></td>
+				      <td>${eventVO.event_writer}</td>
+				      <td><fmt:formatDate value="${eventVO.event_date}" pattern="YYYY-MM-dd"/></td>
+				      <td>${eventVO.event_hits}</td>
+				    </tr>
+				</c:forEach>							
 			</tbody>
 		</table>
+		<!-- pagination{s} -->
+		<div style="">
+			<ul class="pagination" style="width: 0%; justify-content:center;">
+				<c:if test="${pagination.prev}">
+					<li class="page-item">
+						<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+					</li>
+				</c:if>
+				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+						<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+					</li>
+				</c:forEach>
+				<c:if test="${pagination.next}">
+					<li class="page-item">
+						<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a>
+					</li>
+				</c:if>
+			</ul>
+		</div>
+		<!-- pagination{e} -->
+		
 	</div>
+</div>
 </body>
 </html>
