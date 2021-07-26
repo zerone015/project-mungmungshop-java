@@ -14,10 +14,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.service.PaymentService;
+import com.myspring.petshop.payment.vo.OrderDetailVO;
+import com.myspring.petshop.payment.vo.CombineVO;
+import com.myspring.petshop.payment.vo.OrderVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Controller
@@ -30,6 +34,11 @@ public class PaymentControllerImpl implements PaymentController {
 	private AddressVO addressVO;
 	@Autowired
 	private PaymentVO paymentVO;
+	@Autowired
+	private OrderVO orderVO;
+	@Autowired
+	private OrderDetailVO orderDetailVO;
+	
 	
 	
 	@Override
@@ -52,7 +61,7 @@ public class PaymentControllerImpl implements PaymentController {
 		String[] p_codes = request.getParameterValues("productCheck");
 		
 		List<PaymentVO> paymentPrdList = new ArrayList<PaymentVO>();
-		
+		String p_name;
 		if(p_codes != null) {
 			for(int i=0; i<p_codes.length; i++) {
 				Map<String, Object> orderMap = new HashMap<String, Object>();
@@ -63,13 +72,17 @@ public class PaymentControllerImpl implements PaymentController {
 				paymentVO.setCart_quantity(cart_quantity);
 				paymentPrdList.add(paymentVO);
 			}
+			p_name = paymentVO.getP_name();
+			
 			model.addAttribute("paymentPrdList", paymentPrdList);
+			
 		}
 		else {
 			String p_code = paymentVO.getP_code();
 			int order_quantity = paymentVO.getOrder_quantity();
 			paymentVO = paymentService.getCartChkProducts(p_code);
 			paymentVO.setOrder_quantity(order_quantity);
+			p_name = paymentVO.getP_name();
 			
 			model.addAttribute("paymentVO", paymentVO);
 		}
@@ -77,9 +90,20 @@ public class PaymentControllerImpl implements PaymentController {
 		if(addressVO != null) {
 			model.addAttribute("addressVO", addressVO);
 		}
-
+		
 		model.addAttribute("memberVO", memberVO);
+		model.addAttribute("p_name", p_name);
 		
 		return "PaymentPage";
+	}
+	
+	@Override
+	@RequestMapping(value="/payment/addPayment.do", method = RequestMethod.POST)
+	public ModelAndView addPayment(@ModelAttribute("combineVO") CombineVO combineVO) throws Exception {
+		/* paymentService.addPayment(combineVO); */
+		
+		ModelAndView mav = new ModelAndView("paymentResult");
+		
+		return mav;
 	}
 }

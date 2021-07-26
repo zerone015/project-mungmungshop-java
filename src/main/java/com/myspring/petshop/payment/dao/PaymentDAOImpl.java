@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.petshop.myPage.address.vo.AddressVO;
+import com.myspring.petshop.payment.vo.CombineVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Repository
@@ -31,5 +32,11 @@ public class PaymentDAOImpl implements PaymentDAO {
 	public PaymentVO selectCartChkProducts(String p_code) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.payment.selectCartChkProducts", p_code); 
+	}
+	
+	@Override
+	public void insertOrder(CombineVO combineVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.payment.insertOrder", combineVO); 
 	}
 }

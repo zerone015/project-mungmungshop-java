@@ -22,4 +22,10 @@
 			select * from products where p_code = #{p_code}
 		]]>
 	</select>
+	
+	<insert id="insertOrder" parameterType="combineVO" >
+		<![CDATA[	
+			
+		]]>
+	</insert>
 </mapper>

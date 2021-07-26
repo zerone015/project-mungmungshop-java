@@ -126,112 +126,6 @@ request.setCharacterEncoding("utf-8");
 	}
 </script>
 <script type="text/javascript">
-function checkPayment() {
-		
-	var form=document.payment;
-	
-	var a_phoneNumb = form.address_phone;
-	var detailAds = form.address_3;
-	var recipent = form.address_recipent;
-	var post = form.address_1;
-	var postRequest = form.paymentRequest;
-	var email = form.member_email;
-	var name = form.member_name;
-	var m_phoneNumb = form.member_phone;
-	
-	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;							//한글,영어만 사용 가능							
-	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
-	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
-	
-	if (recipent.value == "") {
-		alert("수령인을 입력해주세요.");
-		recipent.focus();
-		return false;
-	} 
-	
-	else if (recipent.value.length < 2) {
-		alert("수령인을 알맞게 다시 입력해주세요.")
-		recipent.select();
-		return false;
-	}
-	
-	else if (!regExpName.test(recipent.value)) {
-		alert("수령인은 한글,영문만 사용 가능합니다.");
-		recipent.select();
-		return false;
-	
-	}
-	
-	if (name.value == "") {
-		alert("이름을 입력해주세요.");
-		name.focus();
-		return false;
-	} 
-	
-	else if (name.value.length < 2) {
-		alert("이름을 알맞게 다시 입력해주세요.")
-		name.select();
-		return false;
-	}
-	
-	else if (!name.test(recipent.value)) {
-		alert("이름은 한글,영문만 사용 가능합니다.");
-		name.select();
-		return false;
-	
-	}
-	
-	if (post.value == "") {
-		alert("우편번호를 입력해주세요.");
-		post.focus();
-		return false;
-	}
-	
-	if (detailAds.value == "") {
-		alert("상세 주소를 입력해주세요.");
-		detailAds.focus();
-		return false;
-	}
-	
-	
-	if (a_phoneNumb.value == "") {
-		alert("수령인 휴대폰 번호를 입력해주세요.");
-		a_phoneNumb.focus();
-		return false;
-	}
-	
-	else if (!regExpPhone.test(a_phoneNumb.value)) {
-		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
-		a_phoneNumb.select();
-		return false;
-	}
-	
-	if (m_phoneNumb.value == "") {
-		alert("수령인 휴대폰 번호를 입력해주세요.");
-		m_phoneNumb.focus();
-		return false;
-	}
-	
-	else if (!regExpPhone.test(m_phoneNumb.value)) {
-		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
-		m_phoneNumb.select();
-		return false;
-	}
-	
-	if (email.value == "") {
-		alert("이메일을 입력해주세요.");
-		email.focus();
-		return false;
-	}
-
-	else if (!regExpEmail.test(email.value)) {
-		alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
-		email.select();
-		return false;
-	}
-	
-	form.submit();
-}
 
 function reset_all() {
 	var address_recipent = document.getElementById("address_recipent");
@@ -291,42 +185,216 @@ function restore_all() {
 function fn_pay(){
 	var form = document.payForm;
 	
+	var a_phoneNumb = form.address_phone;
+	var detailAds = form.address_3;
+	var recipent = form.address_recipent;
+	var post = form.address_1;
+	var postRequest = form.paymentRequest;
+	var email = form.member_email;
+	var name = form.member_name;
+	var m_phoneNumb = form.member_phone;
+	
+	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;							//한글,영어만 사용 가능							
+	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
+	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
+	
 	var pay_card = document.getElementById("pay_card");
 	var pay_mootong = document.getElementById("pay_mootong");
 	
-	if (pay_card.checked) {
-		IMP.init('imp27822683');
-		IMP.request_pay({
-		    pg : 'kcp',
-		    pay_method : 'card',
-		    merchant_uid : 'merchant_' + new Date().getTime(),
-		    name : '상품1' , //결제창에서 보여질 이름
-		    amount : 100, //실제 결제되는 가격
-		    buyer_email : 'iamport@siot.do',
-		    buyer_name : '구매자이름',
-		    buyer_tel : '010-1234-5678',
-		    buyer_addr : '서울 강남구 도곡동',
-		    buyer_postcode : '123-456'
-		}, function(rsp) {
-			console.log(rsp);
-		    if ( rsp.success ) {
-		    	var msg = '결제가 완료되었습니다.';
-		        msg += '고유ID : ' + rsp.imp_uid;
-		        msg += '상점 거래ID : ' + rsp.merchant_uid;
-		        msg += '결제 금액 : ' + rsp.paid_amount;
-		        msg += '카드 승인번호 : ' + rsp.apply_num;
-		    } else {
-		    	 var msg = '결제에 실패하였습니다.';
-		         msg += '에러내용 : ' + rsp.error_msg;
-		    }
-		    alert(msg);
-		});	
+	var pay_products_name = document.getElementById("pay_products_name");
+	var pay_final_total_price = document.getElementById("pay_final_total_price");
+	var pay_member_name = document.getElementById("pay_member_name");
+	var pay_member_email = document.getElementById("pay_member_email");
+	var pay_pay_member_phone = document.getElementById("pay_member_phone");
+	
+	if (recipent.value == "") {
+		alert("수령인을 입력해주세요.");
+		recipent.focus();
+		return false;
+	} 
+	
+	else if (recipent.value.length < 2) {
+		alert("수령인을 알맞게 다시 입력해주세요.")
+		recipent.select();
+		return false;
 	}
 	
-	if (pay_mootong.checked) {
+	else if (!regExpName.test(recipent.value)) {
+		alert("수령인은 한글,영문만 사용 가능합니다.");
+		recipent.select();
+		return false;
+	
+	}
+	
+	if (name.value == "") {
+		alert("이름을 입력해주세요.");
+		name.focus();
+		return false;
+	} 
+	
+	else if (name.value.length < 2) {
+		alert("이름을 알맞게 다시 입력해주세요.")
+		name.select();
+		return false;
+	}
+	
+	else if (!regExpName.test(name.value)) {
+		alert("이름은 한글,영문만 사용 가능합니다.");
+		name.select();
+		return false;
+	
+	}
+	
+	if (post.value == "") {
+		alert("우편번호를 입력해주세요.");
+		post.focus();
+		return false;
+	}
+	
+	if (detailAds.value == "") {
+		alert("상세 주소를 입력해주세요.");
+		detailAds.focus();
+		return false;
+	}
+	
+	
+	if (a_phoneNumb.value == "") {
+		alert("수령인 휴대폰 번호를 입력해주세요.");
+		a_phoneNumb.focus();
+		return false;
+	}
+	
+	else if (!regExpPhone.test(a_phoneNumb.value)) {
+		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
+		a_phoneNumb.select();
+		return false;
+	}
+	
+	if (m_phoneNumb.value == "") {
+		alert("주문자 휴대폰 번호를 입력해주세요.");
+		m_phoneNumb.focus();
+		return false;
+	}
+	
+	else if (!regExpPhone.test(m_phoneNumb.value)) {
+		alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
+		m_phoneNumb.select();
+		return false;
+	}
+	
+	if (email.value == "") {
+		alert("이메일을 입력해주세요.");
+		email.focus();
+		return false;
+	}
+
+	else if (!regExpEmail.test(email.value)) {
+		alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
+		email.select();
+		return false;
+	}
+	
+	
+	if (pay_card.checked) {
+		fn_pay_card();
+	}
+	
+	else {
+		form.method = "post";
+		form.action = "${contextPath}/payment/addPayment.do"
+			
+		form.submit();	
+	}
+		
+	
+
+}
+
+function fn_pay_card() {
+	var form = document.payForm;
+	
+	var pay_products_name = document.getElementById("pay_products_name");
+	var pay_final_total_price = document.getElementById("pay_final_total_price");
+	var pay_member_name = document.getElementById("pay_member_name");
+	var pay_member_email = document.getElementById("pay_member_email");
+	var pay_pay_member_phone = document.getElementById("pay_member_phone");
+	
+	IMP.init('imp27822683');
+	IMP.request_pay({
+	    pg : 'kcp',
+	    pay_method : 'card',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : pay_products_name.value, //결제창에서 보여질 이름
+	    amount : pay_final_total_price.value, //실제 결제되는 가격
+	    buyer_email : pay_member_email.value,
+	    buyer_name : pay_member_name.value,
+	    buyer_tel : pay_pay_member_phone.value,
+	}, function(rsp) {
+		console.log(rsp);
+	    if ( rsp.success ) {
+	    	var msg = '결제가 완료되었습니다.';
+	        msg += '고유ID : ' + rsp.imp_uid;
+	        msg += '상점 거래ID : ' + rsp.merchant_uid;
+	        msg += '결제 금액 : ' + rsp.paid_amount;
+	        msg += '카드 승인번호 : ' + rsp.apply_num;
+	        alert(msg);
+	        
+	        form.method = "post";
+			form.action = "${contextPath}/payment/addPayment.do"
+			
+			form.submit();
+	    } else {
+	    	 var msg = '결제에 실패하였습니다.';
+	         msg += '에러내용 : ' + rsp.error_msg;
+	         alert(msg);
+	    }
+	});
+}
+
+
+
+function point_apply() {
+	var own_point = document.getElementById("own_point");
+	var total_payment_price = document.getElementById("total_payment_price");
+	var sale_point = document.getElementById("sale_point");
+	var point_availability = document.getElementById("point_availability");
+	var point_check = document.getElementById("point_check");
+	var sale_point_apply = document.getElementById("sale_point_apply");
+	var font_final_total_price = document.getElementById("font_final_total_price");
+	var pay_final_total_price = document.getElementById("pay_final_total_price");
+	
+	
+	var sale_point_comma = numberWithCommas(parseInt(sale_point.value));
+	
+	if (own_point.value < sale_point.value) {
+		point_check.disabled = true;
+		$("#point_availability").html("포인트 부족");
+	}
+	
+	else if (own_point.value >= sale_point.value && point_check.checked) {
+		var sum = total_payment_price.value - sale_point.value;
+		sum = numberWithCommas(parseInt(sum));
+		$("#point_availability").html("적용 가능");
+		$("#sale_point_apply").html(sale_point_comma);
+		$("#font_final_total_price").html(sum+"원");
+		$("#order_totalPrice").val(parseInt(total_payment_price.value - sale_point.value));
+		$("#pay_final_total_price").val(parseInt(total_payment_price.value - sale_point.value));
 		
 	}
 	
+	else {
+		var sum = numberWithCommas(parseInt(total_payment_price.value));
+		$("#point_availability").html("적용 가능");
+		$("#sale_point_apply").html(0);
+		$("#font_final_total_price").html(sum+"원");
+		$("#order_totalPrice").val(parseInt(total_payment_price.value));
+		$("#pay_final_total_price").val(parseInt(total_payment_price.value));
+	}
+	
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 </script>
 </head>
@@ -392,7 +460,7 @@ function fn_pay(){
 		핸드폰 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_phone}"/>
 	</div>
 	<div class="address2">
-		이메일 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_email}"/>
+		이메일 <input type="text" class="form-control" name="member_email" value="${memberVO.member_email}"/>
 	</div>
 	</div>
 	<input type="hidden" name="member_num" value="${memberVO.member_num}"/>
@@ -426,11 +494,16 @@ function fn_pay(){
 						<td class="td_prd"><fmt:formatNumber value="${item.p_price * item.cart_quantity / 60}" pattern="###,###,###"/>원</td>
 						<td class="td_prd" style="font-size: 20px;"><b><fmt:formatNumber value="${item.p_price * item.cart_quantity}" pattern="###,###,###"/>원</b></td>
 					</tr>
+					<input type="hidden" name="p_code" value="${item.p_code}"/>
+					<input type="hidden" name="p_price" value="${item.p_price}"/>
+					<input type="hidden" name="order_quantity" value="${item.cart_quantity}"/>
+					<input type="hidden" name="order_price" value="${item.p_price * item.cart_quantity}"/>
 					<c:set var="final_total_products_qty" value="${final_total_products_qty + item.cart_quantity}"/>
 					<c:set var="final_total_addPoint" value="${final_total_addPoint + item.p_price * item.cart_quantity / 60}" />
 					<c:set var="total_payment_price" value="${total_payment_price + item.p_price * item.cart_quantity}"/>
 					<c:set var="final_total_payment_price" value="${final_total_payment_price + item.p_price * item.cart_quantity}" />
 				</c:forEach>
+				<input type="hidden" id="order_totalPrice" name="order_totalPrice" value="${final_total_payment_price}"/>
 			</c:when>
 			<c:otherwise>
 				<tr>
@@ -442,6 +515,11 @@ function fn_pay(){
 					<td class="td_prd"><fmt:formatNumber value="${paymentVO.p_price * paymentVO.order_quantity / 60}" pattern="###,###,###"/>원</td>
 					<td class="td_prd" style="font-size: 20px;"><b><fmt:formatNumber value="${paymentVO.p_price * paymentVO.order_quantity}" pattern="###,###,###"/>원</b></td>
 				</tr>
+				<input type="hidden" name="p_code" value="${paymentVO.p_code}"/>
+				<input type="hidden" name="p_price" value="${paymentVO.p_price}"/>
+				<input type="hidden" name="order_quantity" value="${paymentVO.order_quantity}"/>
+				<input type="hidden" name="order_price" value="${paymentVO.p_price * paymentVO.order_quantity}"/>
+				<input type="hidden" id="order_totalPrice" name="order_totalPrice" value="${final_total_payment_price}"/>
 				<c:set var="final_total_products_qty" value="${final_total_products_qty + paymentVO.order_quantity}"/>
 				<c:set var="final_total_addPoint" value="${final_total_addPoint + paymentVO.p_price * paymentVO.order_quantity / 60}" />
 				<c:set var="total_payment_price" value="${total_payment_price + paymentVO.p_price * paymentVO.order_quantity}"/>
@@ -477,7 +555,10 @@ function fn_pay(){
 		</tr>
 		<tr>
 			<td class="td_payment">포인트 할인</td>
-			<td class="td_payment2">123 원</td>
+			<td class="td_payment2"><input type="checkbox" id="point_check" name="member_point" value="${memberVO.member_point}" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트:${memberVO.member_point}) <font id="point_availability" style="color: red;"></font></td>
+			<input type="hidden" id="own_point" value="${memberVO.member_point}"/>
+			<input type="hidden" id="total_payment_price" value="${total_payment_price}"/>
+			<input type="hidden" id="sale_point" value="${total_payment_price * 0.1}"/>
 		</tr>
 		<tr>
 			<td class="td_payment">총 적립금</td>
@@ -485,7 +566,7 @@ function fn_pay(){
 		</tr>
 		<tr>
 			<td class="td_payment" style="font-size: 20px;"><b>총 결제 금액</b></td>
-			<td class="td_payment2" style="font-size: 20px;"><b><fmt:formatNumber value="${final_total_payment_price}" pattern="###,###,###"/>원</b></td>
+			<td class="td_payment2" style="font-size: 20px;"><b id="font_final_total_price"><fmt:formatNumber value="${final_total_payment_price}" pattern="###,###,###"/>원</b></td>
 		</tr>
 	</table>
 </div>
@@ -494,6 +575,13 @@ function fn_pay(){
 <br>
 <button type="button" style="width: 400px;" class="btn btn-danger btn-lg" onClick="fn_pay();">결제하기</button>
 </div>
+<input type="hidden" id="pay_member_name" value="${memberVO.member_name}"/>
+<input type="hidden" id="pay_member_email" value="${memberVO.member_email}"/>
+<input type="hidden" id="pay_member_phone" value="${memberVO.member_phone}"/>
+<input type="hidden" id="pay_products_name" value="${p_name}"/>
+<input type="hidden" name="order_addPoint" value="${final_total_addPoint}"/>
+<input type="hidden" name="order_totalQuantity" value="${final_total_products_qty}"/>
+<input type="hidden" id="pay_final_total_price" name="order_price" value="${final_total_payment_price}"/>
 </form>
 </body>
 </html>

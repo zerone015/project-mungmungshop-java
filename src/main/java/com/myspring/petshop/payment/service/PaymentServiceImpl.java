@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.dao.PaymentDAO;
+import com.myspring.petshop.payment.vo.CombineVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 @Service
@@ -33,5 +34,11 @@ public class PaymentServiceImpl implements PaymentService {
 	public PaymentVO getCartChkProducts(String p_code) throws Exception {
 		
 		return paymentDAO.selectCartChkProducts(p_code);
+	}
+	
+	@Override
+	public void addPayment(CombineVO combineVO) throws Exception {
+		paymentDAO.insertOrder(combineVO);
+		
 	}
 }
