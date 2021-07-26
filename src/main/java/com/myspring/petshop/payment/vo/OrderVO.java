@@ -13,6 +13,7 @@ public class OrderVO {
 	private String address_recipent;
 	private int order_totalQuantity;
 	private int order_totalPrice;
+	private String order_status;
 	
 	public OrderVO() {
 		
@@ -66,4 +67,11 @@ public class OrderVO {
 		this.order_totalPrice = order_totalPrice;
 	}
 	
+	public String getOrder_status() {
+		return order_status;
+	}
+	
+	public void setOrder_status(String order_status) {
+		this.order_status = order_status;
+	}
 }

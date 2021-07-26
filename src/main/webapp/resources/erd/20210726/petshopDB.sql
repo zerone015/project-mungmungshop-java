@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
 --
 -- Host: localhost    Database: petshopdb
 -- ------------------------------------------------------
--- Server version	8.0.25
+-- Server version	8.0.15
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8 */;
+ SET NAMES utf8 ;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,10 @@
 
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `address` (
-  `address_num` int NOT NULL AUTO_INCREMENT,
-  `member_num` int NOT NULL,
+  `address_num` int(11) NOT NULL AUTO_INCREMENT,
+  `member_num` int(11) NOT NULL,
   `address_recipent` varchar(20) NOT NULL,
   `address_phone` varchar(13) NOT NULL,
   `address_1` varchar(10) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `address` (
   `address_3` varchar(40) NOT NULL,
   `address_request` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`address_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -51,15 +51,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `cart` (
-  `cart_code` int NOT NULL AUTO_INCREMENT,
-  `member_num` int NOT NULL,
+  `cart_code` int(11) NOT NULL AUTO_INCREMENT,
+  `member_num` int(11) NOT NULL,
   `p_code` char(7) NOT NULL,
-  `cart_quantity` int NOT NULL,
+  `cart_quantity` int(11) NOT NULL,
   `cart_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cart_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -78,18 +78,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `delivery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `delivery` (
-  `deli_num` int NOT NULL AUTO_INCREMENT,
+  `deli_num` int(11) NOT NULL AUTO_INCREMENT,
   `order_code` char(7) NOT NULL,
   `deli_name` varchar(20) NOT NULL,
   `deli_tel` varchar(13) NOT NULL,
   `deli_address` varchar(40) NOT NULL,
-  `deli_traking` int DEFAULT NULL,
+  `deli_traking` int(11) DEFAULT NULL,
   `deli_request` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`deli_num`),
   KEY `fk_delivery_ordercode` (`order_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,17 +108,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `eventboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `eventboard` (
-  `event_no` int NOT NULL AUTO_INCREMENT,
+  `event_no` int(11) NOT NULL AUTO_INCREMENT,
   `event_title` varchar(45) NOT NULL,
   `event_writer` varchar(11) NOT NULL,
   `event_content` varchar(1000) NOT NULL,
   `event_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `event_hits` int NOT NULL DEFAULT '0',
+  `event_hits` int(11) NOT NULL DEFAULT '0',
   `event_image_filename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`event_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -137,16 +137,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `faqboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `faqboard` (
-  `faq_no` int NOT NULL AUTO_INCREMENT,
+  `faq_no` int(11) NOT NULL AUTO_INCREMENT,
   `faq_title` varchar(45) NOT NULL,
   `faq_writer` varchar(11) NOT NULL,
   `faq_content` varchar(1000) NOT NULL,
   `faq_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `faq_hits` int NOT NULL DEFAULT '0',
+  `faq_hits` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`faq_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -165,15 +165,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `love`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `love` (
-  `love_code` int NOT NULL AUTO_INCREMENT,
-  `member_num` int NOT NULL,
+  `love_code` int(11) NOT NULL AUTO_INCREMENT,
+  `member_num` int(11) NOT NULL,
   `p_code` char(7) NOT NULL,
   PRIMARY KEY (`love_code`),
   KEY `fk_love_memberNum` (`member_num`),
   KEY `fk_love_pCode` (`p_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -192,13 +192,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `manager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `manager` (
-  `manager_num` int NOT NULL AUTO_INCREMENT,
+  `manager_num` int(11) NOT NULL AUTO_INCREMENT,
   `manager_id` varchar(11) NOT NULL,
   `manager_pw` varchar(20) NOT NULL,
   PRIMARY KEY (`manager_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -217,9 +217,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `members` (
-  `Member_Num` int NOT NULL AUTO_INCREMENT,
+  `Member_Num` int(11) NOT NULL AUTO_INCREMENT,
   `Member_ID` varchar(11) NOT NULL,
   `Member_PW` varchar(100) NOT NULL,
   `Member_name` varchar(45) NOT NULL,
@@ -227,12 +227,12 @@ CREATE TABLE `members` (
   `Member_Phone` varchar(13) NOT NULL,
   `Member_Nick` varchar(20) NOT NULL,
   `Member_joindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `Member_manager` int DEFAULT NULL,
+  `Member_manager` int(11) DEFAULT NULL,
   `Member_logindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `member_point` int DEFAULT NULL,
+  `member_point` int(11) DEFAULT NULL,
   PRIMARY KEY (`Member_Num`),
   KEY `idx_test` (`Member_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -251,16 +251,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `noticeboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `noticeboard` (
-  `notice_no` int NOT NULL AUTO_INCREMENT,
+  `notice_no` int(11) NOT NULL AUTO_INCREMENT,
   `notice_title` varchar(45) NOT NULL,
   `notice_writer` varchar(11) NOT NULL,
   `notice_content` varchar(1000) NOT NULL,
   `notice_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `notice_hits` int NOT NULL DEFAULT '0',
+  `notice_hits` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,17 +279,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `orders` (
   `order_code` char(7) NOT NULL DEFAULT '0',
-  `member_num` int NOT NULL,
+  `member_num` int(11) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `address_recipent` varchar(20) NOT NULL,
-  `order_totalQuantity` int NOT NULL,
-  `order_totalPrice` int NOT NULL,
+  `order_totalQuantity` int(11) NOT NULL,
+  `order_totalPrice` int(11) NOT NULL,
+  `order_status` varchar(20) NOT NULL,
   PRIMARY KEY (`order_code`),
   KEY `fk_order_customer` (`member_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +299,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('OCO0002',1,'2021-06-22 01:31:13','',0,0);
+INSERT INTO `orders` VALUES ('OCO0002',1,'2021-06-22 01:31:13','',0,0,'');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -308,21 +309,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `orders_detail` (
   `order_detailCode` char(7) NOT NULL DEFAULT '0',
   `order_code` char(7) NOT NULL,
   `p_code` char(7) NOT NULL,
-  `order_quantity` int NOT NULL,
-  `p_price` int NOT NULL,
-  `order_usePoint` int DEFAULT NULL,
-  `order_addPoint` int NOT NULL,
-  `order_price` int NOT NULL,
+  `order_quantity` int(11) NOT NULL,
+  `p_price` int(11) NOT NULL,
+  `order_usePoint` int(11) DEFAULT NULL,
+  `order_addPoint` int(11) NOT NULL,
+  `order_price` int(11) NOT NULL,
   `order_method` varchar(10) NOT NULL,
-  `order_status` varchar(20) NOT NULL DEFAULT '입금 대기중',
   PRIMARY KEY (`order_detailCode`),
   KEY `fk_ordersDetail_orderCode` (`order_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -331,7 +331,7 @@ CREATE TABLE `orders_detail` (
 
 LOCK TABLES `orders_detail` WRITE;
 /*!40000 ALTER TABLE `orders_detail` DISABLE KEYS */;
-INSERT INTO `orders_detail` VALUES ('ODC0001','OCO0002','',0,0,NULL,0,20000,'','상품 준비중');
+INSERT INTO `orders_detail` VALUES ('ODC0001','OCO0002','',0,0,NULL,0,20000,'');
 /*!40000 ALTER TABLE `orders_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -341,9 +341,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `orders_seq` (
-  `order_code` int NOT NULL AUTO_INCREMENT,
+  `order_code` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_code`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -363,9 +363,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ordersdetail_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `ordersdetail_seq` (
-  `order_detailCode` int NOT NULL AUTO_INCREMENT,
+  `order_detailCode` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_detailCode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -385,23 +385,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `products` (
   `p_code` char(7) NOT NULL DEFAULT '0',
   `p_cl1` varchar(10) NOT NULL,
   `p_cl2` varchar(10) NOT NULL,
   `p_brand` varchar(20) NOT NULL,
   `p_name` varchar(50) NOT NULL,
-  `p_price` int NOT NULL,
-  `p_salePrice` int DEFAULT NULL,
-  `p_stock` int NOT NULL,
+  `p_price` int(11) NOT NULL,
+  `p_salePrice` int(11) DEFAULT NULL,
+  `p_stock` int(11) NOT NULL,
   `p_imageFileName` varchar(100) NOT NULL,
   `p_description` varchar(1000) NOT NULL,
   `p_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `p_loves` int NOT NULL DEFAULT '0',
+  `p_loves` int(11) NOT NULL DEFAULT '0',
   `p_origin` varchar(56) NOT NULL,
   PRIMARY KEY (`p_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -420,9 +420,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `products_seq` (
-  `p_code` int NOT NULL AUTO_INCREMENT,
+  `p_code` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`p_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=146 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -443,20 +443,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `qnaboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `qnaboard` (
-  `qna_no` int NOT NULL AUTO_INCREMENT,
-  `qna_originNo` int NOT NULL,
-  `qna_groupOrd` int NOT NULL DEFAULT '0',
-  `qna_groupLayer` int NOT NULL DEFAULT '0',
+  `qna_no` int(11) NOT NULL AUTO_INCREMENT,
+  `qna_originNo` int(11) NOT NULL,
+  `qna_groupOrd` int(11) NOT NULL DEFAULT '0',
+  `qna_groupLayer` int(11) NOT NULL DEFAULT '0',
   `qna_title` varchar(45) NOT NULL,
   `qna_writer` varchar(11) NOT NULL,
   `qna_content` varchar(1000) NOT NULL,
   `qna_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `qna_secret` char(1) DEFAULT 'N',
-  `qna_hits` int NOT NULL DEFAULT '0',
+  `qna_hits` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`qna_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -475,9 +475,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+ SET character_set_client = utf8mb4 ;
 CREATE TABLE `reviews` (
-  `review_num` int NOT NULL AUTO_INCREMENT,
+  `review_num` int(11) NOT NULL AUTO_INCREMENT,
   `p_code` char(7) NOT NULL,
   `Member_Nick` varchar(20) NOT NULL,
   `review_content` varchar(1000) NOT NULL,
@@ -485,7 +485,7 @@ CREATE TABLE `reviews` (
   `review_imageFileName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`review_num`),
   KEY `fk_reviews_pcode` (`p_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -507,4 +507,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-26 16:59:32
+-- Dump completed on 2021-07-26 23:18:33

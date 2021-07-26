@@ -15,7 +15,6 @@ public class OrderDetailVO {
 	private int order_addPoint;
 	private int order_price;
 	private String order_method;
-	private String order_status;
 	private int member_num;
 	private Timestamp order_date;
 	private String address_recipent;
@@ -97,13 +96,6 @@ public class OrderDetailVO {
 		this.order_method = order_method;
 	}
 	
-	public String getOrder_status() {
-		return order_status;
-	}
-	
-	public void setOrder_status(String order_status) {
-		this.order_status = order_status;
-	}
 	
 	public int getMember_num() {
 		return member_num;
