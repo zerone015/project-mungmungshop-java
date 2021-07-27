@@ -2,9 +2,11 @@ package com.myspring.petshop.product.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.common.pagination.Pagination;
+import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.product.service.ProductService;
 import com.myspring.petshop.product.vo.ProductVO;
+import com.myspring.petshop.review.service.ReviewService;
+import com.myspring.petshop.review.vo.ReviewVO;
 
 @Controller("productController")
 public class ProductControllerImpl implements ProductController {
@@ -24,6 +29,14 @@ public class ProductControllerImpl implements ProductController {
 	private ProductService productService;
 	@Autowired
 	private ProductVO product;
+	@Autowired
+	private MemberVO memberVO;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private ReviewVO reviewVO;
+	@Autowired
+	private HttpSession session;
 	
 	@Override
 	@RequestMapping(value="/product/productList.do", method = RequestMethod.GET)
@@ -87,11 +100,39 @@ public class ProductControllerImpl implements ProductController {
 	
 	@Override
 	@RequestMapping(value="/product/getProduct.do", method = RequestMethod.GET)
-	public ModelAndView getProduct(@RequestParam("p_code") String p_code) throws Exception {
-		product = productService.getProduct(p_code);
+	public ModelAndView getProduct(@RequestParam("p_code") String p_code,
+								   @RequestParam(required = false, defaultValue = "1") int page,
+								   @RequestParam(required = false, defaultValue = "1") int range, 
+						HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ProductVO product = productService.getProduct(p_code);
 		
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
+		
+		session = request.getSession();
+		
+		memberVO = (MemberVO)session.getAttribute("member");
+		
+		
+		
+		// 게시글 총 개수
+		int listCnt = reviewService.reviewCnt();
+		
+		Pagination pagination = new Pagination();
+		pagination.setListSize(10);
+		pagination.pageInfo(page, range, listCnt);
+		
+		
+		
+		Map<String, Object> info = new HashMap<String, Object>();
+		
+		info.put("pagination", pagination);
+		info.put("p_code", p_code);
+		
+		List reviewList = reviewService.listReview(info);
+
+		mav.addObject("reviewList", reviewList);
+		mav.addObject("info", info);
 		
 		return mav;
 	}

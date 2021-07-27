@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.review.dao.ReviewDAO;
+import com.myspring.petshop.review.vo.ReviewVO;
 
 
 @Service("reviewService")
@@ -26,13 +27,8 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List listReview(Pagination pagination, String p_code) throws DataAccessException {
-		
-		Map<String, Object> info = new HashMap<String, Object>();
-		
-		info.put("pagination", pagination);
-		info.put("p_code", p_code);
-		
+	public List listReview(Map<String, Object> info) throws DataAccessException {
+	
 		List reviewList = null;
 		reviewList = reviewDAO.selectAllReviewList(info);
 		return reviewList;

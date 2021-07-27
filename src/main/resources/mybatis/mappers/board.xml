@@ -106,7 +106,7 @@
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectAllFaqList" resultType="faqVO">
 	<![CDATA[
-		select faq_no, faq_title, faq_writer, faq_hits, faq_date from faqBoard 
+		select faq_no, faq_title, faq_content, faq_writer, faq_hits, faq_date from faqBoard 
 		order by faq_no desc
 		
 	]]>
