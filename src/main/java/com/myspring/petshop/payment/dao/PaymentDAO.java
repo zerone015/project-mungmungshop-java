@@ -13,4 +13,8 @@ public interface PaymentDAO {
 	public int selectCartChkQuantity(Map orderMap) throws DataAccessException;
 	public PaymentVO selectCartChkProducts(String p_code) throws DataAccessException;
 	public void insertOrder(CombineVO combineVO) throws DataAccessException;
+	public int selectMaxOrderNum() throws DataAccessException;
+	public String selectOrderCode(int order_num) throws DataAccessException;
+	public int insertOrderDetail(CombineVO combineVO) throws DataAccessException;
+	public int insertDelivery(CombineVO combineVO) throws DataAccessException;
 }

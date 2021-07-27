@@ -38,7 +38,64 @@ public class PaymentServiceImpl implements PaymentService {
 	
 	@Override
 	public void addPayment(CombineVO combineVO) throws Exception {
+		int order_num = getOrderNum();
+		combineVO.setOrder_num(order_num);
+		
 		paymentDAO.insertOrder(combineVO);
 		
+		String order_code = paymentDAO.selectOrderCode(order_num);
+		
+		combineVO.setOrder_code(order_code);
+		
+		int result = paymentDAO.insertOrderDetail(combineVO);
+		
+		paymentDAO.insertDelivery(combineVO);
+		
+	}
+	
+	@Override
+	public void addPayments(Map paymentMap, CombineVO combineVO) throws Exception {
+		String[] p_codes = (String[]) paymentMap.get("p_codes");
+		String[] order_quantitys = (String[]) paymentMap.get("order_quantitys");
+		String[] p_prices = (String[]) paymentMap.get("p_prices");
+		String[] order_prices = (String[]) paymentMap.get("order_prices");
+			
+		int order_num = getOrderNum();
+		combineVO.setOrder_num(order_num);
+		
+		paymentDAO.insertOrder(combineVO);
+		
+		String order_code = paymentDAO.selectOrderCode(order_num);
+		combineVO.setOrder_code(order_code);
+		
+		for(int i=0; i<p_codes.length; i++) {
+			String p_code = p_codes[i];
+			int order_quantity = Integer.parseInt(order_quantitys[i]);
+			int p_price = Integer.parseInt(p_prices[i]);
+			int order_price = Integer.parseInt(order_prices[i]);
+			
+			combineVO.setP_code(p_code);
+			combineVO.setOrder_quantity(order_quantity);
+			combineVO.setP_price(p_price);
+			combineVO.setOrder_price(order_price);
+			
+			int result = paymentDAO.insertOrderDetail(combineVO);
+		}
+		
+		paymentDAO.insertDelivery(combineVO);
+		
+	}
+	
+	private int getOrderNum() throws Exception {
+		int result;
+		
+		try {
+			result = paymentDAO.selectMaxOrderNum()+1;
+		}
+		catch(NullPointerException e) {
+			result = 0;
+		}
+		
+		return result;
 	}
 }

@@ -11,4 +11,5 @@ public interface PaymentService {
 	public int getCartChkQuantity(Map orderMap) throws Exception;
 	public PaymentVO getCartChkProducts(String p_code) throws Exception;
 	public void addPayment(CombineVO combineVO) throws Exception;
+	public void addPayments(Map paymentMap, CombineVO combineVO) throws Exception;
 }

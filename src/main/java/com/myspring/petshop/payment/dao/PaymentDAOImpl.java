@@ -39,4 +39,28 @@ public class PaymentDAOImpl implements PaymentDAO {
 		
 		sqlSession.insert("mapper.payment.insertOrder", combineVO); 
 	}
+	
+	@Override
+	public int selectMaxOrderNum() throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.payment.selectMaxOrderNum"); 
+	}
+	
+	@Override
+	public String selectOrderCode(int order_num) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.payment.selectOrderCode", order_num); 
+	}
+	
+	@Override
+	public int insertOrderDetail(CombineVO combineVO) throws DataAccessException {
+		
+		return sqlSession.insert("mapper.payment.insertOrderDetail", combineVO); 
+	}
+	
+	@Override
+	public int insertDelivery(CombineVO combineVO) throws DataAccessException {
+		
+		return sqlSession.insert("mapper.payment.insertDelivery", combineVO); 
+	}
 }

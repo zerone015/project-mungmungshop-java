@@ -207,6 +207,11 @@ function fn_pay(){
 	var pay_member_email = document.getElementById("pay_member_email");
 	var pay_pay_member_phone = document.getElementById("pay_member_phone");
 	
+	var order_addPoint = document.getElementById("order_addPoint");
+	
+	$("#order_addPoint").val(parseInt(order_addPoint.value));
+	
+	
 	if (recipent.value == "") {
 		alert("수령인을 입력해주세요.");
 		recipent.focus();
@@ -363,23 +368,25 @@ function point_apply() {
 	var font_final_total_price = document.getElementById("font_final_total_price");
 	var pay_final_total_price = document.getElementById("pay_final_total_price");
 	
+	var sale_point_val = parseInt(sale_point.value);
 	
 	var sale_point_comma = numberWithCommas(parseInt(sale_point.value));
 	
-	if (own_point.value < sale_point.value) {
+	if (own_point.value < sale_point_val) {
 		point_check.disabled = true;
 		$("#point_availability").html("포인트 부족");
+		$("#order_usePoint").val(0);
 	}
 	
-	else if (own_point.value >= sale_point.value && point_check.checked) {
-		var sum = total_payment_price.value - sale_point.value;
+	else if (own_point.value >= sale_point_val && point_check.checked) {
+		var sum = total_payment_price.value - sale_point_val;
 		sum = numberWithCommas(parseInt(sum));
 		$("#point_availability").html("적용 가능");
 		$("#sale_point_apply").html(sale_point_comma);
 		$("#font_final_total_price").html(sum+"원");
-		$("#order_totalPrice").val(parseInt(total_payment_price.value - sale_point.value));
-		$("#pay_final_total_price").val(parseInt(total_payment_price.value - sale_point.value));
-		
+		$("#order_totalPrice").val(parseInt(total_payment_price.value - sale_point_val));
+		$("#pay_final_total_price").val(parseInt(total_payment_price.value - sale_point_val));
+		$("#order_usePoint").val(parseInt(total_payment_price.value / 10));
 	}
 	
 	else {
@@ -389,6 +396,7 @@ function point_apply() {
 		$("#font_final_total_price").html(sum+"원");
 		$("#order_totalPrice").val(parseInt(total_payment_price.value));
 		$("#pay_final_total_price").val(parseInt(total_payment_price.value));
+		$("#order_usePoint").val(0);
 	}
 	
 }
@@ -558,7 +566,7 @@ function numberWithCommas(x) {
 			<td class="td_payment2"><input type="checkbox" id="point_check" name="member_point" value="${memberVO.member_point}" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트:${memberVO.member_point}) <font id="point_availability" style="color: red;"></font></td>
 			<input type="hidden" id="own_point" value="${memberVO.member_point}"/>
 			<input type="hidden" id="total_payment_price" value="${total_payment_price}"/>
-			<input type="hidden" id="sale_point" value="${total_payment_price * 0.1}"/>
+			<input type="hidden" id="sale_point" value="${total_payment_price / 10}"/>
 		</tr>
 		<tr>
 			<td class="td_payment">총 적립금</td>
@@ -579,7 +587,8 @@ function numberWithCommas(x) {
 <input type="hidden" id="pay_member_email" value="${memberVO.member_email}"/>
 <input type="hidden" id="pay_member_phone" value="${memberVO.member_phone}"/>
 <input type="hidden" id="pay_products_name" value="${p_name}"/>
-<input type="hidden" name="order_addPoint" value="${final_total_addPoint}"/>
+<input type="hidden" id="order_addPoint" name="order_addPoint" value="${final_total_addPoint}"/>
+<input type="hidden" id="order_usePoint" name="order_usePoint" value="${total_payment_price / 10}"/>
 <input type="hidden" name="order_totalQuantity" value="${final_total_products_qty}"/>
 <input type="hidden" id="pay_final_total_price" name="order_price" value="${final_total_payment_price}"/>
 </form>

@@ -6,7 +6,15 @@ import org.springframework.stereotype.Component;
 public class CombineVO {
 	private String order_detailCode;
 	private String order_code;
+	private int order_num;
 	private String p_code;
+	private int member_num;
+	private String address_recipent;
+	private String address_phone;
+	private String address_1;
+	private String address_2;
+	private String address_3;
+	private String address_request;
 	private int order_quantity;
 	private int p_price;
 	private int order_usePoint;
@@ -14,6 +22,8 @@ public class CombineVO {
 	private int order_price;
 	private String order_method;
 	private String order_status;
+	private int order_totalQuantity;
+	private int order_totalPrice;
 	
 	public CombineVO() {
 		
@@ -25,6 +35,72 @@ public class CombineVO {
 	
 	public void setOrder_detailCode(String order_detailCode) {
 		this.order_detailCode = order_detailCode;
+	}
+	
+	public int getOrder_num() {
+		return order_num;
+	}
+	
+	public void setOrder_num(int order_num) {
+		this.order_num = order_num;
+	}
+	
+	
+	public int getMember_num() {
+		return member_num;
+	}
+	
+	public void setMember_num(int member_num) {
+		this.member_num = member_num;
+	}
+	
+	public String getAddress_recipent() {
+		return address_recipent;
+	}
+	
+	public void setAddress_recipent(String address_recipent) {
+		this.address_recipent = address_recipent;
+	}
+	
+	
+	public String getAddress_1() {
+		return address_1;
+	}
+	
+	public void setAddress_1(String address_1) {
+		this.address_1 = address_1;
+	}
+	
+	public String getAddress_2() {
+		return address_2;
+	}
+	
+	public void setAddress_2(String address_2) {
+		this.address_2 = address_2;
+	}
+	
+	public String getAddress_3() {
+		return address_3;
+	}
+	
+	public void setAddress_3(String address_3) {
+		this.address_3 = address_3;
+	}
+	
+	public String getAddress_phone() {
+		return address_phone;
+	}
+	
+	public void setAddress_phone(String address_phone) {
+		this.address_phone = address_phone;
+	}
+	
+	public String getAddress_request() {
+		return address_request;
+	}
+	
+	public void setAddress_request(String address_request) {
+		this.address_request = address_request;
 	}
 	
 	public String getOrder_code() {
@@ -97,5 +173,21 @@ public class CombineVO {
 	
 	public void setOrder_status(String order_status) {
 		this.order_status = order_status;
+	}
+	
+	public int getOrder_totalQuantity() {
+		return order_totalQuantity;
+	}
+	
+	public void setOrder_totalQuantity(int order_totalQuantity) {
+		this.order_totalQuantity = order_totalQuantity;
+	}
+	
+	public int getOrder_totalPrice() {
+		return order_totalPrice;
+	}
+	
+	public void setOrder_totalPrice(int order_totalPrice) {
+		this.order_totalPrice = order_totalPrice;
 	}
 }

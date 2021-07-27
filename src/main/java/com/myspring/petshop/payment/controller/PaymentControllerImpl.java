@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.service.PaymentService;
-import com.myspring.petshop.payment.vo.OrderDetailVO;
 import com.myspring.petshop.payment.vo.CombineVO;
+import com.myspring.petshop.payment.vo.OrderDetailVO;
 import com.myspring.petshop.payment.vo.OrderVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
@@ -99,8 +100,28 @@ public class PaymentControllerImpl implements PaymentController {
 	
 	@Override
 	@RequestMapping(value="/payment/addPayment.do", method = RequestMethod.POST)
-	public ModelAndView addPayment(@ModelAttribute("combineVO") CombineVO combineVO) throws Exception {
-		/* paymentService.addPayment(combineVO); */
+	public ModelAndView addPayment(@ModelAttribute("combineVO") CombineVO combineVO, Errors errors,
+			HttpServletRequest request) throws Exception {
+		
+		String[] p_codes = request.getParameterValues("p_code");
+		String[] order_quantitys = request.getParameterValues("order_quantity");
+		String[] p_prices = request.getParameterValues("p_price");
+		String[] order_prices = request.getParameterValues("order_price");
+		
+		Map<String, Object> paymentMap = new HashMap<String, Object>();
+		paymentMap.put("p_codes", p_codes);
+		paymentMap.put("order_quantitys", order_quantitys);
+		paymentMap.put("p_prices", p_prices);
+		paymentMap.put("order_prices", order_prices);
+	
+		if(p_codes.length > 1) {
+			paymentService.addPayments(paymentMap,combineVO);
+		}
+		
+		else {
+			paymentService.addPayment(combineVO);
+		}
+
 		
 		ModelAndView mav = new ModelAndView("paymentResult");
 		
