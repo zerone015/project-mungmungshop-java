@@ -10,11 +10,14 @@ import com.myspring.petshop.payment.vo.PaymentVO;
 
 public interface PaymentDAO {
 	public AddressVO selectAddress(int member_num) throws DataAccessException;
-	public int selectCartChkQuantity(Map orderMap) throws DataAccessException;
+	public int selectCartChkQuantity(Map<String, Object> orderMap) throws DataAccessException;
 	public PaymentVO selectCartChkProducts(String p_code) throws DataAccessException;
 	public void insertOrder(CombineVO combineVO) throws DataAccessException;
 	public int selectMaxOrderNum() throws DataAccessException;
 	public String selectOrderCode(int order_num) throws DataAccessException;
-	public int insertOrderDetail(CombineVO combineVO) throws DataAccessException;
-	public int insertDelivery(CombineVO combineVO) throws DataAccessException;
+	public void insertOrderDetail(CombineVO combineVO) throws DataAccessException;
+	public void insertDelivery(CombineVO combineVO) throws DataAccessException;
+	public void updateAddMemberPoint(CombineVO combineVO) throws DataAccessException;
+	public void updateSubtractMemberPoint(CombineVO combineVO) throws DataAccessException;
+	public void insertAddress(CombineVO combineVO) throws DataAccessException;
 }

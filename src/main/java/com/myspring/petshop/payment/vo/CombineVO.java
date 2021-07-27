@@ -19,11 +19,11 @@ public class CombineVO {
 	private int p_price;
 	private int order_usePoint;
 	private int order_addPoint;
-	private int order_price;
 	private String order_method;
 	private String order_status;
 	private int order_totalQuantity;
 	private int order_totalPrice;
+
 	
 	public CombineVO() {
 		
@@ -151,13 +151,6 @@ public class CombineVO {
 		this.order_addPoint = order_addPoint;
 	}
 	
-	public int getOrder_price() {
-		return order_price;
-	}
-	
-	public void setOrder_price(int order_price) {
-		this.order_price = order_price;
-	}
 	
 	public String getOrder_method() {
 		return order_method;

@@ -198,9 +198,6 @@ function fn_pay(){
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
 	
-	var pay_card = document.getElementById("pay_card");
-	var pay_mootong = document.getElementById("pay_mootong");
-	
 	var pay_products_name = document.getElementById("pay_products_name");
 	var pay_final_total_price = document.getElementById("pay_final_total_price");
 	var pay_member_name = document.getElementById("pay_member_name");
@@ -299,20 +296,7 @@ function fn_pay(){
 		return false;
 	}
 	
-	
-	if (pay_card.checked) {
-		fn_pay_card();
-	}
-	
-	else {
-		form.method = "post";
-		form.action = "${contextPath}/payment/addPayment.do"
-			
-		form.submit();	
-	}
-		
-	
-
+	fn_pay_card();
 }
 
 function fn_pay_card() {
@@ -337,10 +321,10 @@ function fn_pay_card() {
 	}, function(rsp) {
 		console.log(rsp);
 	    if ( rsp.success ) {
-	    	var msg = '결제가 완료되었습니다.';
-	        msg += '고유ID : ' + rsp.imp_uid;
-	        msg += '상점 거래ID : ' + rsp.merchant_uid;
-	        msg += '결제 금액 : ' + rsp.paid_amount;
+	    	var msg = '결제가 완료되었습니다. \n';
+	        msg += '고유ID : ' + rsp.imp_uid + "\n";
+	        msg += '상점 거래ID : ' + rsp.merchant_uid + "\n";
+	        msg += '결제 금액 : ' + rsp.paid_amount + "원\n";
 	        msg += '카드 승인번호 : ' + rsp.apply_num;
 	        alert(msg);
 	        
@@ -505,7 +489,6 @@ function numberWithCommas(x) {
 					<input type="hidden" name="p_code" value="${item.p_code}"/>
 					<input type="hidden" name="p_price" value="${item.p_price}"/>
 					<input type="hidden" name="order_quantity" value="${item.cart_quantity}"/>
-					<input type="hidden" name="order_price" value="${item.p_price * item.cart_quantity}"/>
 					<c:set var="final_total_products_qty" value="${final_total_products_qty + item.cart_quantity}"/>
 					<c:set var="final_total_addPoint" value="${final_total_addPoint + item.p_price * item.cart_quantity / 60}" />
 					<c:set var="total_payment_price" value="${total_payment_price + item.p_price * item.cart_quantity}"/>
@@ -526,7 +509,6 @@ function numberWithCommas(x) {
 				<input type="hidden" name="p_code" value="${paymentVO.p_code}"/>
 				<input type="hidden" name="p_price" value="${paymentVO.p_price}"/>
 				<input type="hidden" name="order_quantity" value="${paymentVO.order_quantity}"/>
-				<input type="hidden" name="order_price" value="${paymentVO.p_price * paymentVO.order_quantity}"/>
 				<input type="hidden" id="order_totalPrice" name="order_totalPrice" value="${final_total_payment_price}"/>
 				<c:set var="final_total_products_qty" value="${final_total_products_qty + paymentVO.order_quantity}"/>
 				<c:set var="final_total_addPoint" value="${final_total_addPoint + paymentVO.p_price * paymentVO.order_quantity / 60}" />
@@ -543,9 +525,6 @@ function numberWithCommas(x) {
 	<hr class="paymentHr">
 	<div style="float: left;">
 		<input type="radio" name="order_method" id="pay_card" value="신용카드" checked/> 신용카드
-	</div><br><br>
-	<div style="float: left;">
-		<input type="radio" name="order_method" id="pay_mootong" value="무통장 입금" /> 무통장 입금
 	</div>
 <br><hr><br>
 	<div style="text-align: left;">
@@ -563,7 +542,7 @@ function numberWithCommas(x) {
 		</tr>
 		<tr>
 			<td class="td_payment">포인트 할인</td>
-			<td class="td_payment2"><input type="checkbox" id="point_check" name="member_point" value="${memberVO.member_point}" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트:${memberVO.member_point}) <font id="point_availability" style="color: red;"></font></td>
+			<td class="td_payment2"><input type="checkbox" id="point_check" name="sale_check" value="checked" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트:${memberVO.member_point}) <font id="point_availability" style="color: red;"></font></td>
 			<input type="hidden" id="own_point" value="${memberVO.member_point}"/>
 			<input type="hidden" id="total_payment_price" value="${total_payment_price}"/>
 			<input type="hidden" id="sale_point" value="${total_payment_price / 10}"/>
@@ -590,7 +569,7 @@ function numberWithCommas(x) {
 <input type="hidden" id="order_addPoint" name="order_addPoint" value="${final_total_addPoint}"/>
 <input type="hidden" id="order_usePoint" name="order_usePoint" value="${total_payment_price / 10}"/>
 <input type="hidden" name="order_totalQuantity" value="${final_total_products_qty}"/>
-<input type="hidden" id="pay_final_total_price" name="order_price" value="${final_total_payment_price}"/>
+<input type="hidden" id="pay_final_total_price" value="${final_total_payment_price}"/>
 </form>
 </body>
 </html>

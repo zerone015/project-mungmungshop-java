@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.petshop.payment.vo.OrderDetailVO;
 import com.myspring.petshop.payment.vo.CombineVO;
-import com.myspring.petshop.payment.vo.OrderVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
 
 public interface PaymentController {
@@ -18,5 +16,5 @@ public interface PaymentController {
 	public String getPaymentPage(@ModelAttribute("payment") PaymentVO payment,
 			HttpServletRequest request, Model model) throws Exception;
 	public ModelAndView addPayment(@ModelAttribute("combineVO") CombineVO combineVO, Errors errors,
-			HttpServletRequest request) throws Exception;
+			   @RequestParam("sale_check") String sale_check, HttpServletRequest request) throws Exception;
 }

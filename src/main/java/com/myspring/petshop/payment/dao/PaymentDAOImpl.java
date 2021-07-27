@@ -23,7 +23,7 @@ public class PaymentDAOImpl implements PaymentDAO {
 	}
 	
 	@Override
-	public int selectCartChkQuantity(Map orderMap) throws DataAccessException {
+	public int selectCartChkQuantity(Map<String, Object> orderMap) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.payment.selectCartChkQuantity", orderMap); 
 	}
@@ -53,14 +53,32 @@ public class PaymentDAOImpl implements PaymentDAO {
 	}
 	
 	@Override
-	public int insertOrderDetail(CombineVO combineVO) throws DataAccessException {
+	public void insertOrderDetail(CombineVO combineVO) throws DataAccessException {
 		
-		return sqlSession.insert("mapper.payment.insertOrderDetail", combineVO); 
+		sqlSession.insert("mapper.payment.insertOrderDetail", combineVO); 
 	}
 	
 	@Override
-	public int insertDelivery(CombineVO combineVO) throws DataAccessException {
+	public void insertDelivery(CombineVO combineVO) throws DataAccessException {
 		
-		return sqlSession.insert("mapper.payment.insertDelivery", combineVO); 
+		sqlSession.insert("mapper.payment.insertDelivery", combineVO); 
+	}
+	
+	@Override
+	public void updateAddMemberPoint(CombineVO combineVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.payment.updateAddMemberPoint", combineVO); 
+	}
+	
+	@Override
+	public void updateSubtractMemberPoint(CombineVO combineVO) throws DataAccessException {
+		
+		sqlSession.update("mapper.payment.updateSubtractMemberPoint", combineVO); 
+	}
+	
+	@Override
+	public void insertAddress(CombineVO combineVO) throws DataAccessException {
+		
+		sqlSession.insert("mapper.payment.insertAddress", combineVO); 
 	}
 }

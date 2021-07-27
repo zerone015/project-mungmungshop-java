@@ -32,16 +32,7 @@
 	<insert id="insertOrder" parameterType="combineVO" >
 			
 			insert into orders(order_code, order_num, member_num, order_date, address_recipent, order_totalQuantity, order_totalPrice, order_usePoint, order_addPoint, order_method, order_status) 
-			values(default, #{order_num}, #{member_num}, default, #{address_recipent}, #{order_totalQuantity}, #{order_totalPrice}, #{order_usePoint}, #{order_addPoint}, #{order_method}, 
-			<choose>
-				<when test="order_method.equals('무통장 입금')">
-					'입금 대기중'
-				</when>
-				<otherwise>
-					'결제 완료'
-				</otherwise>
-			</choose>
-			)
+			values(default, #{order_num}, #{member_num}, default, #{address_recipent}, #{order_totalQuantity}, #{order_totalPrice}, #{order_usePoint}, #{order_addPoint}, #{order_method}, '결제 완료')
 	</insert>
 	
 	<select id="selectOrderCode" resultType="String" parameterType="int">
@@ -50,13 +41,27 @@
 		]]>
 	</select>
 	
+	<insert id="insertAddress" parameterType="combineVO" >
+			insert into address values(null, #{member_num}, #{address_recipent}, #{address_phone}, #{address_1}, #{address_2}, #{address_3}, #{address_request})
+	</insert>
+	
 	<insert id="insertOrderDetail" parameterType="combineVO" >
-			insert into orders_detail(order_detailCode, order_code, p_code, order_quantity, p_price, order_price) 
-			values(default, #{order_code}, #{p_code}, #{order_quantity}, #{p_price}, #{order_price})
+			insert into orders_detail(order_detailCode, order_code, p_code, order_quantity, p_price) 
+			values(default, #{order_code}, #{p_code}, #{order_quantity}, #{p_price})
 	</insert>
 	
 	<insert id="insertDelivery" parameterType="combineVO" >
 			insert into delivery(deli_num, order_code, deli_name, deli_tel, deli_address1, deli_address2, deli_address3, deli_request) 
 			values(default, #{order_code}, #{address_recipent}, #{address_phone}, #{address_1}, #{address_2}, #{address_3}, #{address_request})
+	</insert>
+	
+	<insert id="updateAddMemberPoint" parameterType="combineVO" >
+			update members set member_point = member_point + #{order_addPoint}
+			where member_num = #{member_num}
+	</insert>
+	
+	<insert id="updateSubtractMemberPoint" parameterType="combineVO" >
+			update members set member_point = member_point - #{order_usePoint}
+			where member_num = #{member_num}
 	</insert>
 </mapper>

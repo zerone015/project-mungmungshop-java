@@ -8,8 +8,9 @@ import com.myspring.petshop.payment.vo.PaymentVO;
 
 public interface PaymentService {
 	public AddressVO getAddress(int member_num) throws Exception;
-	public int getCartChkQuantity(Map orderMap) throws Exception;
+	public int getCartChkQuantity(Map<String, Object> orderMap) throws Exception;
 	public PaymentVO getCartChkProducts(String p_code) throws Exception;
-	public void addPayment(CombineVO combineVO) throws Exception;
-	public void addPayments(Map paymentMap, CombineVO combineVO) throws Exception;
+	public String addPayment(CombineVO combineVO, String sale_check) throws Exception;
+	public String addPayments(Map<String, Object> paymentMap, CombineVO combineVO,  String sale_check) throws Exception;
+	public void addAddress(CombineVO combineVO) throws Exception;
 }
