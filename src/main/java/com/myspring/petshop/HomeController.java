@@ -32,12 +32,6 @@ public class HomeController {
 		return "main";
 	}
 	
-	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String login(Locale locale, Model model) {
-		
-		return "login";
-	}
-	
 	@RequestMapping(value = "/joinWelcome.do", method = RequestMethod.GET)
 	public String joinWelcome(Locale locale, Model model) {
 		

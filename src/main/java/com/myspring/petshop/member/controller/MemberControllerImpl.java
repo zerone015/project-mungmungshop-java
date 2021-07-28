@@ -1,6 +1,7 @@
 package com.myspring.petshop.member.controller;
 
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -51,11 +53,33 @@ public class MemberControllerImpl implements MemberController{
 		int result = memberService.getNickNameCnt(vo);
 		return result;
 	}
+	
+	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
+	public String loginForm(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String interceptor = (String) session.getAttribute("interceptor");
+		
+		if(interceptor == null) {
+			String referer = request.getHeader("Referer");	
+			if(referer == null) {
+				referer = "null";
+			}
+			
+			if(!referer.equals("http://localhost:8080/petshop/login.do")) {
+				session.setAttribute("referer", referer);
+			}		
+		}
+		else {
+			session.removeAttribute("interceptor");
+		}
+		
+		return "login";
+	}
 		
 	@Override
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
+			 		RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
 		boolean passMatch = false;
@@ -75,18 +99,28 @@ public class MemberControllerImpl implements MemberController{
 			if(remember_userId == null) {
 				cookie.setMaxAge(0);
 			} 
-			else if(remember_userId != null && remember_userId.trim().equals("checked")) {	
+			else {	
 				cookie.setMaxAge(60*60*24*30);
 			}
-			
 			response.addCookie(cookie);
+			
 			memberService.modLoginDate(memberVO.getMember_num());
-			mav.setViewName("redirect:/main.do");
+			
+			String referer = (String) session.getAttribute("referer");
+			if(!referer.equals("null")) {
+				mav.setViewName("redirect:"+referer);
+			}
+			else {
+				mav.setViewName("redirect:/main.do");
+			}
+			
+			session.removeAttribute("referer");
 		}
 		
 		else {
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/login.do");
+			
 		}
 		
 		return mav;

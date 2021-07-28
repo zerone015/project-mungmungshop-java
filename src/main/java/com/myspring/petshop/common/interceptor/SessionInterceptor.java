@@ -14,15 +14,26 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		MemberVO member = (MemberVO) session.getAttribute("member");
+		
 		String contextPath = request.getContextPath();
+		
 		try {
-			if (member == null) {
+			if (member == null) {	
+				String interceptor = "Execution";
+				session.setAttribute("interceptor", interceptor);
+				
+				String referer = request.getHeader("Referer");
+				if(!referer.equals("http://localhost:8080/petshop/login.do")) {
+					session.setAttribute("referer", referer);
+				}	
+				
 				if(isAjaxRequest(request)) {
 					response.sendError(400);
 				}
 				else {
 					response.sendRedirect(contextPath+"/login.do");
 				}
+				
 				return false;
 			}
 			

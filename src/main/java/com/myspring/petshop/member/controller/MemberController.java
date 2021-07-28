@@ -15,8 +15,8 @@ public interface MemberController{
 	
 	public int getNickNameCnt(MemberVO vo) throws Exception;
 	
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
-			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView login(@ModelAttribute("member") MemberVO member,
+	RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
