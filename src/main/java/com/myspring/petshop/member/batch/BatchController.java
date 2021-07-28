@@ -24,7 +24,7 @@ public class BatchController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(BatchController.class);
 	
-	@Scheduled(cron="0/10 * * * * *") //초 분 시 일 월 요일 년
+	@Scheduled(cron="0 0 12 * * ?") //초 분 시 일 월 요일 년
 	public void scheduleRun() {
 		String batchResult = "success";
 		try {

@@ -22,16 +22,6 @@ public class HomeController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
-		
-		
-		return "main";
-	}
-	
 	@RequestMapping(value = "/joinWelcome.do", method = RequestMethod.GET)
 	public String joinWelcome(Locale locale, Model model) {
 		

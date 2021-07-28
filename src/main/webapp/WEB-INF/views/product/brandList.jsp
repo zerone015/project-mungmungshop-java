@@ -24,17 +24,17 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/ACANA.PNG" style=" width: 100%;  height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=ACANA.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/Hills.PNG" style=" width: 100%;  height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=Hills.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/NaturalBalance.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=NaturalBalance.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 </div>
@@ -42,17 +42,17 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/NOW.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=NOW.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/ORIGEN.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=ORIGEN.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/purinaProplan.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=purinaProplan.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 
@@ -62,17 +62,17 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/RAWZ.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=RAWZ.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/ROYALCANIN.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="resources/image/brandLogo/ZIWIPEAK.PNG" style=" width: 100%; height: 225;"></a>
+            	<a href="#"><img src="${contextPath}/download?imageFileName=ZIWIPEAK.PNG" style=" width: 100%;  height: 225;"/></a>
 </div>
 </div>
 
