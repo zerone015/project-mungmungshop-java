@@ -54,8 +54,9 @@ public class MemberControllerImpl implements MemberController{
 		return result;
 	}
 	
+	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String loginForm(HttpServletRequest request) {
+	public String loginForm(HttpServletRequest request) throws Exception {
 		HttpSession session = request.getSession();
 		String interceptor = (String) session.getAttribute("interceptor");
 		
