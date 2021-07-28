@@ -111,7 +111,7 @@ function imagePopup(type) {
   <div class="row" style="text-align: center">
 	<div class="col-md-6" style="display: inline-block;">
 	  <div class="card mb-4 shadow-sm" style="cursor: pointer;">
-	    	<img class="productImg" src="${contextPath}/resources/image/category/${product.p_imageFileName}" style=" width: 80%; height: 80%;"/>
+	    	<img class="productImg" src="${contextPath}/download?imageFileName=${product.p_imageFileName}" style=" width: 80%; height: 80%;"/>
 	    </div>
 	  </div>
 	<div class="col-md-5" >
@@ -290,7 +290,7 @@ function imagePopup(type) {
 		<div id="popup">
 			<!-- 팝업창 닫기 버튼 -->
 			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> <img
-				src="${contextPath}/resources/image/close.png" id="close" />
+				src="${contextPath}/download?imageFileName=close.png" id="close" />
 			</a>  <br /> <font style="font-size: 20px; font-weight: bold;" id="contents">장바구니에 담았습니다.</font><br> 
 <form   action='${contextPath}/cart/myCartList.do'  >				
 		<input class="btn btn-info" style="margin-top: 60px;" type="submit" value="장바구니 보기">

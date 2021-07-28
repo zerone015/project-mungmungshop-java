@@ -17,7 +17,7 @@
       <div class="site-logo" style="text-align:left; display: inline-block; vertical-align:top;">
         <span>
            <br>
-			<a href="#"><img width="200px"  height="80px" alt="뭉뭉샵" src="${contextPath}/resources/image/logo.png" style="align:left;" /></a>
+			<a href="#"><img width="200px"  height="80px" alt="뭉뭉샵 로고" src="${contextPath}/download?imageFileName=logo.png" style="align:left;" /></a>
 		</span>
       </div>
       <div class="site-discription" style="text-align:right;  display: inline-block;">

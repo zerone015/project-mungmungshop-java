@@ -99,7 +99,7 @@ request.setCharacterEncoding("UTF-8");
 	                <div class="bd-placeholder-img card-img-top">
 	                <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">
 	                    <img
-	                        src="${contextPath}/resources/image/category/${products.p_imageFileName}"
+	                        src="${contextPath}/thumbnail/download?imageFileName=${products.p_imageFileName}"
 	                        style="width: 50%; height: 225;" alt="상품 이미지" />
 	                </a>
 	                </div>

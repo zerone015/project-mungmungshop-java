@@ -90,7 +90,7 @@ request.setCharacterEncoding("UTF-8");
 			<td><b style="color:blue;">상품 이미지</b></td>
 		</tr>
 		<tr>
-			<td><img src="${contextPath}/resources/image/category/food/${product.p_imageFileName}" alt="상품 이미지"></td>
+			<td><img src="${contextPath}/thumbnail/download?imageFileName=${product.p_imageFileName}" alt="상품 이미지"></td>
 		</tr>
 		</table>
 		<br><br>

@@ -212,7 +212,7 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 							<td>
 								<input type="checkbox" class="chkbox" name="productCheck" onclick="checkSelectAll()" value="${myProductsList.p_code}" 
 								value2="${myProductsList.p_price*myCartList[status.index].cart_quantity}" checked/>
-								<img src="${contextPath}/resources/image/category/${myProductsList.p_imageFileName}" alt="상품 이미지"/>
+								<img src="${contextPath}/thumbnail/download?imageFileName=${myProductsList.p_imageFileName}" alt="상품 이미지"/>
 							</td>
 							<td>
 								<a href="${contextPath}/product/getProduct.do?p_code=${myProductsList.p_code}"><b>${myProductsList.p_name}</b></a>

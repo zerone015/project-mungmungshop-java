@@ -112,7 +112,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 		<div class="row flex-nowrap justify-content-around align-items-center" style="width: 1200px;">
 			<!-- 상단 로고 -->
 			<div style="margin : 0;">
-				<a class="blog-header-logo text-dark" href="${contextPath}/main.do"><img src="${contextPath}/resources/image/logo.png" style="width: 200; height: 80;" alt="이미지"></a>
+				<a class="blog-header-logo text-dark" href="${contextPath}/main.do"><img src="${contextPath}/download?imageFileName=logo.png" style="width: 200; height: 80;" alt="이미지"></a>
 			</div>
 			
 			<!-- 검색창 -->

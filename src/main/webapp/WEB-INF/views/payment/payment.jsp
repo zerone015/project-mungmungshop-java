@@ -560,7 +560,7 @@ function numberWithCommas(x) {
 			<c:when test="${paymentPrdList != null}">
 				<c:forEach items="${paymentPrdList}" var="item">
 					<tr>
-						<td class="td_prd"><img src="${contextPath}/resources/image/category/${item.p_imageFileName}"/></td>
+						<td class="td_prd"><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"/></td>
 						<td class="td_prd">${item.p_brand}</td>
 						<td class="td_prd">${item.p_name}</td>
 						<td class="td_prd">${item.cart_quantity}</td>
@@ -580,7 +580,7 @@ function numberWithCommas(x) {
 			</c:when>
 			<c:otherwise>
 				<tr>
-					<td class="td_prd"><img src="${contextPath}/resources/image/category/${paymentVO.p_imageFileName}"/></td>
+					<td class="td_prd"><img src="${contextPath}/thumbnail/download?imageFileName=${paymentVO.p_imageFileName}"/></td>
 					<td class="td_prd">${paymentVO.p_brand}</td>
 					<td class="td_prd">${paymentVO.p_name}</td>
 					<td class="td_prd">${paymentVO.order_quantity}</td>

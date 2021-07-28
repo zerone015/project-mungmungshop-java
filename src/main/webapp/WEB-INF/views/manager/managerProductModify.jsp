@@ -148,7 +148,7 @@ request.setCharacterEncoding("UTF-8");
 	</div>
 	<br>
 	<br>
-	<form name="productModify" method="POST" action="${contextPath}/manager/modifyProduct.do">
+	<form name="productModify" method="POST" action="${contextPath}/manager/modifyProduct.do" enctype="multipart/form-data">
 		<span>1차 분류</span>&nbsp; <span><select class="form-select"
 			onchange="categoryChange(this)" name="p_cl1">
 				<option value=""> </option>

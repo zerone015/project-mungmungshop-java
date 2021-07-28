@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" isELIgnored="false" %>
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%
+request.setCharacterEncoding("UTF-8");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,13 +53,13 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	      		<!-- 슬라이드 쇼 --> 
 	      		<div class="carousel-item active"> 
 	      			<!--가로--> 
-	      			<img class="d-block" src="resources/image/slide1.jpg" alt="First slide" > 
+	      			<img class="d-block" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide" >
 	      		</div> 
 	      		<div class="carousel-item"> 
-	      			<img class="d-block " src="resources/image/slide2.jpg" alt="Second slide" > 
+	      			<img class="d-block " src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide" > 
 	      		</div> 
 	      		<div class="carousel-item"> 
-	      			<img class="d-block " src="resources/image/slide3.jpg" alt="Third slide"> 
+	      			<img class="d-block " src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
 	      		</div> 
 	      		<!-- / 슬라이드 쇼 끝 --> 
 	      		<!-- 왼쪽 오른쪽 화살표 버튼 --> 
