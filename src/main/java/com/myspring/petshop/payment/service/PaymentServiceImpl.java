@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.dao.PaymentDAO;
 import com.myspring.petshop.payment.vo.CombineVO;
@@ -97,6 +98,13 @@ public class PaymentServiceImpl implements PaymentService {
 	public void addAddress(CombineVO combineVO) throws Exception {
 		
 		paymentDAO.insertAddress(combineVO);
+		
+	}
+	
+	@Override
+	public MemberVO getMember(int member_num) throws Exception {
+		
+		return paymentDAO.selectMember(member_num);
 		
 	}
 	

@@ -64,4 +64,8 @@
 			update members set member_point = member_point - #{order_usePoint}
 			where member_num = #{member_num}
 	</insert>
+	
+	<select id="selectMember" resultType="memberVO" parameterType="int">
+			select * from members where member_num = #{member_num}
+	</select>
 </mapper>

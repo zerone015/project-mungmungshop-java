@@ -2,6 +2,7 @@ package com.myspring.petshop.payment.service;
 
 import java.util.Map;
 
+import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 import com.myspring.petshop.payment.vo.CombineVO;
 import com.myspring.petshop.payment.vo.PaymentVO;
@@ -13,4 +14,5 @@ public interface PaymentService {
 	public String addPayment(CombineVO combineVO, String sale_check) throws Exception;
 	public String addPayments(Map<String, Object> paymentMap, CombineVO combineVO,  String sale_check) throws Exception;
 	public void addAddress(CombineVO combineVO) throws Exception;
+	public MemberVO getMember(int member_num) throws Exception;
 }

@@ -121,6 +121,11 @@ public class PaymentControllerImpl implements PaymentController {
 			order_code = paymentService.addPayment(combineVO,sale_check);
 		}
 		
+		MemberVO member = paymentService.getMember(member_num);
+		HttpSession session = request.getSession();
+		session.removeAttribute("member");
+		session.setAttribute("member", member);
+			
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("paymentResult");
 		mav.addObject("order_code", order_code);

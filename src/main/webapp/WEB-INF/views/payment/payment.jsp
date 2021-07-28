@@ -198,6 +198,8 @@ function fn_pay(){
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
 	
+	var pay_card = document.getElementById("pay_card");
+	var pay_transfer = document.getElementById("pay_transfer");
 	var pay_products_name = document.getElementById("pay_products_name");
 	var pay_final_total_price = document.getElementById("pay_final_total_price");
 	var pay_member_name = document.getElementById("pay_member_name");
@@ -295,8 +297,15 @@ function fn_pay(){
 		email.select();
 		return false;
 	}
+
+	if (pay_card.checked) {
+		fn_pay_card();	
+	}
 	
-	fn_pay_card();
+	else if (pay_transfer.checked) {
+		fn_pay_transfer();
+	}
+	
 }
 
 function fn_pay_card() {
@@ -340,6 +349,45 @@ function fn_pay_card() {
 	});
 }
 
+function fn_pay_transfer() {
+	var form = document.payForm;
+	
+	var pay_products_name = document.getElementById("pay_products_name");
+	var pay_final_total_price = document.getElementById("pay_final_total_price");
+	var pay_member_name = document.getElementById("pay_member_name");
+	var pay_member_email = document.getElementById("pay_member_email");
+	var pay_pay_member_phone = document.getElementById("pay_member_phone");
+	
+	IMP.init('imp27822683');
+	IMP.request_pay({
+	    pg : 'kcp',
+	    pay_method : 'trans',
+	    merchant_uid : 'merchant_' + new Date().getTime(),
+	    name : pay_products_name.value, //결제창에서 보여질 이름
+	    amount : pay_final_total_price.value, //실제 결제되는 가격
+	    buyer_email : pay_member_email.value,
+	    buyer_name : pay_member_name.value,
+	    buyer_tel : pay_pay_member_phone.value,
+	}, function(rsp) {
+		console.log(rsp);
+	    if ( rsp.success ) {
+	    	var msg = '결제가 완료되었습니다. \n';
+	        msg += '고유ID : ' + rsp.imp_uid + "\n";
+	        msg += '상점 거래ID : ' + rsp.merchant_uid + "\n";
+	        msg += '결제 금액 : ' + rsp.paid_amount + "원\n";
+	        alert(msg);
+	        
+	        form.method = "post";
+			form.action = "${contextPath}/payment/addPayment.do"
+			
+			form.submit();
+	    } else {
+	    	 var msg = '결제에 실패하였습니다.';
+	         msg += '에러내용 : ' + rsp.error_msg;
+	         alert(msg);
+	    }
+	});
+}
 
 
 function point_apply() {
@@ -525,6 +573,9 @@ function numberWithCommas(x) {
 	<hr class="paymentHr">
 	<div style="float: left;">
 		<input type="radio" name="order_method" id="pay_card" value="신용카드" checked/> 신용카드
+	</div><br><br>
+	<div style="float: left;">
+		<input type="radio" name="order_method" id="pay_transfer" value="계좌이체"/> 계좌이체
 	</div>
 <br><hr><br>
 	<div style="text-align: left;">

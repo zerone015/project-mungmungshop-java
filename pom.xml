@@ -223,7 +223,7 @@
             <version>0.40</version>
         </dependency>
 		
-		<!-- 암호화 -->
+		<!-- 보안 -->
 		<dependency>
     		<groupId>org.springframework.security</groupId>
     		<artifactId>spring-security-core</artifactId>
