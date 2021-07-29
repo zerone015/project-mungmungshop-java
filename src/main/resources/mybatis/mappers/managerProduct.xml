@@ -5,21 +5,6 @@
 	
 <mapper namespace="mapper.managerProduct">
 
-	<resultMap id="managerResult" type="managerProductVO">
-		<result property="p_code" column="p_code"/>
-		<result property="p_cl1" column="p_cl1"/>
-		<result property="p_cl2" column="p_cl2"/>
-		<result property="p_brand" column="p_brand"/>
-		<result property="p_name" column="p_name"/>
-		<result property="p_price" column="p_price"/>
-		<result property="p_salePrice" column="p_salePrice"/>
-		<result property="p_stock" column="p_stock"/>
-		<result property="p_imageFileName" column="p_imageFileName"/>
-		<result property="p_description" column="p_description"/>
-		<result property="p_date" column="p_date"/>
-		<result property="p_loves" column="p_loves"/>
-		<result property="p_origin" column="p_origin"/>
-	</resultMap>
 	
 	<insert id="insertProduct" parameterType="java.util.Map">
 		<![CDATA[ 

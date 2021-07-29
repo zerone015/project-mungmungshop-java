@@ -87,7 +87,11 @@ request.setCharacterEncoding("UTF-8");
 				<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
 				<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
 				<td>${item.order_code}</td>
-				<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원<br>${item.order_quantity}개</td>
+				<td>
+				<fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원<br>
+				${item.order_quantity}개<br>
+				총 주문금액 : <fmt:formatNumber value="${item.order_totalPrice}" pattern="###,###,###"/>원
+				</td>
 				<td>${item.order_status}</td>
 				<td><button type="button" class="btn btn-primary btn-sm"
 						onclick="checkCancle()">환불 요청</button> <button type="button" class="btn btn-primary btn-sm">교환 요청</button></td>

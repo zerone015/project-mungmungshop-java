@@ -36,8 +36,8 @@
 	
 	<insert id="insertMember" parameterType="memberVO">
 		<![CDATA[ 
-			insert into members(Member_Num,Member_ID, Member_PW, Member_name, Member_email, Member_Phone, Member_Nick, Member_joindate)
-			values(null,#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_nick},default)
+			insert into members(Member_Num,Member_ID, Member_PW, Member_name, Member_email, Member_Phone, Member_Nick, Member_joindate, Member_manager, member_point)
+			values(null,#{member_id},#{member_pw},#{member_name},#{member_email},#{member_phone},#{member_nick},default,0,500)
 		]]>
 	</insert>
 

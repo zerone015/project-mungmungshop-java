@@ -51,12 +51,5 @@ public String managerProductModify(Locale locale, Model model) {
 	
 	return "managerProductModify";
 }
-
-@RequestMapping(value = "/managerOrderList.do", method = RequestMethod.GET)
-public String managerOrderList(Locale locale, Model model) {
-	
-	
-	return "managerOrderList";
-}
 	
 }

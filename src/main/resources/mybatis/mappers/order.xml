@@ -8,7 +8,7 @@
 
 <select id="selectOrder" parameterType="java.util.Map" resultType="combineVO">
 	<![CDATA[
-		select ord.member_num, ord.address_recipent,ord.order_totalQuantity, ord.order_usePoint, ord.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName 
+		select ord.member_num, ord.address_recipent, ord.order_totalQuantity, ord.order_totalPrice, ord.order_usePoint, ord.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName 
 		from orders AS ord 
 		JOIN orders_detail AS odd 
 		ON ord.order_code = odd.order_code 
