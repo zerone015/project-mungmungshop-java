@@ -7,7 +7,8 @@
 	
 	<select id="selectAddress" resultType="addressVO" parameterType="int" >
 		<![CDATA[	
-			select * from address where member_num = #{member_num}
+			select * from address where member_num = #{member_num} 
+			AND address_num = (select max(address_num) from address where member_num = #{member_num})
 		]]>
 	</select>
 	

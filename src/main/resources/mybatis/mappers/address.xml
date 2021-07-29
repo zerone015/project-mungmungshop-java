@@ -4,18 +4,25 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
 <mapper namespace="mapper.address">
+
 <!-- 배송지 주소 등록 -->
 <insert id="insertAddress" parameterType="addressVO">
 <![CDATA[
 insert into address(address_num,member_num,address_recipent,address_phone,address_1,address_2,address_3,address_request)
 value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{address_2},#{address_3},#{address_request})
 ]]>
-
 </insert>
 <!-- 배송지 주소 목록 -->
-<select id="selectAddressList" resultType="addressVO">
+<select id="selectAddressList" resultType="addressVO" parameterType="int">
 <![CDATA[
-	select * from address
+	select * from address where member_num = #{member_num}
+]]>
+</select>
+
+<!-- 배송지 총 합계 불러오기 -->
+<select id="selectAddressCnt" resultType="int" parameterType="int">
+<![CDATA[
+	select count(*) from address where member_num = #{member_num}
 ]]>
 </select>
 
@@ -46,5 +53,4 @@ value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{add
 	where address_num = #{address_num};
 ]]>
 </delete>
-
 </mapper>

@@ -122,56 +122,50 @@ function checkAddress() {
 	form.submit();
 }
 </script>
-<script type="text/javascript">
-function cancle(){
-	if(confirm('배송지 주소 등록을 취소하시겠습니까?'))
-		window.location = "/petshop/address/addressList.do"
-}
-</script>
 </head>
 <body>
-<div class="addressModify">
-<h2> 배송지 입력 </h2><br>
+<div class="container">
+	<h2><b>배송지 입력</b></h2><br>
 <form method="POST"  action="${contextPath}/myPage/modifyAddress.do" name="addressInfo">
-	
-	<div>
-            <table>                            
+<div>
+            <table class="table table-hover" style="width: 650px;">                     
                 <tr>
-                    <td id="title">수령인</td>
+                    <td>수령인</td>
                     <td>
-                        <input type="text" name="address_recipent" maxlength="45" style="width:200px;" placeholder="수령인을 입력해주세요." value="${addressVO.address_recipent }">
+                        <input type="text" name="address_recipent" maxlength="20" class="form-control" placeholder="수령인을 입력해주세요." value="${addressVO.address_recipent }">
                     </td>
                 </tr>                
                 <tr>
-                    <td id="title">휴대폰 번호</td>
+                    <td>휴대폰 번호</td>
                     <td>
-                        <input type="text" name="address_phone" maxlength="50" placeholder="-없이 번호만 입력해주세요" style="width:200px;" value="${addressVO.address_phone }">
+                        <input class="form-control" type="text" name="address_phone" maxlength="13" placeholder="-없이 번호만 입력해주세요" value="${addressVO.address_phone }">
                     </td>
                 </tr>
                 <tr>                 
- 					<td style="vertical-align:top">배송지 주소</td>
+ 					<td>배송지 주소</td>
 					<td>
-						<input type="text" id="sample4_postcode" placeholder="우편번호" readonly name="address_1" value="${addressVO.address_1 }">
-						<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="btn btn-dark"><br>
-						<input type="text" id="sample4_roadAddress" placeholder="도로명,지번주소" size="30" name="address_2" readonly  value="${addressVO.address_2 }"><br>
+						<input type="text" class="form-control" style="display: inline-block; width: 80%;" id="sample4_postcode" placeholder="우편번호" maxlength="10" name="address_1" value="${addressVO.address_1 }" readonly>
+						<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="btn btn-outline-secondary"><br><br>
+						<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명,지번주소" maxlength="30" size="30" name="address_2" value="${addressVO.address_2 }" readonly><br>
                         <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="30">
 						<span id="guide" style="color:#999;display:none"></span>
-						<input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="address_3" maxlength="50"  value="${addressVO.address_3 }"><br>
+						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="address_3" maxlength="40" value="${addressVO.address_3 }" ><br>
                         <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="30">
 						<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="30" ><br>
 						<input type="hidden" name="address_num" value="${addressVO.address_num }">
 					</td>
 				</tr>
 				<tr>
+					<td>요청 사항</td>
 					<td>
-						<input name="address_request" type="text" size="50" placeholder="택배 기사님께 전달할 메시지를 남겨주세요." value="${addressVO.address_request}" />
+						<input class="form-control" name="address_request" type="text" size="50" placeholder="택배 기사님께 전달할 메시지를 남겨주세요." value="${addressVO.address_request}" />
 					</td>
 				</tr>
                </table>
 	</div>          
-	<button type="button" onclick="checkAddress()" class="btn btn-dark">등록</button>
+	<button type="button" onclick="checkAddress()" class="btn btn-outline-dark">수정</button>
 	&nbsp;
-	<button type="button" onclick="cancle()" class="btn btn-dark" >취소</button>
+	<button type="button" class="btn btn-secondary" >취소</button>
 </form>
 	</div>
 </body>

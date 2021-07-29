@@ -22,8 +22,8 @@
      	 <h1>주문과 결제가 정상적으로 완료되었습니다.</h1>   
       <p>업체(브랜드)의 주문 확인 후 발송됩니다.</p>
       <div>
-         <button type="button" class="btn btn-primary" style="width: 40%; height: 50px; margin-right: 1;" onclick="location.href='${contextPath}/main.do'">메인 화면으로</button>
-         <button type="button" class="btn btn-outline-secondary " style="width: 40%; height: 50px; margin-left: 1;" onclick="location.href='${contextPath}/order.do'">주문 내역 조회하기</button>
+         <button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/main.do'">메인 화면으로</button>
+         <button type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/order.do'">주문 내역 조회하기</button>
       </div>
     </div>
   </div>

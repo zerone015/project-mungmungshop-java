@@ -6,12 +6,13 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.petshop.myPage.address.vo.AddressVO;
 
 
 public interface AddressController {
-	public ModelAndView addAddress(@ModelAttribute("address") AddressVO address,
+	public ModelAndView addAddress(@ModelAttribute("address") AddressVO address, RedirectAttributes rAttr,
 			HttpServletRequest request,HttpServletResponse response) throws Exception;
 	
 	public ModelAndView getAddressList(HttpServletRequest request, HttpServletResponse response) throws Exception;

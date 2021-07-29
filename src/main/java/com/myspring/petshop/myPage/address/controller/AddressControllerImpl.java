@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.service.AddressService;
@@ -33,25 +34,37 @@ public class AddressControllerImpl implements AddressController {
 	
 	@Override
 	@RequestMapping(value = "/address/addAddress.do",  method= {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView addAddress(@ModelAttribute("address") AddressVO address,
+	public ModelAndView addAddress(@ModelAttribute("address") AddressVO address, RedirectAttributes rAttr,
 			HttpServletRequest request,HttpServletResponse response) throws Exception {
 		 	request.setCharacterEncoding("utf-8");
 			
 		 	HttpSession session = request.getSession();
 			memberVO = (MemberVO) session.getAttribute("member");
 			int member_num = memberVO.getMember_num();
-			address.setMember_num(member_num);
 		 	
-			addressService.addAddress(address);
+			int addressCnt = addressService.getAddressCnt(member_num);
+			System.out.println(addressCnt);
 		
+			if(addressCnt < 10) {
+				address.setMember_num(member_num);
+				addressService.addAddress(address);
+			}
+			
+			else {
+				rAttr.addAttribute("result", "addFailed");	
+			}
+			
 			return new ModelAndView("redirect:/address/addressList.do");
 	}
 	
 	@Override
 	@RequestMapping(value = "/address/addressList.do", method = {RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView getAddressList(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-		List addressList = addressService.getAddressList();
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		int member_num = memberVO.getMember_num();
+		
+		List<AddressVO> addressList = addressService.getAddressList(member_num);
 		
 		ModelAndView mav = new ModelAndView("address");
 		mav.addObject("addressList", addressList);
@@ -64,14 +77,12 @@ public class AddressControllerImpl implements AddressController {
 	@RequestMapping(value="/myPage/modAddress.do", method={RequestMethod.GET, RequestMethod.POST})
 	public ModelAndView modAddress(@RequestParam("address_num") int address_num,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-			request.setCharacterEncoding("utf-8");
-			addressVO = addressService.getModAddress(address_num);
-				ModelAndView mav = new ModelAndView("modAddress");
-				mav.addObject("addressVO", addressVO);
+		
+		addressVO = addressService.getModAddress(address_num);
+		ModelAndView mav = new ModelAndView("modAddress");
+		mav.addObject("addressVO", addressVO);
 				
-				return mav; 
-				
-				
+		return mav; 			
 	}
 	
 	@Override

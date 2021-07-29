@@ -486,7 +486,7 @@ function numberWithCommas(x) {
 	<div class="um">
 		<div class="address">
 		<div style="margin-left: 250px; margin-bottom: 15px;">
-			<input type="radio" name="selectBy" value="old" onClick="restore_all()" checked> 기본 배송지
+			<input type="radio" name="selectBy" value="old" onClick="restore_all()" checked> 최근 배송지
 			<input type="radio" style="margin-left: 30px;" name="selectBy" value="new" onClick="reset_all()"> 신규 배송지
 		</div>
 		<div>

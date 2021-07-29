@@ -23,9 +23,9 @@ public class AddressServiceImpl implements AddressService{
 	}
 	
 	@Override
-	public List getAddressList() throws Exception{
+	public List<AddressVO> getAddressList(int member_num) throws Exception{
 		
-		return addressDAO.selectAddressList();
+		return addressDAO.selectAddressList(member_num);
 	}
 	@Override
 	public AddressVO getModAddress(int address_num) throws Exception{
@@ -41,5 +41,10 @@ public class AddressServiceImpl implements AddressService{
 	@Override
 	public void modifyAddress(AddressVO address) throws Exception {
 		addressDAO.updateAddress(address);
+	}
+	
+	@Override
+	public int getAddressCnt(int member_num) throws Exception {
+		return addressDAO.selectAddressCnt(member_num);
 	}
 }

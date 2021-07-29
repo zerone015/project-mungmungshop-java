@@ -4,6 +4,14 @@
 <%
 request.setCharacterEncoding("utf-8");
 %>
+<c:set var="result" value="${param.result }" />
+<c:if test="${result=='addFailed' }">
+		<script>
+			window.onload = function() {
+				alert("배송지 등록은 최대 10개까지 가능합니다.");
+			}
+		</script>
+</c:if>
 <html>
 <head>
 <meta charset="utf-8">
@@ -18,59 +26,41 @@ function fn_delete(address_num) {
 	else {
 		return false;
 	}
-}
-	
-
-	
-
-	
+}	
 </script>
 <body>
 	<div align="center">
-		<h2>배송지 관리</h2>
-		 
+		<h2><b>배송지 관리</b></h2>
 		<br>
-		<table>
+		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th align="center">배송지번호</th>
 					<th align="center">수령인</th>
 					<th align="center">연락처</th>
-					<th align="center">주소1</th>
-					<th align="center">주소2</th>
-					<th align="center">주소3</th>
-					<th align="center">수정</th>
-					<th align="center">삭제</th>
+					<th align="center">주소</th>
+					<th align="center">요청사항</th>
+					<th align="center">변경</th>
 				</tr>
 			</thead>
 			<tbody>
-				<form method="POST" action="">
-						
 				<c:forEach items="${addressList}" var="addressVO">
 					<tr>
-						<td>${addressVO.address_num }</td>
 						<td>${addressVO.address_recipent}</td>
 						<td>${addressVO.address_phone}</td>
-						<td>${addressVO.address_1}</td>
-						<td>${addressVO.address_2}</td>
-						<td>${addressVO.address_3}</td>
+						<td>${addressVO.address_1} ${addressVO.address_2} ${addressVO.address_3}</td>
 						<td>${addressVO.address_request}</td>
-					
 						<td>
-							<button  type="button" class="btn btn-dark" onclick="location.href='${contextPath}/myPage/modAddress.do?address_num=${addressVO.address_num}'" >수정</button>
-						</td>
-						<td>
-							<button  type="button" class="btn btn-dark" onclick="fn_delete(${addressVO.address_num});">삭제</button>
+							<button  type="button" class="btn btn-secondary" onclick="location.href='${contextPath}/myPage/modAddress.do?address_num=${addressVO.address_num}'" >수정</button>
+							<button  type="button" class="btn btn-danger" onclick="fn_delete(${addressVO.address_num});">삭제</button>
 						</td>
 					</tr>
 				</c:forEach>
-				</form>
 			</tbody>	
-		</table>
+		</table>			
 	</div>
-	<div align="right" style="margin-right: 300px;">
-		<button type="submit" class="btn btn-dark" onclick="location.href='${contextPath}/addressWrite.do' ">
-			배송지<br>등록
+	<div align="center">
+		<button type="submit" style="margin-top: 50px;" class="btn btn-outline-dark btn-lg" onclick="location.href='${contextPath}/addressWrite.do' ">
+			배송지 등록
 		</button>
 	</div>
 	
