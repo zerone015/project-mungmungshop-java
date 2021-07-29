@@ -228,7 +228,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
             </ul>
         </li>
         <li><a href="${contextPath}/board/eventList.do">Event</a></li>
-        <li><a href="#">신상품</a></li>
+        <li><a href="${contextPath}/product/newProduct.do">신상품</a></li>
         <li><a href="${contextPath}/brandList.do">브랜드</a></li>
 		<li><a href="#">랭킹</a></li>
 		<li><a href="#">할인</a></li>

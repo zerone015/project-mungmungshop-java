@@ -44,7 +44,7 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<div class="col-md-5" style="float: left;">
 		<h4>
-			<a href="#">주문 관리</a>
+			<a href="${contextPath}/managerOrderList.do">주문 관리</a>
 		</h4>
 	</div>
 	<br>

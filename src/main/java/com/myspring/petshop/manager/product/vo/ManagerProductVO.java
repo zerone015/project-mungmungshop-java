@@ -1,11 +1,11 @@
-package com.myspring.petshop.manager.vo;
+package com.myspring.petshop.manager.product.vo;
 
 import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
-@Component("managerVO")
-public class ManagerVO{
+@Component
+public class ManagerProductVO{
 	private String p_code;
 	private String p_cl1;
 	private String p_cl2;
@@ -20,7 +20,7 @@ public class ManagerVO{
 	private int p_loves;
 	private String p_origin;
 	
-	public ManagerVO() {
+	public ManagerProductVO() {
 		
 	}
 	public String getP_code() {

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myspring.petshop.manager.dao.ManagerDAO;
+import com.myspring.petshop.manager.product.dao.ManagerProductDAO;
 import com.myspring.petshop.product.dao.ProductDAO;
 import com.myspring.petshop.product.vo.ProductVO;
 

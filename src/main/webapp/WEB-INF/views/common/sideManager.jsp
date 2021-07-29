@@ -23,7 +23,7 @@ ul{
            <ul  class="sideMenu">
            	<h3><p>주요 기능</p></h3><br>
             <li><h5><a href="${contextPath}/manager/managerProduct.do">상품 관리</a></h5><li>
-            <li><h5><a href="#">주문 관리</a></h5><li>
+            <li><h5><a href="${contextPath}/managerOrderList.do">주문 관리</a></h5><li>
             <li><h5><a href="${contextPath}/manager/getMembersList.do">회원 관리</a></h5><li>
             <li><h5><a href="#">배송 관리</a></h5><li>
             <li><h5><a href="#">후기 관리</a></h5><li>

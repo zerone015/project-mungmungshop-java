@@ -63,7 +63,7 @@
 	</c:if>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
-			<table class="table table-striped">
+			<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>No</th>

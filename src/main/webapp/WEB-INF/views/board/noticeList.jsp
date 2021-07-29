@@ -18,10 +18,10 @@
 </head>
 <body>
 	<div>
-	<h1 class="display-5 fw-bold">공지사항</h1>
+	<h3 class="display-5 fw-bold">공지사항</h3>
 	</div>
 	<div class="table-responsive" style="margin-top:30;">
-		<table class="table table-striped">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>글 번호</th>
@@ -48,7 +48,7 @@
 		
 		<c:if test="${manager == 1}">
 					<form action="${contextPath}/board/noticeWrite.do" method="GET">
-						<input type="submit" value="글 작성">
+						<input class="btn btn-outline-dark" type="submit" value="글 작성">
 					</form>
 				</c:if>	
 </body>

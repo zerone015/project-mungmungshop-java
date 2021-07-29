@@ -1,4 +1,4 @@
-package com.myspring.petshop.manager.service;
+package com.myspring.petshop.manager.member.service;
 
 import java.util.List;
 import java.util.Map;
@@ -9,37 +9,13 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.common.pagination.Pagination;
-import com.myspring.petshop.manager.dao.ManagerDAO;
-import com.myspring.petshop.product.vo.ProductVO;
+import com.myspring.petshop.manager.member.dao.ManagerMemberDAO;
 
-@Service("managerService")
+@Service
 @Transactional(propagation = Propagation.REQUIRED)
-public class ManagerServiceImpl implements ManagerService{
+public class ManagerMemberServiceImpl implements ManagerMemberService{
 	@Autowired
-	private ManagerDAO managerDAO;
-	
-	@Override
-	public void addProduct(ProductVO product) throws Exception {
-		managerDAO.insertProduct(product);
-	}
-	
-	@Override
-	public List<ProductVO> listProducts(Pagination pagination) throws Exception {  
-		
-		return managerDAO.selectProducts(pagination);
-	}
-	
-	@Override
-	public List<ProductVO> fewStockProducts(Pagination pagination) throws Exception { 
-		
-		return managerDAO.selectFewStockProducts(pagination);
-	}
-	
-	@Override
-	public int productsCnt() throws Exception {
-	
-		return managerDAO.selectProductsCnt();
-	}
+	private ManagerMemberDAO managerDAO;
 	
 	@Override
 	public int membersCnt() throws Exception {
@@ -47,28 +23,7 @@ public class ManagerServiceImpl implements ManagerService{
 		return managerDAO.selectMembersCnt();
 	}
 	
-	@Override
-	public ProductVO getProduct(String p_code) throws Exception {
-		 
-		return managerDAO.selectProduct(p_code);
-	}
-	
-	@Override
-	public ProductVO getModifyProduct(String p_code) throws Exception {
-		
-		return managerDAO.selectProduct(p_code);
-	}
-	
-	@Override
-	public void modifyProduct(ProductVO product) throws Exception {
-		managerDAO.updateProduct(product);
-	}
-	
-	@Override
-	public void removeProduct(String p_code) throws Exception {
-		managerDAO.deleteProduct(p_code);
-	}
-	
+
 	@Override
 	public List getMembersList(Pagination pagination) throws Exception {
 		
@@ -106,18 +61,6 @@ public class ManagerServiceImpl implements ManagerService{
 		else {
 			return false;
 		}
-	}
-	
-	@Override
-	public int searchProductsCnt(Map searchMap) throws Exception {
-		
-		return managerDAO.selectSearchProductsCnt(searchMap);
-	}
-	
-	@Override
-	public List getSearchProducts(Map searchMap) throws Exception {
-		
-		return managerDAO.selectSearchProducts(searchMap);
 	}
 	
 	@Override

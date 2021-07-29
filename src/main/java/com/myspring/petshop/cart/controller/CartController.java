@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.cart.vo.CartVO;
-import com.myspring.petshop.manager.vo.ManagerVO;
+import com.myspring.petshop.manager.product.vo.ManagerProductVO;
 import com.myspring.petshop.product.vo.ProductVO;
 
 public interface CartController {

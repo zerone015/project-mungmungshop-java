@@ -27,15 +27,13 @@ public class FileUploadController  {
 	  }
 	
 	@RequestMapping(value="/upload",method = RequestMethod.POST)
-	public ModelAndView upload(MultipartHttpServletRequest multipartRequest,HttpServletResponse response)
-	  throws Exception{
+	public ModelAndView upload(MultipartHttpServletRequest multipartRequest,HttpServletResponse response) throws Exception{
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map map = new HashMap();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
 			String name=(String)enu.nextElement();
 			String value=multipartRequest.getParameter(name);
-			//System.out.println(name+", "+value);
 			map.put(name,value);
 		}
 		

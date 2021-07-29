@@ -27,11 +27,11 @@ request.setCharacterEncoding("utf-8");
 		<hr style=" width:120px; margin: auto; margin-top: 75; margin-bottom: 5;">
 		<p style="font-size: 16;">나의 쇼핑 활동</p>
            <ul  class="sideMenu">
-            <li class="sideMenu2"><a href="#">주문 내역 조회</a><li>
+            <li class="sideMenu2"><a href="${contextPath}/myPage/getOrderList.do">주문 내역 조회</a><li>
             <li class="sideMenu2"><a href="#">주문 취소 내역</a></li>
             <li class="sideMenu2"><a href="#">찜 리스트</a></li>
             <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
-            <li class="sideMenu2"><a href="#">1:1 문의</a></li>
+            <li class="sideMenu2"><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
            </ul>
     	 <hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
 		<p style="font-size: 16;">나의 쇼핑 활동</p>       
