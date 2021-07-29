@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.cart">
+	
+	<select id="selectCountInCart" resultType="String" parameterType="cartVO">
+		<![CDATA[	
+			select IF(count(*) = 0, 'false', 'true') from cart
+			where p_code = #{p_code} AND member_num = #{member_num}
+		]]>	
+	</select>	
+	
+	<insert id="insertProductsInCart" parameterType="cartVO">
+		<![CDATA[
+			insert into cart(cart_code,member_num,p_code,cart_quantity,cart_date) 
+			values(null, #{member_num}, #{p_code}, #{cart_quantity}, default)
+		]]>
+	</insert>
+
+	<select id="selectMaxCartId" resultType="int">
+		<![CDATA[	
+			select IFNULL(max(cart_code), 0) + 1 from cart
+		]]>	
+	</select>	
+	
+	<select id="selectCartList" resultType="cartVO" parameterType="cartVO" >
+		<![CDATA[	
+			select * from cart where member_num = #{member_num}
+		]]>	
+	</select>
+	
+	<select id="selectProductsList" resultType="productVO" parameterType="int" >
+		<![CDATA[	
+			SELECT * FROM products where p_code IN (select p_code from cart where member_num = #{member_num} order by cart_date)
+		]]>
+		
+	</select>
+	
+	<select id="updateCartProductsQty" parameterType="java.util.Map" >
+		update cart
+		<choose>
+			<when test="cartQty_btnVal.equals('minus')">
+				set cart_quantity = cart_quantity-1
+			</when>
+			<when test="cartQty_btnVal.equals('plus')">
+				set cart_quantity = cart_quantity+1
+			</when>
+			<otherwise>
+				set cart_quantity = #{cartVO.cart_quantity}
+			</otherwise>
+		</choose>
+		where member_num = #{cartVO.member_num} 
+		AND p_code = #{cartVO.p_code}
+	</select>
+	
+	<select id="selectProductsStock" resultType="int" parameterType="String" >
+		<![CDATA[	
+			SELECT p_stock FROM products where p_code = #{p_code} 
+		]]>
+		
+	</select>
+	
+	<delete id="deleteCartProducts" parameterType="String">
+		delete from cart where p_code = #{p_code}
+	</delete>
+</mapper>

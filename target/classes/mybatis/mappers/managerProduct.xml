@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.managerProduct">
+
+	
+	<insert id="insertProduct" parameterType="java.util.Map">
+		<![CDATA[ 
+			insert into products(p_code,p_cl1, p_cl2, p_brand, p_name, p_price, p_stock, p_imageFileName, p_description, p_date, p_loves, p_origin)
+			values(default, #{p_cl1}, #{p_cl2}, #{p_brand}, #{p_name}, #{p_price}, #{p_stock}, #{p_imageFileName}, #{p_description}, default, default, #{p_origin})
+		]]>
+	</insert>
+	
+	<select id="selectProducts" resultType="productVO">
+		<![CDATA[ 
+			select * from products order by p_date desc LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<select id="selectFewStockProducts" resultType="productVO">
+		<![CDATA[ 
+			select * from products order by p_stock ASC LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<select id="selectProductsCnt" resultType="int">
+		<![CDATA[ 
+			select count(*) as listCnt from products
+		]]>
+	</select>
+	
+	<select id="selectProduct" resultType="productVO" parameterType="String">
+		<![CDATA[ 
+			select * from products where p_code = #{p_code}
+		]]>
+	</select>
+	
+	<update id="updateProduct" parameterType="java.util.Map">
+		<![CDATA[ 
+			update products set p_cl1=#{p_cl1}, p_cl2=#{p_cl2}, p_brand=#{p_brand}, p_name=#{p_name}, p_price=#{p_price},
+			 p_stock=#{p_stock}, p_imageFileName=#{p_imageFileName}, p_description=#{p_description}, p_date=current_timestamp, p_origin=#{p_origin}
+			 where p_code = #{p_code}
+		]]>
+	</update>
+	
+	<delete id="deleteProduct" parameterType="String">
+		<![CDATA[ 
+			delete from products where p_code = #{p_code}
+		]]>
+	</delete>
+	
+	<select id="selectSearchProductsCnt" resultType="int" parameterType="HashMap">
+		<![CDATA[ 
+			select count(*) as listCnt from products where ${searchBy} LIKE CONCAT('%',#{searchContents},'%')
+		]]>
+	</select>
+	
+	<select id="selectSearchProducts" resultType="productVO" parameterType="HashMap">
+		<![CDATA[ 
+			select * from products where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+		]]>
+	</select>
+
+</mapper>

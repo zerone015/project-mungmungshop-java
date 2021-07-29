@@ -64,6 +64,7 @@
 	    <mvc:mapping path="/myPage/*"/>
 	    <mvc:mapping path="/board/qna*"/>
 	    <mvc:mapping path="/qna*"/>
+	    <mvc:mapping path="/manager/*"/>
 	    <beans:bean class="com.myspring.petshop.common.interceptor.SessionInterceptor"/>
 	   </mvc:interceptor>
 	</mvc:interceptors>

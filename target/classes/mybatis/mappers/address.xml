@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.address">
+
+<!-- 배송지 주소 등록 -->
+<insert id="insertAddress" parameterType="addressVO">
+<![CDATA[
+insert into address(address_num,member_num,address_recipent,address_phone,address_1,address_2,address_3,address_request)
+value(null,#{member_num},#{address_recipent},#{address_phone},#{address_1},#{address_2},#{address_3},#{address_request})
+]]>
+</insert>
+<!-- 배송지 주소 목록 -->
+<select id="selectAddressList" resultType="addressVO" parameterType="int">
+<![CDATA[
+	select * from address where member_num = #{member_num}
+]]>
+</select>
+
+<!-- 배송지 총 합계 불러오기 -->
+<select id="selectAddressCnt" resultType="int" parameterType="int">
+<![CDATA[
+	select count(*) from address where member_num = #{member_num}
+]]>
+</select>
+
+ <!-- 배송지 수정 페이지로 해당 배송지 내역 불러오기 -->
+<select id="selectModAddress" parameterType="int" resultType="addressVO">
+<![CDATA[
+	select * from address
+	where address_num = #{address_num}
+]]>
+</select>
+<!-- 배송지 수정 페이지로 불러온 배송지 내역 갱신하기 -->
+<update id="updateAddress" parameterType="addressVO" >
+		<![CDATA[ 
+			update address 
+			set	address_recipent=#{address_recipent},
+				address_phone=#{address_phone},
+				address_1=#{address_1},
+				address_2=#{address_2},
+				address_3=#{address_3},
+				address_request=#{address_request}
+			where address_num=#{address_num}
+		]]>
+</update>
+<!-- 배송지 삭제 -->
+<delete id="deleteAddress" parameterType="addressVO">
+<![CDATA[
+	delete from address
+	where address_num = #{address_num};
+]]>
+</delete>
+</mapper>

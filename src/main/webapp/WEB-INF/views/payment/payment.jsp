@@ -528,13 +528,13 @@ function numberWithCommas(x) {
 
 	<div class="um">
 	<div class="address2">
-		이름 <input type="text" class="form-control" name="member_name" value="${memberVO.member_name}"/>
+		이름 <input type="text" class="form-control" name="member_name" value="${memberVO.member_name}" readonly/>
 	</div>
 	<div class="address2">
-		핸드폰 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_phone}"/>
+		핸드폰 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_phone}" readonly/>
 	</div>
 	<div class="address2">
-		이메일 <input type="text" class="form-control" name="member_email" value="${memberVO.member_email}"/>
+		이메일 <input type="text" class="form-control" name="member_email" value="${memberVO.member_email}" readonly/>
 	</div>
 	</div>
 	<input type="hidden" name="member_num" value="${memberVO.member_num}"/>

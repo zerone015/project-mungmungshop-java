@@ -6,7 +6,20 @@
 	<typeAliases>
 		<typeAlias type="com.myspring.petshop.member.vo.MemberVO" alias="memberVO" />
 		<typeAlias type="com.myspring.petshop.mail.vo.MailVO" alias="mailVO"/>
-		<typeAlias type="com.myspring.petshop.manager.vo.ManagerVO" alias="managerVO"/>
+		<typeAlias type="com.myspring.petshop.manager.product.vo.ManagerProductVO" alias="managerProductVO"/>
+		<typeAlias type="com.myspring.petshop.manager.order.vo.OrderVO" alias="orderVO"/>
+		<typeAlias type="com.myspring.petshop.manager.order.vo.OrderDetailVO" alias="orderDetailVO"/>
+		<typeAlias type="com.myspring.petshop.manager.order.vo.DeliveryVO" alias="deliveryVO"/>
 		<typeAlias type="com.myspring.petshop.product.vo.ProductVO" alias="productVO"/>
+		<typeAlias type="com.myspring.petshop.cart.vo.CartVO" alias="cartVO"/>
+		<typeAlias type="com.myspring.petshop.payment.vo.PaymentVO" alias="paymentVO"/>
+		<typeAlias type="com.myspring.petshop.payment.vo.CombineVO" alias="combineVO"/>
+		<typeAlias type="com.myspring.petshop.board.qna.vo.QnaVO" alias="qnaVO"/>
+		<typeAlias type="com.myspring.petshop.review.vo.ReviewVO" alias="reviewVO"/>
+		<typeAlias type="com.myspring.petshop.board.faq.vo.FaqVO" alias="faqVO"/>
+		<typeAlias type="com.myspring.petshop.board.event.vo.EventVO" alias="eventVO"/>
+		<typeAlias type="com.myspring.petshop.board.notice.vo.NoticeVO" alias="noticeVO"/>
+		<typeAlias type="com.myspring.petshop.myPage.address.vo.AddressVO" alias="addressVO"/>
+		<typeAlias type="com.myspring.petshop.inquiry.vo.InquiryVO" alias="inquiryVO"/>
 	</typeAliases>
 </configuration>

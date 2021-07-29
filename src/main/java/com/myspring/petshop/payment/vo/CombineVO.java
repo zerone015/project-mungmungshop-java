@@ -11,6 +11,9 @@ public class CombineVO {
 	private int order_num;
 	private String p_code;
 	private int member_num;
+	private String member_name;
+	private String member_phone;
+	private String member_email;
 	private String address_recipent;
 	private String address_phone;
 	private String address_1;
@@ -58,6 +61,31 @@ public class CombineVO {
 	public void setMember_num(int member_num) {
 		this.member_num = member_num;
 	}
+	
+	public String getMember_name() {
+		return member_name;
+	}
+	
+	public void setMember_name(String member_name) {
+		this.member_name=member_name;
+	}
+	
+	public String getMember_email() {
+		return member_email;
+	}
+	
+	public void setMember_email(String member_email) {
+		this.member_email=member_email;
+	}
+	
+	public String getMember_phone() {
+		return member_phone;
+	}
+	
+	public void setMember_phone(String member_phone) {
+		this.member_phone=member_phone;
+	}
+	
 	
 	public String getAddress_recipent() {
 		return address_recipent;

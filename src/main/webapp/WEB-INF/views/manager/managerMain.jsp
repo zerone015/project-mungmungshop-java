@@ -45,21 +45,7 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<div class="col-md-5" style="float: left;">
 		<h4>
-			<a href="#">배송 관리</a>
-		</h4>
-	</div>
-	<br>
-	<br>
-	<div class="col-md-5" style="float: left;">
-		<h4>
 			<a href="#">후기 관리</a>
-		</h4>
-	</div>
-	<br>
-	<br>
-	<div class="col-md-5" style="float: left;">
-		<h4>
-			<a href="#">게시판 관리</a>
 		</h4>
 	</div>
 </body>

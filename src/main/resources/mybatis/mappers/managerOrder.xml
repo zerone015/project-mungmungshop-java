@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.managerOrder">
+
+<select id="selectOrderList" resultType="combineVO">
+	<![CDATA[
+		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
+		from orders AS ord 
+		JOIN orders_detail AS odd 
+		ON ord.order_code = odd.order_code 
+		LIMIT #{startList}, #{listSize}
+	]]>
+</select>
+
+<select id="selectOrdersCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from orders_detail
+	]]>
+</select>
+
+<select id="selectOrder" resultType="orderVO" parameterType="String">
+	<![CDATA[
+		select * from orders where order_code = #{order_code}
+	]]>
+</select>
+
+<select id="selectOrderDetail" resultType="orderDetailVO" parameterType="String">
+	<![CDATA[
+		select * from orders_detail where order_code = #{order_code}
+	]]>
+</select>
+
+<select id="selectDelevery" resultType="deliveryVO" parameterType="String">
+	<![CDATA[
+		select * from delivery where order_code = #{order_code}
+	]]>
+</select>
+
+<update id="updateOrderStatus" parameterType="orderDetailVO">
+	<![CDATA[
+		update orders_detail set order_status = #{order_status} where order_detailCode = #{order_detailCode}
+	]]>
+</update>
+</mapper>

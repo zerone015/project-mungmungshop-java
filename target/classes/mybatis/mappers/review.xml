@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.review">
+		
+	
+	
+	
+	<!--================================== 상품 리뷰 ==================================-->
+	<!-- 상품 리뷰 조회 -->
+	<select id="selectAllReviewList" resultType="ReviewVO" parameterType="HashMap">
+	<![CDATA[
+		select * from reviews 
+		where p_code = #{p_code}
+		order by review_num DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	]]>
+	</select>
+	
+	<!-- 게시글 개수 -->
+	<select id="selectReviewCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from reviews where p_code = #{p_code}
+	]]>
+	</select> 
+	
+	
+</mapper>

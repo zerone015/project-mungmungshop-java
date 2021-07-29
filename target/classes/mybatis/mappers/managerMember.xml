@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.managerMember">
+
+	<select id="selectMembers" resultType="memberVO">
+		<![CDATA[ 
+			select * from members order by Member_joindate desc LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<select id="selectMembersCnt" resultType="int">
+		<![CDATA[ 
+			select count(*) as listCnt from members
+		]]>
+	</select>
+
+	
+	<delete id="deleteMembers" parameterType="int">
+		<![CDATA[ 
+			delete from members where member_num = #{member_num}
+		]]>
+	</delete>
+	
+	<update id="updateMemberGrant" parameterType="int">
+		<![CDATA[ 
+			update members set member_manager = 1
+			where member_num = #{member_num}
+		]]>
+	</update>
+	
+	<update id="updateMemberRevoke" parameterType="int">
+		<![CDATA[ 
+			update members set member_manager = 0
+			where member_num = #{member_num}
+		]]>
+	</update>
+	
+	<select id="selectMemberManager" resultType="int" parameterType="int">
+		<![CDATA[ 
+			select member_manager from members
+			where member_num = #{member_num}
+		]]>
+	</select>
+	
+	<select id="selectSearchMembersCnt" resultType="int" parameterType="HashMap">
+		<![CDATA[ 
+			select count(*) as listCnt from members where ${searchBy} LIKE CONCAT('%',#{searchContents},'%')
+		]]>
+	</select>
+	
+	<select id="selectSearchMembers" resultType="memberVO" parameterType="HashMap">
+		<![CDATA[ 
+			select * from members where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+		]]>
+	</select>
+</mapper>
