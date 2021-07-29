@@ -66,4 +66,32 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectProduct(p_code);
 	}
 	
+	
+	@Override
+	public List getNewProducts(HashMap productInfo) throws Exception {
+		return productDAO.selectAllNewProducts(productInfo);
+	}
+	
+	@Override
+	public List getNewProductsLove(HashMap productInfo) throws Exception {
+		return productDAO.selectNewLoveRanking(productInfo);
+	}
+
+	@Override
+	public List getNewProductsHigh(HashMap productInfo) throws Exception {
+		return productDAO.selectNewHighPriceRanking(productInfo);
+	}
+
+	@Override
+	public List getNewProductsLow(HashMap productInfo) throws Exception {
+		return productDAO.selectNewLowPriceRanking(productInfo);
+	}
+	
+	@Override
+	public int newProductsCnt() throws Exception {
+		return productDAO.selectNewProductsCnt();
+	}
+	
+	
+	
 }

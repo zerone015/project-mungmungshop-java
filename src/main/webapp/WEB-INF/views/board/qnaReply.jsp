@@ -60,6 +60,7 @@ function checkBoard() {
 </script>
 </head>
 <body>
+<div class="container">
 	<form action="${contextPath}/qnaReply.do" method="POST" name="qnaReply" >
 		
 		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}"/>
@@ -78,8 +79,10 @@ function checkBoard() {
 			<tr>
 				<th style="background: #e6e6e6;">작성자</th>
 				<td>
-					<input type="text" id = "qna_writer" name = "qna_writer" />
-				</td>
+					<c:if test="${isLogOn == true  && member != null}">
+						<input type="text" id = "qna_writer" name = "qna_writer" value="${member.member_nick}" readonly/>
+					</c:if>
+					</td>
 				<th style="background: #e6e6e6;">날짜</th>
 				<td>
 					<input type="text" id = "qna_date" name = "qna_date" value="<%=nowTime%>" readonly>
@@ -101,6 +104,6 @@ function checkBoard() {
 	
 	<hr width="100%">
 	
-	
+</div>	
 </body>
 </html>

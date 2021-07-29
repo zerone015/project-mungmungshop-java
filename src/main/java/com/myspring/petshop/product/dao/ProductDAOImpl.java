@@ -65,4 +65,36 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	
+	@Override
+	public List selectAllNewProducts(HashMap productInfo) throws Exception {
+		
+		return sqlSession.selectList("mapper.product.selectAllNewProducts", productInfo);
+	}
+	
+
+	@Override
+	public List selectNewLowPriceRanking(HashMap productInfo) throws Exception {
+		
+		return sqlSession.selectList("mapper.product.selectNewLowPriceRanking", productInfo);
+	}
+	
+
+	@Override
+	public List selectNewHighPriceRanking(HashMap productInfo) throws Exception {
+		
+		return sqlSession.selectList("mapper.product.selectNewHighPriceRanking", productInfo);
+	}
+	
+	@Override
+	public List selectNewLoveRanking(HashMap productInfo) throws Exception {
+		
+		return sqlSession.selectList("mapper.product.selectNewLoveRanking", productInfo);
+	}
+	
+	@Override
+	public int selectNewProductsCnt() throws Exception {
+		return sqlSession.selectOne("mapper.product.selectNewProductsCnt");
+	}
+	
+	
 }

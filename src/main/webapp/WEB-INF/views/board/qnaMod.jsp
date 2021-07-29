@@ -52,6 +52,7 @@ function checkBoard() {
 </script>
 </head>
 <body>
+<div class="container">
 	<form name="qnaModify" method="POST" action="${contextPath}/qnaMod.do?qna_no=${qnaVO.qna_no}">
 		<table class="table table-sm table-bordered" border="1" >
 			<tr>
@@ -82,7 +83,7 @@ function checkBoard() {
 	</form>
 	
 	<hr width="100%">
-	
+</div>
 	
 </body>
 </html>

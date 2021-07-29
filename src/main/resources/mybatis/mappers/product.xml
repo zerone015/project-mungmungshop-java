@@ -99,4 +99,42 @@
 	<select id="selectProduct" resultType="productVO" parameterType="String">
 		select * from products where p_code = #{p_code}
 	</select>
+	
+	
+	
+	
+	
+	
+	<!-- =========================== 신상품 =========================== -->
+	<select id="selectAllNewProducts" resultType="productVO" parameterType="HashMap">
+		SELECT * FROM petshopdb.products
+		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
+        order by p_date DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectNewLoveRanking" resultType="productVO" parameterType="HashMap">
+		SELECT * FROM petshopdb.products
+		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
+        order by p_loves DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectNewLowPriceRanking" resultType="productVO" parameterType="HashMap">
+		SELECT * FROM petshopdb.products
+		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
+        order by p_price
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectNewHighPriceRanking" resultType="productVO" parameterType="HashMap">
+		SELECT * FROM petshopdb.products
+		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
+        order by p_price DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+		
+	<select id="selectNewProductsCnt" resultType="int">
+		select count(*) as listCnt from products 
+	</select>
 </mapper>

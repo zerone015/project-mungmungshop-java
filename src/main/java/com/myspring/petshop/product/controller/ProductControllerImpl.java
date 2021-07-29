@@ -136,4 +136,60 @@ public class ProductControllerImpl implements ProductController {
 		
 		return mav;
 	}
+	
+	
+	
+	@Override
+	@RequestMapping(value="/product/newProduct.do", method = RequestMethod.GET)
+	public ModelAndView newProduct(
+			@RequestParam(value="sortBy", required=false, defaultValue="default") String sortBy,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("newProduct");
+		
+		int listCnt = productService.newProductsCnt();
+		
+		Pagination pagination = new Pagination();
+		pagination.setListSize(9);
+		pagination.pageInfo(page, range, listCnt);
+		
+		HashMap<String, Object> productInfo = new HashMap<String, Object>();
+		productInfo.put("pagination", pagination);
+		
+		List products = null;
+		
+		if(sortBy.equals("default")) {
+			products = productService.getNewProducts(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("love")) {
+			products = productService.getNewProductsLove(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		
+		else if(sortBy.equals("lowPrice")) {
+			products = productService.getNewProductsLow(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("highPrice")) {
+			products = productService.getNewProductsHigh(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else{
+			mav.setViewName("pageError");
+		}
+	
+		mav.addObject("pagination", pagination);
+		mav.addObject("products", products);
+		mav.addObject("sortBy", sortBy);
+		
+		return mav;
+	}
 }
