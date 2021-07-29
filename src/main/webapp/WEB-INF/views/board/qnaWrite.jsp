@@ -73,7 +73,10 @@ function checkBoard() {
 				<tr>
 					<th style="background: #e6e6e6;">작성자</th>
 					<td>
-						<input type="text" id = "qna_writer" name = "qna_writer" />
+						<c:if test="${isLogOn == true  && member != null}">
+						<input type="text" id = "qna_writer" name = "qna_writer" value="${member.member_nick}" readonly/>
+							
+						</c:if>
 					</td>
 					<th style="background: #e6e6e6;">날짜</th>
 					<td>

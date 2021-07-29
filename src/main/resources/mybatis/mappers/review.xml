@@ -14,7 +14,7 @@
 	<![CDATA[
 		select * from reviews 
 		where p_code = #{p_code}
-		order by  review_date
+		order by review_num DESC
 		LIMIT #{pagination.startList}, #{pagination.listSize}
 	]]>
 	</select>
@@ -22,7 +22,7 @@
 	<!-- 게시글 개수 -->
 	<select id="selectReviewCnt" resultType="int">
 	<![CDATA[
-		select count(*) as listCnt from reviews 
+		select count(*) as listCnt from reviews where p_code = #{p_code}
 	]]>
 	</select> 
 	

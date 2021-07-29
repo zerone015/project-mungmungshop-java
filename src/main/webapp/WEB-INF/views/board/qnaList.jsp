@@ -16,7 +16,12 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <meta charset="utf-8">
 <title>1:1 문의 목록</title>
-	
+<style>
+	.secret {
+		width: 20;
+		height: 20;
+	}
+</style>	
 <script>
 
 	//이전 버튼 이벤트
@@ -50,6 +55,23 @@
 		url = url + "&range=" + range;
 		
 		location.href = url;
+	}
+	
+	
+	function fn_qnaView(qna_writer, memberNick, manager, qna_no){
+		if (qna_writer == memberNick) {
+			url = "${contextPath}/board/qnaView.do"
+			url = url + "?qna_no=" + qna_no;
+			location.href = url;
+		 }
+		else if (manager == 1) {
+			url = "${contextPath}/board/qnaView.do"
+			url = url + "?qna_no=" + qna_no;
+			location.href = url;
+		 }
+		else {
+			alert('권한이 없습니다.');
+		}
 	}
 </script>
 
@@ -86,33 +108,19 @@
 				      
 				      
 				      <!-- 제목 -->
-				      <c:choose>
-				      	<c:when test="${qnaVO.qna_secret == 'Y'}">
-					      <c:if test="${qnaVO.qna_groupLayer == 0}">
-					      	<td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
-					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >비밀글 입니다.</a></td>
-					      </c:if>
-					      <c:if test="${qnaVO.qna_groupLayer == 1}">
-					      	<td class="reply1"> <a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
-					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >ㄴ[답변] 비밀 답글 입니다.</a></td>
-					      </c:if>
-					      <c:if test="${qnaVO.qna_groupLayer == 2}">
-					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
-					      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >ㄴ[답변] 비밀 답글 입니다.</a></td>
-					      </c:if>
-					    </c:when>
-					    <c:otherwise>
-					      <c:if test="${qnaVO.qna_groupLayer == 0}">
-					      <td><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">${qnaVO.qna_title}</a></td>
-					      </c:if>
-					      <c:if test="${qnaVO.qna_groupLayer == 1}">
-					      	<td class="reply1"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">ㄴ${qnaVO.qna_title}</a></td>
-					      </c:if>
-					      <c:if test="${qnaVO.qna_groupLayer == 2}">
-					      	<td class="reply2"><a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}"> ㄴ${qnaVO.qna_title}</a></td>
-					      </c:if>
-					    </c:otherwise>
-					  </c:choose>
+
+				      <c:if test="${qnaVO.qna_groupLayer == 0}">
+				      	<td> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
+				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >${qnaVO.qna_title}</a></td>
+				      </c:if>
+				      <c:if test="${qnaVO.qna_groupLayer == 1}">
+				      	<td class="reply1"> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
+				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" > ㄴ[답변] ${qnaVO.qna_title}</a></td>
+				      </c:if>
+				      <c:if test="${qnaVO.qna_groupLayer == 2}">
+				      	<td class="reply2"> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
+				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" > ㄴ[답변] ${qnaVO.qna_title}</a></td>
+				      </c:if>
 				      
 				      
 				      <!-- 작성자 -->

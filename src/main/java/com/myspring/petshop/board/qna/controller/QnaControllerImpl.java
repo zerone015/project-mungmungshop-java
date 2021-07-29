@@ -44,7 +44,7 @@ public class QnaControllerImpl implements QnaController {
 								@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("/board/qnaList");
-		
+		session = request.getSession();
 		// 게시글 총 개수
 		int listCnt = qnaService.qnaCnt();
 		
@@ -52,10 +52,32 @@ public class QnaControllerImpl implements QnaController {
 		pagination.setListSize(10);
 		pagination.pageInfo(page, range, listCnt);
 		
+		// 매니저 권한 여부 
+		memberVO = (MemberVO)session.getAttribute("member");
+		int manager;
+		
+		if(memberVO != null) {
+			 manager = memberVO.getMember_manager();
+		}
+		else {
+			 manager = 1234;
+		}
+		
+		// 회원 닉네임 정보
+		String memberNick;
+		if(memberVO != null) {
+			memberNick = memberVO.getMember_nick();
+		}
+		else {
+			memberNick = "!*";
+		}
+		
 		List qnaList = qnaService.listQna(pagination);
 		
 		mav.addObject("pagination", pagination);
 		mav.addObject("qnaList", qnaList);
+		mav.addObject("manager", manager);
+		mav.addObject("memberNick", memberNick);
 		
 		return mav;
 	}

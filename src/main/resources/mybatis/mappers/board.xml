@@ -106,7 +106,7 @@
 	<!-- 게시글 리스트 조회 -->
 	<select id="selectAllFaqList" resultType="faqVO">
 	<![CDATA[
-		select faq_no, faq_title, faq_writer, faq_hits, faq_date from faqBoard 
+		select faq_no, faq_title, faq_content, faq_writer, faq_hits, faq_date from faqBoard 
 		order by faq_no desc
 		
 	]]>
@@ -306,5 +306,25 @@
 	</delete> 
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- =================================================상품 문의============================================================= -->
+	<!-- 게시글 리스트 조회 -->
+	<select id="selectAllInquiryList" resultType="InquiryVO">
+	<![CDATA[
+		select * from inquiry 
+		order by inq_originNo desc, inq_groupOrd 
+	]]>
+	</select>
 	
 </mapper>
