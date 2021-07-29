@@ -1,5 +1,7 @@
 package com.myspring.petshop.payment.vo;
 
+import java.sql.Timestamp;
+
 import org.springframework.stereotype.Component;
 
 @Component
@@ -17,12 +19,15 @@ public class CombineVO {
 	private String address_request;
 	private int order_quantity;
 	private int p_price;
+	private String p_name;
+	private String p_imageFileName;
 	private int order_usePoint;
 	private int order_addPoint;
 	private String order_method;
 	private String order_status;
 	private int order_totalQuantity;
 	private int order_totalPrice;
+	private Timestamp order_date;
 
 	
 	public CombineVO() {
@@ -111,12 +116,12 @@ public class CombineVO {
 		this.order_code = order_code;
 	}
 	
-	public String getP_code() {
-		return p_code;
+	public String getP_imageFileName() {
+		return p_imageFileName;
 	}
 	
-	public void setP_code(String p_code) {
-		this.p_code = p_code;
+	public void setP_imageFileName(String p_imageFileName) {
+		this.p_imageFileName = p_imageFileName;
 	}
 	
 	public int getOrder_quantity() {
@@ -133,6 +138,22 @@ public class CombineVO {
 	
 	public void setP_price(int p_price) {
 		this.p_price = p_price;
+	}
+	
+	public String getP_name() {
+		return p_name;
+	}
+	
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+	
+	public String getP_code() {
+		return p_code;
+	}
+	
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
 	}
 	
 	public int getOrder_usePoint() {
@@ -182,5 +203,13 @@ public class CombineVO {
 	
 	public void setOrder_totalPrice(int order_totalPrice) {
 		this.order_totalPrice = order_totalPrice;
+	}
+	
+	public Timestamp getOrder_date() {
+		return order_date;
+	}
+	
+	public void setOrder_date(Timestamp order_date) {
+		this.order_date = order_date;
 	}
 }

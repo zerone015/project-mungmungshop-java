@@ -571,6 +571,8 @@ function numberWithCommas(x) {
 					<input type="hidden" name="p_code" value="${item.p_code}"/>
 					<input type="hidden" name="p_price" value="${item.p_price}"/>
 					<input type="hidden" name="order_quantity" value="${item.cart_quantity}"/>
+					<input type="hidden" name="p_name" value="${item.p_name}"/>
+					<input type="hidden" name="p_imageFileName" value="${item.p_imageFileName}"/>
 					<c:set var="final_total_products_qty" value="${final_total_products_qty + item.cart_quantity}"/>
 					<c:set var="final_total_addPoint" value="${final_total_addPoint + item.p_price * item.cart_quantity / 60}" />
 					<c:set var="total_payment_price" value="${total_payment_price + item.p_price * item.cart_quantity}"/>
@@ -591,6 +593,8 @@ function numberWithCommas(x) {
 				<input type="hidden" name="p_code" value="${paymentVO.p_code}"/>
 				<input type="hidden" name="p_price" value="${paymentVO.p_price}"/>
 				<input type="hidden" name="order_quantity" value="${paymentVO.order_quantity}"/>
+				<input type="hidden" name="p_name" value="${paymentVO.p_name}"/>
+				<input type="hidden" name="p_imageFileName" value="${paymentVO.p_imageFileName}"/>
 				<input type="hidden" id="order_totalPrice" name="order_totalPrice" value="${final_total_payment_price}"/>
 				<c:set var="final_total_products_qty" value="${final_total_products_qty + paymentVO.order_quantity}"/>
 				<c:set var="final_total_addPoint" value="${final_total_addPoint + paymentVO.p_price * paymentVO.order_quantity / 60}" />

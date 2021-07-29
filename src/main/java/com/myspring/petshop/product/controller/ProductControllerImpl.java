@@ -33,7 +33,6 @@ public class ProductControllerImpl implements ProductController {
 			@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		request.setCharacterEncoding("utf-8");
 		ModelAndView mav = new ModelAndView("productList");
 		
 		int listCnt = productService.productsCnt(category);

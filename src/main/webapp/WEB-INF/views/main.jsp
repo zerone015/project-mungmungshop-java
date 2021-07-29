@@ -40,8 +40,14 @@ request.setCharacterEncoding("UTF-8");
 	section {
 		text-align: center;
 	}
-</style>
+	.product{
+	    cursor: pointer; 
+	    width: 330px; 
+	    height: 400px;
+	    margin-right: auto;
+	}
 
+</style>
 </head>
 <body>
 	<!-- 배너 -->
@@ -83,7 +89,7 @@ request.setCharacterEncoding("UTF-8");
 		 </div>
 </section>
 
-<!-- 목록 -->
+	<!-- 목록 -->
 	<div style="margin-top: 20;">
 		<div class="container">
 			<div class="row">
@@ -95,102 +101,104 @@ request.setCharacterEncoding("UTF-8");
 				<hr width="100%">
 				<div class="row">
 					<c:forEach items="${newProductList}" var="item">
-						<div class="col-md-4" style="display: inline-block; float: left;">
-							<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-								onclick="location.href='${contextPath}/product/getProduct.do?p_code=${item.p_code}';">
-								<div class="bd-placeholder-img card-img-top">
+						<div class="product">
+							<div class="bd-placeholder-img card-img-top">
+								<a
+									href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
 									<img
-										src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
-										style="width: 100%; height: 225;" alt="상품 이미지" />
-								</div>
-								<div class="card-body">
-									<p style="font-size: 14px;">${item.p_name}</p>
-									<p style="font-size: 14px;">
-										<fmt:formatNumber value="${item.p_price}"
-											pattern="###,###,###" />
-										원
-									</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group"></div>
-										<p style="color: red;">♥ ${item.p_loves}</p>
-									</div>
+									src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
+									style="width: 100%; height: 225;" alt="상품 이미지" />
+								</a>
+							</div>
+							<div class="card-body">
+								<p style="font-size: 14px;">${item.p_name}</p>
+								<p style="font-size: 14px;">
+									<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
+									원
+								</p>
+								<div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group"></div>
+									<p style="color: red;">♥ ${item.p_loves}</p>
 								</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
+			</div>
 
-				<!-- 랭킹 목록 -->
-				<div class="row">
-					<h3 style="margin: 0; margin-right: 1030px;">랭킹</h3>
-					<a href="#" style="float: right; margin: 0;">+ 더보기</a>
-				</div>
-				<hr width="100%">
-
-				<div style="text-align: center;">
-					<c:forEach items="${rankProductList}" var="item" varStatus="status">
-						<div class="col-md-4" style="display: inline-block; float: left;">
-							<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-								onclick="location.href='${contextPath}/product/getProduct.do?p_code=${item.p_code}';">
-								<div class="bd-placeholder-img card-img-top">
-									<img
-										src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
-										style="width: 100%; height: 225;" alt="상품 이미지" />
-									<p class="rank">${status.count}</p>
-								</div>
-								<div class="card-body">
-									<p style="font-size: 14px;">${item.p_name}</p>
-									<p style="font-size: 14px;">
-										<fmt:formatNumber value="${item.p_price}"
-											pattern="###,###,###" />
-										원
-									</p>
-									<div class="d-flex justify-content-between align-items-center">
-										<div class="btn-group"></div>
-										<p style="color: red;">♥ ${item.p_loves}</p>
-									</div>
-								</div>
-							</div>
+			<!-- 랭킹 목록 -->
+			<div class="row">
+				<h3 style="margin: 0; margin-right: 1030px;">랭킹</h3>
+				<a href="#" style="float: right; margin: 0;">+ 더보기</a>
+			</div>
+			<hr width="100%">
+			<div class="row">
+				<c:forEach items="${rankProductList}" var="item" varStatus="status">
+					<div class="product">
+						<div class="bd-placeholder-img card-img-top">
+							<a
+								href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
+								<img
+								src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
+								style="width: 100%; height: 225;" alt="상품 이미지" />
+							</a>
+							<p class="rank">${status.count}</p>
 						</div>
-					</c:forEach>
-				</div>
-
-
-				<!-- 브랜드 목록 -->
-				<div class="row">
-					<h3 style="margin: 0; margin-right: 1000px;">브랜드</h3>
-					<a href="#" style="float: right; margin: 0;">+ 더보기</a>
-				</div>
-				<hr width="100%">
-
-				<div style="text-align: center;">
-					<div class="col-md-4" style="display: inline-block; float: left;">
-						<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-							onclick="location.href='#';">
-							<div class="bd-placeholder-img card-img-top">
-								<img src="${contextPath}/download?imageFileName=ACANA.PNG" style="width: 100%; height: 250;"/>
+						<div class="card-body">
+							<p style="font-size: 14px;">${item.p_name}</p>
+							<p style="font-size: 14px;">
+								<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
+								원
+							</p>
+							<div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group"></div>
+								<p style="color: red;">♥ ${item.p_loves}</p>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4" style="display: inline-block; float: left;">
-						<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-							onclick="location.href='#';">
-							<div class="bd-placeholder-img card-img-top">
-								<img src="${contextPath}/download?imageFileName=ORIGEN.PNG" style="width: 100%; height: 250;"/>
-							</div>
+				</c:forEach>
+			</div>
+		</div>
+
+
+		<!-- 브랜드 목록 -->
+			<div class="row">
+				<h3 style="margin: 0; margin-right: 1000px;">브랜드</h3>
+				<a href="#" style="float: right; margin: 0;">+ 더보기</a>
+			</div>
+			<hr width="100%">
+
+			<div style="text-align: center;">
+				<div class="col-md-4" style="display: inline-block; float: left;">
+					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
+						onclick="location.href='#';">
+						<div class="bd-placeholder-img card-img-top">
+							<img src="${contextPath}/download?imageFileName=ACANA.PNG"
+								style="width: 100%; height: 250;" />
 						</div>
 					</div>
-					<div class="col-md-4" style="display: inline-block; float: left;">
-						<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-							onclick="location.href='#';">
-							<div class="bd-placeholder-img card-img-top">
-								<img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG" style="width: 100%; height: 250;"/>
-							</div>
+				</div>
+				<div class="col-md-4" style="display: inline-block; float: left;">
+					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
+						onclick="location.href='#';">
+						<div class="bd-placeholder-img card-img-top">
+							<img src="${contextPath}/download?imageFileName=ORIGEN.PNG"
+								style="width: 100%; height: 250;" />
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4" style="display: inline-block; float: left;">
+					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
+						onclick="location.href='#';">
+						<div class="bd-placeholder-img card-img-top">
+							<img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG"
+								style="width: 100%; height: 250;" />
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
 	</div>
 
 

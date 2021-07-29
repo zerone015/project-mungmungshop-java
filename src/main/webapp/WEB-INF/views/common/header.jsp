@@ -148,7 +148,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 								<font class="divider">|</font>
 							</c:otherwise>
 						</c:choose>
-						<a class="rightMenu" href="${contextPath}/order.do">마이페이지</a>
+						<a class="rightMenu" href="${contextPath}/myPage/getOrderList.do">마이페이지</a>
 					</div>
 				</div>
 			</div>

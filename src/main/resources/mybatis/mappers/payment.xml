@@ -47,13 +47,13 @@
 	</insert>
 	
 	<insert id="insertOrderDetail" parameterType="combineVO" >
-			insert into orders_detail(order_detailCode, order_code, p_code, order_quantity, p_price) 
-			values(default, #{order_code}, #{p_code}, #{order_quantity}, #{p_price})
+			insert into orders_detail(order_detailCode,member_num, order_code, p_code, p_name, order_quantity, p_price, p_imageFileName) 
+			values(default, #{member_num}, #{order_code}, #{p_code}, #{p_name}, #{order_quantity}, #{p_price}, #{p_imageFileName})
 	</insert>
 	
 	<insert id="insertDelivery" parameterType="combineVO" >
-			insert into delivery(deli_num, order_code, deli_name, deli_tel, deli_address1, deli_address2, deli_address3, deli_request) 
-			values(default, #{order_code}, #{address_recipent}, #{address_phone}, #{address_1}, #{address_2}, #{address_3}, #{address_request})
+			insert into delivery(deli_num, member_num, order_code, deli_name, deli_tel, deli_address1, deli_address2, deli_address3, deli_request) 
+			values(default, #{member_num}, #{order_code}, #{address_recipent}, #{address_phone}, #{address_1}, #{address_2}, #{address_3}, #{address_request})
 	</insert>
 	
 	<insert id="updateAddMemberPoint" parameterType="combineVO" >

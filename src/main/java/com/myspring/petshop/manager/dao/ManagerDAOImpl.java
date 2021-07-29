@@ -21,9 +21,15 @@ public class ManagerDAOImpl implements ManagerDAO {
 	}
 	
 	@Override
-	public List selectProducts(Pagination pagination) throws Exception {
+	public List<ProductVO> selectProducts(Pagination pagination) throws Exception { 
 		
 		return sqlSession.selectList("mapper.manager.selectProducts", pagination);
+	}
+	
+	@Override
+	public List<ProductVO> selectFewStockProducts(Pagination pagination) throws Exception { 
+		
+		return sqlSession.selectList("mapper.manager.selectFewStockProducts", pagination);
 	}
 	
 	@Override

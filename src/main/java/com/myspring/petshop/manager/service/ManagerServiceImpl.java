@@ -24,9 +24,15 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 	
 	@Override
-	public List listProducts(Pagination pagination) throws Exception {
+	public List<ProductVO> listProducts(Pagination pagination) throws Exception {  
 		
 		return managerDAO.selectProducts(pagination);
+	}
+	
+	@Override
+	public List<ProductVO> fewStockProducts(Pagination pagination) throws Exception { 
+		
+		return managerDAO.selectFewStockProducts(pagination);
 	}
 	
 	@Override

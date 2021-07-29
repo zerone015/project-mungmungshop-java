@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.address.vo.AddressVO;
@@ -35,10 +36,10 @@ public class PaymentControllerImpl implements PaymentController {
 		
 	
 	@Override
-	@RequestMapping(value = "/payment/getPaymentCompletePage.do", method = RequestMethod.GET)
-	public String getPaymentCompletePage(Model model) throws Exception {
+	@RequestMapping(value = "/payment/getPaymentResult.do", method = RequestMethod.GET)
+	public String getPaymentResult() throws Exception {
 		
-		return "PaymentCompletePage";
+		return "paymentResult";
 	}
 	
 	@Override
@@ -93,12 +94,14 @@ public class PaymentControllerImpl implements PaymentController {
 	
 	@Override
 	@RequestMapping(value="/payment/addPayment.do", method = RequestMethod.POST)
-	public ModelAndView addPayment(@ModelAttribute("combineVO") CombineVO combineVO, Errors errors,
+	public String addPayment(@ModelAttribute("combineVO") CombineVO combineVO, Errors errors, RedirectAttributes rAttr,
 								   @RequestParam(value="sale_check", required=false) String sale_check, HttpServletRequest request) throws Exception {
 		
 		String[] p_codes = request.getParameterValues("p_code");
 		String[] order_quantitys = request.getParameterValues("order_quantity");
 		String[] p_prices = request.getParameterValues("p_price");
+		String[] p_names = request.getParameterValues("p_name");
+		String[] p_imageFileNames = request.getParameterValues("p_imageFileName");
 		
 		int member_num = combineVO.getMember_num();
 		addressVO = paymentService.getAddress(member_num);
@@ -113,6 +116,8 @@ public class PaymentControllerImpl implements PaymentController {
 			paymentMap.put("p_codes", p_codes);
 			paymentMap.put("order_quantitys", order_quantitys);
 			paymentMap.put("p_prices", p_prices);
+			paymentMap.put("p_names", p_names);
+			paymentMap.put("p_imageFileNames", p_imageFileNames);
 			
 			order_code = paymentService.addPayments(paymentMap,combineVO,sale_check);
 		}
@@ -125,11 +130,9 @@ public class PaymentControllerImpl implements PaymentController {
 		HttpSession session = request.getSession();
 		session.removeAttribute("member");
 		session.setAttribute("member", member);
-			
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("paymentResult");
-		mav.addObject("order_code", order_code);
+
+		rAttr.addAttribute("order_code", order_code);
 		
-		return mav;
+		return "redirect:/payment/getPaymentResult.do";
 	}
 }

@@ -31,4 +31,11 @@ public class MainControllerImpl implements MainController{
 		
 		return mav;
 	}
+	
+	@Override
+	@RequestMapping(value="/member/null", method = RequestMethod.GET)
+	public String main2() throws Exception {
+		
+		return "redirect:/main.do";
+	}
 }

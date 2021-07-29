@@ -30,7 +30,13 @@
 	
 	<select id="selectProducts" resultType="productVO">
 		<![CDATA[ 
-			select * from products order by p_code desc LIMIT #{startList}, #{listSize}
+			select * from products order by p_date desc LIMIT #{startList}, #{listSize}
+		]]>
+	</select>
+	
+	<select id="selectFewStockProducts" resultType="productVO">
+		<![CDATA[ 
+			select * from products order by p_stock ASC LIMIT #{startList}, #{listSize}
 		]]>
 	</select>
 	

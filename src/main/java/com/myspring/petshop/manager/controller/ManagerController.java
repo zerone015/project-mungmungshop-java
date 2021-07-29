@@ -16,6 +16,7 @@ public interface ManagerController {
 			HttpServletResponse response) throws Exception;
 	
 	public ModelAndView listProducts(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(value="sortBy", required=false, defaultValue="default") String sortBy,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 	

@@ -9,7 +9,8 @@ import com.myspring.petshop.product.vo.ProductVO;
 
 public interface ManagerDAO {
 	public void insertProduct(ProductVO product) throws Exception;
-	public List selectProducts(Pagination pagination) throws Exception;
+	public List<ProductVO> selectProducts(Pagination pagination) throws Exception;
+	public List<ProductVO> selectFewStockProducts(Pagination pagination) throws Exception;
 	public int selectProductsCnt() throws Exception;
 	public int selectMembersCnt() throws Exception;
 	public ProductVO selectProduct(String p_code) throws Exception;

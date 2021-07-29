@@ -8,21 +8,7 @@ request.setCharacterEncoding("UTF-8");
 %>
 <html>
 <head>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-	crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-	integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-	integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-	crossorigin="anonymous"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-	integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-	crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <meta charset="utf-8">
 <title>주문 내역 조회</title>
 </head>
@@ -33,56 +19,103 @@ request.setCharacterEncoding("UTF-8");
 			window.close();
 	}
 </script>
+<script>
+
+	//이전 버튼 이벤트
+	function fn_prev(page, range, rangeSize) {
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		
+		
+		var url = "${contextPath}/myPage/getOrderList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;
+		
+}
+
+	//페이지 번호 클릭
+	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		
+		var url = "${contextPath}/myPage/getOrderList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;	
+	}
+
+	//다음 버튼 이벤트
+	function fn_next(page, range, rangeSize) {
+
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+		
+		var url = "${contextPath}/myPage/getOrderList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;
+	}
+</script>
 <body>
 	<div>
-		<h1 class="display-5 fw-bold">
+		<h2 class="display-5 fw-bold" style="margin-bottom: 50px;">
 			<b>주문 내역 조회</b>
-		</h1>
+		</h2>
 	</div>
 
 	<table class="table table-hover">
-
 		<thead>
-			<tr>
+			<tr align="center">
+				<th>&nbsp;</th>
 				<th>상품 정보</th>
 				<th>주문 일자</th>
 				<th>주문 번호</th>
-				<th>주문 금액</th>
-				<th>배송 현황</th>
-				<th>주문 취소</th>
+				<th>상품 금액(수량)</th>
+				<th>주문 상태</th>
+				<th>&nbsp;</th>
 			</tr>
 		</thead>
-
 		<tbody>
-			<tr>
-				<td><a href="#">상품명입니다</a></td>
-				<td>2021-06-04</td>
-				<td>12312312312</td>
-				<td>20,000원</td>
-				<td>배송 준비중</td>
+		<c:forEach items="${orderList}" var="item">
+		<tr align="center">
+				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>
+				<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
+				<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
+				<td>${item.order_code}</td>
+				<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원<br>${item.order_quantity}개</td>
+				<td>${item.order_status}</td>
 				<td><button type="button" class="btn btn-primary btn-sm"
-						onclick="checkCancle()">주문 취소</button></td>
+						onclick="checkCancle()">환불 요청</button> <button type="button" class="btn btn-primary btn-sm">교환 요청</button></td>
 			</tr>
-			<tr>
-				<td><a href="#">상품명입니다2</a></td>
-				<td>2021-06-04</td>
-				<td>12312312322</td>
-				<td>30,000원</td>
-				<td>배송 준비중</td>
-				<td><button type="button" class="btn btn-primary btn-sm"
-						onclick="checkCancle()">주문 취소</button></td>
-			</tr>
-			<tr>
-				<td><a href="#">상품명입니다3</a></td>
-				<td>2021-06-04</td>
-				<td>12312312332</td>
-				<td>40,000원</td>
-				<td>배송 준비중</td>
-				<td><button type="button" class="btn btn-primary btn-sm"
-						onclick="checkCancle()">주문 취소</button></td>
-			</tr>
+		</c:forEach>
 		</tbody>
 	</table>
 	<hr width="100%">
+	<!-- pagination{s} -->
+	<div style="">
+		<ul class="pagination" style="width: 0%; justify-content: center;">
+			<c:if test="${pagination.prev}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+					<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagination.next}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
+	<!-- pagination{e} -->
 </body>
 </html>

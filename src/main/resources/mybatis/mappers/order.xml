@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.order">
+
+
+<select id="selectOrder" parameterType="java.util.Map" resultType="combineVO">
+	<![CDATA[
+		select ord.member_num, ord.address_recipent,ord.order_totalQuantity, ord.order_usePoint, ord.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName 
+		from orders AS ord 
+		JOIN orders_detail AS odd 
+		ON ord.order_code = odd.order_code 
+		where ord.member_num = #{member_num}
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	]]>
+</select>
+
+<select id="selectOrderCnt" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from orders_detail where member_num = #{member_num}
+	]]>
+</select>
+</mapper>

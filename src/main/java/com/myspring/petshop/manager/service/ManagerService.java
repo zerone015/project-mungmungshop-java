@@ -12,7 +12,8 @@ import com.myspring.petshop.product.vo.ProductVO;
 
 public interface ManagerService {
 	public void addProduct(ProductVO product) throws Exception;
-	public List listProducts(Pagination pagination) throws Exception;
+	public List<ProductVO> listProducts(Pagination pagination) throws Exception;
+	public List<ProductVO> fewStockProducts(Pagination pagination) throws Exception;
 	public int productsCnt() throws Exception;
 	public int membersCnt() throws Exception;
 	public ProductVO getProduct(String p_code) throws Exception;

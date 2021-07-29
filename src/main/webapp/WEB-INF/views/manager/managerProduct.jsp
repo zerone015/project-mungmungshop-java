@@ -19,8 +19,10 @@ request.setCharacterEncoding("UTF-8");
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		
+		var sortBy = "${sortBy}";
 		var searchBy = "${searchBy}";
 		var searchContents = "${searchContents}";
+		
 		
 		if(searchBy == "p_code" || searchBy == "p_name"){
 			var url = "${contextPath}/manager/getSearchProducts.do";
@@ -30,6 +32,13 @@ request.setCharacterEncoding("UTF-8");
 			
 			url = url + "&page=" + page;
 		}
+		
+		else if(sortBy == "stock"){
+			var url = "${contextPath}/manager/managerProduct.do";
+			url = url + "?sortBy=" + sortBy;
+			url = url + "&page=" + page;
+		}
+		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
@@ -44,6 +53,7 @@ request.setCharacterEncoding("UTF-8");
 	//페이지 번호 클릭
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
 		
+		var sortBy = "${sortBy}";
 		var searchBy = "${searchBy}";
 		var searchContents = "${searchContents}";
 		
@@ -55,6 +65,13 @@ request.setCharacterEncoding("UTF-8");
 			
 			url = url + "&page=" + page;
 		}
+		
+		else if(sortBy == "stock"){
+			var url = "${contextPath}/manager/managerProduct.do";
+			url = url + "?sortBy=" + sortBy;
+			url = url + "&page=" + page;
+		}
+		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
@@ -68,7 +85,8 @@ request.setCharacterEncoding("UTF-8");
 
 	//다음 버튼 이벤트
 	function fn_next(page, range, rangeSize) {
-
+		
+		var sortBy = "${sortBy}";
 		var searchBy = "${searchBy}";
 		var searchContents = "${searchContents}";
 		
@@ -83,6 +101,13 @@ request.setCharacterEncoding("UTF-8");
 			
 			url = url + "&page=" + page;
 		}
+		
+		else if(sortBy == "stock"){
+			var url = "${contextPath}/manager/managerProduct.do";
+			url = url + "?sortBy=" + sortBy;
+			url = url + "&page=" + page;
+		}
+		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
@@ -100,10 +125,13 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 <br>
 <form method="GET" action="${contextPath}/managerProductAdd.do">	
-<div class="bd-example" align="right">
+<span class="bd_example" style="float: left; margin-bottom: 10px;">
+	<a href="${contextPath}/manager/managerProduct.do?sortBy=stock">재고 없는순</a> | <a href="${contextPath}/manager/managerProduct.do">상품 등록순</a>
+</span>
+<span class="bd-example" style="float: right; margin-bottom: 10px;">
 		<button type="submit" class="btn btn-primary btn-lg">상품 등록</button>
-</div>
-	<table class="table table-striped" style="margin-top: 10;">
+</span>
+	<table class="table table-hover" style="margin-top: 10;">
 		<thead>
 			<tr>
 				<th>상품 번호</th>

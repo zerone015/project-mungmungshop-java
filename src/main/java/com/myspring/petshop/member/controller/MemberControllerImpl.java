@@ -108,13 +108,8 @@ public class MemberControllerImpl implements MemberController{
 			memberService.modLoginDate(memberVO.getMember_num());
 			
 			String referer = (String) session.getAttribute("referer");
-			if(!referer.equals("null")) {
-				mav.setViewName("redirect:"+referer);
-			}
-			else {
-				mav.setViewName("redirect:/main.do");
-			}
-			
+			mav.setViewName("redirect:"+referer);
+		
 			session.removeAttribute("referer");
 		}
 		

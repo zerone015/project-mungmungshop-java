@@ -23,6 +23,7 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 				session.setAttribute("interceptor", interceptor);
 				
 				String referer = request.getHeader("Referer");
+				
 				if(!referer.equals("http://localhost:8080/petshop/login.do")) {
 					session.setAttribute("referer", referer);
 				}	

@@ -79,16 +79,6 @@ public class HomeController {
 		return "changePwResult";
 	}
 	
-	
-	
-	
-	
-	@RequestMapping(value = "/order.do", method = RequestMethod.GET)
-	public String order(Locale locale, Model model) {
-
-
-		return "order";
-	}
 
 	@RequestMapping(value = "/love.do", method = RequestMethod.GET)
 	public String love(Locale locale, Model model) {

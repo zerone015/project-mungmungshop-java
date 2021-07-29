@@ -42,17 +42,28 @@ public class ManagerControllerImpl implements ManagerController {
 	@Override
 	@RequestMapping(value="/manager/managerProduct.do", method = RequestMethod.GET)
 	public ModelAndView listProducts(@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(value="sortBy", required=false, defaultValue="default") String sortBy,
 			@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("managerProduct");
 		
 		int listCnt = managerService.productsCnt();
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(page, range, listCnt);
-		List products = managerService.listProducts(pagination);
 		
-		ModelAndView mav = new ModelAndView("managerProduct");
+		List<ProductVO> products;
+		if(sortBy.equals("stock")) {
+			products = managerService.fewStockProducts(pagination);
+			mav.addObject("products", products);
+		}
+		else {
+			products = managerService.listProducts(pagination);
+			mav.addObject("products", products);
+		}
+		
 		mav.addObject("pagination", pagination);
-		mav.addObject("products", products);
+		mav.addObject("sortBy", sortBy);
 		
 		return mav;
 	}

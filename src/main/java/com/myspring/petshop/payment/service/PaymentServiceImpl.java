@@ -64,7 +64,9 @@ public class PaymentServiceImpl implements PaymentService {
 		String[] p_codes = (String[]) paymentMap.get("p_codes");
 		String[] order_quantitys = (String[]) paymentMap.get("order_quantitys");
 		String[] p_prices = (String[]) paymentMap.get("p_prices");
-			
+		String[] p_names = (String[]) paymentMap.get("p_names");	
+		String[] p_imageFileNames = (String[]) paymentMap.get("p_imageFileNames");
+		
 		int order_num = getOrderNum();
 		combineVO.setOrder_num(order_num);
 		
@@ -77,10 +79,14 @@ public class PaymentServiceImpl implements PaymentService {
 			String p_code = p_codes[i];
 			int order_quantity = Integer.parseInt(order_quantitys[i]);
 			int p_price = Integer.parseInt(p_prices[i]);
+			String p_name = p_names[i];
+			String p_imageFileName = p_imageFileNames[i];
 			
 			combineVO.setP_code(p_code);
 			combineVO.setOrder_quantity(order_quantity);
 			combineVO.setP_price(p_price);
+			combineVO.setP_name(p_name);
+			combineVO.setP_imageFileName(p_imageFileName);
 			
 			paymentDAO.insertOrderDetail(combineVO);
 		}

@@ -4,6 +4,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="order_code" value="${param.order_code }" />
 <%
   request.setCharacterEncoding("UTF-8");
 %>  
@@ -16,14 +17,14 @@
 <body>
 <div class="px-4 py-5 my-5 text-center">
 	  <div>
-      	 <p style="color: #808080;">상품번호 ${order_code}</p>
+      	 <p style="color: #808080; font-size: 20px;">상품번호 ${order_code}</p>
       </div>
       <div>
-     	 <h1>주문과 결제가 정상적으로 완료되었습니다.</h1>   
-      <p>업체(브랜드)의 주문 확인 후 발송됩니다.</p>
+     	 <h1>주문과 결제가 정상적으로 완료되었습니다.</h1><br>  
+      <p style="font-size: 20px;">업체(브랜드)의 주문 확인 후 발송됩니다.</p>
       <div>
          <button type="button" class="btn btn-primary" onclick="location.href='${contextPath}/main.do'">메인 화면으로</button>
-         <button type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/order.do'">주문 내역 조회하기</button>
+         <button type="button" class="btn btn-outline-secondary" onclick="location.href='${contextPath}/myPage/getOrderList.do'">주문 내역 조회하기</button>
       </div>
     </div>
   </div>
