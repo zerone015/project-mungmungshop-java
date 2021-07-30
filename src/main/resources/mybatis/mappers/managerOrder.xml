@@ -7,7 +7,7 @@
 
 <select id="selectOrderList" resultType="combineVO">
 	<![CDATA[
-		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
+		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
 		from orders AS ord 
 		JOIN orders_detail AS odd 
 		ON ord.order_code = odd.order_code 
@@ -44,4 +44,38 @@
 		update orders_detail set order_status = #{order_status} where order_detailCode = #{order_detailCode}
 	]]>
 </update>
+
+<select id="selectSearchOrdersCnt" resultType="int" parameterType="java.util.Map">
+	<![CDATA[ 
+		select count(*) AS listCnt 
+		from orders AS ord
+		JOIN orders_detail AS odd
+		ON ord.order_code = odd.order_code 
+	]]>
+		<choose>
+			<when test="searchBy.equals('order_code')">
+				where odd.${searchBy} LIKE CONCAT('%',#{searchContents},'%')
+			</when>
+			<otherwise>
+				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%')
+			</otherwise>
+		</choose>		
+</select>
+
+<select id="selectSearchOrders" resultType="combineVO" parameterType="java.util.Map">
+	<![CDATA[ 	
+		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
+		from orders AS ord 
+		JOIN orders_detail AS odd 
+		ON ord.order_code = odd.order_code 
+	]]> 
+		<choose>
+			<when test="searchBy.equals('order_code')">
+				where odd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+			</when>
+			<otherwise>
+				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+			</otherwise>
+		</choose>		
+</select>
 </mapper>

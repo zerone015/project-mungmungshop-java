@@ -76,7 +76,7 @@ request.setCharacterEncoding("UTF-8");
 				<th>주문 일자</th>
 				<th>주문 번호</th>
 				<th>상품 금액(수량)</th>
-				<th>주문 상태</th>
+				<th>주문 현황</th>
 				<th>&nbsp;</th>
 			</tr>
 		</thead>

@@ -34,8 +34,11 @@ function modOrderStatus(index) {
 <body>
 	<div class="col-md-5" style="float: center;">
 		<h3>
-			<b>주문 상세</b>
+			<b>주문 상세</b><br>
 		</h3>
+		<h4>
+			주문번호 : ${orderVO.order_code}
+		</h4>
 	</div><br><br>
 	<hr class="paymentHr">
 		<table class="table table-hover">
@@ -47,8 +50,8 @@ function modOrderStatus(index) {
 					<th>개당 가격</th>
 					<th>구매 수량</th>
 					<th>합계</th>
+					<th>주문 현황</th>
 					<th>상태 변경</th>
-					
 				</tr>
 			</thead>
 			<tbody>
@@ -56,14 +59,14 @@ function modOrderStatus(index) {
 				<tr>
 					<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" alt="상품 이미지" /></td>
 					<td>${item.order_code}</td>
-					<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
+					<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}"><b>${item.p_name}</b></a></td>
 					<td><fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/>원</td>
 					<td>${item.order_quantity}개</td>
 					<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</td>
+					<td>${item.order_status}</td>
 					<td>
 					<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">
 						<select class="form-select" name="order_status">
-							<option> </option>
 							<option value="결제 완료">결제 완료</option>
 							<option value="배송 준비중">배송 준비중</option>
 							<option value="배송중">배송중</option>
@@ -72,6 +75,7 @@ function modOrderStatus(index) {
 							<option value="환불 완료">환불 완료</option>
 						</select>
 						<input type="hidden" name="order_detailCode" value="${item.order_detailCode}"/>
+						<input type="hidden" name="order_code" value="${item.order_code}"/>
 						<button type="button" class="btn btn-outline-dark"
 							onclick="modOrderStatus(${status.count - 1})">상태 수정</button>
 						</form>
@@ -113,6 +117,10 @@ function modOrderStatus(index) {
 	<table class="table table-hover">
 		<thead>
 		 <tr>
+		 	<th>회원번호</th>
+		 	<th>주문자 이름</th>
+		 	<th>주문자 휴대폰</th>
+		 	<th>주문자 이메일</th>
 			<th>할인 포인트</th>
 			<th>적립 포인트</th>
 			<th>총 구매수량</th>
@@ -121,6 +129,10 @@ function modOrderStatus(index) {
 		</thead>
 		<tbody>
 		 <tr>
+		 	<td>${orderVO.member_num}</td>
+		 	<td>${orderVO.member_name}</td>
+		 	<td>${orderVO.member_phone}</td>
+		 	<td>${orderVO.member_email}</td>
 			<td><fmt:formatNumber value="${orderVO.order_usePoint}" pattern="###,###,###"/>원</td>
 			<td><fmt:formatNumber value="${orderVO.order_addPoint}" pattern="###,###,###"/>원</td>
 			<td>${orderVO.order_totalQuantity}</td>

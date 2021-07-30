@@ -11,9 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -109,7 +111,7 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 	
 	@Override
 	@RequestMapping(value="/manager/modifyProduct.do", method = RequestMethod.POST)
-	public ModelAndView modifyProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+	public ResponseEntity modifyProduct(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map<String, Object> map = new HashMap<String, Object>(); 
 		Enumeration enu = multipartRequest.getParameterNames();
@@ -119,24 +121,59 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 			map.put(name, value);
 			System.out.println(name+value);
 		}
-		
 		String p_imageFileName = upload(multipartRequest);
 		map.put("p_imageFileName", p_imageFileName);
 		
-		managerService.modifyProduct(map);
-		ModelAndView mav = new ModelAndView("redirect:/manager/managerProduct.do");
+		String p_code = multipartRequest.getParameter("p_code");
 		
-		return mav;
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			managerService.modifyProduct(map);
+			message = "<script>";
+			message += "alert('상품 수정을 완료하였습니다.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProductInfo.do?p_code=" + p_code + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류 발생. 다시 시도해주세요.');";
+			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProduct.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
 	}
 	
 	@Override
 	@RequestMapping(value="/manager/removeProduct.do", method = RequestMethod.GET)
-	public ModelAndView removeProduct(@RequestParam("p_code") String p_code,
+	public ResponseEntity removeProduct(@RequestParam("p_code") String p_code,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		managerService.removeProduct(p_code);
-		ModelAndView mav = new ModelAndView("redirect:/manager/managerProduct.do");
-		
-		return mav;
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			managerService.removeProduct(p_code);
+			message = "<script>";
+			message += "alert('상품 삭제를 완료하였습니다.');";
+			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류 발생. 다시 시도해주세요.');";
+			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			e.printStackTrace();
+		}
+			
+		return resEnt;
 	}
 	
 	

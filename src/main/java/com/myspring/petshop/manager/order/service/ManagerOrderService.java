@@ -14,4 +14,6 @@ public interface ManagerOrderService {
 	public List<CombineVO> getOrderList(Pagination pagination) throws Exception;
 	public Map<String, Object> getOrderInfo(String order_code) throws Exception;
 	public void modOrderStatus(OrderDetailVO ord) throws Exception;
+	public int searchOrdersCnt(Map<String, Object> searchMap) throws Exception;
+	public List<CombineVO> getSearchOrders(Map<String, Object> searchMap) throws Exception;
 }

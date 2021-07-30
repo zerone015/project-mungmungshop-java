@@ -60,4 +60,15 @@ public class ManagerOrderServiceImpl implements ManagerOrderService{
 		managerDAO.updateOrderStatus(ord);
 	}
 	
+	@Override
+	public int searchOrdersCnt(Map<String, Object> searchMap) throws Exception {
+		
+		return managerDAO.selectSearchOrdersCnt(searchMap);
+	}	
+	
+	@Override
+	public List<CombineVO> getSearchOrders(Map<String, Object> searchMap) throws Exception {
+		
+		return managerDAO.selectSearchOrders(searchMap);
+	}	
 }

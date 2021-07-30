@@ -631,7 +631,9 @@ function numberWithCommas(x) {
 		</tr>
 		<tr>
 			<td class="td_payment">포인트 할인</td>
-			<td class="td_payment2"><input type="checkbox" id="point_check" name="sale_check" value="checked" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트:${memberVO.member_point}) <font id="point_availability" style="color: red;"></font></td>
+			<td class="td_payment2"><input type="checkbox" id="point_check" name="sale_check" value="checked" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트 : <fmt:formatNumber value="${memberVO.member_point}" pattern="###,###,###"/>원)
+			 (필요 포인트 : <fmt:formatNumber value="${total_payment_price / 10}" pattern="###,###,###"/>원)
+			<font id="point_availability" style="color: red;"></font></td>
 			<input type="hidden" id="own_point" value="${memberVO.member_point}"/>
 			<input type="hidden" id="total_payment_price" value="${total_payment_price}"/>
 			<input type="hidden" id="sale_point" value="${total_payment_price / 10}"/>

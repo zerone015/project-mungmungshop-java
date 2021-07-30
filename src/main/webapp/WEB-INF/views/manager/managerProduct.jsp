@@ -31,22 +31,23 @@ request.setCharacterEncoding("UTF-8");
 			url = url + "&searchContents=" + searchContents;
 			
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else if(sortBy == "stock"){
 			var url = "${contextPath}/manager/managerProduct.do";
 			url = url + "?sortBy=" + sortBy;
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
 			url = url + "?page=" + page;
+			url = url + "&range=" + range;
 		}
 		
-		url = url + "&range=" + range;
-
 		location.href = url;
 	}
 
@@ -64,21 +65,22 @@ request.setCharacterEncoding("UTF-8");
 			url = url + "&searchContents=" + searchContents;
 			
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else if(sortBy == "stock"){
 			var url = "${contextPath}/manager/managerProduct.do";
 			url = url + "?sortBy=" + sortBy;
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
 			url = url + "?page=" + page;
+			url = url + "&range=" + range;
 		}
-
-		url = url + "&range=" + range;
 
 		location.href = url;	
 	}
@@ -100,29 +102,30 @@ request.setCharacterEncoding("UTF-8");
 			url = url + "&searchContents=" + searchContents;
 			
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else if(sortBy == "stock"){
 			var url = "${contextPath}/manager/managerProduct.do";
 			url = url + "?sortBy=" + sortBy;
 			url = url + "&page=" + page;
+			url = url + "&range=" + range;
 		}
 		
 		else {
 			var url = "${contextPath}/manager/managerProduct.do";	
 			
 			url = url + "?page=" + page;
+			url = url + "&range=" + range;
 		}
-
-		url = url + "&range=" + range;
 
 		location.href = url;
 	}
 </script>
 <body>
-<h1>
+<h3>
 <b>상품 목록</b>
-</h1>
+</h3>
 <br>
 <form method="GET" action="${contextPath}/managerProductAdd.do">	
 <span class="bd_example" style="float: left; margin-bottom: 10px;">

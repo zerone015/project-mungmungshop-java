@@ -228,13 +228,13 @@ function fn_modify_cartQty(p_code,index,cartQty_btnVal) {
 					</c:forEach>
 					<tr class="table-danger">
 						<td>
-							<h4>총 상품금액<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" type="number"/></b>원</h4>
+							&nbsp;
 						</td>
 						<td>
-							<h4>배송비<br><b>0원</b></h4>
+							&nbsp;
 						</td>	
 						<td>
-							<h4>총 할인 금액<br><b>0원</b></h4>
+							&nbsp;
 						</td>
 						<td style="width: 300px;">
 							<h4>합계:<br><b class="total_sum"><fmt:formatNumber value="${totalGoodsPrice}" pattern="###,###,###"/></b>원</h4>

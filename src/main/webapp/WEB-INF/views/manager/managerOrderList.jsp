@@ -19,35 +19,73 @@ request.setCharacterEncoding("UTF-8");
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
 		
-		var url = "${contextPath}/manager/getOrderList.do";
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
 		
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
+		if(searchBy == null){
+			var url = "${contextPath}/manager/getOrderList.do";
+			
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+		}
+		else {
+			var url = "${contextPath}/manager/getOrderList.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+			url = url + "&range=" + range;
+		}
 
-		location.href = url;
-		
+		location.href = url;		
 }
 
 	//페이지 번호 클릭
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var url = "${contextPath}/manager/getOrderList.do";
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
 		
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-
-		location.href = url;
+		if(searchBy == null){
+			var url = "${contextPath}/manager/getOrderList.do";
+			
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+		}
+		else {
+			var url = "${contextPath}/manager/getOrderList.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+			url = url + "&range=" + range;
+		}
 	}
 
 	//다음 버튼 이벤트
 	function fn_next(page, range, rangeSize) {
-
+		var searchBy = "${searchBy}";
+		var searchContents = "${searchContents}";
+		
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
 
+		if(searchBy == null){
 			var url = "${contextPath}/manager/getOrderList.do";
-		
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
+			
+			url = url + "?page=" + page;
+			url = url + "&range=" + range;
+		}
+		else {
+			var url = "${contextPath}/manager/getOrderList.do";
+			
+			url = url + "?searchBy=" + searchBy;
+			url = url + "&searchContents=" + searchContents;
+			
+			url = url + "&page=" + page;
+			url = url + "&range=" + range;
+		}
 
 		location.href = url;
 	}
@@ -63,16 +101,24 @@ request.setCharacterEncoding("UTF-8");
 			<thead>
 				<tr>
 					<th>주문번호</th>
+					<th>상세번호</th>
 					<th>주문일자</th>
 					<th>주문내역</th>
 					<th>결제방식</th>
-					<th>주문상태</th>
+					<th>주문현황</th>
+					<th>상세보기</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody>				
+			<c:if test="${orderList.size() == 0 && searchBy.length() != 0}">
+				<tr>
+					<td align="center" colspan="7">주문 검색 결과가 없습니다.</td>
+				</tr>
+			</c:if>
 			<c:forEach items="${orderList}" var="item">
 				<tr>
-					<td><a href="${contextPath}/manager/getOrderInfo.do?order_code=${item.order_code}">${item.order_code}</a></td>
+					<td>${item.order_code}</td>
+					<td>${item.order_detailCode}</td>
 					<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
 					<td>
 					주문자 : ${item.member_name}<br>
@@ -87,25 +133,23 @@ request.setCharacterEncoding("UTF-8");
 					</td>
 					<td>${item.order_method}</td>
 					<td>${item.order_status}</td>
-					<!-- <td colspan="2">
-						<select class="form-select">
-							<option value="">결제 완료</option>
-							<option value="">배송 준비중</option>
-							<option value="">배송중</option>
-							<option value="">배송 완료</option>
-							<option value="">구매 확정</option>
-							<option value="">환불 완료</option>
-						</select>
-						<button type="button" class="btn btn-outline-dark"
-							onclick="checkOrderList()">상태 수정</button>
-					</td> -->
-					
+					<td><button class="btn btn-primary btn-sm" type="button" onClick="location.href='${contextPath}/manager/getOrderInfo.do?order_code=${item.order_code}'">상세 주문 내역</button></td>
 				</tr>
 			</c:forEach>	
 			</tbody>
 		</table>
 		<hr width="100%">
 	</form>
+	<form method="GET" action="${contextPath}/manager/getSearchOrders.do">
+		<select style="height: 35px;" name="searchBy">
+			<option value="member_name">주문자 이름</option>
+			<option value="order_status">주문 현황</option>
+			<option value="order_code">주문 번호</option>
+			<option value="member_phone">휴대폰 번호</option>
+		</select>
+		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
+		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
+	</form> <br>
 	<!-- pagination{s} -->
 	<div style="">
 		<ul class="pagination" style="width: 0%; justify-content: center;">

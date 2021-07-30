@@ -1,6 +1,7 @@
 package com.myspring.petshop.manager.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
@@ -17,4 +18,6 @@ public interface ManagerOrderDAO {
 	public List<OrderDetailVO> selectOrderDetail(String order_code) throws DataAccessException;
 	public DeliveryVO selectDelevery(String order_code) throws DataAccessException;
 	public void updateOrderStatus(OrderDetailVO ord) throws DataAccessException;
+	public int selectSearchOrdersCnt(Map<String, Object> searchMap) throws DataAccessException;
+	public List<CombineVO> selectSearchOrders(Map<String, Object> searchMap) throws DataAccessException;
 }

@@ -1,6 +1,7 @@
 package com.myspring.petshop.manager.order.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,17 @@ public class ManagerOrderDAOImpl implements ManagerOrderDAO {
 	public void updateOrderStatus(OrderDetailVO ord) throws DataAccessException {
 		
 		sqlSession.update("mapper.managerOrder.updateOrderStatus", ord);
+	}
+	
+	@Override
+	public int selectSearchOrdersCnt(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.managerOrder.selectSearchOrdersCnt", searchMap);
+	}
+	
+	@Override
+	public List<CombineVO> selectSearchOrders(Map<String, Object> searchMap) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.managerOrder.selectSearchOrders", searchMap);
 	}
 }
