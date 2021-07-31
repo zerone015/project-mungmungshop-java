@@ -48,7 +48,7 @@
 	
 	<insert id="insertOrderDetail" parameterType="combineVO" >
 			insert into orders_detail(order_detailCode,member_num, order_code, p_code, p_name, order_quantity, p_price, p_imageFileName, order_status) 
-			values(default, #{member_num}, #{order_code}, #{p_code}, #{p_name}, #{order_quantity}, #{p_price}, #{p_imageFileName}, '결제 완료')
+			values(default, #{member_num}, #{order_code}, #{p_code}, #{p_name}, #{order_quantity}, #{p_price}, #{p_imageFileName}, '결제완료')
 	</insert>
 	
 	<insert id="insertDelivery" parameterType="combineVO" >
