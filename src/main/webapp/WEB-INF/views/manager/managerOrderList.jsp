@@ -142,10 +142,10 @@ request.setCharacterEncoding("UTF-8");
 	</form>
 	<form method="GET" action="${contextPath}/manager/getSearchOrders.do">
 		<select style="height: 35px;" name="searchBy">
-			<option value="member_name">주문자 이름</option>
-			<option value="order_status">주문 현황</option>
-			<option value="order_code">주문 번호</option>
-			<option value="member_phone">휴대폰 번호</option>
+			<option value="member_name" <c:if test="${searchBy == 'member_name'}">selected</c:if>>주문자 이름</option>
+			<option value="order_status" <c:if test="${searchBy == 'order_status'}">selected</c:if>>주문 현황</option>
+			<option value="order_code" <c:if test="${searchBy == 'order_code'}">selected</c:if>>주문 번호</option>
+			<option value="member_phone" <c:if test="${searchBy == 'member_phone'}">selected</c:if>>휴대폰 번호</option>
 		</select>
 		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
 		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>

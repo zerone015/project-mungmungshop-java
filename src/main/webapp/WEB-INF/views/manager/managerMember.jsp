@@ -219,12 +219,12 @@ request.setCharacterEncoding("UTF-8");
 	</table>
 	<form method="GET" action="${contextPath}/manager/getSearchMembers.do">
 		<select style="height: 35px;" name="searchBy">
-			<option value="member_id">ID</option>
-			<option value="member_num">회원 번호</option>
-			<option value="member_name">이름</option>
-			<option value="member_nick">닉네임</option>
-			<option value="member_email">이메일</option>
-			<option value="member_phone">휴대폰 번호</option>
+			<option value="member_id" <c:if test="${searchBy == 'member_id'}">selected</c:if>>ID</option>
+			<option value="member_num" <c:if test="${searchBy == 'member_num'}">selected</c:if>>회원 번호</option>
+			<option value="member_name" <c:if test="${searchBy == 'member_name'}">selected</c:if>>이름</option>
+			<option value="member_nick" <c:if test="${searchBy == 'member_nick'}">selected</c:if>>닉네임</option>
+			<option value="member_email" <c:if test="${searchBy == 'member_email'}">selected</c:if>>이메일</option>
+			<option value="member_phone" <c:if test="${searchBy == 'member_phone'}">selected</c:if>>휴대폰 번호</option>
 		</select>
 		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
 		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>

@@ -171,8 +171,8 @@ request.setCharacterEncoding("UTF-8");
 	<hr width="100%">
 	<form method="GET" action="${contextPath}/manager/getSearchProducts.do">
 		<select style="height: 35px;" name="searchBy">
-			<option value="p_name">상품명</option>
-			<option value="p_code">상품 번호</option>
+			<option value="p_name" <c:if test="${searchBy == 'p_name'}">selected</c:if>>상품명</option>
+			<option value="p_code" <c:if test="${searchBy == 'p_code'}">selected</c:if>>상품 번호</option>
 		</select>
 		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
 		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
