@@ -26,7 +26,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/myPage/order.jsp" />
 	</definition>
 	
-	
+	<definition name="orderRefund" extends="sideMenuLayout">
+		<put-attribute name="title" value="주문 내역 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/orderRefund.jsp" />
+	</definition>
 	
 	<definition name="love" extends="sideMenuLayout">
 		<put-attribute name="title" value="찜 리스트 페이지" />
@@ -39,7 +42,7 @@
 	</definition>
 	
 	<definition name="pwCertify" extends="sideMenuLayout">
-		<put-attribute name="title" value="비밀번호 확인 페이지2" />
+		<put-attribute name="title" value="비밀번호 확인 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/pwCertify.jsp" />
 	</definition>
 	

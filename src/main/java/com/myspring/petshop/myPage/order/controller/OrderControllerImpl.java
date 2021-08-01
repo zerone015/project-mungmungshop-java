@@ -52,5 +52,10 @@ public class OrderControllerImpl implements OrderController {
 	
 		return mav;
 	}
-
+	
+	@RequestMapping(value = "/myPage/orderRefund.do", method = RequestMethod.GET)
+	public String orderRefund() throws Exception {
+		
+		return "orderRefund";
+	}
 }

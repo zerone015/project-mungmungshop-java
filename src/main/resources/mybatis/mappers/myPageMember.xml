@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.myPageMember">
+
+	<update id="updatePw" parameterType="memberVO">
+		update Members set member_pw = #{member_pw}
+		where member_num = #{member_num}	
+	</update>
+	
+	<update id="updateInfo" parameterType="memberVO">
+		update Members set member_name = #{member_name}, member_nick = #{member_nick}, member_phone = #{member_phone}
+		where member_num = #{member_num}	
+	</update>
+	
+	<delete id="deleteMember" parameterType="memberVO">
+		delete from Members where member_num = #{member_num}
+	</delete>
+
+</mapper>

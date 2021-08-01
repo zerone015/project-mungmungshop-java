@@ -14,7 +14,7 @@
      text-align:center;
    }
 </style>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <script type="text/javascript">
 function checkinfoModify() {
@@ -22,12 +22,10 @@ function checkinfoModify() {
 	
 	var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/; 				//한글,영어만 사용 가능
 	var regExpNickName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/;  		//한글,영어만 사용 가능
-	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	
 	var name = form.name
 	var nickName = form.Nickname;
-	var email = form.email;
 	var phoneNumb = form.telNum;
 	
 	if (name.value == "") {
@@ -56,18 +54,6 @@ function checkinfoModify() {
 	    	
 	}
 	
-	
-	if (email.value == "") {
-		alert("이메일을 입력해주세요.");
-		email.focus();
-		return false;
-	}
-	
-	else if (!regExpEmail.test(email.value)) {
-		alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
-		email.select();
-		return false;
-	}
 	
 	if (phoneNumb.value == "") {
 		alert("휴대폰 번호를 입력해주세요.");
@@ -104,7 +90,7 @@ function checkinfoModify() {
    </tr>
    <tr>
      <td width="200"><p align="right" >이메일</td>
-     <td width="400"><input   type="text" name="email"  value="${memInfo.email}" ></td>
+     <td width="400"><input   type="text" name="email"  value="${memInfo.email}" readonly></td>
    </tr>
    <tr>
      <td width="200"><p align="right" >휴대전화</td>
@@ -117,9 +103,5 @@ function checkinfoModify() {
    </tr>
  </table>
 </form>
- 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

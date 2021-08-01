@@ -11,6 +11,7 @@
 		from orders AS ord 
 		JOIN orders_detail AS odd 
 		ON ord.order_code = odd.order_code 
+		order by ord.order_date DESC
 		LIMIT #{startList}, #{listSize}
 	]]>
 </select>

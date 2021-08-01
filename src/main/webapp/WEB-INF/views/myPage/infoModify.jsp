@@ -8,15 +8,14 @@
 <head>
 <meta charset="utf-8">
 <title>회원정보 수정창</title>
-<style>
-  .cls1 {
-     font-size:40px;
-     text-align:center;
-   }
-</style>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <script type="text/javascript">
+function inputNickChk() {
+	document.infoModify.nickDuplication.value = "nickUncheck";
+}
+
 function checkinfoModify() {
 	var form=document.infoModify;
 	
@@ -25,10 +24,11 @@ function checkinfoModify() {
 	var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //이메일
 	var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;		//휴대폰 번호
 	
-	var name = form.name
-	var nickName = form.Nickname;
-	var email = form.email;
-	var phoneNumb = form.telNum;
+	var name = form.member_name;
+	var nickName = form.member_nick;
+	var email = form.member_email;
+	var phoneNumb = form.member_phone;
+	var nickDuplication = form.nickDuplication;
 	
 	if (name.value == "") {
 		alert("이름을 입력해주세요.");
@@ -43,20 +43,31 @@ function checkinfoModify() {
 	}
 	
 	
-	if (!(nickName.value == "") && nickName.value.length < 2) {  
+	if (nickName.value == "") {
+		alert("닉네임을 입력해주세요.");
+		nickName.focus();
+		return false;
+	}
+
+	else if (nickName.value.length < 2) {
 		alert("닉네임을 최소 2글자 이상 입력해주세요.")
 		nickName.select()
 		return false;
 	}
-	    
-	else if (!(nickName.value == "") && !(regExpNickName.test(nickName.value))) {  
-	    alert("닉네임은 한글,영문으로만 사용 가능합니다.")
-	    nickName.select()
-	    return false;
-	    	
+
+	else if (!regExpNickName.test(nickName.value)) {
+		alert("닉네임은 한글,영문,숫자만 사용 가능합니다.")
+		nickName.select()
+		return false;
+
 	}
 	
-	
+	else if (nickDuplication.value != "nickCheck") {
+		alert("닉네임 중복체크를 해주세요.");
+		return false;
+	}
+
+		
 	if (email.value == "") {
 		alert("이메일을 입력해주세요.");
 		email.focus();
@@ -85,41 +96,87 @@ function checkinfoModify() {
 	
 	form.submit();
 }
+
+function fn_nickChk() {
+	var form = document.infoModify;
+
+	var nickName = form.member_nick;
+	var regExpNickName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]+$/; //한글,영문,숫자만 사용 가능
+
+	if (nickName.value == "") {
+		alert("닉네임을 입력해주세요.");
+		nickName.focus();
+		return false;
+	}
+
+	else if (nickName.value.length < 2) {
+		alert("닉네임을 최소 2글자 이상 입력해주세요.")
+		nickName.select()
+		return false;
+	}
+
+	else if (!regExpNickName.test(nickName.value)) {
+		alert("닉네임은 한글,영문,숫자만 사용 가능합니다.")
+		nickName.select()
+		return false;
+
+	}
+
+	else {
+		$.ajax({
+			url : "${contextPath}/member/nickChk",
+			type : "post",
+			dataType : "json",
+			data : {
+				"member_nick" : $("#member_nick").val()
+			},
+			success : function(data) {
+				if (data == 1) {
+					alert("중복된 닉네임입니다.");
+				} else if (data == 0) {
+					$("#nickChk").attr("value", "Y");
+					document.infoModify.nickDuplication.value = "nickCheck";
+					alert("사용 가능한 닉네임입니다.");
+				}
+			}
+		})
+	}
+}
 </script>
 <body>
- <h1 class="cls1">회원 정보 수정창</h1>
-<form name="infoModify" method="post" action="${contextPath}/MemInfo/modifyInfo.do">
+ <h4><b>회원 정보 수정</b></h4><br><br>
+<form name="infoModify" method="post" action="${contextPath}/myPage/modifyInfo.do">
  <table align="center" >
    <tr>
      <td width="200"><p align="right" >아이디</td>
-     <td width="400"><input   type="text" name="id" value="${memInfo.id}" readonly ></td>
+     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_id" value="${memberVO.member_id}" readonly ></td>
    </tr>
    <tr>
      <td width="200"><p align="right" >이름</td>
-     <td width="400"><input   type="text" name="name" value="${memInfo.name}" maxlength="45" ></td>
+     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_name" value="${memberVO.member_name}" maxlength="45" ></td>
    </tr>
    <tr>
      <td width="200"><p align="right" >닉네임</td>
-     <td width="400"><input   type="text" name="Nickname" value="${memInfo.Nickname}" ></td>
+     <td width="400">
+     <input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" id="member_nick" name="member_nick" value="${memberVO.member_nick}" onkeydown="inputNickChk()"  maxlength="20" >	
+     <button class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"value="N">중복확인</button>
+     <input type="hidden" name="nickDuplication" value="nickUncheck">
+	</td>
    </tr>
    <tr>
      <td width="200"><p align="right" >이메일</td>
-     <td width="400"><input   type="text" name="email"  value="${memInfo.email}" ></td>
+     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_email"  value="${memberVO.member_email}" maxlength="50" readonly></td>
    </tr>
    <tr>
      <td width="200"><p align="right" >휴대전화</td>
-     <td width="400"><input   type="text" name="telNum" value="${memInfo.telNum}" ></td>
+     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_phone" value="${memberVO.member_phone}" ></td>
    </tr>
    <tr align="center" >
-    <td colspan="2" width="400"><input type="button" value="수정하기" onclick="checkinfoModify(${MemInfoVO.memInfo_num });" >
+    <td colspan="2" width="400"><br><br><input class="btn btn-primary btn-lg" type="button" value="수정하기" onclick="checkinfoModify();" >
     <h1></h1>
-    <a href="fn_exit(${MemInfoVO.memInfo_num });">회원 탈퇴</a>&nbsp;&nbsp;&nbsp;&nbsp;
+ 	<button class="btn btn-danger btn-lg" type="button" onclick="location.href='${contextPath}/myPage/quit.do'">회원탈퇴</button>
    </tr>
  </table>
 </form>
- 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

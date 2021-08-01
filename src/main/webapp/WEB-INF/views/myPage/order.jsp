@@ -81,6 +81,11 @@ request.setCharacterEncoding("UTF-8");
 			</tr>
 		</thead>
 		<tbody>
+		<c:if test="${orderList.size() == 0}">
+			<tr>
+				<td align="center" colspan="7">주문 내역이 없습니다.</td>
+			</tr>
+		</c:if>
 		<c:forEach items="${orderList}" var="item">
 		<tr align="center">
 				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>

@@ -34,7 +34,7 @@ public class MemberControllerImpl implements MemberController{
 	@Autowired
 	private MemberVO memberVO;
 	@Autowired
-	BCryptPasswordEncoder passEncoder;
+	private BCryptPasswordEncoder passEncoder;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
 	
@@ -145,7 +145,6 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value="/member/addMember.do", method=RequestMethod.POST)
 	public ModelAndView addMember(@ModelAttribute("member")MemberVO member, HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
-		request.setCharacterEncoding("utf-8");
 		
 		String inputPass = member.getMember_pw();
 		String pass = passEncoder.encode(inputPass);

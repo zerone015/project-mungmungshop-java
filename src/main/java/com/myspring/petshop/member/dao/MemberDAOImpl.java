@@ -15,13 +15,13 @@ public class MemberDAOImpl implements MemberDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public int selectIdCnt(MemberVO vo) throws Exception {
+	public int selectIdCnt(MemberVO vo) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.member.selectIdCnt", vo);
 	}
 	
 	@Override
-	public int selectNickNameCnt(MemberVO vo) throws Exception {
+	public int selectNickNameCnt(MemberVO vo) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.member.selectNickNameCnt", vo);
 	}
@@ -32,7 +32,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public List selectMemberId(MemberVO member) throws Exception {
+	public List selectMemberId(MemberVO member) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.member.selectMemberId", member);
 	}
@@ -49,7 +49,7 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public void updateLoginDate(int member_num) throws Exception {
+	public void updateLoginDate(int member_num) throws DataAccessException {
 		sqlSession.update("mapper.member.updateLoginDate", member_num);
 	}
 	

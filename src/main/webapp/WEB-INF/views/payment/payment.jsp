@@ -639,7 +639,7 @@ function numberWithCommas(x) {
 			<input type="hidden" id="sale_point" value="${total_payment_price / 10}"/>
 		</tr>
 		<tr>
-			<td class="td_payment">총 적립금</td>
+			<td class="td_payment">총 적립포인트</td>
 			<td class="td_payment2"><fmt:formatNumber value="${final_total_addPoint}" pattern="###,###,###"/>원</td>
 		</tr>
 		<tr>

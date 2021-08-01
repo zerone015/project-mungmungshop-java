@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" isELIgnored="false" %>
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,14 +14,19 @@ pageEncoding="utf-8" isELIgnored="false" %>
 <script type="text/javascript">
 function checkPwCertify() {
 	var form=document.pwCertify;
-	if (form.pw.value == "") {
+	if (form.member_pw.value == "") {
 		alert("비밀번호를 입력해주세요.");
-		form.pw.focus();
+		form.member_pw.focus();
 		return false;
 	} 
 
 	form.submit();
 }
+</script>
+<script>
+	window.onload = function() {
+		document.pwCertify.member_pw.focus();
+	}
 </script>
 <body>
 <div class="container">
@@ -30,15 +38,15 @@ function checkPwCertify() {
 	
 	<div style="margin-top: 40;">
 		<div style="text-align: center;">
-		  <form id="pwConfirm" name="pwCertify" method="GET" action="#">
+		  <form name="pwCertify" method="POST" action="${contextPath}/myPage/getNewPw.do">
 			<input class="form-control" style="width: 300; margin: 0 auto; "
-				type="password" name="pw" placeholder="비밀번호를 입력해주세요" />
+				type="password" name="member_pw" placeholder="비밀번호를 입력해주세요" />
 			
 		  </form>
 		</div>
 		<div>
 			<button class="btn btn-primary" style="width: 300; margin-top: 5;" type="submit" 
-				form="pwConfirm" onclick="checkPwCertify()">다음</button>
+				onclick="checkPwCertify()">다음</button>
 		</div>
 	</div>
  </div>

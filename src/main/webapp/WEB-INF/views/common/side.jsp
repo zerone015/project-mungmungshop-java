@@ -36,8 +36,8 @@ request.setCharacterEncoding("utf-8");
     	 <hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
 		<p style="font-size: 16;">내 정보 관리</p>       
            <ul class="sideMenu">
-            <li class="sideMenu2"><a href="#">비밀번호 변경</a></li>
-            <li class="sideMenu2"><a href="#">회원 정보 수정</a></li>
+            <li class="sideMenu2"><a href="${contextPath}/myPage/infoCertify.do">회원 정보 수정</a></li>
+            <li class="sideMenu2"><a href="${contextPath}/myPage/pwCertify.do">비밀번호 변경</a></li>
            </ul>
 	</div>
 		
