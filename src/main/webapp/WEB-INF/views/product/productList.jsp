@@ -84,10 +84,10 @@ request.setCharacterEncoding("UTF-8");
 		</h2>
 	</div>
 	<div align="right">
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=love">인기상품&nbsp;&nbsp;&nbsp;</a> 
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=new">신상품&nbsp;&nbsp;&nbsp;</a>
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=lowPrice">낮은가격&nbsp;&nbsp;&nbsp;</a> 
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=highPrice">높은가격&nbsp;&nbsp;&nbsp;</a>
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=love"><font style="color: #0078FF;">인기상품</font>&nbsp;&nbsp;&nbsp;</a> 
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=new"><font style="color: #0078FF;">신상품</font>&nbsp;&nbsp;&nbsp;</a>
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=lowPrice"><font style="color: #0078FF;">낮은가격</font>&nbsp;&nbsp;&nbsp;</a> 
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=highPrice"><font style="color: #0078FF;">높은가격</font>&nbsp;&nbsp;&nbsp;</a>
 	</div>
 	<hr width="100%">
 	<div>

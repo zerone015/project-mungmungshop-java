@@ -105,19 +105,18 @@ request.setCharacterEncoding("utf-8");
 			</tr>
 			<tr align="center">
 				<td>
-				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 400; height:50px; margin-top: 35px;">로그인</button>
-				<div id="naver_id_login" style="text-align:center"><a href="${url}"><img style="width: 400; height:50px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" style="width: 200; height: 80;" alt="네이버 로그인 이미지"/></a></div>
+				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 370; height: 50px; margin-top: 35px;">로그인</button>
+				<div id="naver_id_login" style="text-align:center; margin-top: 15px;"><a href="${url}"><img style="width: 370; height: 50px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" alt="네이버 로그인 이미지"/></a></div>
 				</td>
-			</tr>
-			<tr align="center">
-				<td><button class="btn btn-outline-primary" type="button"
-						onclick="location.href='${contextPath}/member/joinAgree.do'" style="width: 400; height:50px; margin-top: 10px; margin-bottom: 10px;">회원가입</button></td>
 			</tr>
 		</table>
 	</form>
 	<div style="margin-top: 15px;">
 		<a href="${contextPath}/findId.do">아이디 찾기</a> |
 		<a href="${contextPath}/findPw.do">비밀번호 찾기</a>
+	</div>
+	<div style="margin-top: 15px;">
+		<a href="${contextPath}/member/joinAgree.do"><font style="color: #0078FF;">회원가입</font></a>
 	</div>
 </body>
 </html>

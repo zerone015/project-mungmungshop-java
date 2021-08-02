@@ -129,7 +129,8 @@ request.setCharacterEncoding("UTF-8");
 <br>
 <form method="GET" action="${contextPath}/managerProductAdd.do">	
 <span class="bd_example" style="float: left; margin-bottom: 10px;">
-	<a href="${contextPath}/manager/managerProduct.do?sortBy=stock">재고 없는순</a> | <a href="${contextPath}/manager/managerProduct.do">상품 등록순</a>
+	<a href="${contextPath}/manager/managerProduct.do?sortBy=stock"><font style="color: #0078FF;">재고 없는순</font></a> <font style="color: #AAAAAA;">|</font> 
+	<a href="${contextPath}/manager/managerProduct.do"><font style="color: #0078FF;">상품 등록순</font></a>
 </span>
 <span class="bd-example" style="float: right; margin-bottom: 10px;">
 		<button type="submit" class="btn btn-primary btn-lg">상품 등록</button>
