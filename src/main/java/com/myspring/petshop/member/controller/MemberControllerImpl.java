@@ -183,6 +183,7 @@ public class MemberControllerImpl implements MemberController{
 		    	session.setAttribute("member", memberVO);
 		    }
 		    else {
+		    	memberVO = memberService.login(memberVO);
 		    	session.setAttribute("member", memberVO);
 		    }
 	

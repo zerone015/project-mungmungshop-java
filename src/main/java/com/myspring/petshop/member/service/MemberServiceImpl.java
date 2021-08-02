@@ -74,6 +74,7 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.insertNaverMember(memberVO);
 		memberVO = getNaverMember(memberVO.getMember_id());
 		addMember(memberVO);
+		memberVO = memberDAO.selectLoginMember(memberVO);
 		
 		return memberVO;
 	}
