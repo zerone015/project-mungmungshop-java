@@ -33,12 +33,14 @@ request.setCharacterEncoding("utf-8");
             <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
             <li class="sideMenu2"><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
            </ul>
-    	 <hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
-		<p style="font-size: 16;">내 정보 관리</p>       
-           <ul class="sideMenu">
-            <li class="sideMenu2"><a href="${contextPath}/myPage/infoCertify.do">회원 정보 수정</a></li>
-            <li class="sideMenu2"><a href="${contextPath}/myPage/pwCertify.do">비밀번호 변경</a></li>
+        <c:if test="${member.member_type != '네이버'}">
+    		<hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
+			<p style="font-size: 16;">내 정보 관리</p>       
+            <ul class="sideMenu">
+            	<li class="sideMenu2"><a href="${contextPath}/myPage/infoCertify.do">회원 정보 수정</a></li>
+            	<li class="sideMenu2"><a href="${contextPath}/myPage/pwCertify.do">비밀번호 변경</a></li>
            </ul>
+        </c:if>
 	</div>
 		
 

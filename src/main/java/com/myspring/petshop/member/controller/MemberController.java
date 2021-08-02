@@ -2,7 +2,9 @@ package com.myspring.petshop.member.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,10 +17,10 @@ public interface MemberController{
 	
 	public int getNickNameCnt(MemberVO vo) throws Exception;
 	
-	public String loginForm(HttpServletRequest request) throws Exception;
+	public String loginForm(HttpServletRequest request, Model model) throws Exception;
 	
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
-	RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	 		RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView logout(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
@@ -38,6 +40,9 @@ public interface MemberController{
 	
 	public ModelAndView changePw(@ModelAttribute("member")MemberVO member, RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response)throws Exception;
+	
+	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state,
+			HttpServletRequest request, HttpSession session) throws Exception;
 
 	
 	

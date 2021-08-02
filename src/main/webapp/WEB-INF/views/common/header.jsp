@@ -128,7 +128,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 			<div class="col-4 d-flex justify-content-end align-items-center" style="text-align: center; margin:0;">
 				<div class="col" >
 					<div style="text-align: center; margin-bottom: 5;">
-						<c:if test="${isLogOn == true  && member != null}">
+						<c:if test="${member != null}">
 							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 ! 포인트 : ${member.member_point}</font>
 						</c:if>
 					</div>
@@ -139,7 +139,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 						</c:if>
 						<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
 						<c:choose>
-							<c:when test="${isLogOn == true  && member != null}">
+							<c:when test="${member != null}">
 								<a class="rightMenu" href="${contextPath}/member/logout.do" >로그아웃</a> 
 								<font class="divider">|</font>
 							</c:when>

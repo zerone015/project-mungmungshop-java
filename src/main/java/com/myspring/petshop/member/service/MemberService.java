@@ -14,4 +14,6 @@ public interface MemberService{
 	public List findId(MemberVO member) throws Exception;
 	public void changePw(MemberVO member) throws Exception;
 	public void modLoginDate(int member_num) throws Exception;
+	public MemberVO getNaverMember(String unique_id) throws Exception;
+	public MemberVO addNaverMember(MemberVO memberVO) throws Exception;
 }

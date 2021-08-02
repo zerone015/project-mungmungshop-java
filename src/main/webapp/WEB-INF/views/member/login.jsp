@@ -104,8 +104,10 @@ request.setCharacterEncoding("utf-8");
 					value="checked" ${checked}> 아이디 기억</td>
 			</tr>
 			<tr align="center">
-				<td><button class="btn btn-primary" type="button"
-						onclick="fn_checkLogin();" style="width: 400; height:50px; margin-top: 35px;">로그인</button></td>
+				<td>
+				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 400; height:50px; margin-top: 35px;">로그인</button>
+				<div id="naver_id_login" style="text-align:center"><a href="${url}"><img style="width: 400; height:50px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" style="width: 200; height: 80;" alt="네이버 로그인 이미지"/></a></div>
+				</td>
 			</tr>
 			<tr align="center">
 				<td><button class="btn btn-outline-primary" type="button"

@@ -394,6 +394,7 @@ request.setCharacterEncoding("utf-8");
 				</tr>
 			</table>
 			<br> <button class="btn btn-dark btn-lg" type="button" onclick="fn_checkJoin()">회원가입</button>
+			<input type="hidden" name="member_type" value="일반"/>
 		</form>
 	</div>
 </body>

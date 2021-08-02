@@ -54,6 +54,22 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
+	public void updateNaverLoginDate(String member_id) throws DataAccessException {
+		sqlSession.update("mapper.member.updateNaverLoginDate", member_id);
+	}
+	
+	@Override
+	public void insertNaverMember(MemberVO memberVO) throws DataAccessException {
+		sqlSession.insert("mapper.member.insertNaverMember", memberVO);
+	}
+	
+	@Override
+	public MemberVO selectNaverMember(String member_id) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.member.selectNaverMember", member_id);
+	}
+	
+	@Override
 	//DB 에서 최근 접속 날짜가 1년이 지난 회원 목록 조회
 	public List<MemberVO> batchSelectMember() throws DataAccessException {
 		return sqlSession.selectList("mapper.member.batchSelectMember");

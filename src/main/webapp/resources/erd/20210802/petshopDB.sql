@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.15, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.26, for Win64 (x86_64)
 --
 -- Host: localhost    Database: petshopdb
 -- ------------------------------------------------------
--- Server version	8.0.15
+-- Server version	8.0.25
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
- SET NAMES utf8 ;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,10 +21,10 @@
 
 DROP TABLE IF EXISTS `address`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `address` (
-  `address_num` int(11) NOT NULL AUTO_INCREMENT,
-  `member_num` int(11) NOT NULL,
+  `address_num` int NOT NULL AUTO_INCREMENT,
+  `member_num` int NOT NULL,
   `address_recipent` varchar(20) NOT NULL,
   `address_phone` varchar(13) NOT NULL,
   `address_1` varchar(10) NOT NULL,
@@ -32,7 +32,7 @@ CREATE TABLE `address` (
   `address_3` varchar(40) NOT NULL,
   `address_request` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`address_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (8,10,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123','ㅁㄴㅇㄹ'),(16,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(18,12,'gdgd','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄻㄴㅇㄹ','없음'),(19,12,'asdf','010-1234-1234','39596','경북 김천시 중앙공원4길 10','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(20,12,'ASDF','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(21,12,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(22,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(23,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 62-1','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(24,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ',''),(25,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(26,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ');
+INSERT INTO `address` VALUES (8,10,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123','ㅁㄴㅇㄹ'),(16,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(18,12,'gdgd','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄻㄴㅇㄹ','없음'),(19,12,'asdf','010-1234-1234','39596','경북 김천시 중앙공원4길 10','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(20,12,'ASDF','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(21,12,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(22,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(23,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 62-1','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(24,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ',''),(25,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(26,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(28,0,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -51,17 +51,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `backup_members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `backup_members` (
-  `Member_Num` int(11) NOT NULL,
+  `Member_Num` int NOT NULL,
   `Member_ID` varchar(11) NOT NULL,
   `Member_name` varchar(45) NOT NULL,
   `Member_Phone` varchar(13) NOT NULL,
   `Member_Nick` varchar(20) NOT NULL,
   `Member_joindate` timestamp NOT NULL,
-  `Member_manager` int(11) NOT NULL,
+  `Member_manager` int NOT NULL,
   `Member_logindate` timestamp NULL DEFAULT NULL,
-  `member_point` int(11) NOT NULL,
+  `member_point` int NOT NULL,
   `modType` char(2) NOT NULL,
   `modDate` timestamp NOT NULL,
   `modUser` varchar(256) NOT NULL,
@@ -85,15 +85,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `cart`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cart` (
-  `cart_code` int(11) NOT NULL AUTO_INCREMENT,
-  `member_num` int(11) NOT NULL,
+  `cart_code` int NOT NULL AUTO_INCREMENT,
+  `member_num` int NOT NULL,
   `p_code` char(7) NOT NULL,
-  `cart_quantity` int(11) NOT NULL,
+  `cart_quantity` int NOT NULL,
   `cart_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`cart_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (4,3,'PRD0145',4,'2021-07-13 08:48:46'),(6,3,'PRD0144',1,'2021-07-13 08:49:25'),(11,2,'PRD0104',1,'2021-07-13 08:50:33'),(19,6,'PRD0005',2,'2021-07-16 06:41:57'),(20,6,'PRD0008',1,'2021-07-16 06:42:01'),(65,12,'PRD0141',2,'2021-07-27 15:37:05'),(66,12,'PRD0142',1,'2021-07-27 15:37:09'),(68,12,'PRD0144',1,'2021-07-28 11:08:35'),(69,12,'PRD0003',1,'2021-07-28 11:17:32'),(70,12,'PRD0002',1,'2021-07-28 11:21:03'),(71,12,'PRD0133',3,'2021-07-29 03:20:32'),(73,10,'PRD0138',1,'2021-07-29 06:41:59'),(74,10,'PRD0005',1,'2021-07-29 11:24:59');
+INSERT INTO `cart` VALUES (4,3,'PRD0145',4,'2021-07-13 08:48:46'),(6,3,'PRD0144',1,'2021-07-13 08:49:25'),(11,2,'PRD0104',1,'2021-07-13 08:50:33'),(19,6,'PRD0005',2,'2021-07-16 06:41:57'),(20,6,'PRD0008',1,'2021-07-16 06:42:01'),(65,12,'PRD0141',2,'2021-07-27 15:37:05'),(66,12,'PRD0142',1,'2021-07-27 15:37:09'),(68,12,'PRD0144',1,'2021-07-28 11:08:35'),(69,12,'PRD0003',1,'2021-07-28 11:17:32'),(70,12,'PRD0002',1,'2021-07-28 11:21:03'),(71,12,'PRD0133',3,'2021-07-29 03:20:32'),(73,10,'PRD0138',1,'2021-07-29 06:41:59'),(74,10,'PRD0005',1,'2021-07-29 11:24:59'),(76,0,'PRD0002',1,'2021-08-02 04:04:12'),(77,0,'PRD0145',2,'2021-08-02 04:04:17');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,21 +112,21 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `delivery`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `delivery` (
-  `deli_num` int(11) NOT NULL AUTO_INCREMENT,
-  `member_num` int(11) NOT NULL,
+  `deli_num` int NOT NULL AUTO_INCREMENT,
+  `member_num` int NOT NULL,
   `order_code` char(7) NOT NULL,
   `deli_name` varchar(20) NOT NULL,
   `deli_tel` varchar(13) NOT NULL,
   `deli_address1` varchar(10) NOT NULL,
   `deli_address2` varchar(30) NOT NULL,
   `deli_address3` varchar(40) NOT NULL,
-  `deli_traking` int(11) DEFAULT NULL,
+  `deli_traking` int DEFAULT NULL,
   `deli_request` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`deli_num`),
   KEY `fk_delivery_ordercode` (`order_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -145,17 +145,17 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `eventboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `eventboard` (
-  `event_no` int(11) NOT NULL AUTO_INCREMENT,
+  `event_no` int NOT NULL AUTO_INCREMENT,
   `event_title` varchar(45) NOT NULL,
   `event_writer` varchar(11) NOT NULL,
   `event_content` varchar(1000) NOT NULL,
   `event_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `event_hits` int(11) NOT NULL DEFAULT '0',
+  `event_hits` int NOT NULL DEFAULT '0',
   `event_image_filename` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`event_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -173,16 +173,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `faqboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `faqboard` (
-  `faq_no` int(11) NOT NULL AUTO_INCREMENT,
+  `faq_no` int NOT NULL AUTO_INCREMENT,
   `faq_title` varchar(45) NOT NULL,
   `faq_writer` varchar(11) NOT NULL,
   `faq_content` varchar(1000) NOT NULL,
   `faq_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `faq_hits` int(11) NOT NULL DEFAULT '0',
+  `faq_hits` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`faq_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -201,19 +201,19 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `inquiry`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `inquiry` (
-  `inq_no` int(11) NOT NULL AUTO_INCREMENT,
-  `inq_originNo` int(11) NOT NULL,
-  `inq_groupOrd` int(11) NOT NULL DEFAULT '0',
-  `inq_groupLayer` int(11) NOT NULL DEFAULT '0',
+  `inq_no` int NOT NULL AUTO_INCREMENT,
+  `inq_originNo` int NOT NULL,
+  `inq_groupOrd` int NOT NULL DEFAULT '0',
+  `inq_groupLayer` int NOT NULL DEFAULT '0',
   `p_code` char(7) NOT NULL,
   `inq_title` varchar(45) NOT NULL,
   `inq_writer` varchar(11) NOT NULL,
   `inq_content` varchar(1000) NOT NULL,
   `inq_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `inq_secret` varchar(3) DEFAULT 'N',
-  `inq_hits` int(11) NOT NULL DEFAULT '0',
+  `inq_hits` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`inq_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -233,15 +233,15 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `love`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `love` (
-  `love_code` int(11) NOT NULL AUTO_INCREMENT,
-  `member_num` int(11) NOT NULL,
+  `love_code` int NOT NULL AUTO_INCREMENT,
+  `member_num` int NOT NULL,
   `p_code` char(7) NOT NULL,
   PRIMARY KEY (`love_code`),
   KEY `fk_love_memberNum` (`member_num`),
   KEY `fk_love_pCode` (`p_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -260,13 +260,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `manager`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `manager` (
-  `manager_num` int(11) NOT NULL AUTO_INCREMENT,
+  `manager_num` int NOT NULL AUTO_INCREMENT,
   `manager_id` varchar(11) NOT NULL,
   `manager_pw` varchar(20) NOT NULL,
   PRIMARY KEY (`manager_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -285,22 +285,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `members`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `members` (
-  `Member_Num` int(11) NOT NULL AUTO_INCREMENT,
-  `Member_ID` varchar(11) NOT NULL,
+  `Member_Num` int NOT NULL AUTO_INCREMENT,
+  `Member_ID` varchar(200) NOT NULL,
   `Member_PW` varchar(100) NOT NULL,
   `Member_name` varchar(45) NOT NULL,
   `Member_email` varchar(50) NOT NULL,
   `Member_Phone` varchar(13) NOT NULL,
   `Member_Nick` varchar(20) NOT NULL,
   `Member_joindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `Member_manager` int(11) DEFAULT NULL,
+  `Member_manager` int DEFAULT NULL,
   `Member_logindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `member_point` int(11) DEFAULT NULL,
+  `member_point` int DEFAULT NULL,
+  `member_type` varchar(10) NOT NULL,
   PRIMARY KEY (`Member_Num`),
   KEY `idx_test` (`Member_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -309,8 +310,43 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-01 16:18:32',4365),(12,'son1234','$2a$10$wBeYG2fmAs2ImYoDsqUEWuVHckxFiipJHQSwc7f4B.5ybN8VaXE/m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-01 16:33:37',28803);
+INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-02 04:12:37',4365,'일반'),(12,'son1234','$2a$10$wBeYG2fmAs2ImYoDsqUEWuVHckxFiipJHQSwc7f4B.5ybN8VaXE/m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-02 04:14:06',28803,'일반'),(21,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','zerone015@naver.com','010-9163-5375','손영원','2021-08-02 03:45:19',0,'2021-08-02 04:15:27',500,'네이버'),(22,'son12345','$2a$10$x3jL72BFEpfO9OlgYL3HKu1p1BHr9D5sV7uMRGAG7WnLl49nmUQK6','손영원','zerone015@naver.com','010-1234-1234','qqwer','2021-08-02 04:10:06',0,'2021-08-02 04:10:21',500,'일반');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `members_oauth`
+--
+
+DROP TABLE IF EXISTS `members_oauth`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `members_oauth` (
+  `seq` int NOT NULL AUTO_INCREMENT,
+  `member_id` varchar(200) NOT NULL,
+  `member_pw` varchar(100) NOT NULL,
+  `member_name` varchar(45) NOT NULL,
+  `member_nick` varchar(20) NOT NULL,
+  `member_email` varchar(50) NOT NULL,
+  `member_phone` varchar(13) NOT NULL,
+  `member_joindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `member_logindate` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `member_manager` int DEFAULT NULL,
+  `member_point` int DEFAULT NULL,
+  `member_type` varchar(10) NOT NULL,
+  PRIMARY KEY (`seq`),
+  UNIQUE KEY `unique_id_UNIQUE` (`member_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `members_oauth`
+--
+
+LOCK TABLES `members_oauth` WRITE;
+/*!40000 ALTER TABLE `members_oauth` DISABLE KEYS */;
+INSERT INTO `members_oauth` VALUES (11,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','손영원','zerone015@naver.com','010-9163-5375','2021-08-02 03:45:19','2021-08-02 04:15:27',0,500,'네이버');
+/*!40000 ALTER TABLE `members_oauth` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -319,16 +355,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `noticeboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `noticeboard` (
-  `notice_no` int(11) NOT NULL AUTO_INCREMENT,
+  `notice_no` int NOT NULL AUTO_INCREMENT,
   `notice_title` varchar(45) NOT NULL,
   `notice_writer` varchar(11) NOT NULL,
   `notice_content` varchar(1000) NOT NULL,
   `notice_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `notice_hits` int(11) NOT NULL DEFAULT '0',
+  `notice_hits` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -347,24 +383,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders` (
   `order_code` char(7) NOT NULL DEFAULT '0',
-  `order_num` int(11) NOT NULL,
-  `member_num` int(11) NOT NULL,
+  `order_num` int NOT NULL,
+  `member_num` int NOT NULL,
   `member_name` varchar(45) NOT NULL,
   `member_phone` varchar(13) NOT NULL,
   `member_email` varchar(50) NOT NULL,
   `address_recipent` varchar(20) NOT NULL,
-  `order_totalQuantity` int(11) NOT NULL,
-  `order_totalPrice` int(11) NOT NULL,
-  `order_usePoint` int(11) NOT NULL,
-  `order_addPoint` int(11) NOT NULL,
+  `order_totalQuantity` int NOT NULL,
+  `order_totalPrice` int NOT NULL,
+  `order_usePoint` int NOT NULL,
+  `order_addPoint` int NOT NULL,
   `order_method` varchar(10) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`order_code`),
   KEY `fk_order_customer` (`member_num`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -383,20 +419,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders_detail`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders_detail` (
   `order_detailCode` char(7) NOT NULL DEFAULT '0',
-  `member_num` int(11) NOT NULL,
+  `member_num` int NOT NULL,
   `order_code` char(7) NOT NULL,
   `p_code` char(7) NOT NULL,
   `p_name` varchar(50) NOT NULL,
-  `order_quantity` int(11) NOT NULL,
-  `p_price` int(11) NOT NULL,
+  `order_quantity` int NOT NULL,
+  `p_price` int NOT NULL,
   `p_imageFileName` varchar(100) NOT NULL,
   `order_status` varchar(20) NOT NULL,
   PRIMARY KEY (`order_detailCode`),
   KEY `fk_ordersDetail_orderCode` (`order_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -415,11 +451,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `orders_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `orders_seq` (
-  `order_code` int(11) NOT NULL AUTO_INCREMENT,
+  `order_code` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=59 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -428,7 +464,7 @@ CREATE TABLE `orders_seq` (
 
 LOCK TABLES `orders_seq` WRITE;
 /*!40000 ALTER TABLE `orders_seq` DISABLE KEYS */;
-INSERT INTO `orders_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(28),(29),(30),(31),(32),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56);
+INSERT INTO `orders_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(28),(29),(30),(31),(32),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58);
 /*!40000 ALTER TABLE `orders_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -438,11 +474,11 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ordersdetail_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ordersdetail_seq` (
-  `order_detailCode` int(11) NOT NULL AUTO_INCREMENT,
+  `order_detailCode` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_detailCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -451,7 +487,7 @@ CREATE TABLE `ordersdetail_seq` (
 
 LOCK TABLES `ordersdetail_seq` WRITE;
 /*!40000 ALTER TABLE `ordersdetail_seq` DISABLE KEYS */;
-INSERT INTO `ordersdetail_seq` VALUES (4),(5),(6),(8),(9),(10),(11),(12),(13),(14),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(27),(28),(29),(30);
+INSERT INTO `ordersdetail_seq` VALUES (4),(5),(6),(8),(9),(10),(11),(12),(13),(14),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(27),(28),(29),(30),(31),(32),(33),(34);
 /*!40000 ALTER TABLE `ordersdetail_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -461,23 +497,23 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
   `p_code` char(7) NOT NULL DEFAULT '0',
   `p_cl1` varchar(10) NOT NULL,
   `p_cl2` varchar(10) NOT NULL,
   `p_brand` varchar(20) NOT NULL,
   `p_name` varchar(50) NOT NULL,
-  `p_price` int(11) NOT NULL,
-  `p_salePrice` int(11) DEFAULT NULL,
-  `p_stock` int(11) NOT NULL,
+  `p_price` int NOT NULL,
+  `p_salePrice` int DEFAULT NULL,
+  `p_stock` int NOT NULL,
   `p_imageFileName` varchar(100) NOT NULL,
   `p_description` varchar(1000) NOT NULL,
   `p_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `p_loves` int(11) NOT NULL DEFAULT '0',
+  `p_loves` int NOT NULL DEFAULT '0',
   `p_origin` varchar(56) NOT NULL,
   PRIMARY KEY (`p_code`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -496,9 +532,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `products_seq`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products_seq` (
-  `p_code` int(11) NOT NULL AUTO_INCREMENT,
+  `p_code` int NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`p_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -519,20 +555,20 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `qnaboard`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `qnaboard` (
-  `qna_no` int(11) NOT NULL AUTO_INCREMENT,
-  `qna_originNo` int(11) NOT NULL,
-  `qna_groupOrd` int(11) NOT NULL DEFAULT '0',
-  `qna_groupLayer` int(11) NOT NULL DEFAULT '0',
+  `qna_no` int NOT NULL AUTO_INCREMENT,
+  `qna_originNo` int NOT NULL,
+  `qna_groupOrd` int NOT NULL DEFAULT '0',
+  `qna_groupLayer` int NOT NULL DEFAULT '0',
   `qna_title` varchar(45) NOT NULL,
   `qna_writer` varchar(11) NOT NULL,
   `qna_content` varchar(1000) NOT NULL,
   `qna_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `qna_secret` varchar(3) DEFAULT 'N',
-  `qna_hits` int(11) NOT NULL DEFAULT '0',
+  `qna_hits` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`qna_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -551,9 +587,9 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `reviews`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reviews` (
-  `review_num` int(11) NOT NULL AUTO_INCREMENT,
+  `review_num` int NOT NULL AUTO_INCREMENT,
   `p_code` char(7) NOT NULL,
   `Member_Nick` varchar(20) NOT NULL,
   `review_content` varchar(1000) NOT NULL,
@@ -561,7 +597,7 @@ CREATE TABLE `reviews` (
   `review_imageFileName` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`review_num`),
   KEY `fk_reviews_pcode` (`p_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -583,4 +619,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-02  1:40:48
+-- Dump completed on 2021-08-02 13:16:39

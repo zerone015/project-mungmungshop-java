@@ -17,6 +17,7 @@ public class MemberVO{
 	private int member_manager;
 	private Timestamp member_logindate;
 	private int member_point;
+	private String member_type;
 	
 	public MemberVO() {
 		
@@ -108,5 +109,13 @@ public class MemberVO{
 	
 	public void setMember_point(int member_point) {
 		this.member_point = member_point;
+	}
+	
+	public String getMember_type() {
+		return member_type;
+	}
+	
+	public void setMember_type(String member_type) {
+		this.member_type=member_type;
 	}
 }

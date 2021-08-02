@@ -1,17 +1,19 @@
 package com.myspring.petshop.member.controller;
 
 import java.util.List;
-import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.expression.ParseException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.myspring.petshop.member.naver.NaverLoginBO;
 import com.myspring.petshop.member.service.MemberService;
 import com.myspring.petshop.member.vo.MemberVO;
 
@@ -35,8 +39,16 @@ public class MemberControllerImpl implements MemberController{
 	private MemberVO memberVO;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
+	/* NaverLoginBO */
+    private NaverLoginBO naverLoginBO;
+    private String apiResult = null;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberControllerImpl.class);
+	
+	@Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
 	
 	@Override
 	@ResponseBody
@@ -56,7 +68,7 @@ public class MemberControllerImpl implements MemberController{
 	
 	@Override
 	@RequestMapping(value = "/login.do", method = RequestMethod.GET)
-	public String loginForm(HttpServletRequest request) throws Exception {
+	public String loginForm(HttpServletRequest request, Model model) throws Exception {
 		HttpSession session = request.getSession();
 		String interceptor = (String) session.getAttribute("interceptor");
 		
@@ -74,12 +86,22 @@ public class MemberControllerImpl implements MemberController{
 			session.removeAttribute("interceptor");
 		}
 		
+		  /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
+        String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+        
+        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
+        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
+        System.out.println("네이버:" + naverAuthUrl);
+        
+        //네이버 
+        model.addAttribute("url", naverAuthUrl);
+		
 		return "login";
 	}
 		
 	@Override
 	@RequestMapping(value="/member/login.do", method = RequestMethod.POST)
-	public ModelAndView login(@ModelAttribute("member") MemberVO member, 
+	public ModelAndView login(@ModelAttribute("member") MemberVO member,
 			 		RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		memberVO = memberService.login(member);
@@ -111,6 +133,7 @@ public class MemberControllerImpl implements MemberController{
 			mav.setViewName("redirect:"+referer);
 		
 			session.removeAttribute("referer");
+			
 		}
 		
 		else {
@@ -119,6 +142,50 @@ public class MemberControllerImpl implements MemberController{
 			
 		}
 		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/member/naverLogin.do", method = { RequestMethod.GET, RequestMethod.POST })
+	public ModelAndView naverLogin(@RequestParam String code, @RequestParam String state,
+						HttpServletRequest request, HttpSession session) throws Exception {
+			ModelAndView mav = new ModelAndView("redirect:/main.do");
+		    OAuth2AccessToken oauthToken;
+		    oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		    //로그인 사용자 정보를 읽어온다.
+		    apiResult = naverLoginBO.getUserProfile(oauthToken);
+		    
+		    
+		 // 내가 원하는 정보 (이름)만 JSON타입에서 String타입으로 바꿔 가져오기 위한 작업 
+		    JSONParser parser = new JSONParser(); 
+		    Object obj = null; 
+		    try { 
+		    	obj = parser.parse(apiResult); 
+		    }catch (ParseException e){ 
+		    	e.printStackTrace(); 
+		    } 
+		    JSONObject jsonobj = (JSONObject) obj; 
+		    JSONObject response = (JSONObject) jsonobj.get("response"); 
+		    String member_id = (String) response.get("id");
+		    String member_name = (String) response.get("name"); 
+		    String member_email = (String) response.get("email"); 
+		    String member_phone = (String) response.get("mobile");
+		    	    
+		    memberVO = memberService.getNaverMember(member_id);
+		    
+		    if (memberVO == null) {
+		    	MemberVO memberVO = new MemberVO();
+		    	memberVO.setMember_id(member_id);
+		    	memberVO.setMember_name(member_name);
+		    	memberVO.setMember_email(member_email);
+		    	memberVO.setMember_phone(member_phone);
+		    	memberVO = memberService.addNaverMember(memberVO);
+		    	session.setAttribute("member", memberVO);
+		    }
+		    else {
+		    	session.setAttribute("member", memberVO);
+		    }
+	
 		return mav;
 	}
 	
