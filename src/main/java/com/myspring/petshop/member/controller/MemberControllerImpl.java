@@ -78,7 +78,27 @@ public class MemberControllerImpl implements MemberController{
 				referer = "null";
 			}
 			
-			if(!referer.equals("http://localhost:8080/petshop/login.do")) {
+			if(
+				!referer.equals("http://localhost:8080/petshop/login.do") && 
+				!referer.equals("http://localhost:8080/petshop/member/joinAgree.do") &&
+				!referer.equals("http://localhost:8080/petshop/joinMember.do") &&
+				!referer.equals("http://localhost:8080/petshop/joinWelcome.do") &&
+				!referer.equals("http://localhost:8080/petshop/findId.do") &&
+				!referer.equals("http://localhost:8080/petshop/member/resultId.do") &&
+				!referer.equals("http://localhost:8080/petshop/findPw.do") &&
+				!referer.equals("http://localhost:8080/petshop/mail/findPwCheck.do") &&
+				!referer.equals("http://localhost:8080/petshop/member/changePw.do") &&
+				!referer.equals("http://localhost:8080/petshop/changePwResult.do") &&
+				!referer.equals("http://localhost:8080/petshop/payment/getPaymentPage.do") &&
+				!referer.equals("http://localhost:8080/petshop/payment/getPaymentResult.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/infoCertify.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/infoModify.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/quit.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/pwCertify.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/newPW.do") &&
+				!referer.equals("http://localhost:8080/petshop/address/addressList.do")
+				){
+					
 				session.setAttribute("referer", referer);
 			}		
 		}
@@ -91,7 +111,6 @@ public class MemberControllerImpl implements MemberController{
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println("네이버:" + naverAuthUrl);
         
         //네이버 
         model.addAttribute("url", naverAuthUrl);
@@ -181,10 +200,12 @@ public class MemberControllerImpl implements MemberController{
 		    	memberVO.setMember_phone(member_phone);
 		    	memberVO = memberService.addNaverMember(memberVO);
 		    	session.setAttribute("member", memberVO);
+		    	session.setAttribute("isLogOn", true);
 		    }
 		    else {
 		    	memberVO = memberService.login(memberVO);
 		    	session.setAttribute("member", memberVO);
+		    	session.setAttribute("isLogOn", true);
 		    }
 	
 		return mav;
@@ -239,6 +260,15 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		List memberId = memberService.findId(member);
+		
+		for(int i=0; i<memberId.size(); i++ ) {
+			String member_id = (String) memberId.get(i);
+			if(member_id.length() > 20) {
+				memberId.remove(i);
+			}
+			
+		}
+		
 		ModelAndView mav = new ModelAndView();
 		if (memberId.size() == 0) {
 			rAttr.addAttribute("memberId", "notExists");

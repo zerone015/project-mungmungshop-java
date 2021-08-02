@@ -45,7 +45,6 @@ img{
 	padding: 5px;
 	border: 0px solid #bcbcbc;
 }
-
 </style>
 </head>
 <body>

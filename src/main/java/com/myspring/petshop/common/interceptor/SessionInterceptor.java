@@ -24,7 +24,26 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 				
 				String referer = request.getHeader("Referer");
 				
-				if(!referer.equals("http://localhost:8080/petshop/login.do")) {
+				if(
+						!referer.equals("http://localhost:8080/petshop/login.do") && 
+						!referer.equals("http://localhost:8080/petshop/member/joinAgree.do") &&
+						!referer.equals("http://localhost:8080/petshop/joinMember.do") &&
+						!referer.equals("http://localhost:8080/petshop/joinWelcome.do") &&
+						!referer.equals("http://localhost:8080/petshop/findId.do") &&
+						!referer.equals("http://localhost:8080/petshop/member/resultId.do") &&
+						!referer.equals("http://localhost:8080/petshop/findPw.do") &&
+						!referer.equals("http://localhost:8080/petshop/mail/findPwCheck.do") &&
+						!referer.equals("http://localhost:8080/petshop/member/changePw.do") &&
+						!referer.equals("http://localhost:8080/petshop/changePwResult.do") &&
+						!referer.equals("http://localhost:8080/petshop/payment/getPaymentPage.do") &&
+						!referer.equals("http://localhost:8080/petshop/payment/getPaymentResult.do") &&
+						!referer.equals("http://localhost:8080/petshop/myPage/infoCertify.do") &&
+						!referer.equals("http://localhost:8080/petshop/myPage/infoModify.do") &&
+						!referer.equals("http://localhost:8080/petshop/myPage/quit.do") &&
+						!referer.equals("http://localhost:8080/petshop/myPage/pwCertify.do") &&
+						!referer.equals("http://localhost:8080/petshop/myPage/newPW.do") &&
+						!referer.equals("http://localhost:8080/petshop/address/addressList.do")
+						) {
 					session.setAttribute("referer", referer);
 				}	
 				
