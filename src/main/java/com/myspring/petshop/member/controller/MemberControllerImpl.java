@@ -1,5 +1,6 @@
 package com.myspring.petshop.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -26,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.myspring.petshop.member.kakao.KakaoController;
 import com.myspring.petshop.member.naver.NaverLoginBO;
 import com.myspring.petshop.member.service.MemberService;
 import com.myspring.petshop.member.vo.MemberVO;
@@ -39,7 +41,8 @@ public class MemberControllerImpl implements MemberController{
 	private MemberVO memberVO;
 	@Autowired
 	private BCryptPasswordEncoder passEncoder;
-	/* NaverLoginBO */
+	@Autowired
+	private KakaoController kakaoController;
     private NaverLoginBO naverLoginBO;
     private String apiResult = null;
 	
@@ -106,16 +109,13 @@ public class MemberControllerImpl implements MemberController{
 			session.removeAttribute("interceptor");
 		}
 		
-		  /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-        
-        //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-        //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        
-        //네이버 
-        model.addAttribute("url", naverAuthUrl);
+		/* String kakaoAuthUrl = KakaoController.getAuthorizationUrl(session); */
+      
+        model.addAttribute("naver_url", naverAuthUrl);
+		/* model.addAttribute("kakao_url", kakaoAuthUrl); */
 		
-		return "login";
+        return "login";
 	}
 		
 	@Override
@@ -209,6 +209,25 @@ public class MemberControllerImpl implements MemberController{
 		    }
 	
 		return mav;
+	}
+	
+	@RequestMapping(value = "/member/kakaoLogin.do", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Model model) throws Exception {
+
+		System.out.println("#########" + code);
+		String access_Token = kakaoController.getAccessToken(code);
+		System.out.println("###access_Token#### : " + access_Token);
+    
+    
+		HashMap<String, Object> userInfo = kakaoController.getUserInfo(access_Token);
+		System.out.println("###access_Token#### : " + access_Token);
+		System.out.println("###userInfo#### : " + userInfo.get("email"));
+		System.out.println("###nickname#### : " + userInfo.get("nickname"));
+   
+		JSONObject kakaoInfo =  new JSONObject(userInfo);
+		model.addAttribute("kakaoInfo", kakaoInfo);
+    
+		return "redirect:/main.do"; //본인 원하는 경로 설정
 	}
 	
 	@Override

@@ -263,10 +263,30 @@
 		
 		<!-- JSONParser -->
 		<dependency>
-    		<groupId>com.googlecode.json-simple</groupId>
-   			<artifactId>json-simple</artifactId>
-   			<version>1.1</version>
+			<groupId>com.googlecode.json-simple</groupId>
+			<artifactId>json-simple</artifactId>
+			<version>1.1.1</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.8.7</version>
+		</dependency>
+		
+		<!-- http 요청 -->
+		<dependency> 
+			<groupId>org.apache.httpcomponents</groupId> 
+			<artifactId>httpclient</artifactId> 
+			<version>4.3.5</version> 
+		</dependency>
+	
+		<dependency>
+    		<groupId>org.apache.httpcomponents</groupId>
+    		<artifactId>httpcore</artifactId>
+    		<version>4.4</version>
+		</dependency>
+		
 		
 		<!-- Test -->
 		<dependency>

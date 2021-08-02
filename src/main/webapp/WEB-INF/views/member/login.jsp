@@ -39,14 +39,12 @@
 		</script>
 	</c:otherwise>
 	</c:choose>
-<%
-request.setCharacterEncoding("utf-8");
-%>
 <html>
 <head>
 <meta charset="utfo-8">
 <title>로그인</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
 	input[type="text"] {
 		width: 400px; height: 50px; display:inline-block;
@@ -83,6 +81,38 @@ request.setCharacterEncoding("utf-8");
         }
 }
 </script>
+  <script>
+  //카카오로그인
+  function kakaoLogin() {
+
+    $.ajax({
+        url: '${contextPath}/login/getKakaoAuthUrl',
+        type: 'get',
+        async: false,
+        dataType: 'text',
+        success: function (res) {
+            location.href = res;
+        }
+    });
+
+  }
+
+  $(document).ready(function() {
+
+      var kakaoInfo = '${kakaoInfo}';
+
+      if(kakaoInfo != ""){
+          var data = JSON.parse(kakaoInfo);
+
+          alert("카카오로그인 성공 \n accessToken : " + data['accessToken']);
+          alert(
+          "user : \n" + "email : "
+          + data['email']  
+          + "\n nickname : " 
+          + data['nickname']);
+      }
+  });  
+  </script>
 <body>
 	<form id="login" name="login" method="POST"
 		action="${contextPath}/member/login.do">
@@ -105,8 +135,9 @@ request.setCharacterEncoding("utf-8");
 			</tr>
 			<tr align="center">
 				<td>
-				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 370; height: 50px; margin-top: 35px;">로그인</button>
-				<div id="naver_id_login" style="text-align:center; margin-top: 15px;"><a href="${url}"><img style="width: 370; height: 50px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" alt="네이버 로그인 이미지"/></a></div>
+				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 370; height: 60px; margin-top: 35px;">로그인</button>
+				<div id="naver_id_login" style="text-align:center; margin-top: 15px;"><a href="${naver_url}"><img style="width: 370; height: 60px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" alt="네이버 로그인 이미지"/></a></div>
+				<div id="kakao_id_login" style="text-align: center"> <a href="#" onclick="kakaoLogin();"> <img style="width: 370; height: 60px; margin-top: 15px;" src="${contextPath}/download?imageFileName=kakao_login_medium_narrow.png" /></a> </div>
 				</td>
 			</tr>
 		</table>
