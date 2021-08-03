@@ -531,7 +531,7 @@ function numberWithCommas(x) {
 		이름 <input type="text" class="form-control" name="member_name" value="${memberVO.member_name}"/>
 	</div>
 	<div class="address2">
-		핸드폰 <input type="text" class="form-control" name="member_phone" value="${memberVO.member_phone}"/>
+		핸드폰 <input type="text" class="form-control" name="member_phone" <c:if test="${memberVO.member_phone != 'null'}"> value="${memberVO.member_phone}"</c:if>/>
 	</div>
 	<div class="address2">
 		이메일 <input type="text" class="form-control" name="member_email" value="${memberVO.member_email}"/>

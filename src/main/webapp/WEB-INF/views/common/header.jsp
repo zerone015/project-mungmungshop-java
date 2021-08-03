@@ -134,7 +134,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 					</div>
 					<div style="display: flex;">
 						<c:if test="${member.getMember_manager() == 1}">
-							<a class="rightMenu" href="${contextPath}/managerMain.do">관리자</a> 
+							<a class="rightMenu" href="${contextPath}/managerMain.do"><font style="color: #0078FF;">관리자</font></a> 
 							<font class="divider">|</font>
 						</c:if>
 						<a class="rightMenu" href="${contextPath}/cart/myCartList.do" style="">장바구니</a><font class="divider">|</font>
