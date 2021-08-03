@@ -28,7 +28,7 @@
 	
 	<select id="selectMemberId" resultType="memberVO" parameterType="memberVO">
 		<![CDATA[
-			select member_id,member_type from Members 	
+			select member_id,member_type,member_joindate from Members 	
 			where Member_name=#{member_name} and Member_email=#{member_email}
 		]]>
 	</select>
