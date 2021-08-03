@@ -18,9 +18,9 @@ request.setCharacterEncoding("utf-8");
 	</h4>
 	<label style="margin-bottom: 35px;">아이디 찾기를 완료하였습니다.</label>
 	<div class="box6" style="text-align: center">
-		<c:forEach var="memberId" items="${memberId}" varStatus="status">
+		<c:forEach var="memberList" items="${memberList}" varStatus="status">
 			<p>ID
-				: <strong><c:out value="${memberId}" /></strong>
+				: <strong><c:out value="${memberList.member_id}" /></strong>
 			</p>
 		</c:forEach>
 	</div>

@@ -16,8 +16,6 @@ import com.myspring.petshop.member.vo.MemberVO;
 public class MemberServiceImpl implements MemberService{
 	@Autowired
 	private MemberDAO memberDAO;
-	@Autowired
-	private MemberVO memberVO;
 	
 	@Override
 	public int getIdCnt(MemberVO vo) throws Exception {
@@ -32,9 +30,9 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override
-	public MemberVO login(MemberVO memberVO) throws Exception{
+	public MemberVO login(String member_id) throws Exception{
 		
-		return memberDAO.selectLoginMember(memberVO);
+		return memberDAO.selectLoginMember(member_id);
 	}
 	
 	@Override
@@ -43,7 +41,7 @@ public class MemberServiceImpl implements MemberService{
 	}	
 	
 	@Override
-	public List findId(MemberVO member) throws Exception {
+	public List<MemberVO> findId(MemberVO member) throws Exception {
 		
 		return memberDAO.selectMemberId(member);
 		
@@ -59,24 +57,5 @@ public class MemberServiceImpl implements MemberService{
 		memberDAO.updateLoginDate(member_num);
 	}
 	
-	@Override
-	public MemberVO getNaverMember(String member_id) throws Exception {
-		memberVO = memberDAO.selectNaverMember(member_id);
-		
-		if(memberVO != null) {
-			memberDAO.updateNaverLoginDate(member_id);
-		}
-		return memberVO;
-	}
-	
-	@Override
-	public MemberVO addNaverMember(MemberVO memberVO) throws Exception {
-		memberDAO.insertNaverMember(memberVO);
-		memberVO = getNaverMember(memberVO.getMember_id());
-		addMember(memberVO);
-		memberVO = memberDAO.selectLoginMember(memberVO);
-		
-		return memberVO;
-	}
 
 }

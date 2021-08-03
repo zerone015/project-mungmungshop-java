@@ -26,13 +26,13 @@ public class MemberDAOImpl implements MemberDAO{
 		return sqlSession.selectOne("mapper.member.selectNickNameCnt", vo);
 	}
 	
-	public MemberVO selectLoginMember(MemberVO memberVO) throws DataAccessException {
+	public MemberVO selectLoginMember(String member_id) throws DataAccessException {
 		
-		return sqlSession.selectOne("mapper.member.selectLoginMember", memberVO);
+		return sqlSession.selectOne("mapper.member.selectLoginMember", member_id);
 	}
 	
 	@Override
-	public List selectMemberId(MemberVO member) throws DataAccessException {
+	public List<MemberVO> selectMemberId(MemberVO member) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.member.selectMemberId", member);
 	}
@@ -54,29 +54,11 @@ public class MemberDAOImpl implements MemberDAO{
 	}
 	
 	@Override
-	public void updateNaverLoginDate(String member_id) throws DataAccessException {
-		sqlSession.update("mapper.member.updateNaverLoginDate", member_id);
-	}
-	
-	@Override
-	public void insertNaverMember(MemberVO memberVO) throws DataAccessException {
-		sqlSession.insert("mapper.member.insertNaverMember", memberVO);
-	}
-	
-	@Override
-	public MemberVO selectNaverMember(String member_id) throws DataAccessException {
-		
-		return sqlSession.selectOne("mapper.member.selectNaverMember", member_id);
-	}
-	
-	@Override
-	//DB 에서 최근 접속 날짜가 1년이 지난 회원 목록 조회
 	public List<MemberVO> batchSelectMember() throws DataAccessException {
 		return sqlSession.selectList("mapper.member.batchSelectMember");
 	}
 	
 	@Override
-	//DB 에서 최근 접속 날짜가 1년이 지난 회원 목록 삭제
 	public void deleteMember(MemberVO memberVO) throws DataAccessException {
 		sqlSession.delete("mapper.member.deleteMember", memberVO);
 	}

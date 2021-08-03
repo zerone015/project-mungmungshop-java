@@ -123,7 +123,7 @@ public class MemberControllerImpl implements MemberController{
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
 			 		RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		memberVO = memberService.login(member);
+		memberVO = memberService.login(member.getMember_id());
 		boolean passMatch = false;
 		
 		if(memberVO != null) {
@@ -171,11 +171,11 @@ public class MemberControllerImpl implements MemberController{
 			ModelAndView mav = new ModelAndView("redirect:/main.do");
 		    OAuth2AccessToken oauthToken;
 		    oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		    //·Î±×ÀÎ »ç¿ëÀÚ Á¤º¸¸¦ ÀĞ¾î¿Â´Ù.
+		    //ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ¾ï¿½Â´ï¿½.
 		    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		    
 		    
-		 // ³»°¡ ¿øÇÏ´Â Á¤º¸ (ÀÌ¸§)¸¸ JSONÅ¸ÀÔ¿¡¼­ StringÅ¸ÀÔÀ¸·Î ¹Ù²ã °¡Á®¿À±â À§ÇÑ ÀÛ¾÷ 
+		 // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Ì¸ï¿½)ï¿½ï¿½ JSONÅ¸ï¿½Ô¿ï¿½ï¿½ï¿½ StringÅ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Û¾ï¿½ 
 		    JSONParser parser = new JSONParser(); 
 		    Object obj = null; 
 		    try { 
@@ -185,25 +185,29 @@ public class MemberControllerImpl implements MemberController{
 		    } 
 		    JSONObject jsonobj = (JSONObject) obj; 
 		    JSONObject response = (JSONObject) jsonobj.get("response"); 
-		    String member_id = (String) response.get("id");
+		    String id = (String) response.get("id");
+		    String member_id = "mungmungshopNaverID "+id;
 		    String member_name = (String) response.get("name"); 
 		    String member_email = (String) response.get("email"); 
 		    String member_phone = (String) response.get("mobile");
-		    	    
-		    memberVO = memberService.getNaverMember(member_id);
+		    
+		    memberVO = memberService.login(member_id);
 		    
 		    if (memberVO == null) {
-		    	MemberVO memberVO = new MemberVO();
-		    	memberVO.setMember_id(member_id);
-		    	memberVO.setMember_name(member_name);
-		    	memberVO.setMember_email(member_email);
-		    	memberVO.setMember_phone(member_phone);
-		    	memberVO = memberService.addNaverMember(memberVO);
-		    	session.setAttribute("member", memberVO);
+		    	MemberVO member = new MemberVO();
+		    	member.setMember_id(member_id);
+		    	member.setMember_pw("null");
+		    	member.setMember_name(member_name);
+		    	member.setMember_email(member_email);
+		    	member.setMember_phone(member_phone);
+		    	member.setMember_nick(member_name);
+		    	member.setMember_type("ë„¤ì´ë²„");
+		    	memberService.addMember(member);
+		    	member = memberService.login(member_id);
+		    	session.setAttribute("member", member);
 		    	session.setAttribute("isLogOn", true);
 		    }
 		    else {
-		    	memberVO = memberService.login(memberVO);
 		    	session.setAttribute("member", memberVO);
 		    	session.setAttribute("isLogOn", true);
 		    }
@@ -212,22 +216,38 @@ public class MemberControllerImpl implements MemberController{
 	}
 	
 	@RequestMapping(value = "/member/kakaoLogin.do", produces = "application/json", method = { RequestMethod.GET, RequestMethod.POST }) 
-	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Model model) throws Exception {
+	public String oauthKakao(@RequestParam(value = "code", required = false) String code, Model model, HttpSession session) throws Exception {
 
-		System.out.println("#########" + code);
-		String access_Token = kakaoController.getAccessToken(code);
-		System.out.println("###access_Token#### : " + access_Token);
-    
-    
+		String access_Token = kakaoController.getAccessToken(code);    
 		HashMap<String, Object> userInfo = kakaoController.getUserInfo(access_Token);
-		System.out.println("###access_Token#### : " + access_Token);
-		System.out.println("###userInfo#### : " + userInfo.get("email"));
-		System.out.println("###nickname#### : " + userInfo.get("nickname"));
-   
+		String member_id = (String) userInfo.get("member_id");
+		String member_nick = (String) userInfo.get("member_nick");
+		String member_email = (String) userInfo.get("member_email");
+		
+		memberVO = memberService.login(member_id);
+		
+		if(memberVO == null) {
+			MemberVO member = new MemberVO();
+			member.setMember_id(member_id);
+			member.setMember_pw("null");
+			member.setMember_name(member_nick);
+			member.setMember_email(member_email);
+			member.setMember_phone("null");
+			member.setMember_nick(member_nick);
+			member.setMember_type("ì¹´ì¹´ì˜¤");
+			memberService.addMember(member);
+			member = memberService.login(member_id);
+			session.setAttribute("member", member);
+	    	session.setAttribute("isLogOn", true);
+		}
+		else {
+	    	session.setAttribute("member", memberVO);
+	    	session.setAttribute("isLogOn", true);
+	    }
 		JSONObject kakaoInfo =  new JSONObject(userInfo);
 		model.addAttribute("kakaoInfo", kakaoInfo);
     
-		return "redirect:/main.do"; //º»ÀÎ ¿øÇÏ´Â °æ·Î ¼³Á¤
+		return "redirect:/main.do";
 	}
 	
 	@Override
@@ -257,7 +277,7 @@ public class MemberControllerImpl implements MemberController{
 		String inputPass = member.getMember_pw();
 		String pass = passEncoder.encode(inputPass);
 		member.setMember_pw(pass);
-		
+		member.setMember_type("ì¼ë°˜");
 		memberService.addMember(member);
 		
 		ModelAndView mav = new ModelAndView("redirect:/member/joinWelcome.do");
@@ -278,22 +298,28 @@ public class MemberControllerImpl implements MemberController{
 	public ModelAndView findId(@ModelAttribute("member")MemberVO member,RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		request.setCharacterEncoding("utf-8");
-		List memberId = memberService.findId(member);
+		List<MemberVO> memberList = memberService.findId(member);
 		
-		for(int i=0; i<memberId.size(); i++ ) {
-			String member_id = (String) memberId.get(i);
-			if(member_id.length() > 20) {
-				memberId.remove(i);
+		for(int i=0; i<memberList.size(); i++ ) {
+			MemberVO memberVO = (MemberVO) memberList.get(i);
+			if(!memberVO.getMember_type().equals("ì¼ë°˜")) {
+				if(memberVO.getMember_type().equals("ì¹´ì¹´ì˜¤")) {
+					memberVO.setMember_id("ì¹´ì¹´ì˜¤ ê³„ì •");
+				}
+				else {
+					memberVO.setMember_id("ë„¤ì´ë²„ ê³„ì •");
+				}
+				memberList.remove(i);
+				memberList.add(i, memberVO);
 			}
-			
 		}
 		
 		ModelAndView mav = new ModelAndView();
-		if (memberId.size() == 0) {
+		if (memberList.size() == 0) {
 			rAttr.addAttribute("memberId", "notExists");
 			mav.setViewName("redirect:/findId.do");
 		}else {
-			mav.addObject("memberId", memberId);
+			mav.addObject("memberList", memberList);
 			mav.setViewName("resultId");
 		}
 		return mav;

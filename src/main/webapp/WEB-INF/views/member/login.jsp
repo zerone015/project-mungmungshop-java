@@ -41,7 +41,7 @@
 	</c:choose>
 <html>
 <head>
-<meta charset="utfo-8">
+<meta charset="utf-8">
 <title>로그인</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>

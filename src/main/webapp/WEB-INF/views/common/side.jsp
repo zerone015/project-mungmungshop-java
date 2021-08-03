@@ -33,7 +33,7 @@ request.setCharacterEncoding("utf-8");
             <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
             <li class="sideMenu2"><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
            </ul>
-        <c:if test="${member.member_type != '네이버'}">
+        <c:if test="${member.member_type != '네이버' && member.member_type != '카카오'}">
     		<hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
 			<p style="font-size: 16;">내 정보 관리</p>       
             <ul class="sideMenu">

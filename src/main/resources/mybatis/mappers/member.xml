@@ -26,26 +26,12 @@
 		]]>
   	</select>
 	
-	<select id="selectMemberId" resultType="String" parameterType="memberVO">
+	<select id="selectMemberId" resultType="memberVO" parameterType="memberVO">
 		<![CDATA[
-			select member_id from Members 	
+			select member_id,member_type from Members 	
 			where Member_name=#{member_name} and Member_email=#{member_email}
 		]]>
 	</select>
-	
-	<select id="selectNaverMember" resultType="memberVO" parameterType="String">
-		<![CDATA[
-			select * from members_oauth 	
-			where member_id = #{member_id}
-		]]>
-	</select>
-	
-	<insert id="insertNaverMember" parameterType="memberVO">
-		<![CDATA[ 
-			insert into members_oauth(seq, member_id, member_pw, member_name, member_nick, member_email, member_phone, member_joindate, member_manager, member_point, member_type)
-			values(null, #{member_id},'null', #{member_name}, #{member_name}, #{member_email}, #{member_phone}, default, 0, 500, '네이버')
-		]]>
-	</insert>
 	
 	<insert id="insertMember" parameterType="memberVO">
 		insert into members(Member_Num,Member_ID, Member_PW, Member_name, Member_email, Member_Phone, Member_Nick, Member_joindate, Member_manager, member_point, member_type)
@@ -64,13 +50,6 @@
 		<![CDATA[ 
 			update Members set member_logindate = default 
 			where member_num = #{member_num}
-		]]>
-	</update>
-	
-	<update id="updateNaverLoginDate" parameterType="String">
-		<![CDATA[ 
-			update members_oauth set member_logindate = default 
-			where member_id = #{member_id}
 		]]>
 	</update>
 	

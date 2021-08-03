@@ -39,7 +39,7 @@ public class KakaoController {
 	}
 	
 
-    //ÅäÅ«¹ß±Þ
+    //ï¿½ï¿½Å«ï¿½ß±ï¿½
 	public String getAccessToken (String authorize_code) {
         String access_Token = "";
         String refresh_Token = "";
@@ -50,25 +50,25 @@ public class KakaoController {
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            //  URL¿¬°áÀº ÀÔÃâ·Â¿¡ »ç¿ë µÉ ¼ö ÀÖ°í, POST È¤Àº PUT ¿äÃ»À» ÇÏ·Á¸é setDoOutputÀ» true·Î ¼³Á¤ÇØ¾ßÇÔ.
+            //  URLï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½Ö°ï¿½, POST È¤ï¿½ï¿½ PUT ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ï¿½ setDoOutputï¿½ï¿½ trueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ï¿½ï¿½.
             conn.setRequestMethod("POST");
             conn.setDoOutput(true);
 
-            //	POST ¿äÃ»¿¡ ÇÊ¿ä·Î ¿ä±¸ÇÏ´Â ÆÄ¶ó¹ÌÅÍ ½ºÆ®¸²À» ÅëÇØ Àü¼Û
+            //	POST ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ ï¿½ä±¸ï¿½Ï´ï¿½ ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
             StringBuilder sb = new StringBuilder();
             sb.append("grant_type=authorization_code");
-            sb.append("&client_id=196078c56197bc475e89d20429e90e22");  //º»ÀÎÀÌ ¹ß±Þ¹ÞÀº key
-            sb.append("&redirect_uri=http://localhost:8080/petshop/member/kakaoLogin.do");     // º»ÀÎÀÌ ¼³Á¤ÇØ ³õÀº °æ·Î
+            sb.append("&client_id=196078c56197bc475e89d20429e90e22");  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ß±Þ¹ï¿½ï¿½ï¿½ key
+            sb.append("&redirect_uri=http://localhost:8080/petshop/member/kakaoLogin.do");     // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
             sb.append("&code=" + authorize_code);
             bw.write(sb.toString());
             bw.flush();
 
-            //    °á°ú ÄÚµå°¡ 200ÀÌ¶ó¸é ¼º°ø
+            //    ï¿½ï¿½ï¿½ ï¿½Úµå°¡ 200ï¿½Ì¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             int responseCode = conn.getResponseCode();
             System.out.println("responseCode : " + responseCode);
 
-            //    ¿äÃ»À» ÅëÇØ ¾òÀº JSONÅ¸ÀÔÀÇ Response ¸Þ¼¼Áö ÀÐ¾î¿À±â
+            //    ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ JSONÅ¸ï¿½ï¿½ï¿½ï¿½ Response ï¿½Þ¼ï¿½ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
             BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
             String line = "";
             String result = "";
@@ -78,7 +78,7 @@ public class KakaoController {
             }
             System.out.println("response body : " + result);
 
-            //    Gson ¶óÀÌºê·¯¸®¿¡ Æ÷ÇÔµÈ Å¬·¡½º·Î JSONÆÄ½Ì °´Ã¼ »ý¼º
+            //    Gson ï¿½ï¿½ï¿½Ìºê·¯ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ JSONï¿½Ä½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
 
@@ -98,10 +98,10 @@ public class KakaoController {
         return access_Token;
     }
 	
-    //À¯ÀúÁ¤º¸Á¶È¸
+    //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¸
     public HashMap<String, Object> getUserInfo (String access_Token) {
 
-        //    ¿äÃ»ÇÏ´Â Å¬¶óÀÌ¾ðÆ®¸¶´Ù °¡Áø Á¤º¸°¡ ´Ù¸¦ ¼ö ÀÖ±â¿¡ HashMapÅ¸ÀÔÀ¸·Î ¼±¾ð
+        //    ï¿½ï¿½Ã»ï¿½Ï´ï¿½ Å¬ï¿½ï¿½ï¿½Ì¾ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù¸ï¿½ ï¿½ï¿½ ï¿½Ö±â¿¡ HashMapÅ¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         HashMap<String, Object> userInfo = new HashMap<String, Object>();
         String reqURL = "https://kapi.kakao.com/v2/user/me";
         try {
@@ -109,7 +109,7 @@ public class KakaoController {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
-            //    ¿äÃ»¿¡ ÇÊ¿äÇÑ Header¿¡ Æ÷ÇÔµÉ ³»¿ë
+            //    ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ Headerï¿½ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½ï¿½
             conn.setRequestProperty("Authorization", "Bearer " + access_Token);
 
             int responseCode = conn.getResponseCode();
@@ -127,15 +127,18 @@ public class KakaoController {
 
             JsonParser parser = new JsonParser();
             JsonElement element = parser.parse(result);
-
+            
+            int id =  element.getAsJsonObject().get("id").getAsInt();
+            String member_id = "mungmungshopKakaoID"+id;
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
-            String nickname = properties.getAsJsonObject().get("nickname").getAsString();
-            String email = kakao_account.getAsJsonObject().get("email").getAsString();
-            
+            String member_nick = properties.getAsJsonObject().get("nickname").getAsString();
+            String member_email = kakao_account.getAsJsonObject().get("email").getAsString();
             userInfo.put("accessToken", access_Token);
-            userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
+            userInfo.put("member_nick", member_nick);
+            userInfo.put("member_email", member_email);
+            userInfo.put("member_id", member_id);
+           
 
         } catch (IOException e) {
             // TODO Auto-generated catch block

@@ -9,11 +9,9 @@ import com.myspring.petshop.member.vo.MemberVO;
 public interface MemberService{
 	public int getIdCnt(MemberVO vo) throws Exception;
 	public int getNickNameCnt(MemberVO vo) throws Exception;
-	public MemberVO login(MemberVO memberVO) throws Exception;
+	public MemberVO login(String member_id) throws Exception;
 	public int addMember(MemberVO memberVO) throws DataAccessException;
-	public List findId(MemberVO member) throws Exception;
+	public List<MemberVO> findId(MemberVO member) throws Exception;
 	public void changePw(MemberVO member) throws Exception;
 	public void modLoginDate(int member_num) throws Exception;
-	public MemberVO getNaverMember(String unique_id) throws Exception;
-	public MemberVO addNaverMember(MemberVO memberVO) throws Exception;
 }
