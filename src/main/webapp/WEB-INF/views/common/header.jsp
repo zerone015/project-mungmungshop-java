@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" isELIgnored="false" %>
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -129,7 +130,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 				<div class="col" >
 					<div style="text-align: center; margin-bottom: 5;">
 						<c:if test="${isLogOn == true && member != null}">
-							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 ! 포인트 : ${member.member_point}</font>
+							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 ! 포인트 : <fmt:formatNumber value="${member.member_point}" pattern="###,###,###"/>원</font>
 						</c:if>
 					</div>
 					<div style="display: flex;">

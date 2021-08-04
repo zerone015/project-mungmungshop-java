@@ -7,7 +7,7 @@
 
 <select id="selectOrderList" resultType="combineVO">
 	<![CDATA[
-		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
+		select ord.member_name, ord.member_phone, ord.order_usePoint, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
 		from orders AS ord 
 		JOIN orders_detail AS odd 
 		ON ord.order_code = odd.order_code 

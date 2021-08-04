@@ -47,11 +47,13 @@ function modOrderStatus(index) {
 					<th>&nbsp;</th>
 					<th>주문번호</th>
 					<th>상품명</th>
-					<th>개당 가격</th>
-					<th>구매 수량</th>
+					<th>상품 가격</th>
+					<th>수량</th>
+					<th>사용 포인트</th>
 					<th>합계</th>
-					<th>주문 현황</th>
-					<th>상태 변경</th>
+					<th>적립금</th>
+					<th>현황</th>
+					<th>변경</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -62,7 +64,17 @@ function modOrderStatus(index) {
 					<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}"><b>${item.p_name}</b></a></td>
 					<td><fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/>원</td>
 					<td>${item.order_quantity}개</td>
-					<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</td>
+					<c:choose>
+						<c:when test="${orderVO.order_usePoint != 0}">
+							<td><fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
+							<td><fmt:formatNumber value="${item.p_price * item.order_quantity - item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
+						</c:when>
+						<c:otherwise>
+							<td>0원</td>
+							<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</td>
+						</c:otherwise>
+					</c:choose>
+					<td><fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원</td>
 					<td>${item.order_status}</td>
 					<td>
 					<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">

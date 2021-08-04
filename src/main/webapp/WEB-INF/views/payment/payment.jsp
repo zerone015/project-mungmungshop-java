@@ -7,9 +7,7 @@
 <c:set var="final_total_addPoint" value="0" />
 <c:set var="total_payment_price" value="0"/>
 <c:set var="final_total_payment_price" value="0" />
-<%
-request.setCharacterEncoding("utf-8");
-%>
+<c:set var="final_total_salePoint" value="0" />
 <html>
 <head>
 <meta charset="utf-8">
@@ -577,6 +575,7 @@ function numberWithCommas(x) {
 					<c:set var="final_total_addPoint" value="${final_total_addPoint + item.p_price * item.cart_quantity / 60}" />
 					<c:set var="total_payment_price" value="${total_payment_price + item.p_price * item.cart_quantity}"/>
 					<c:set var="final_total_payment_price" value="${final_total_payment_price + item.p_price * item.cart_quantity}" />
+					<c:set var="final_total_salePoint" value="${final_total_salePoint + item.p_price * item.cart_quantity / 10}" />
 				</c:forEach>
 				<input type="hidden" id="order_totalPrice" name="order_totalPrice" value="${final_total_payment_price}"/>
 			</c:when>
@@ -600,6 +599,7 @@ function numberWithCommas(x) {
 				<c:set var="final_total_addPoint" value="${final_total_addPoint + paymentVO.p_price * paymentVO.order_quantity / 60}" />
 				<c:set var="total_payment_price" value="${total_payment_price + paymentVO.p_price * paymentVO.order_quantity}"/>
 				<c:set var="final_total_payment_price" value="${final_total_payment_price + paymentVO.p_price * paymentVO.order_quantity}" />
+				<c:set var="final_total_salePoint" value="${final_total_salePoint + paymentVO.p_price * paymentVO.order_quantity / 10}" />
 			</c:otherwise>
 		</c:choose>
 		</tbody>
@@ -632,11 +632,11 @@ function numberWithCommas(x) {
 		<tr>
 			<td class="td_payment">포인트 할인</td>
 			<td class="td_payment2"><input type="checkbox" id="point_check" name="sale_check" value="checked" onClick="point_apply();"/>-<font id="sale_point_apply">0</font>원 (보유 포인트 : <fmt:formatNumber value="${memberVO.member_point}" pattern="###,###,###"/>원)
-			 (필요 포인트 : <fmt:formatNumber value="${total_payment_price / 10}" pattern="###,###,###"/>원)
+			 (필요 포인트 : <fmt:formatNumber value="${final_total_salePoint}" pattern="###,###,###"/>원)
 			<font id="point_availability" style="color: red;"></font></td>
 			<input type="hidden" id="own_point" value="${memberVO.member_point}"/>
 			<input type="hidden" id="total_payment_price" value="${total_payment_price}"/>
-			<input type="hidden" id="sale_point" value="${total_payment_price / 10}"/>
+			<input type="hidden" id="sale_point" value="${final_total_salePoint}"/>
 		</tr>
 		<tr>
 			<td class="td_payment">총 적립포인트</td>
