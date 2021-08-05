@@ -13,4 +13,10 @@ public interface ReviewService {
 	public List listReview(Map<String, Object> info) throws DataAccessException;
 
 	public int reviewCnt() throws DataAccessException;
+
+	public int myReviewCnt() throws DataAccessException;
+
+	public List listMyReview(Map<String, Object> info) throws DataAccessException;
+
+	public int reviewWrite(Map<String, Object> map) throws DataAccessException;
 }

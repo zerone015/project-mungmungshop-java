@@ -19,6 +19,14 @@
 		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />
 	</definition>
 	
+	<definition name="Layout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value=""  />
+		<put-attribute name="header" value="" />
+		<put-attribute name="side" value="" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="" />
+	</definition>
+	
 	
 	<definition name="product" extends="baseLayout">
 		<put-attribute name="title" value="상품 상세 페이지" />
@@ -56,13 +64,9 @@
 	</definition>
 	
 	
-	<definition name="review" extends="sideMenuLayout">
-		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/product/review.jsp" />
-	</definition>
 	
-	<definition name="reviewWrite" extends="sideMenuLayout">
-		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
+	<definition name="reviewWrite" extends="Layout">
+		<put-attribute name="title" value="리뷰작성페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/product/reviewWrite.jsp" />
 	</definition>
 	

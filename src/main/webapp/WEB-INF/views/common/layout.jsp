@@ -12,9 +12,7 @@ pageEncoding="utf-8" isELIgnored="false" %>
 	text-align: center;
 	border: 0px solid #bcbcbc;
 }
-img{
-	height: 100px;
-}
+
 #header {
 	padding: 5px;
 	margin-bottom: 5px;

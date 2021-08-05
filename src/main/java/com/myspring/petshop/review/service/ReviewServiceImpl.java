@@ -34,4 +34,21 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewList;
 	}
 
+	@Override
+	public int myReviewCnt() throws DataAccessException {
+		return reviewDAO.selectMyReviewCnt();
+	}
+
+	@Override
+	public List listMyReview(Map<String, Object> info) throws DataAccessException {
+		List reviewList = null;
+		reviewList = reviewDAO.selectMyReviewList(info);
+		return reviewList;
+	}
+	
+	@Override
+	public int reviewWrite(Map<String, Object> map) throws DataAccessException {
+		return reviewDAO.reviewWrite(map);
+	}
+
 }

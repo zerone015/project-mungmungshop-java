@@ -12,35 +12,14 @@ request.setCharacterEncoding("UTF-8");
 <title>뭉뭉샵</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<style>
-#layer {
-	z-index: 2;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 100%;
-}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-#popup {
-	z-index: 3;
-	position: fixed;
-	text-align: center;
-	left: 50%;
-	top: 45%;
-	width: 300px;
-	height: 200px;
-	background-color: white;
-	border: 3px solid #787878;
-}
+<link rel="stylesheet" href="${contextPath}/resources/css/product.css">
+<script src="${contextPath}/resources/js/product.js"></script>
 
-#close {
-	z-index: 4;
-	float: right;
-	width: 30px;
-	height: 20px;
-}
-</style>
 <script type="text/javascript">
 function checkWrite() {
 	var form=document.review;
@@ -106,12 +85,12 @@ function imagePopup(type) {
 </script>
 </head>
 <body>
-<form method="GET" action="${contextPath}/payment/getPaymentPage.do">
 <div class="container">
+<form method="GET" action="${contextPath}/payment/getPaymentPage.do">
   <div class="row" style="text-align: center">
-	<div class="col-md-6" style="display: inline-block;">
+	<div class="col-md-5" style="display: inline-block;">
 	  <div class="card mb-4 shadow-sm" style="cursor: pointer;">
-	    	<img class="productImg" src="${contextPath}/download?imageFileName=${product.p_imageFileName}" style=" width: 80%; height: 80%;"/>
+	    	<img class="productImage" src="${contextPath}/download?imageFileName=${product.p_imageFileName}" style=" width: 80%; height: 80%;"/>
 	    </div>
 	  </div>
 	<div class="col-md-5" >
@@ -174,117 +153,55 @@ function imagePopup(type) {
   
   <hr>
   <div>
-  	<h3 style="text-align: left;">후기</h3>
-	<details>
-	    <summary>더 많은 내용</summary>
-	    <p>내부에 넣을 내용을 입력해주세요</p>
-	</details>
-	<!-- 후기 목록 -->
-	<div class="table-responsive" style="margin-top:30;">
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>제목</th>
-					<th>글쓴이</th>
-					<th>날짜</th>
-					<th>조회수</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				<c:forEach items="${reviewList}" var="reviewVO">						
-				    <tr>
-				      <!-- 글번호 -->
-				      <td class="center">${reviewVO.review_num}</td>
-				      <!-- 글내용 -->
-				      <td class="center">${reviewVO.review_content}</td>
-				      
-				      <!-- 작성자 -->
-				      <td class="center">${reviewVO.memberNick}</td>
-				      <!-- 작성일 --> 
-				      <td class="center"><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></td>
-				     
-				    </tr>
-				</c:forEach>							
-			</tbody>
-		</table>
-		<!-- pagination{s} -->
-		<div style="">
-			<ul class="pagination" style="width: 0%; justify-content:center;">
-				<c:if test="${pagination.prev}">
-					<li class="page-item">
-						<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
-					</li>
-				</c:if>
-				<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
-					<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
-						<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
-					</li>
-				</c:forEach>
-				<c:if test="${pagination.next}">
-					<li class="page-item">
-						<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a>
-					</li>
-				</c:if>
-			</ul>
+		<h3 style="text-align: left; margin-bottom: 20;">후기</h3>
+	  	
+	  	
+	  	<!-- 후기 목록 -->
+	  	<c:forEach items="${reviewList}" var="reviewVO">
+	  	<div class="row" style="align-items: center;">
+			<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_recommend}.png" />
+					<c:if test="${reviewVO.review_recommend eq 'good'}">
+						<font>적극 추천!</font>
+					</c:if>
+					
+					<c:if test="${reviewVO.review_recommend eq 'notBad'}">
+						<font>보통이에요.</font>
+					</c:if>
+					
+					<c:if test="${reviewVO.review_recommend eq 'bad'}">
+						<font>별로에요.</font>
+					</c:if>
+			<details>
+			    <summary>
+			    	${reviewVO.review_title}
+			    </summary>
+				<div class="" style="padding: 5;">
+					<div id="wrap">
+					  <a href="javascript:openModal('reviewImage');" class="button modal-open">
+					  	<img class="reviewImg" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+					  </a>
+					</div>
+					
+					<div id="modal"></div>
+					<div class="modal-con reviewImage">
+						 <a href="javascript:;" class="close">X</a>
+						 <div class="con">
+							<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+						 </div>
+					</div>
+					<p> ${reviewVO.review_content}</p>
+			    </div>
+			    <p style="color: graytext;">${reviewVO.memberNick} | <fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></p>
+			</details>
 		</div>
-		<!-- pagination{e} -->
-	</div>
-	
-	<div style="margin-top: 10; ">
-		<a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	        <strong class="mb-1">후기 제목</strong>
-	        <small class="text-muted">날짜</small>
-	      </div>
-	      <div class="col-10 mb-1 small">=== 후 기 내 용 들어갈 곳 ===</div>
-	    </a>
-	    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	        <strong class="mb-1">후기 제목</strong>
-	        <small class="text-muted">날짜</small>
-	      </div>
-	      <div class="col-10 mb-1 small">=== 후 기 내 용 들어갈 곳 ===</div>
-	    </a>
-	    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	        <strong class="mb-1">후기 제목</strong>
-	        <small class="text-muted">날짜</small>
-	      </div>
-	      <div class="col-10 mb-1 small">=== 후 기 내 용 들어갈 곳 ===</div>
-	    </a>
-	    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	        <strong class="mb-1">후기 제목</strong>
-	        <small class="text-muted">날짜</small>
-	      </div>
-	      <div class="col-10 mb-1 small">=== 후 기 내 용 들어갈 곳 ===</div>
-	    </a>
-	    <a href="#" class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	        <strong class="mb-1">후기 제목</strong>
-	        <small class="text-muted">날짜</small>
-	      </div>
-	      <div class="col-10 mb-1 small">=== 후 기 내 용 들어갈 곳 ===</div>
-	    </a>
-    </div>
-    
-    <hr>
-    <!-- 후기 작성 -->
-    <form name="review" method="GET" action="" enctype="multipart/form-data">
-	    <div class="row g-3">
-	      <div class="col-12">
-	        <textarea class="form-control" style="height:150; resize:none;" id="" placeholder="후기를 작성해주세요." name="reviewWrite"></textarea>
-	        <div style="margin-top: 5; ">
-	        	<p><button type="button" class="btn btn-outline-primary" style="height: 50px; float: right;" onclick="checkWrite()">작성하기</button></p>
-	        </div>
-	      </div>
-		</div>
-	</form>
+			<hr>
+		</c:forEach>
   </div>
- </div>
-<div class="clear"></div>
+  
+  
+  
+
+	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
 		<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
 		<div id="popup">
@@ -292,10 +209,33 @@ function imagePopup(type) {
 			<a href="javascript:" onClick="javascript:imagePopup('close', '.layer01');"> <img
 				src="${contextPath}/download?imageFileName=close.png" id="close" />
 			</a>  <br /> <font style="font-size: 20px; font-weight: bold;" id="contents">장바구니에 담았습니다.</font><br> 
-<form   action='${contextPath}/cart/myCartList.do'  >				
-		<input class="btn btn-info" style="margin-top: 60px;" type="submit" value="장바구니 보기">
-</form>
-</div>
-</div>			
+			<form   action='${contextPath}/cart/myCartList.do'  >				
+					<input class="btn btn-info" style="margin-top: 60px;" type="submit" value="장바구니 보기">
+			</form>
+		</div>
+	</div>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+</div>	
 </body>
 </html>

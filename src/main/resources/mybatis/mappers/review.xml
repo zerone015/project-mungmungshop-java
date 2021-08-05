@@ -26,5 +26,31 @@
 	]]>
 	</select> 
 	
+	<!-- 게시글 개수 -->
+	<select id="selectMyReviewCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from reviews where member_nick = #{member_nick}
+	]]>
+	</select> 
 	
+	
+	
+	<!-- 나의 상품 리뷰 조회 -->
+	<select id="selectMyReviewList" resultType="ReviewVO" parameterType="HashMap">
+	<![CDATA[
+		select * from reviews 
+		where member_nick = #{member_nick}
+		order by review_num DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	]]>
+	</select>
+	
+	
+	<!-- 게시글 등록 -->
+	<insert id="reviewInsert" parameterType="map">
+	<![CDATA[
+		insert into reviews(review_num, p_code, member_nick, review_title, review_content, review_recommend, review_date, review_imageFileName)
+				values(null, #{p_code}, #{member_nick}, #{review_title}, #{review_content}, #{review_recommend}, #{review_date}, #{review_imageFileName})
+	]]>
+	</insert>
 </mapper>

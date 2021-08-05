@@ -26,6 +26,20 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sqlSession.selectList("mapper.review.selectAllReviewList", info);
 	}
 
+	@Override
+	public int selectMyReviewCnt() throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.selectMyReviewCnt");
+	}
+
+	@Override
+	public List selectMyReviewList(Map<String, Object> info) throws DataAccessException {
+		return sqlSession.selectList("mapper.review.selectMyReviewList", info);
+	}
 	
+	@Override
+	public int reviewWrite(Map<String, Object> map) throws DataAccessException {
+		return sqlSession.insert("mapper.review.reviewInsert", map);
+	}
+
 
 }

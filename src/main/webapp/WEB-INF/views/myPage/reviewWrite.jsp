@@ -81,15 +81,6 @@ function fn_reviewClose(form) {
       	<p class="subscript" > 닉네임</p>
       	<input type="text" class="form-control" name="member_nick" value="${member_nick}" readonly>
       	
-      	<p class="subscript" > 제목</p>
-      	<input type="text" class="form-control" name="review_title" >
-      	
-      	<p class="subscript" > 만족도</p>
-      	<select name="review_recommend" class="form-control">
-		    <option value="good">적극 추천합니다!</option>
-		    <option value="notBad">보통이에요</option>
-		    <option value="bod">나빠요</option>
-		</select>
       	
       	<input type="hidden" id = "review_date" name = "review_date" value="<%=nowTime%>" readonly>
 		
@@ -130,5 +121,9 @@ function fn_reviewClose(form) {
 	</form>
 </div>
 
+
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
