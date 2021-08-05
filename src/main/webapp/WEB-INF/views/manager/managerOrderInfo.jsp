@@ -66,15 +66,15 @@ function modOrderStatus(index) {
 					<td>${item.order_quantity}개</td>
 					<c:choose>
 						<c:when test="${orderVO.order_usePoint != 0}">
-							<td><fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
+							<td>-<fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
 							<td><fmt:formatNumber value="${item.p_price * item.order_quantity - item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
 						</c:when>
 						<c:otherwise>
-							<td>0원</td>
+							<td>-0원</td>
 							<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</td>
 						</c:otherwise>
 					</c:choose>
-					<td><fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원</td>
+					<td>+<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원</td>
 					<td>${item.order_status}</td>
 					<td>
 					<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">

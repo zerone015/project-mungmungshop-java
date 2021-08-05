@@ -13,10 +13,20 @@ request.setCharacterEncoding("UTF-8");
 <title>주문 내역 조회</title>
 </head>
 <script type="text/javascript">
-	function checkCancle() {
-
-		if (confirm('정말로 주문을 취소하시겠습니까?'))
-			window.close();
+	function checkCancle(index) {
+		
+		if (confirm('주문을 취소하시겠습니까?')){
+				var form = document.orderForm;
+				var order_detailCode = document.orderForm.order_detailCode[index];
+				
+				order_detailCode.disabled = false;
+				
+				form.submit();
+				
+		}
+		else {
+			return false;
+		}
 	}
 </script>
 <script>
@@ -67,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
 			<b>주문 내역 조회</b>
 		</h2>
 	</div>
-
+	<form name="orderForm" method="POST" action="${contextPath}//myPage/getRefundPage.do">
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
@@ -86,7 +96,7 @@ request.setCharacterEncoding("UTF-8");
 				<td align="center" colspan="7">주문 내역이 없습니다.</td>
 			</tr>
 		</c:if>
-		<c:forEach items="${orderList}" var="item">
+		<c:forEach items="${orderList}" var="item" varStatus="status" >
 		<tr align="center">
 				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>
 				<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
@@ -96,26 +106,30 @@ request.setCharacterEncoding("UTF-8");
 				<fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/>원 (${item.order_quantity}개)<br><br>
 				<c:choose>
 					<c:when test="${item.order_usePoint != 0}">
-						사용 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원<br>
-						적립 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
+						사용 포인트 : -<fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원<br>
+						적립 포인트 : +<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
 						<b>결제금액 : <fmt:formatNumber value="${item.p_price * item.order_quantity - item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</b>
 						
 					</c:when>
 					<c:otherwise>
-						사용 포인트 : 0원<br>
-						적립 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
+						사용 포인트 : -0원<br>
+						적립 포인트 : +<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
 						<b>결제금액 : <fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</b>
 						
 					</c:otherwise>
 				</c:choose>
 				</td>
 				<td>${item.order_status}</td>
-				<td><button type="button" class="btn btn-primary btn-sm"
-						onclick="checkCancle()">환불 요청</button> <button type="button" class="btn btn-primary btn-sm">교환 요청</button></td>
+				<td>
+					<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button>
+					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
+				</td>
+						
 			</tr>
 		</c:forEach>
 		</tbody>
 	</table>
+</form>
 	<hr width="100%">
 	<!-- pagination{s} -->
 	<div style="">

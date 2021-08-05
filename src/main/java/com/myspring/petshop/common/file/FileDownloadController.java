@@ -50,7 +50,7 @@ public class FileDownloadController {
 		File thumbnail = new File(CURR_IMAGE_REPO_PATH + "\\" + "thumbnail" + "\\" + fileName + ".png");
 		if (image.exists()) {
 			thumbnail.getParentFile().mkdirs();
-			Thumbnails.of(image).size(50,50).outputFormat("png").toFile(thumbnail);
+			Thumbnails.of(image).size(150,150).outputFormat("png").toFile(thumbnail);
 		}
 
 		FileInputStream in = new FileInputStream(thumbnail);

@@ -71,13 +71,13 @@ public class ManagerOrderControllerImpl implements ManagerOrderController {
 			message += "alert('주문 상태를 수정하였습니다.');";
 			message += "location.href='" + request.getContextPath() + "/manager/getOrderInfo.do?order_code=" + order_code + "';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		} catch(Exception e) {
 			message = "<script>";
 			message += " alert('오류가 발생했습니다. 다시 시도해주세요');";
 			message += "location.href='" + request.getContextPath() + "/manager/getOrderInfo.do?order_code=" + order_code + "';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		

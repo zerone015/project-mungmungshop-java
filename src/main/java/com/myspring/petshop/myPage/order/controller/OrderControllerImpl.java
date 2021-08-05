@@ -9,6 +9,9 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +29,8 @@ import com.myspring.petshop.payment.vo.CombineVO;
 public class OrderControllerImpl implements OrderController {
 	@Autowired
 	private OrderService orderService;
+	@Autowired
+	private CombineVO combineVO;
 	
 	@Override
 	@RequestMapping(value = "/myPage/getOrderList.do", method = RequestMethod.GET)
@@ -53,9 +58,18 @@ public class OrderControllerImpl implements OrderController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/myPage/orderRefund.do", method = RequestMethod.GET)
-	public String orderRefund() throws Exception {
+	
+	@RequestMapping(value = "/myPage/getRefundPage.do", method = RequestMethod.POST)
+	public ModelAndView getRefundPage(@RequestParam("order_detailCode") String order_detailCode, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView();
 		
-		return "orderRefund";
+		combineVO = orderService.getRefundInfo(order_detailCode);
+		int order_usePoint = orderService.getOrder_usePoint(combineVO.getOrder_code()); 
+		
+		mav.setViewName("orderRefund");
+		mav.addObject("combineVO", combineVO);
+		mav.addObject("order_usePoint", order_usePoint);
+		
+		return mav;
 	}
 }

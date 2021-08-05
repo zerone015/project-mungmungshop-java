@@ -25,4 +25,20 @@ public class OrderDAOImpl implements OrderDAO{
 	public List<CombineVO> selectOrder(Map<String, Object> orderMap) throws DataAccessException {
 		return sqlSession.selectList("mapper.order.selectOrder", orderMap);
 	}
+	
+	@Override
+	public CombineVO selectRefundInfo(String order_detailCode) throws DataAccessException {
+		return sqlSession.selectOne("mapper.order.selectRefundInfo", order_detailCode);
+	}
+	
+	@Override
+	public void updateOrder_status(String order_detailCode) throws DataAccessException {
+		sqlSession.update("mapper.order.updateOrder_status", order_detailCode);
+	}
+	
+	@Override
+	public int selectOrder_usePoint(String order_code) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.order.selectOrder_usePoint", order_code);
+	}
 }

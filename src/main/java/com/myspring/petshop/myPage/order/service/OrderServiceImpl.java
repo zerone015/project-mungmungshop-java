@@ -34,4 +34,21 @@ public class OrderServiceImpl implements OrderService{
 		
 		return orderList;
 	}	
+	
+	@Override
+	public CombineVO getRefundInfo(String order_detailCode) throws Exception {
+		
+		return orderDAO.selectRefundInfo(order_detailCode);		
+	}
+	
+	@Override
+	public void modOrder_status(String order_detailCode) throws Exception {
+		orderDAO.updateOrder_status(order_detailCode);		
+	}
+	
+	@Override
+	public int getOrder_usePoint(String order_code) throws Exception {
+		
+		return orderDAO.selectOrder_usePoint(order_code);		
+	}
 }

@@ -89,14 +89,14 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			message = "<script>";
 			message += "location.href='" + request.getContextPath() + "/myPage/infoModify.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}
 		else {
 			message = "<script>";
 			message += "alert('비밀번호가 일치하지 않습니다.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/infoCertify.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 		}
 		
 		return resEnt;
@@ -118,14 +118,14 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			message = "<script>";
 			message += "location.href='" + request.getContextPath() + "/myPage/newPW.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}
 		else {
 			message = "<script>";
 			message += "alert('비밀번호가 일치하지 않습니다.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/pwCertify.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 		}
 		
 		return resEnt;
@@ -149,7 +149,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			message += "alert('현재 비밀번호와 다른 비밀번호로 변경해주세요.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/newPW.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 		}
 		
 		else {
@@ -162,13 +162,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 				message += "alert('변경이 완료되었습니다.다시 로그인 해주세요.');";
 				message += "location.href='" + request.getContextPath() + "/login.do';";
 				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 			}catch(Exception e) {
 				message = "<script>";
 				message += "alert('오류가 발생하였습니다.');";
 				message += "location.href='" + request.getContextPath() + "/myPage/pwCertify.do';";
 				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 				e.printStackTrace();
 			}
 		}
@@ -197,13 +197,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			message += "alert('회원 정보 수정을 완료하였습니다.다시 로그인 해주세요.');";
 			message += "location.href='" + request.getContextPath() + "/login.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
 			message += "alert('오류가 발생하였습니다.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/infoModify.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		
@@ -227,7 +227,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			message += "alert('비밀번호가 일치하지 않습니다. 다시 시도해주세요.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/quit.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 		}else {
 			try {
 				myPageMemberService.removeMember(memberVO);
@@ -236,13 +236,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 				message += "alert('회원 탈퇴를 완료하였습니다.그동안 저희 사이트를 이용해주셔서 감사합니다.');";
 				message += "location.href='" + request.getContextPath() + "/main.do';";
 				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 			}catch(Exception e) {
 				message = "<script>";
 				message += "alert('오류가 발생하였습니다.');";
 				message += "location.href='" + request.getContextPath() + "/myPage/quit.do';";
 				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 				e.printStackTrace();
 			}
 		}

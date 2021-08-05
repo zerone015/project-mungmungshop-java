@@ -9,5 +9,7 @@ public interface OrderService {
 
 	public int getOrderCnt(int member_num) throws Exception;
 	public List<CombineVO> getOrderList(Map<String, Object> orderMap) throws Exception;
-	
+	public CombineVO getRefundInfo(String order_detailCode) throws Exception;
+	public void modOrder_status(String order_detailCode) throws Exception;
+	public int getOrder_usePoint(String order_code) throws Exception;
 } 

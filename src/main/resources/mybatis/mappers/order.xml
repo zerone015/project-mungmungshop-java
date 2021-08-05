@@ -8,7 +8,7 @@
 
 <select id="selectOrder" parameterType="java.util.Map" resultType="combineVO">
 	<![CDATA[
-		select ord.member_num, ord.address_recipent, ord.order_totalQuantity, ord.order_totalPrice, ord.order_usePoint, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName 
+		select ord.member_num, ord.address_recipent, ord.order_totalQuantity, ord.order_totalPrice, ord.order_usePoint, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName 
 		from orders AS ord 
 		JOIN orders_detail AS odd 
 		ON ord.order_code = odd.order_code 
@@ -22,4 +22,28 @@
 		select count(*) as listCnt from orders_detail where member_num = #{member_num}
 	]]>
 </select>
+
+<select id="selectRefundInfo" parameterType="String" resultType="combineVO">
+	<![CDATA[
+		select odd.member_num, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName, odd.order_status, 
+		dvr.deli_name AS address_recipent, dvr.deli_tel AS address_phone, dvr.deli_address1 AS address_1, dvr.deli_address2 AS address_2, dvr.deli_address3 AS address_3
+		from orders_detail AS odd
+		JOIN delivery AS dvr
+		ON odd.order_code = dvr.order_code
+		where odd.order_detailCode = #{order_detailCode}
+	]]>
+</select>
+
+<select id="selectOrder_usePoint" parameterType="String" resultType="int">
+	<![CDATA[
+		select order_usePoint from orders where order_code = #{order_code}
+	]]>
+</select>
+
+<update id="updateOrder_status" parameterType="String">
+	<![CDATA[
+		update orders_detail set order_status = '주문취소'
+		where order_detailCode = #{order_detailCode}
+	]]>
+</update>
 </mapper>

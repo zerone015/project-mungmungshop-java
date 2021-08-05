@@ -136,13 +136,13 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 			message += "alert('상품 수정을 완료하였습니다.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProductInfo.do?p_code=" + p_code + "';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
 			message += "alert('오류 발생. 다시 시도해주세요.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 		
@@ -163,13 +163,13 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 			message += "alert('상품 삭제를 완료하였습니다.');";
 			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
 			message += "alert('오류 발생. 다시 시도해주세요.');";
 			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
-			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
 			e.printStackTrace();
 		}
 			

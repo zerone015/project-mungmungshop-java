@@ -129,13 +129,13 @@ request.setCharacterEncoding("UTF-8");
 					상품금액 (수량) : <fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/>원 (${item.order_quantity}개)<br>
 					<c:choose>
 						<c:when test="${item.order_usePoint != 0}">
-							사용 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원<br>
-							적립 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
+							사용 포인트 : -<fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원<br>
+							적립 포인트 : +<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
 							<b>결제 금액 : <fmt:formatNumber value="${item.p_price * item.order_quantity - item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</b>
 						</c:when>
 						<c:otherwise>
-							사용 포인트 : 0원<br>
-							적립 포인트 : <fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
+							사용 포인트 : -0원<br>
+							적립 포인트 : +<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원<br><br>
 							<b>결제 금액 : <fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</b>
 						</c:otherwise>
 					</c:choose>
