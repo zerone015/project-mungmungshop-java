@@ -126,7 +126,7 @@ CREATE TABLE `delivery` (
   `deli_request` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`deli_num`),
   KEY `fk_delivery_ordercode` (`order_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -135,7 +135,7 @@ CREATE TABLE `delivery` (
 
 LOCK TABLES `delivery` WRITE;
 /*!40000 ALTER TABLE `delivery` DISABLE KEYS */;
-INSERT INTO `delivery` VALUES (32,10,'ORD0055','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(33,10,'ORD0056','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(36,21,'ORD0059','ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ',NULL,'ㅁㄴㅇㄹ');
+INSERT INTO `delivery` VALUES (32,10,'ORD0055','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(33,10,'ORD0056','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(36,21,'ORD0059','ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ',NULL,'ㅁㄴㅇㄹ'),(37,10,'ORD0060','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(38,10,'ORD0061','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ'),(39,10,'ORD0062','ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123',NULL,'ㅁㄴㅇㄹ');
 /*!40000 ALTER TABLE `delivery` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -310,7 +310,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-05 07:56:00',4365,'일반'),(12,'son1234','$2a$10$vWdiQcFiDNSXGmTokHdM1eAGmwMZ2EKHSaEV0qnr.VsFk90W13g8m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-04 07:46:56',28803,'일반'),(22,'son12345','$2a$10$x3jL72BFEpfO9OlgYL3HKu1p1BHr9D5sV7uMRGAG7WnLl49nmUQK6','손영원','zerone015@naver.com','010-1234-1234','qqwer','2021-08-02 04:10:06',0,'2021-08-02 04:10:21',500,'일반'),(26,'mungmungshopNaverID YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','zerone015@naver.com','010-9163-5375','손영원','2021-08-03 02:19:20',0,'2021-08-03 02:19:20',500,'네이버'),(27,'mungmungshopKakaoID1832531817','null','손영원','zerone015@naver.com','null','손영원','2021-08-03 02:19:35',0,'2021-08-03 02:19:35',500,'카카오');
+INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-05 14:05:26',2213,'일반'),(12,'son1234','$2a$10$vWdiQcFiDNSXGmTokHdM1eAGmwMZ2EKHSaEV0qnr.VsFk90W13g8m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-05 10:50:14',28803,'일반'),(22,'son12345','$2a$10$x3jL72BFEpfO9OlgYL3HKu1p1BHr9D5sV7uMRGAG7WnLl49nmUQK6','손영원','zerone015@naver.com','010-1234-1234','qqwer','2021-08-02 04:10:06',0,'2021-08-02 04:10:21',500,'일반'),(26,'mungmungshopNaverID YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','zerone015@naver.com','010-9163-5375','손영원','2021-08-03 02:19:20',0,'2021-08-03 02:19:20',500,'네이버'),(27,'mungmungshopKakaoID1832531817','null','손영원','zerone015@naver.com','null','손영원','2021-08-03 02:19:35',0,'2021-08-03 02:19:35',500,'카카오');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -374,7 +374,7 @@ CREATE TABLE `orders` (
 
 LOCK TABLES `orders` WRITE;
 /*!40000 ALTER TABLE `orders` DISABLE KEYS */;
-INSERT INTO `orders` VALUES ('ORD0055',0,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',5,163000,0,2716,'신용카드','2021-07-30 09:32:37'),('ORD0056',1,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',2,126450,14050,2341,'신용카드','2021-07-31 07:28:41'),('ORD0059',2,21,'손영원','010-9163-5375','zerone015@naver.com','ㅁㄴㅇㄹ',3,127800,0,2130,'신용카드','2021-08-02 05:03:50');
+INSERT INTO `orders` VALUES ('ORD0055',0,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',5,163000,0,2716,'신용카드','2021-07-30 09:32:37'),('ORD0056',1,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',2,126450,14050,2341,'신용카드','2021-07-31 07:28:41'),('ORD0059',2,21,'손영원','010-9163-5375','zerone015@naver.com','ㅁㄴㅇㄹ',3,127800,0,2130,'신용카드','2021-08-02 05:03:50'),('ORD0060',3,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',3,38700,4300,716,'신용카드','2021-08-05 11:41:53'),('ORD0061',4,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',3,43000,0,716,'신용카드','2021-08-05 11:43:01'),('ORD0062',5,10,'손영원','010-1234-1234','zerone015@naver.com','ㅁㄴㅇㄹ',3,43000,0,716,'신용카드','2021-08-05 14:06:28');
 /*!40000 ALTER TABLE `orders` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -406,7 +406,7 @@ CREATE TABLE `orders_detail` (
 
 LOCK TABLES `orders_detail` WRITE;
 /*!40000 ALTER TABLE `orders_detail` DISABLE KEYS */;
-INSERT INTO `orders_detail` VALUES ('ODD0027',10,'ORD0055','PRD0138','패리스독 파인애플 매너벨트 핑크',4,7500,'paerisdog_maenubelt_pink.PNG','배송완료'),('ODD0028',10,'ORD0055','PRD0005','오리젠 6 피쉬 독 11.4kg',1,133000,'origen_6fishDog_11.4kg.PNG','결제완료'),('ODD0029',10,'ORD0056','PRD0138','패리스독 파인애플 매너벨트 핑크',1,7500,'paerisdog_maenubelt_pink.PNG','결제완료'),('ODD0030',10,'ORD0056','PRD0005','오리젠 6 피쉬 독 11.4kg',1,133000,'origen_6fishDog_11.4kg.PNG','결제완료'),('ODD0035',21,'ORD0059','PRD0002','오리젠 오리지널 독 6kg',1,71800,'origen_originalDog_6kg.PNG','결제완료'),('ODD0036',21,'ORD0059','PRD0102','우리아지 더올림 초대형 레몬향 패드 20매 x 4개 세트',2,28000,'wooriarji_pad_x80.PNG','결제완료');
+INSERT INTO `orders_detail` VALUES ('ODD0027',10,'ORD0055','PRD0138','패리스독 파인애플 매너벨트 핑크',4,7500,'paerisdog_maenubelt_pink.PNG','배송완료'),('ODD0028',10,'ORD0055','PRD0005','오리젠 6 피쉬 독 11.4kg',1,133000,'origen_6fishDog_11.4kg.PNG','결제완료'),('ODD0029',10,'ORD0056','PRD0138','패리스독 파인애플 매너벨트 핑크',1,7500,'paerisdog_maenubelt_pink.PNG','결제완료'),('ODD0030',10,'ORD0056','PRD0005','오리젠 6 피쉬 독 11.4kg',1,133000,'origen_6fishDog_11.4kg.PNG','결제완료'),('ODD0035',21,'ORD0059','PRD0002','오리젠 오리지널 독 6kg',1,71800,'origen_originalDog_6kg.PNG','결제완료'),('ODD0036',21,'ORD0059','PRD0102','우리아지 더올림 초대형 레몬향 패드 20매 x 4개 세트',2,28000,'wooriarji_pad_x80.PNG','결제완료'),('ODD0037',10,'ORD0060','PRD0138','패리스독 파인애플 매너벨트 핑크',2,7500,'paerisdog_maenubelt_pink.PNG','결제완료'),('ODD0038',10,'ORD0060','PRD0102','우리아지 더올림 초대형 레몬향 패드 20매 x 4개 세트',1,28000,'wooriarji_pad_x80.PNG','결제완료'),('ODD0039',10,'ORD0061','PRD0138','패리스독 파인애플 매너벨트 핑크',2,7500,'paerisdog_maenubelt_pink.PNG','결제완료'),('ODD0040',10,'ORD0061','PRD0102','우리아지 더올림 초대형 레몬향 패드 20매 x 4개 세트',1,28000,'wooriarji_pad_x80.PNG','결제완료'),('ODD0041',10,'ORD0062','PRD0138','패리스독 파인애플 매너벨트 핑크',2,7500,'paerisdog_maenubelt_pink.PNG','결제완료'),('ODD0042',10,'ORD0062','PRD0102','우리아지 더올림 초대형 레몬향 패드 20매 x 4개 세트',1,28000,'wooriarji_pad_x80.PNG','결제완료');
 /*!40000 ALTER TABLE `orders_detail` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -420,7 +420,7 @@ DROP TABLE IF EXISTS `orders_seq`;
 CREATE TABLE `orders_seq` (
   `order_code` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=63 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -429,7 +429,7 @@ CREATE TABLE `orders_seq` (
 
 LOCK TABLES `orders_seq` WRITE;
 /*!40000 ALTER TABLE `orders_seq` DISABLE KEYS */;
-INSERT INTO `orders_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(28),(29),(30),(31),(32),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58),(59);
+INSERT INTO `orders_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(28),(29),(30),(31),(32),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58),(59),(60),(61),(62);
 /*!40000 ALTER TABLE `orders_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -443,7 +443,7 @@ DROP TABLE IF EXISTS `ordersdetail_seq`;
 CREATE TABLE `ordersdetail_seq` (
   `order_detailCode` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`order_detailCode`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -452,8 +452,37 @@ CREATE TABLE `ordersdetail_seq` (
 
 LOCK TABLES `ordersdetail_seq` WRITE;
 /*!40000 ALTER TABLE `ordersdetail_seq` DISABLE KEYS */;
-INSERT INTO `ordersdetail_seq` VALUES (4),(5),(6),(8),(9),(10),(11),(12),(13),(14),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(27),(28),(29),(30),(31),(32),(33),(34),(35),(36);
+INSERT INTO `ordersdetail_seq` VALUES (4),(5),(6),(8),(9),(10),(11),(12),(13),(14),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(27),(28),(29),(30),(31),(32),(33),(34),(35),(36),(37),(38),(39),(40),(41),(42);
 /*!40000 ALTER TABLE `ordersdetail_seq` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `point_history`
+--
+
+DROP TABLE IF EXISTS `point_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `point_history` (
+  `point_num` int(11) NOT NULL AUTO_INCREMENT,
+  `member_num` int(11) NOT NULL,
+  `point_status` char(2) NOT NULL,
+  `point_value` int(11) NOT NULL,
+  `point_contents` varchar(50) NOT NULL,
+  `order_code` char(7) DEFAULT NULL,
+  `point_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`point_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `point_history`
+--
+
+LOCK TABLES `point_history` WRITE;
+/*!40000 ALTER TABLE `point_history` DISABLE KEYS */;
+INSERT INTO `point_history` VALUES (3,10,'적립',716,'주문결제 적립',NULL,'2021-08-05 11:41:53'),(4,10,'사용',4300,'주문결제 사용',NULL,'2021-08-05 11:41:53'),(5,10,'적립',716,'주문결제 적립',NULL,'2021-08-05 11:43:01'),(6,10,'적립',716,'주문결제 적립','ORD0062','2021-08-05 14:06:28');
+/*!40000 ALTER TABLE `point_history` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -619,4 +648,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-05 18:40:02
+-- Dump completed on 2021-08-05 23:08:03

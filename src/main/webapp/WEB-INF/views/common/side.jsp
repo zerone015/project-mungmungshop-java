@@ -29,6 +29,7 @@ request.setCharacterEncoding("utf-8");
            <ul  class="sideMenu">
             <li class="sideMenu2"><a href="${contextPath}/myPage/getOrderList.do">주문 내역 조회</a><li>
             <li class="sideMenu2"><a href="#">주문 취소 내역</a></li>
+            <li class="sideMenu2"><a href="${contextPath}/myPage/getPointHistory.do">포인트 내역</a></li>
             <li class="sideMenu2"><a href="#">찜 리스트</a></li>
             <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
             <li class="sideMenu2"><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>

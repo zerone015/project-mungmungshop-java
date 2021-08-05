@@ -9,9 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.order.service.OrderService;
+import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
 import com.myspring.petshop.payment.vo.CombineVO;
 
 
@@ -31,6 +29,10 @@ public class OrderControllerImpl implements OrderController {
 	private OrderService orderService;
 	@Autowired
 	private CombineVO combineVO;
+	@Autowired
+	private MemberVO memberVO;
+	@Autowired
+	private PointHistoryVO pointHistoryVO;
 	
 	@Override
 	@RequestMapping(value = "/myPage/getOrderList.do", method = RequestMethod.GET)
@@ -69,6 +71,32 @@ public class OrderControllerImpl implements OrderController {
 		mav.setViewName("orderRefund");
 		mav.addObject("combineVO", combineVO);
 		mav.addObject("order_usePoint", order_usePoint);
+		
+		return mav;
+	}
+	
+	@RequestMapping(value = "/myPage/getPointHistory.do", method = RequestMethod.GET)
+	public ModelAndView getPointHistory(@RequestParam(required = false, defaultValue = "1") int page,
+									    @RequestParam(required = false, defaultValue = "1") int range,HttpSession session) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		memberVO = (MemberVO) session.getAttribute("member");
+		int member_num = memberVO.getMember_num();
+		
+		int listCnt = orderService.getPointHistoryCnt(member_num);
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		
+		Map<String, Object> phMap = new HashMap<String, Object>();
+		phMap.put("member_num", member_num);
+		phMap.put("pagination", pagination);
+		
+		List<PointHistoryVO> phList = orderService.getPointHistory(phMap);
+		
+		
+		mav.setViewName("pointHistory");
+		mav.addObject("phList", phList);
+		mav.addObject("pagination", pagination);
 		
 		return mav;
 	}

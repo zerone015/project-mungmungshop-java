@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.myPage.order.dao.OrderDAO;
+import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
 import com.myspring.petshop.payment.vo.CombineVO;
 
 
@@ -26,6 +27,12 @@ public class OrderServiceImpl implements OrderService{
 	public int getOrderCnt(int member_num) throws Exception {
 		
 		return orderDAO.selectOrderCnt(member_num);
+	}
+	
+	@Override
+	public int getPointHistoryCnt(int member_num) throws Exception {
+		
+		return orderDAO.selectPointHistoryCnt(member_num);
 	}
 	
 	@Override
@@ -50,5 +57,11 @@ public class OrderServiceImpl implements OrderService{
 	public int getOrder_usePoint(String order_code) throws Exception {
 		
 		return orderDAO.selectOrder_usePoint(order_code);		
+	}
+	
+	@Override
+	public List<PointHistoryVO> getPointHistory(Map<String, Object> phMap) throws Exception {
+		
+		return orderDAO.selectPointHistory(phMap);		
 	}
 }

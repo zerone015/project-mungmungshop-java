@@ -26,6 +26,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/myPage/order.jsp" />
 	</definition>
 	
+	<definition name="pointHistory" extends="sideMenuLayout">
+		<put-attribute name="title" value="포인트 내역" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/pointHistory.jsp" />
+	</definition>
+	
 	<definition name="orderRefund" extends="sideMenuLayout">
 		<put-attribute name="title" value="주문 내역 조회 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/orderRefund.jsp" />

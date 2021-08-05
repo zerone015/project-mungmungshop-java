@@ -46,4 +46,18 @@
 		where order_detailCode = #{order_detailCode}
 	]]>
 </update>
+
+<select id="selectPointHistoryCnt" parameterType="int" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from point_history where member_num = #{member_num}
+	]]>
+</select>
+
+<select id="selectPointHistory" parameterType="java.util.Map" resultType="pointHistoryVO">
+	<![CDATA[
+		select * from point_history 
+		where member_num = #{member_num}
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	]]>
+</select>
 </mapper>
