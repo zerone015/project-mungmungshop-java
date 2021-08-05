@@ -98,7 +98,7 @@ request.setCharacterEncoding("UTF-8");
 		</c:if>
 		<c:forEach items="${orderList}" var="item" varStatus="status" >
 		<tr align="center">
-				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>
+				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"/></td>
 				<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
 				<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
 				<td>${item.order_code}</td>
