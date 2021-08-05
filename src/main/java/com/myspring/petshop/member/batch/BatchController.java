@@ -24,18 +24,18 @@ public class BatchController{
 	
 	private static final Logger logger = LoggerFactory.getLogger(BatchController.class);
 	
-	@Scheduled(cron="0 0 12 * * ?") //ÃÊ ºĞ ½Ã ÀÏ ¿ù ¿äÀÏ ³â
+	@Scheduled(cron="0 0 12 * * ?") //ì´ˆ ë¶„ ì‹œ ì¼ ì›” ìš”ì¼ ë…„
 	public void scheduleRun() {
 		String batchResult = "success";
 		try {
-			System.out.println("- - - 10ÃÊ ÁÖ±â¸¶´Ù ½ÇÇà");
+			System.out.println("- - - 10ì´ˆ ì£¼ê¸°ë§ˆë‹¤ ì‹¤í–‰");
 			List<MemberVO> memberList = memberDAO.batchSelectMember();
 			
 			
 			if(memberList != null) {
 				for(int i = 0; i < memberList.size(); i++) {
 					memberVO = memberList.get(i);
-					System.out.println("VO Å©±â"+memberVO);
+					System.out.println("VO í¬ê¸°"+memberVO);
 					memberDAO.deleteMember(memberVO);
 				}
 			}
@@ -43,6 +43,6 @@ public class BatchController{
 			batchResult = "failed";
 		}
 		
-		logger.info("½ºÄÉÁì ½ÇÇà : [" + batchResult + "] " );	
+		logger.info("ìŠ¤ì¼€ì¥´ ì‹¤í–‰ : [" + batchResult + "] " );	
 	}
 }

@@ -171,11 +171,11 @@ public class MemberControllerImpl implements MemberController{
 			ModelAndView mav = new ModelAndView("redirect:/main.do");
 		    OAuth2AccessToken oauthToken;
 		    oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		    //�α��� ����� ������ �о�´�.
+		    //占싸깍옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占싻억옙쨈占�.
 		    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		    
 		    
-		 // ���� ���ϴ� ���� (�̸�)�� JSONŸ�Կ��� StringŸ������ �ٲ� �������� ���� �۾� 
+		 // 占쏙옙占쏙옙 占쏙옙占싹댐옙 占쏙옙占쏙옙 (占싱몌옙)占쏙옙 JSON타占쌉울옙占쏙옙 String타占쏙옙占쏙옙占쏙옙 占쌕뀐옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌜억옙 
 		    JSONParser parser = new JSONParser(); 
 		    Object obj = null; 
 		    try { 
@@ -297,7 +297,6 @@ public class MemberControllerImpl implements MemberController{
 	@RequestMapping(value="/member/resultId.do", method = RequestMethod.POST)
 	public ModelAndView findId(@ModelAttribute("member")MemberVO member,RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
 		List<MemberVO> memberList = memberService.findId(member);
 		
 		for(int i=0; i<memberList.size(); i++ ) {
@@ -313,7 +312,7 @@ public class MemberControllerImpl implements MemberController{
 				memberList.add(i, memberVO);
 			}
 		}
-		
+			
 		ModelAndView mav = new ModelAndView();
 		if (memberList.size() == 0) {
 			rAttr.addAttribute("memberId", "notExists");

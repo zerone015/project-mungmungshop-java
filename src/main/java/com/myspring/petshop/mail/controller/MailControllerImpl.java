@@ -29,7 +29,7 @@ import com.myspring.petshop.member.vo.MemberVO;
 
 
 @Controller("mailController")
-@EnableAsync // ºñµ¿±â Ã³¸® ÇØÁÖ´Â @Async ¾Ö³ÊÅ×ÀÌ¼ÇÀ» ÀÎ½ÄÇÒ ¼ö ÀÖ°Ô ÇØÁÖ´Â ¾Ö³ÊÅ×ÀÌ¼Ç.
+@EnableAsync // ë¹„ë™ê¸° ì²˜ë¦¬ í•´ì£¼ëŠ” @Async ì• ë„ˆí…Œì´ì…˜ì„ ì¸ì‹í•  ìˆ˜ ìˆê²Œ í•´ì£¼ëŠ” ì• ë„ˆí…Œì´ì…˜.
 public class MailControllerImpl implements MailController {
 	@Autowired
 	private MailServiceImpl mailService;
@@ -55,15 +55,15 @@ public class MailControllerImpl implements MailController {
 			int checkNum = random.nextInt(888888) + 111111;
 		
 			String setFrom = "mungmungshop12@gmail.com";
-			String setFromName = "¹¶¹¶¼¥";
+			String setFromName = "ë­‰ë­‰ìƒµ";
 			String toMail = email;
-			String title = "È¸¿ø°¡ÀÔ ÀÎÁõ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù.";
+			String title = "íšŒì›ê°€ì… ì¸ì¦ ì´ë©”ì¼ ì…ë‹ˆë‹¤.";
 			String content =
-					"È¨ÆäÀÌÁö¸¦ ¹æ¹®ÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù." +
+					"í™ˆí˜ì´ì§€ë¥¼ ë°©ë¬¸í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤." +
 							"<br><br>" +
-							"ÀÎÁõ ¹øÈ£´Â " + checkNum + " ÀÔ´Ï´Ù." +
+							"ì¸ì¦ ë²ˆí˜¸ëŠ” " + checkNum + " ì…ë‹ˆë‹¤." +
 							"<br><br>" +
-							"ÇØ´ç ÀÎÁõ¹øÈ£¸¦ ÀÎÁõ¹øÈ£ È®ÀÎ¶õ¿¡ ±âÀÔÇÏ¿© ÁÖ¼¼¿ä.";
+							"í•´ë‹¹ ì¸ì¦ë²ˆí˜¸ë¥¼ ì¸ì¦ë²ˆí˜¸ í™•ì¸ë€ì— ê¸°ì…í•˜ì—¬ ì£¼ì„¸ìš”.";
 		
 		
 			try {		
@@ -93,15 +93,15 @@ public class MailControllerImpl implements MailController {
 			Random random = new Random();
 			int checkNum = random.nextInt(888888) + 111111;
 			String setFrom = "mungmungshop12@gmail.com";
-			String setFromName = "¹¶¹¶¼¥";
+			String setFromName = "ë­‰ë­‰ìƒµ";
 			String toMail = email;
-			String title = "ºñ¹Ğ¹øÈ£ Ã£±â ÀÎÁõ ÀÌ¸ŞÀÏ ÀÔ´Ï´Ù.";
+			String title = "ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ì¸ì¦ ì´ë©”ì¼ ì…ë‹ˆë‹¤.";
 			String content =
-					"È¨ÆäÀÌÁö¸¦ ¹æ¹®ÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù." +
+					"í™ˆí˜ì´ì§€ë¥¼ ë°©ë¬¸í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤." +
 					"<br><br>" +
-					"ÀÎÁõ ¹øÈ£´Â " + checkNum + " ÀÔ´Ï´Ù." +
+					"ì¸ì¦ ë²ˆí˜¸ëŠ” " + checkNum + " ì…ë‹ˆë‹¤." +
 					"<br><br>" +
-					"ÇØ´ç ÀÎÁõ¹øÈ£¸¦ ÀÎÁõ¹øÈ£ È®ÀÎ¶õ¿¡ ±âÀÔÇÏ¿© ÁÖ¼¼¿ä.";
+					"í•´ë‹¹ ì¸ì¦ë²ˆí˜¸ë¥¼ ì¸ì¦ë²ˆí˜¸ í™•ì¸ë€ì— ê¸°ì…í•˜ì—¬ ì£¼ì„¸ìš”.";
 			try {		
 				MimeMessage message = mailSender.createMimeMessage();
 				MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
@@ -131,28 +131,28 @@ public class MailControllerImpl implements MailController {
 	@RequestMapping(value="/sendMail.do", method = RequestMethod.GET)
 	public void sendSimpleMail(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		
-		request.setCharacterEncoding("utf-8");	// Å¬¶óÀÌ¾ğÆ®ÀÇ ¿äÃ» Á¤º¸°¡ ÀúÀåµÈ request °´Ã¼ÀÇ ÇÑ±Û ÀÎÄÚµùÀ» À§ÇØ utf-8¼³Á¤
-		response.setContentType("text/html;charset=utf-8");	//¼­¹ö¿¡¼­ Å¬¶óÀÌ¾ğÆ®¿¡ ÀÀ´äÇÒ ÇÑ±Û ÀÎÄÚµùÀ» À§ÇØ utf-8 ¼³Á¤
-		PrintWriter out = response.getWriter(); //ÅØ½ºÆ® Çü½ÄÀ» response ³»Àå °´Ã¼·Î Å¬¶óÀÌ¾ğÆ®¿¡ ÀÀ´äÇØ º¸³¾ ¼ö ÀÖ´Â ½ºÆ®¸²À» »ı¼º/ 
-		StringBuffer sb = new StringBuffer(); //java.lang.StringBuffer·Î ÈÎ¾À È¿À²ÀûÀÌ°í ºü¸¥ Ã³¸®¼Óµµ·Î ¹®ÀÚ¿­À» Ãß°¡ÇÕ´Ï´Ù.(String Å¬·¡½º °´Ã¼´Â + ¿¬»êÀÚ¸¦ ÀÌ¿ëÇØ ¹®ÀÚ¿­À» °áÇÕÇÏ¸é °è¼Ó »õ·Î¿î °´Ã¼¸¦ »ı¼ºÇÏ¿© ¹®ÀÚ¿­À» ¸¹ÀÌ °áÇÕÇÏ¸é ÇÒ¼ö·Ï °ø°£ÀÇ ³¶ºñ»Ó¸¸ ¾Æ´Ï¶ó ¼Óµµ ¶ÇÇÑ ¸Å¿ì ´À·ÁÁö°ÔµÈ´Ù)ºÒº¯ Å¬·¡½º=String,°¡º¯Å¬·¡½º=StringBuffer
+		request.setCharacterEncoding("utf-8");	// í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ ì •ë³´ê°€ ì €ì¥ëœ request ê°ì²´ì˜ í•œê¸€ ì¸ì½”ë”©ì„ ìœ„í•´ utf-8ì„¤ì •
+		response.setContentType("text/html;charset=utf-8");	//ì„œë²„ì—ì„œ í´ë¼ì´ì–¸íŠ¸ì— ì‘ë‹µí•  í•œê¸€ ì¸ì½”ë”©ì„ ìœ„í•´ utf-8 ì„¤ì •
+		PrintWriter out = response.getWriter(); //í…ìŠ¤íŠ¸ í˜•ì‹ì„ response ë‚´ì¥ ê°ì²´ë¡œ í´ë¼ì´ì–¸íŠ¸ì— ì‘ë‹µí•´ ë³´ë‚¼ ìˆ˜ ìˆëŠ” ìŠ¤íŠ¸ë¦¼ì„ ìƒì„±/ 
+		StringBuffer sb = new StringBuffer(); //java.lang.StringBufferë¡œ í›¨ì”¬ íš¨ìœ¨ì ì´ê³  ë¹ ë¥¸ ì²˜ë¦¬ì†ë„ë¡œ ë¬¸ìì—´ì„ ì¶”ê°€í•©ë‹ˆë‹¤.(String í´ë˜ìŠ¤ ê°ì²´ëŠ” + ì—°ì‚°ìë¥¼ ì´ìš©í•´ ë¬¸ìì—´ì„ ê²°í•©í•˜ë©´ ê³„ì† ìƒˆë¡œìš´ ê°ì²´ë¥¼ ìƒì„±í•˜ì—¬ ë¬¸ìì—´ì„ ë§ì´ ê²°í•©í•˜ë©´ í• ìˆ˜ë¡ ê³µê°„ì˜ ë‚­ë¹„ë¿ë§Œ ì•„ë‹ˆë¼ ì†ë„ ë˜í•œ ë§¤ìš° ëŠë ¤ì§€ê²Œëœë‹¤)ë¶ˆë³€ í´ë˜ìŠ¤=String,ê°€ë³€í´ë˜ìŠ¤=StringBuffer
 		sb.append("<html><body>");
 		sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
-		sb.append("<h1>"+"Á¦Ç°¼Ò°³"+"<h1><br>");
-		sb.append("½Å°£ µµ¼­¸¦ ¼Ò°³ÇÕ´Ï´Ù.<br><br>");
+		sb.append("<h1>"+"ì œí’ˆì†Œê°œ"+"<h1><br>");
+		sb.append("ì‹ ê°„ ë„ì„œë¥¼ ì†Œê°œí•©ë‹ˆë‹¤.<br><br>");
 		sb.append("<a href='http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788956746425&orderClick=LAG&Kc=#N'>");
 		sb.append("<img src='http://image.kyobobook.co.kr/images/book/xlarge/425/x9788956746425.jpg'/></a><br>");
 		sb.append("</a>");
-		sb.append("<a href='http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788956746425&orderClick=LAG&Kc=#N'>»óÇ°º¸±â</a>");
-		sb.append("</body></html>");		//¿©±â±îÁö ¹®ÀÚ¿­À» È¿À²ÀûÀ¸·Î ¿¬»êÇÑ´Ù.
-		String str=sb.toString();			//È¿À²ÀûÀ¸·Î ¿¬»êÇÑ ÈÄ toString() ¸Ş¼Òµå¸¦ ÀÌ¿ëÇØ ¹®ÀÚ¿­À» ÇÒ´ç
-		mailService.sendMail("¼ö½ÅÀÚ@naver.com", "½Å»óÇ°À» ¼Ò°³ÇÕ´Ï´Ù", str);		
+		sb.append("<a href='http://www.kyobobook.co.kr/product/detailViewKor.laf?ejkGb=KOR&mallGb=KOR&barcode=9788956746425&orderClick=LAG&Kc=#N'>ìƒí’ˆë³´ê¸°</a>");
+		sb.append("</body></html>");		//ì—¬ê¸°ê¹Œì§€ ë¬¸ìì—´ì„ íš¨ìœ¨ì ìœ¼ë¡œ ì—°ì‚°í•œë‹¤.
+		String str=sb.toString();			//íš¨ìœ¨ì ìœ¼ë¡œ ì—°ì‚°í•œ í›„ toString() ë©”ì†Œë“œë¥¼ ì´ìš©í•´ ë¬¸ìì—´ì„ í• ë‹¹
+		mailService.sendMail("ìˆ˜ì‹ ì@naver.com", "ì‹ ìƒí’ˆì„ ì†Œê°œí•©ë‹ˆë‹¤", str);		
 		
-		out.print("¸ŞÀÏÀ» º¸³Â½À´Ï´Ù!!");
+		out.print("ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤!!");
 	} */
 
 /*
 @Controller
-@EnableAsync  //ºñµ¿±âÃ³¸® @Async¸¦ »ç¿ëÇÒ ¼ö ÀÖ°Ô ÇØÁÖ´Â ³à¼® (@Async´Â public ¸Ş¼Òµå¿¡¸¸ Àû¿ëÇØ¾ßÇÑ´Ù,°°Àº Å¬·¡½º¾È¿¡¼­ÀÇ È£ÃâÀº ÀÛµ¿ÇÏÁö ¾Ê´Â´Ù.)
+@EnableAsync  //ë¹„ë™ê¸°ì²˜ë¦¬ @Asyncë¥¼ ì‚¬ìš©í•  ìˆ˜ ìˆê²Œ í•´ì£¼ëŠ” ë…€ì„ (@AsyncëŠ” public ë©”ì†Œë“œì—ë§Œ ì ìš©í•´ì•¼í•œë‹¤,ê°™ì€ í´ë˜ìŠ¤ì•ˆì—ì„œì˜ í˜¸ì¶œì€ ì‘ë™í•˜ì§€ ì•ŠëŠ”ë‹¤.)
 public class MailController {
 	@Autowired
 	private MailService mailService;
@@ -163,9 +163,9 @@ public class MailController {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		mailService.sendMail("¼ö½ÅÀÚ¸ŞÀÏ@naver.com","Å×½ºÆ® ¸ŞÀÏ","¾È³çÇÏ¼¼¿ä. º¸³½ ¸ŞÀÏ ³»¿ëÀÔ´Ï´Ù.");
-		mailService.sendPreConfiguredMail("Å×½ºÆ® ¸ŞÀÏÀÔ´Ï´Ù.");
-		out.print("¸ŞÀÏÀ» º¸³Â½À´Ï´Ù!!");
+		mailService.sendMail("ìˆ˜ì‹ ìë©”ì¼@naver.com","í…ŒìŠ¤íŠ¸ ë©”ì¼","ì•ˆë…•í•˜ì„¸ìš”. ë³´ë‚¸ ë©”ì¼ ë‚´ìš©ì…ë‹ˆë‹¤.");
+		mailService.sendPreConfiguredMail("í…ŒìŠ¤íŠ¸ ë©”ì¼ì…ë‹ˆë‹¤.");
+		out.print("ë©”ì¼ì„ ë³´ëƒˆìŠµë‹ˆë‹¤!!");
 	}
 }				*/
 

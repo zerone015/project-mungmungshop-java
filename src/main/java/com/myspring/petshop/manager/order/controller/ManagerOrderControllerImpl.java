@@ -68,13 +68,13 @@ public class ManagerOrderControllerImpl implements ManagerOrderController {
 		try {
 			managerService.modOrderStatus(odv);
 			message = "<script>";
-			message += "alert('ÁÖ¹® »óÅÂ¸¦ ¼öÁ¤ÇÏ¿´½À´Ï´Ù.');";
+			message += "alert('ì£¼ë¬¸ ìƒíƒœë¥¼ ìˆ˜ì •í•˜ì˜€ìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + request.getContextPath() + "/manager/getOrderInfo.do?order_code=" + order_code + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		} catch(Exception e) {
 			message = "<script>";
-			message += " alert('¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä');";
+			message += " alert('ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”');";
 			message += "location.href='" + request.getContextPath() + "/manager/getOrderInfo.do?order_code=" + order_code + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);

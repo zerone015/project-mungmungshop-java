@@ -133,13 +133,13 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 		try {
 			managerService.modifyProduct(map);
 			message = "<script>";
-			message += "alert('»óÇ° ¼öÁ¤À» ¿Ï·áÇÏ¿´½À´Ï´Ù.');";
+			message += "alert('ìƒí’ˆ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProductInfo.do?p_code=" + p_code + "';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
-			message += "alert('¿À·ù ¹ß»ı. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.');";
+			message += "alert('ì˜¤ë¥˜ ë°œìƒ. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.');";
 			message += "location.href='" + multipartRequest.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -160,13 +160,13 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 		try {
 			managerService.removeProduct(p_code);
 			message = "<script>";
-			message += "alert('»óÇ° »èÁ¦¸¦ ¿Ï·áÇÏ¿´½À´Ï´Ù.');";
+			message += "alert('ìƒí’ˆ ì‚­ì œë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
-			message += "alert('¿À·ù ¹ß»ı. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.');";
+			message += "alert('ì˜¤ë¥˜ ë°œìƒ. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.');";
 			message += "location.href='" + request.getContextPath() + "/manager/managerProduct.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);

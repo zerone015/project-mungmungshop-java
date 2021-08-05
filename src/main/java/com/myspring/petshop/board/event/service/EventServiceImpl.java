@@ -55,7 +55,6 @@ public class EventServiceImpl implements EventService {
 	
 	@Override
 	public int increaseHits(int event_no) {
-		// TODO Auto-generated method stub
 		return eventDAO.increaseHist(event_no);
 	}
 	

@@ -61,8 +61,6 @@ public class EventControllerImpl implements EventController {
 			 manager = 1234;
 		}
 		
-		
-		// 게시글 총 개수
 		int listCnt = eventService.eventCnt();
 		
 		Pagination pagination = new Pagination();
@@ -107,7 +105,6 @@ public class EventControllerImpl implements EventController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/eventView");
 		mav.addObject("event", eventVO);
-		// 조회수 증가
 		eventService.increaseHits(event_no);
 		return mav;
 	}

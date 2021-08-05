@@ -93,7 +93,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		}
 		else {
 			message = "<script>";
-			message += "alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');";
+			message += "alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/infoCertify.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -122,7 +122,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		}
 		else {
 			message = "<script>";
-			message += "alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù.');";
+			message += "alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/pwCertify.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -146,7 +146,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		
 		if(passMatch) {
 			message = "<script>";
-			message += "alert('ÇöÀç ºñ¹Ğ¹øÈ£¿Í ´Ù¸¥ ºñ¹Ğ¹øÈ£·Î º¯°æÇØÁÖ¼¼¿ä.');";
+			message += "alert('í˜„ì¬ ë¹„ë°€ë²ˆí˜¸ì™€ ë‹¤ë¥¸ ë¹„ë°€ë²ˆí˜¸ë¡œ ë³€ê²½í•´ì£¼ì„¸ìš”.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/newPW.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -159,13 +159,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 				myPageMemberService.modPw(memberVO);
 				session.removeAttribute("member");
 				message = "<script>";
-				message += "alert('º¯°æÀÌ ¿Ï·áµÇ¾ú½À´Ï´Ù.´Ù½Ã ·Î±×ÀÎ ÇØÁÖ¼¼¿ä.');";
+				message += "alert('ë³€ê²½ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.ë‹¤ì‹œ ë¡œê·¸ì¸ í•´ì£¼ì„¸ìš”.');";
 				message += "location.href='" + request.getContextPath() + "/login.do';";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 			}catch(Exception e) {
 				message = "<script>";
-				message += "alert('¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.');";
+				message += "alert('ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.');";
 				message += "location.href='" + request.getContextPath() + "/myPage/pwCertify.do';";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -194,13 +194,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 			myPageMemberService.modifyInfo(member);
 			session.removeAttribute("member");
 			message = "<script>";
-			message += "alert('È¸¿ø Á¤º¸ ¼öÁ¤À» ¿Ï·áÇÏ¿´½À´Ï´Ù.´Ù½Ã ·Î±×ÀÎ ÇØÁÖ¼¼¿ä.');";
+			message += "alert('íšŒì› ì •ë³´ ìˆ˜ì •ì„ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.ë‹¤ì‹œ ë¡œê·¸ì¸ í•´ì£¼ì„¸ìš”.');";
 			message += "location.href='" + request.getContextPath() + "/login.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 		}catch(Exception e) {
 			message = "<script>";
-			message += "alert('¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.');";
+			message += "alert('ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/infoModify.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -224,7 +224,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		if(!passMatch) {
 			message = "<script>";
-			message += "alert('ºñ¹Ğ¹øÈ£°¡ ÀÏÄ¡ÇÏÁö ¾Ê½À´Ï´Ù. ´Ù½Ã ½ÃµµÇØÁÖ¼¼¿ä.');";
+			message += "alert('ë¹„ë°€ë²ˆí˜¸ê°€ ì¼ì¹˜í•˜ì§€ ì•ŠìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì‹œë„í•´ì£¼ì„¸ìš”.');";
 			message += "location.href='" + request.getContextPath() + "/myPage/quit.do';";
 			message += " </script>";
 			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -233,13 +233,13 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 				myPageMemberService.removeMember(memberVO);
 				session.removeAttribute("member");
 				message = "<script>";
-				message += "alert('È¸¿ø Å»Åğ¸¦ ¿Ï·áÇÏ¿´½À´Ï´Ù.±×µ¿¾È ÀúÈñ »çÀÌÆ®¸¦ ÀÌ¿ëÇØÁÖ¼Å¼­ °¨»çÇÕ´Ï´Ù.');";
+				message += "alert('íšŒì› íƒˆí‡´ë¥¼ ì™„ë£Œí•˜ì˜€ìŠµë‹ˆë‹¤.ê·¸ë™ì•ˆ ì €í¬ ì‚¬ì´íŠ¸ë¥¼ ì´ìš©í•´ì£¼ì…”ì„œ ê°ì‚¬í•©ë‹ˆë‹¤.');";
 				message += "location.href='" + request.getContextPath() + "/main.do';";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
 			}catch(Exception e) {
 				message = "<script>";
-				message += "alert('¿À·ù°¡ ¹ß»ıÇÏ¿´½À´Ï´Ù.');";
+				message += "alert('ì˜¤ë¥˜ê°€ ë°œìƒí•˜ì˜€ìŠµë‹ˆë‹¤.');";
 				message += "location.href='" + request.getContextPath() + "/myPage/quit.do';";
 				message += " </script>";
 				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
@@ -250,3 +250,4 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		return resEnt;
 	}
 }
+
