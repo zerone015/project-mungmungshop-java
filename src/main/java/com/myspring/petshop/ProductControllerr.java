@@ -52,19 +52,9 @@ public class ProductControllerr {
 		return "rankList";
 	}
 	
-	@RequestMapping(value = "/review.do", method = RequestMethod.GET)
-	public String review(Locale locale, Model model) {
-		
-		
-		return "review";
-	}
 	
-	@RequestMapping(value = "/reviewWrite.do", method = RequestMethod.GET)
-	public String reviewWrite(Locale locale, Model model) {
-
-		
-		return "reviewWrite";
-	}
+	
+	
 	
 	@RequestMapping(value = "/saleList.do", method = RequestMethod.GET)
 	public String saleList(Locale locale, Model model) {

@@ -27,14 +27,11 @@ request.setCharacterEncoding("UTF-8");
 	.carousel-inner > .carousel-item > img { 
 	width: 1200!important; height: 500px;
 	} 
-	.rank {
-	color:red; 
+	.rank { 
 	position: absolute; 
-	top: 10px; 
+	top: 5px; 
 	left: 10px;
-	font-size: 30px;
-	font-weight: 700;
-	font-family: HY수평선B;
+	width: 50px;
 	}
 	
 	section {
@@ -52,51 +49,51 @@ request.setCharacterEncoding("UTF-8");
 <body>
 	<!-- 배너 -->
 
-<section>
-   <div class="container" style="z-index: 0;"> 
-      	<div id="demo" class="carousel slide" data-ride="carousel" style="text-align: center; margin-left: -35;">
-	      	<div class="carousel-inner" style="display: inline;"> 
-	      		<!-- 슬라이드 쇼 --> 
-	      		<div class="carousel-item active"> 
-	      			<!--가로--> 
-	      			<img class="d-block" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide" >
-	      		</div> 
-	      		<div class="carousel-item"> 
-	      			<img class="d-block " src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide" > 
-	      		</div> 
-	      		<div class="carousel-item"> 
-	      			<img class="d-block " src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
-	      		</div> 
-	      		<!-- / 슬라이드 쇼 끝 --> 
-	      		<!-- 왼쪽 오른쪽 화살표 버튼 --> 
-	      		<a class="carousel-control-prev" href="#demo" data-slide="prev"> 
-		      		<span class="carousel-control-prev-icon" aria-hidden="true">
-		      		</span> <!-- <span>Previous</span> --> 
-	      		</a> 
-	      		<a class="carousel-control-next" href="#demo" data-slide="next"> 
-	      			<span class="carousel-control-next-icon" aria-hidden="true"></span> 
-	      			<!-- <span>Next</span> --> 
-	      		</a> 
-	      		<!-- / 화살표 버튼 끝 --> 
-	      		<!-- 인디케이터 --> 
-	      		<ul class="carousel-indicators"> 
-	      			<li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작--> 
-	      			<li data-target="#demo" data-slide-to="1"></li> 
-	      			<li data-target="#demo" data-slide-to="2"></li> 
-	      		</ul> <!-- 인디케이터 끝 --> 
-	      	</div>
-	     </div>
-		 </div>
-</section>
+	<section>
+	   <div class="container" style="z-index: 0;"> 
+	      	<div id="demo" class="carousel slide" data-ride="carousel" style="text-align: center; margin-left: -35;">
+		      	<div class="carousel-inner" style="display: inline;"> 
+		      		<!-- 슬라이드 쇼 --> 
+		      		<div class="carousel-item active"> 
+		      			<!--가로--> 
+		      			<img class="d-block" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide" >
+		      		</div> 
+		      		<div class="carousel-item"> 
+		      			<img class="d-block " src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide" > 
+		      		</div> 
+		      		<div class="carousel-item"> 
+		      			<img class="d-block " src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
+		      		</div> 
+		      		<!-- / 슬라이드 쇼 끝 --> 
+		      		<!-- 왼쪽 오른쪽 화살표 버튼 --> 
+		      		<a class="carousel-control-prev" href="#demo" data-slide="prev"> 
+			      		<span class="carousel-control-prev-icon" aria-hidden="true">
+			      		</span> <!-- <span>Previous</span> --> 
+		      		</a> 
+		      		<a class="carousel-control-next" href="#demo" data-slide="next"> 
+		      			<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+		      			<!-- <span>Next</span> --> 
+		      		</a> 
+		      		<!-- / 화살표 버튼 끝 --> 
+		      		<!-- 인디케이터 --> 
+		      		<ul class="carousel-indicators"> 
+		      			<li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작--> 
+		      			<li data-target="#demo" data-slide-to="1"></li> 
+		      			<li data-target="#demo" data-slide-to="2"></li> 
+		      		</ul> <!-- 인디케이터 끝 --> 
+		      	</div>
+		     </div>
+			 </div>
+	</section>
 
 	<!-- 목록 -->
 	<div style="margin-top: 20;">
 		<div class="container">
-			<div class="row">
+			<div class="col">
 				<!-- 신상품 목록 -->
 				<div class="row">
-					<h3 style="margin: 0; margin-right: 1000px;">신상품</h3>
-					<a href="#" style="float: right; margin: 0;">+ 더보기</a>
+					<h3 style="margin: 0; margin-right: 950px;">신상품</h3>
+					<a href="${contextPath}/product/newProduct.do" style="float: right; margin: auto;">+ 더보기</a>
 				</div>
 				<hr width="100%">
 				<div class="row">
@@ -106,13 +103,13 @@ request.setCharacterEncoding("UTF-8");
 								<a
 									href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
 									<img
-									src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
-									style="width: 100%; height: 225;" alt="상품 이미지" />
+									src="${contextPath}/download?imageFileName=${item.p_imageFileName}"
+									style="width: 50%; height: 225;" alt="상품 이미지" />
 								</a>
 							</div>
 							<div class="card-body">
-								<p style="font-size: 14px;">${item.p_name}</p>
-								<p style="font-size: 14px;">
+								<p style="font-size: 16px;">${item.p_name}</p>
+								<p style="font-size: 16px;">
 									<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
 									원
 								</p>
@@ -128,25 +125,25 @@ request.setCharacterEncoding("UTF-8");
 
 			<!-- 랭킹 목록 -->
 			<div class="row">
-				<h3 style="margin: 0; margin-right: 1030px;">랭킹</h3>
-				<a href="#" style="float: right; margin: 0;">+ 더보기</a>
+				<h3 style="margin: 0; margin-right: 950px;">랭킹</h3>
+				<a href="#" style="float: right; margin: auto;">+ 더보기</a>
 			</div>
 			<hr width="100%">
 			<div class="row">
 				<c:forEach items="${rankProductList}" var="item" varStatus="status">
 					<div class="product">
-						<div class="bd-placeholder-img card-img-top">
+						<div class="bd-placeholder-img card-img-top" style="position: relative;">
 							<a
 								href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
 								<img
-								src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
-								style="width: 100%; height: 225;" alt="상품 이미지" />
+								src="${contextPath}/download?imageFileName=${item.p_imageFileName}"
+								style="width: 50%; height: 225;" alt="상품 이미지" />
 							</a>
-							<p class="rank">${status.count}</p>
+							<img class="rank" src="${contextPath}/download?imageFileName=rank${status.count}.png"/>
 						</div>
 						<div class="card-body">
-							<p style="font-size: 14px;">${item.p_name}</p>
-							<p style="font-size: 14px;">
+							<p style="font-size: 16px;">${item.p_name}</p>
+							<p style="font-size: 16px;">
 								<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
 								원
 							</p>
@@ -158,13 +155,12 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				</c:forEach>
 			</div>
-		</div>
-
+		
 
 		<!-- 브랜드 목록 -->
 			<div class="row">
-				<h3 style="margin: 0; margin-right: 1000px;">브랜드</h3>
-				<a href="#" style="float: right; margin: 0;">+ 더보기</a>
+				<h3 style="margin: 0; margin-right: 950px;">브랜드</h3>
+				<a href="#" style="float: right; margin: auto;">+ 더보기</a>
 			</div>
 			<hr width="100%">
 
@@ -199,12 +195,9 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 		</div>
 	</div>
-	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
 </body>
 </html>

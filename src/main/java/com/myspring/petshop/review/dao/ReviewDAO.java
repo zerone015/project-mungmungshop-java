@@ -12,4 +12,10 @@ public interface ReviewDAO {
 	public int selectReviewCnt() throws DataAccessException;
 
 	public List selectAllReviewList(Map<String, Object> info) throws DataAccessException;
+
+	public int selectMyReviewCnt() throws DataAccessException;
+
+	public List selectMyReviewList(Map<String, Object> info) throws DataAccessException;
+
+	public int reviewWrite(Map<String, Object> map) throws DataAccessException;
 }

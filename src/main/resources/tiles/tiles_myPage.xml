@@ -80,5 +80,11 @@
 		<put-attribute name="title" value="주문 취소 내역 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/orderCancle.jsp" />
 	</definition>
+	
+	
+	<definition name="reviewList" extends="sideMenuLayout">
+		<put-attribute name="title" value="내 상품 후기 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/reviewList.jsp" />
+	</definition>
 
 </tiles-definitions>

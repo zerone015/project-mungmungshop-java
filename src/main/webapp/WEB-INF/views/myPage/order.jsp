@@ -12,13 +12,43 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="utf-8">
 <title>주문 내역 조회</title>
 </head>
-<script type="text/javascript">
+<style>
+	td, th {
+		vertical-align: middle!important;
+	}
+    #my_modal {
+        display: none;
+        width: 300px;
+        padding: 20px 60px;
+        background-color: #fefefe;
+        border: 1px solid #888;
+        border-radius: 3px;
+    }
+
+    #my_modal .modal_close_btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
+</style>
+
+<script>
+	
 	function checkCancle() {
 
 		if (confirm('정말로 주문을 취소하시겠습니까?'))
 			window.close();
 	}
+		
+	function fn_reviewWrite(url,title,width,height,top,left) {
+		window.name = "order";
+		
+		window.open(url,title,"width="+width+",height="+height+",top="+top+",left="+left);
+	}
+	
 </script>
+
+
 <script>
 
 	//이전 버튼 이벤트
@@ -60,8 +90,13 @@ request.setCharacterEncoding("UTF-8");
 
 		location.href = url;
 	}
+
 </script>
+
+
+
 <body>
+<div class="container">
 	<div>
 		<h2 class="display-5 fw-bold" style="margin-bottom: 50px;">
 			<b>주문 내역 조회</b>
@@ -71,11 +106,11 @@ request.setCharacterEncoding("UTF-8");
 	<table class="table table-hover">
 		<thead>
 			<tr align="center">
-				<th>&nbsp;</th>
-				<th>상품 정보</th>
-				<th>주문 일자</th>
 				<th>주문 번호</th>
+				<th colspan="2">상품 정보</th>
 				<th>상품 금액(수량)</th>
+				<th>합계</th>
+				<th>주문 일자</th>
 				<th>주문 현황</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -88,18 +123,24 @@ request.setCharacterEncoding("UTF-8");
 		</c:if>
 		<c:forEach items="${orderList}" var="item">
 		<tr align="center">
-				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>
-				<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
-				<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
 				<td>${item.order_code}</td>
+				<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" style=" width: 80%; height: 80%;"/></td>
+				<td style="text-align: left;"><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a></td>
 				<td>
 				<fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원<br>
-				${item.order_quantity}개<br>
-				총 주문금액 : <fmt:formatNumber value="${item.order_totalPrice}" pattern="###,###,###"/>원
+				(${item.order_quantity}개)<br>
 				</td>
+				<td><fmt:formatNumber value="${item.order_totalPrice}" pattern="###,###,###"/>원</td>
+				<td><fmt:formatDate value="${item.order_date}" type="date" dateStyle="long"></fmt:formatDate></td>
 				<td>${item.order_status}</td>
-				<td><button type="button" class="btn btn-primary btn-sm"
-						onclick="checkCancle()">환불 요청</button> <button type="button" class="btn btn-primary btn-sm">교환 요청</button></td>
+				<td>
+					<div class="col">
+						<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle()">환불 요청</button><br>
+						<c:if test="${item.order_status eq '배송완료'}">
+							<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
+						</c:if>
+					</div>
+				</td>
 			</tr>
 		</c:forEach>
 		</tbody>
@@ -126,5 +167,10 @@ request.setCharacterEncoding("UTF-8");
 		</ul>
 	</div>
 	<!-- pagination{e} -->
+</div>
+
+
+
+
 </body>
 </html>
