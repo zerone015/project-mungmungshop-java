@@ -12,6 +12,11 @@ request.setCharacterEncoding("UTF-8");
 <meta charset="utf-8">
 <title>주문 내역 조회</title>
 </head>
+<style>
+	td, th {
+		vertical-align: middle!important;
+	}
+</style>
 <script type="text/javascript">
 	function checkCancle(index) {
 		
@@ -27,6 +32,12 @@ request.setCharacterEncoding("UTF-8");
 		else {
 			return false;
 		}
+	}
+	
+	function fn_reviewWrite(url,title,width,height,top,left) {
+		window.name = "order";
+		
+		window.open(url,title,"width="+width+",height="+height+",top="+top+",left="+left);
 	}
 </script>
 <script>
@@ -121,7 +132,10 @@ request.setCharacterEncoding("UTF-8");
 				</td>
 				<td>${item.order_status}</td>
 				<td>
-					<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button>
+					<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
+					<c:if test="${item.order_status eq '배송완료'}">
+						<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
+					</c:if>
 					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
 				</td>
 						

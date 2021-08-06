@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 pageEncoding="utf-8" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,13 +29,17 @@ function delReview(){
 	<hr>
 	<!-- 후기 목록 -->
 	<div style="margin-top: 10; ">
+		<c:forEach items="${reviewList}" var="reviewVO">		
 		<div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
 	      <div class="d-flex w-100 align-items-center justify-content-between">
 	      	<div>
-	      	  <img src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
+	      	  <img src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" style=" width: 60px; height: 60px; border: 1px solid #CCCCCC"/>
 	      	</div>
 	      	<div>
-	          <strong class="mb-1">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
+	          <strong class="mb-1">${reviewVO.review_title}</strong>
+	        </div>
+	        <div>
+	          <font class="mb-1"><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></font>
 	        </div>
 	        <div>
 	          <button class="btn btn-outline-primary" onclick="javascript:modReview()">수정</button>
@@ -40,46 +47,7 @@ function delReview(){
 	        </div>
 	      </div>
 	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      	  <img src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-	      	</div>
-	      	<div>
-	          <strong class="mb-1">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	        <div>
-	          <button class="btn btn-primary" style="width: 120px">작성하기</button>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      	  <img src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-	      	</div>
-	      	<div>
-	          <strong class="mb-1">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	        <div>
-	          <button class="btn btn-outline-primary" onclick="javascript:modReview()">수정</button>
-	          <button class="btn btn-outline-danger" onclick="javascript:delReview()">삭제</button>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      	  <img src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-	      	</div>
-	      	<div>
-	          <strong class="mb-1">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	        <div style="width: 120px; height: 38px;">
-	        	<p style="color: gray; margin: auto;">작성 완료</p>
-	        </div>
-	      </div>
-	    </div>
+	    </c:forEach>
     </div>
  </div>
 </div>
