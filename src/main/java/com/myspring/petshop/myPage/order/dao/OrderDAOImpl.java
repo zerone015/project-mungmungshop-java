@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.petshop.manager.order.vo.OrderDetailVO;
+import com.myspring.petshop.myPage.order.vo.OrderRefundVO;
 import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
 import com.myspring.petshop.payment.vo.CombineVO;
 
@@ -52,5 +54,51 @@ public class OrderDAOImpl implements OrderDAO{
 	public List<PointHistoryVO> selectPointHistory(Map<String, Object> phMap) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.order.selectPointHistory", phMap);
+	}
+	
+	
+	@Override
+	public OrderDetailVO selectOddPrice(String order_detailCode) throws DataAccessException {
+		return sqlSession.selectOne("mapper.order.selectOddPrice", order_detailCode);
+	}
+	
+	@Override
+	public void updateReturnMemberPoint(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateReturnMemberPoint", refundMap);
+	}
+	
+	@Override
+	public void updateOrderStatus(OrderRefundVO orderRefund) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateOrderStatus", orderRefund);
+	}
+	
+	@Override
+	public void insertOrderRefund(OrderRefundVO orderRefund) throws DataAccessException {
+		 sqlSession.insert("mapper.order.insertOrderRefund", orderRefund);
+	}
+	
+	@Override
+	public void updateOrder(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.insert("mapper.order.updateOrder", refundMap);
+	}
+	
+	@Override
+	public void updateStock(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateStock", refundMap);
+	}
+	
+	@Override
+	public void updateRetrieveMemberPoint(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateRetrieveMemberPoint", refundMap);
+	}
+	
+	@Override
+	public void insertAddPointHistory(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.insert("mapper.order.insertAddPointHistory", refundMap);
+	}
+	
+	@Override
+	public void insertSubtractPointHistory(Map<String, Object> refundMap) throws DataAccessException {
+		 sqlSession.insert("mapper.order.insertSubtractPointHistory", refundMap);
 	}
 }

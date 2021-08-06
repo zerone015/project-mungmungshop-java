@@ -99,7 +99,9 @@ public class MemberControllerImpl implements MemberController{
 				!referer.equals("http://localhost:8080/petshop/myPage/quit.do") &&
 				!referer.equals("http://localhost:8080/petshop/myPage/pwCertify.do") &&
 				!referer.equals("http://localhost:8080/petshop/myPage/newPW.do") &&
-				!referer.equals("http://localhost:8080/petshop/address/addressList.do")
+				!referer.equals("http://localhost:8080/petshop/address/addressList.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/addOrderRefund.do") &&
+				!referer.equals("http://localhost:8080/petshop/myPage/getRefundPage.do")
 				){
 					
 				session.setAttribute("referer", referer);

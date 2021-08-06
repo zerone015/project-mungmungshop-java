@@ -25,11 +25,14 @@
 
 <select id="selectRefundInfo" parameterType="String" resultType="combineVO">
 	<![CDATA[
-		select odd.member_num, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName, odd.order_status, 
-		dvr.deli_name AS address_recipent, dvr.deli_tel AS address_phone, dvr.deli_address1 AS address_1, dvr.deli_address2 AS address_2, dvr.deli_address3 AS address_3
+		select odd.member_num, odd.order_code, odd.order_detailCode, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price, odd.p_imageFileName, odd.order_status, 
+		dvr.deli_name AS address_recipent, dvr.deli_tel AS address_phone, dvr.deli_address1 AS address_1, dvr.deli_address2 AS address_2, dvr.deli_address3 AS address_3,
+		ord.order_usePoint
 		from orders_detail AS odd
-		JOIN delivery AS dvr
+		INNER JOIN delivery AS dvr 
 		ON odd.order_code = dvr.order_code
+		INNER JOIN orders AS ord
+		ON dvr.order_code = ord.order_code
 		where odd.order_detailCode = #{order_detailCode}
 	]]>
 </select>
@@ -60,4 +63,72 @@
 		LIMIT #{pagination.startList}, #{pagination.listSize}
 	]]>
 </select>
+
+<insert id="insertOrderRefund"  parameterType="orderRefundVO">
+	<![CDATA[
+		insert into refund
+		values(
+		null, #{member_num}, #{order_code}, #{order_detailCode}, #{refund_quantity}, #{refund_price}, #{refund_name}, #{refund_tel}, 
+		#{refund_address1}, #{refund_address2}, #{refund_address3}, null, #{order_status}, #{buyer_reason}, #{seller_reason}, default
+		)
+	]]>
+</insert>
+
+<select id="selectOddPrice" parameterType="String" resultType="orderDetailVO">
+	<![CDATA[
+		select p_price,order_quantity from orders_detail 
+		where order_detailCode = #{order_detailCode}
+	]]>
+</select>
+
+<update id="updateReturnMemberPoint" parameterType="java.util.Map">
+	<![CDATA[
+		update members set member_point = member_point + #{usePoint}
+		where member_num = #{member_num}
+	]]>
+</update>
+
+<update id="updateRetrieveMemberPoint" parameterType="java.util.Map">
+	<![CDATA[
+		update members set member_point = member_point - #{addPoint}
+		where member_num = #{member_num}
+	]]>
+</update>
+
+<update id="updateOrderStatus" parameterType="orderRefundVO">
+	<![CDATA[
+		update orders_detail set order_status = #{order_status}
+		where order_detailCode = #{order_detailCode}
+	]]>
+</update>
+
+<update id="updateOrder" parameterType="java.util.Map">
+	<![CDATA[
+		update orders set order_totalPrice = order_totalPrice - #{orderRefund.refund_price}, order_totalQuantity = order_totalQuantity - #{orderRefund.refund_quantity},
+		order_usePoint = order_usePoint - #{usePoint}, order_addPoint = order_addPoint - #{addPoint}
+		where order_code = #{orderRefund.order_code}
+	]]>
+</update>
+
+<update id="updateStock" parameterType="java.util.Map">
+	<![CDATA[
+		update products set p_stock = p_stock + #{refund_quantity}
+		where p_code = #{p_code}
+	]]>
+</update>
+
+<insert id="insertAddPointHistory"  parameterType="java.util.Map">
+	<![CDATA[
+		insert into point_history
+		values(null, #{member_num}, '적립', #{usePoint}, '주문취소 사용 포인트 환불', #{order_code}, default)
+	]]>
+</insert>
+
+<insert id="insertSubtractPointHistory"  parameterType="java.util.Map">
+	<![CDATA[
+		insert into point_history
+		values(null, #{member_num}, '사용', #{addPoint}, '주문취소 적립 포인트 회수', #{order_code}, default)
+	]]>
+</insert>
+
 </mapper>

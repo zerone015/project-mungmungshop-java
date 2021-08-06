@@ -84,6 +84,8 @@ function modOrderStatus(index) {
 							<option value="배송중">배송중</option>
 							<option value="배송완료">배송완료</option>
 							<option value="구매확정">구매확정</option>
+							<option value="주문취소">주문취소</option>
+							<option value="환불요청">환불요청</option>
 							<option value="환불완료">환불완료</option>
 						</select>
 						<input type="hidden" name="order_detailCode" value="${item.order_detailCode}"/>

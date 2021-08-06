@@ -21,6 +21,7 @@
 		<typeAlias type="com.myspring.petshop.board.notice.vo.NoticeVO" alias="noticeVO"/>
 		<typeAlias type="com.myspring.petshop.myPage.address.vo.AddressVO" alias="addressVO"/>
 		<typeAlias type="com.myspring.petshop.myPage.order.vo.PointHistoryVO" alias="pointHistoryVO"/>
+		<typeAlias type="com.myspring.petshop.myPage.order.vo.OrderRefundVO" alias="orderRefundVO"/>
 		<typeAlias type="com.myspring.petshop.inquiry.vo.InquiryVO" alias="inquiryVO"/>
 	</typeAliases>
 </configuration>

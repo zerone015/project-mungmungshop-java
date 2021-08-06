@@ -126,7 +126,7 @@
 	}
 </script>
 <body>
-<form name="refundForm" method="post" action="#">
+<form name="refundForm" method="post" action="${contextPath}/myPage/addOrderRefund.do">
 <div class="container">
 <div align="left">
 	<h4 style="margin-bottom: 30px;"><b>환불 상품</b></h4>
@@ -302,16 +302,32 @@
 				<td>환불 금액</td>
 				<c:choose>
 					<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원</td>
+						<td>
+							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원
+							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" />
+							<input type="hidden" name="refund_price" value="${i}"/>
+						</td>
 					</c:when>
 					<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint == 0}">
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원</td>
+						<td>
+							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원
+							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity}" />
+							<input type="hidden" name="refund_price" value="${i}"/>
+						</td>
 					</c:when>
 					<c:when test="${!combineVO.order_status.equals('결제완료') && !combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" pattern="###,###,###"/>원</td>
+						<td>
+							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" pattern="###,###,###"/>원
+							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" />
+							<input type="hidden" name="refund_price" value="${i}"/>
+						</td>
 					</c:when>
 					<c:otherwise>
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - 5000}" pattern="###,###,###"/>원</td>
+						<td>
+							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - 5000}" pattern="###,###,###"/>원
+							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - 5000}" />
+							<input type="hidden" name="refund_price" value="${i}"/>
+						</td>
 					</c:otherwise>
 				</c:choose>
 			</tr>
@@ -326,6 +342,12 @@
 	<div align="center">
 		<button class="btn btn-primary btn-lg" type="button" onClick="refund_check();">환불 요청</button>
 	</div>
+	<input type="hidden" name="order_code" value="${combineVO.order_code}"/>
+	<input type="hidden" name="order_detailCode" value="${combineVO.order_detailCode}"/>
+	<input type="hidden" name="order_quantity" value="${combineVO.order_quantity}"/>
+	<input type="hidden" name="order_status" value="${combineVO.order_status}"/>
+	<input type="hidden" name="order_usePoint" value="${combineVO.order_usePoint}"/>
+	<input type="hidden" name="p_code" value="${combineVO.p_code}"/>
 </div>
 </form>
 </body>

@@ -9,7 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.order.service.OrderService;
+import com.myspring.petshop.myPage.order.vo.OrderRefundVO;
 import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
 import com.myspring.petshop.payment.vo.CombineVO;
 
@@ -73,6 +79,47 @@ public class OrderControllerImpl implements OrderController {
 		mav.addObject("order_usePoint", order_usePoint);
 		
 		return mav;
+	}
+	
+	@RequestMapping(value = "/myPage/addOrderRefund.do", method = RequestMethod.POST)
+	public ResponseEntity addOrderRefund(@ModelAttribute("orderRefund") OrderRefundVO orderRefund,Errors errors,
+										 @RequestParam("order_usePoint") int order_usePoint,
+										 @RequestParam("p_code") String p_code,
+					HttpSession session, HttpServletRequest request) throws Exception {
+		
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		memberVO = (MemberVO) session.getAttribute("member");
+		int member_num = memberVO.getMember_num();
+		orderRefund.setMember_num(member_num);
+		
+		String order_status = orderRefund.getOrder_status();
+			try{
+				orderService.addOrderRefund(orderRefund, order_usePoint, p_code);
+				message = "<script>";
+				if(order_status.equals("결제완료") || order_status.equals("배송준비중")) {
+					message += "alert('주문 취소 및 환불이 완료되었습니다.');";
+				}
+				else {
+					message += "alert('환불 요청 완료');";
+				}
+				message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+				message += " </script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+			}catch(Exception e) {
+				message = "<script>";
+				message += "alert('에러가 발생했습니다.');";
+				message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+				message += " </script>";
+				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+				e.printStackTrace();
+			}
+		
+			
+		return resEnt;
 	}
 	
 	@RequestMapping(value = "/myPage/getPointHistory.do", method = RequestMethod.GET)
