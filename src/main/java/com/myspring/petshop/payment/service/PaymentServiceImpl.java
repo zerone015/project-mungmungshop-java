@@ -50,7 +50,6 @@ public class PaymentServiceImpl implements PaymentService {
 		paymentDAO.insertOrderDetail(combineVO);
 		
 		paymentDAO.insertDelivery(combineVO);
-		paymentDAO.updateAddMemberPoint(combineVO);
 	
 		if(sale_check != null) {
 			paymentDAO.updateSubtractMemberPoint(combineVO);
@@ -91,7 +90,6 @@ public class PaymentServiceImpl implements PaymentService {
 			paymentDAO.insertOrderDetail(combineVO);
 		}
 		paymentDAO.insertDelivery(combineVO);
-		paymentDAO.updateAddMemberPoint(combineVO);
 		
 		if(sale_check != null) {
 			paymentDAO.updateSubtractMemberPoint(combineVO);

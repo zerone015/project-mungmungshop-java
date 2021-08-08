@@ -55,12 +55,7 @@
 			insert into delivery(deli_num, member_num, order_code, deli_name, deli_tel, deli_address1, deli_address2, deli_address3, deli_request) 
 			values(default, #{member_num}, #{order_code}, #{address_recipent}, #{address_phone}, #{address_1}, #{address_2}, #{address_3}, #{address_request})
 	</insert>
-	
-	<insert id="updateAddMemberPoint" parameterType="combineVO" >
-			update members set member_point = member_point + #{order_addPoint}
-			where member_num = #{member_num}
-	</insert>
-	
+
 	<insert id="updateSubtractMemberPoint" parameterType="combineVO" >
 			update members set member_point = member_point - #{order_usePoint}
 			where member_num = #{member_num}

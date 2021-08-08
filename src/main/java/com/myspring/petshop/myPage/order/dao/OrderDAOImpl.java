@@ -86,19 +86,9 @@ public class OrderDAOImpl implements OrderDAO{
 	public void updateStock(Map<String, Object> refundMap) throws DataAccessException {
 		 sqlSession.update("mapper.order.updateStock", refundMap);
 	}
-	
-	@Override
-	public void updateRetrieveMemberPoint(Map<String, Object> refundMap) throws DataAccessException {
-		 sqlSession.update("mapper.order.updateRetrieveMemberPoint", refundMap);
-	}
-	
+		
 	@Override
 	public void insertAddPointHistory(Map<String, Object> refundMap) throws DataAccessException {
 		 sqlSession.insert("mapper.order.insertAddPointHistory", refundMap);
-	}
-	
-	@Override
-	public void insertSubtractPointHistory(Map<String, Object> refundMap) throws DataAccessException {
-		 sqlSession.insert("mapper.order.insertSubtractPointHistory", refundMap);
 	}
 }

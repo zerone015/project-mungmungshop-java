@@ -18,7 +18,6 @@ public interface PaymentDAO {
 	public String selectOrderCode(int order_num) throws DataAccessException;
 	public void insertOrderDetail(CombineVO combineVO) throws DataAccessException;
 	public void insertDelivery(CombineVO combineVO) throws DataAccessException;
-	public void updateAddMemberPoint(CombineVO combineVO) throws DataAccessException;
 	public void updateSubtractMemberPoint(CombineVO combineVO) throws DataAccessException;
 	public void insertAddress(CombineVO combineVO) throws DataAccessException;
 	public MemberVO selectMember(int member_num) throws DataAccessException;

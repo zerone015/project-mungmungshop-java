@@ -66,12 +66,6 @@ public class PaymentDAOImpl implements PaymentDAO {
 	}
 	
 	@Override
-	public void updateAddMemberPoint(CombineVO combineVO) throws DataAccessException {
-		
-		sqlSession.update("mapper.payment.updateAddMemberPoint", combineVO); 
-	}
-	
-	@Override
 	public void updateSubtractMemberPoint(CombineVO combineVO) throws DataAccessException {
 		
 		sqlSession.update("mapper.payment.updateSubtractMemberPoint", combineVO); 

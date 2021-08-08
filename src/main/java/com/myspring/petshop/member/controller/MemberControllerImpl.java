@@ -173,11 +173,8 @@ public class MemberControllerImpl implements MemberController{
 			ModelAndView mav = new ModelAndView("redirect:/main.do");
 		    OAuth2AccessToken oauthToken;
 		    oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		    //占싸깍옙占쏙옙 占쏙옙占쏙옙占� 占쏙옙占쏙옙占쏙옙 占싻억옙쨈占�.
 		    apiResult = naverLoginBO.getUserProfile(oauthToken);
 		    
-		    
-		 // 占쏙옙占쏙옙 占쏙옙占싹댐옙 占쏙옙占쏙옙 (占싱몌옙)占쏙옙 JSON타占쌉울옙占쏙옙 String타占쏙옙占쏙옙占쏙옙 占쌕뀐옙 占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙 占쌜억옙 
 		    JSONParser parser = new JSONParser(); 
 		    Object obj = null; 
 		    try { 
@@ -188,7 +185,7 @@ public class MemberControllerImpl implements MemberController{
 		    JSONObject jsonobj = (JSONObject) obj; 
 		    JSONObject response = (JSONObject) jsonobj.get("response"); 
 		    String id = (String) response.get("id");
-		    String member_id = "mungmungshopNaverID "+id;
+		    String member_id = "naverID"+id;
 		    String member_name = (String) response.get("name"); 
 		    String member_email = (String) response.get("email"); 
 		    String member_phone = (String) response.get("mobile");

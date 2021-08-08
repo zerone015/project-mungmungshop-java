@@ -20,11 +20,9 @@ public interface OrderDAO {
 	public List<PointHistoryVO> selectPointHistory(Map<String, Object> phMap) throws DataAccessException;
 	public OrderDetailVO selectOddPrice(String order_detailCode) throws DataAccessException;
 	public void updateReturnMemberPoint(Map<String, Object> refundMap) throws DataAccessException;
-	public void updateRetrieveMemberPoint(Map<String, Object> refundMap) throws DataAccessException;
 	public void updateOrderStatus(OrderRefundVO orderRefund) throws DataAccessException;
 	public void insertOrderRefund(OrderRefundVO orderRefund) throws DataAccessException;
 	public void updateOrder(Map<String, Object> refundMap) throws DataAccessException;
 	public void updateStock(Map<String, Object> refundMap) throws DataAccessException;
 	public void insertAddPointHistory(Map<String, Object> refundMap) throws DataAccessException;
-	public void insertSubtractPointHistory(Map<String, Object> refundMap) throws DataAccessException;
 }

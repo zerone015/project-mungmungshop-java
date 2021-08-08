@@ -129,7 +129,7 @@ public class KakaoController {
             JsonElement element = parser.parse(result);
             
             int id =  element.getAsJsonObject().get("id").getAsInt();
-            String member_id = "mungmungshopKakaoID"+id;
+            String member_id = "kakaoID"+id;
             JsonObject properties = element.getAsJsonObject().get("properties").getAsJsonObject();
             JsonObject kakao_account = element.getAsJsonObject().get("kakao_account").getAsJsonObject();
             String member_nick = properties.getAsJsonObject().get("nickname").getAsString();

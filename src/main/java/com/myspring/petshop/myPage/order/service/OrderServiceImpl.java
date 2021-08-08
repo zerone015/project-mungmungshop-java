@@ -22,9 +22,6 @@ import com.myspring.petshop.payment.vo.CombineVO;
 public class OrderServiceImpl implements OrderService{
 	@Autowired
 	private OrderDAO orderDAO;
-	@Autowired
-	private CombineVO combineVO;
-	
 	
 	@Override
 	public int getOrderCnt(int member_num) throws Exception {
@@ -76,21 +73,16 @@ public class OrderServiceImpl implements OrderService{
 				orderDAO.insertOrderRefund(orderRefund);
 				
 				int usePoint =  usePoint_calculation(orderRefund.getOrder_detailCode());	//해당 상품 구매할 때 사용한 포인트 얼마인지 가져옴
-				int addPoint = addPoint_calculation(orderRefund.getOrder_detailCode());		//해당 상품 구매할 때 적립된 포인트 얼마인지 가져옴 
 				int member_num =  orderRefund.getMember_num();							//회원 번호 가져옴
 				
 				Map<String, Object> refundMap = new HashMap<String, Object>();
 				refundMap.put("member_num", member_num);
-				refundMap.put("usePoint", usePoint);
-				refundMap.put("addPoint", addPoint);												
+				refundMap.put("usePoint", usePoint);											
 				refundMap.put("order_code", orderRefund.getOrder_code());							
 				if(order_usePoint != 0) {												//해당 상품을 구매할 때 포인트를 사용했으면									
 					orderDAO.updateReturnMemberPoint(refundMap);						//해당 회원에게 포인트를 되돌려줌
 					orderDAO.insertAddPointHistory(refundMap);								//포인트 내역에 추가 
 				}
-				
-				orderDAO.updateRetrieveMemberPoint(refundMap);								//해당 회원의 적립포인트 회수
-				orderDAO.insertSubtractPointHistory(refundMap);								//포인트 내역에 추가
 				
 				refundMap.put("orderRefund", orderRefund);										//환불 정보 객체
 				orderDAO.updateOrder(refundMap);													//orders 테이블을 수정															
@@ -119,12 +111,4 @@ public class OrderServiceImpl implements OrderService{
 		return usePoint;
 	}
 	
-	private int addPoint_calculation(String order_detailCode) throws Exception {
-		OrderDetailVO orderDetailVO = orderDAO.selectOddPrice(order_detailCode);
-		int p_price = orderDetailVO.getP_price();
-		int order_quantity = orderDetailVO.getOrder_quantity();
-		int addPoint = p_price * order_quantity / 60 ;
-		
-		return addPoint;
-	}
 }
