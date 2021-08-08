@@ -15,10 +15,33 @@
 		LIMIT #{startList}, #{listSize}
 	]]>
 </select>
-
+	
+<select id="selectRefundList" resultType="combineVO">
+	<![CDATA[
+		select rfd.member_num, rfd.order_code, rfd.order_detailCode, rfd.refund_quantity AS order_quantity, rfd.refund_price AS order_totalPrice, rfd.refund_name AS address_recipent, rfd.refund_tel AS address_phone, 
+		rfd.refund_address1 AS address_1, rfd.refund_address2 AS address_2, rfd.refund_address3 AS address_3, rfd.buyer_reason, rfd.seller_reason, rfd.refund_date AS order_date,
+		odd.p_name, odd.p_price, odd.p_imageFileName, odd.p_code, odd.order_status,
+		ord.member_name, ord.member_phone, ord.member_email, ord.order_usePoint
+		from refund AS rfd 
+		JOIN orders_detail AS odd 
+		ON rfd.order_detailCode = odd.order_detailCode
+		JOIN orders AS ord
+		ON rfd.order_code = ord.order_code
+		where rfd.order_status IN ('주문취소','환불요청','환불완료')
+		LIMIT #{startList}, #{listSize}
+	]]>
+</select>
+	
 <select id="selectOrdersCnt" resultType="int">
 	<![CDATA[
 		select count(*) as listCnt from orders_detail
+	]]>
+</select>
+
+<select id="selectRefundsCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from orders_detail 
+		where order_status IN ('주문취소','환불요청','환불완료')
 	]]>
 </select>
 
@@ -42,7 +65,8 @@
 
 <update id="updateOrderStatus" parameterType="orderDetailVO">
 	<![CDATA[
-		update orders_detail set order_status = #{order_status} where order_detailCode = #{order_detailCode}
+		update orders_detail set order_status = #{order_status} 
+		where order_detailCode = #{order_detailCode}
 	]]>
 </update>
 
@@ -63,6 +87,23 @@
 		</choose>		
 </select>
 
+<select id="selectSearchRefundsCnt" resultType="int" parameterType="java.util.Map">
+	<![CDATA[ 
+		select count(*) AS listCnt 
+		from orders AS ord
+		JOIN orders_detail AS odd
+		ON ord.order_code = odd.order_code 
+	]]>
+		<choose>
+			<when test="searchBy.equals('order_code')">
+				where odd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') AND order_status IN ('주문취소','환불요청','환불완료')
+			</when>
+			<otherwise>
+				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') AND order_status IN ('주문취소','환불요청','환불완료')
+			</otherwise>
+		</choose>		
+</select>
+
 <select id="selectSearchOrders" resultType="combineVO" parameterType="java.util.Map">
 	<![CDATA[ 	
 		select ord.member_name, ord.member_phone, ord.member_email, ord.address_recipent, ord.order_method, ord.order_totalPrice, odd.order_detailCode, odd.order_status, ord.order_date, odd.order_code, odd.p_code, odd.p_name, odd.order_quantity, odd.p_price 
@@ -72,11 +113,114 @@
 	]]> 
 		<choose>
 			<when test="searchBy.equals('order_code')">
-				where odd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+				where odd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') 
+				LIMIT #{pagination.startList}, #{pagination.listSize}
 			</when>
 			<otherwise>
-				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') 
+				LIMIT #{pagination.startList}, #{pagination.listSize}
 			</otherwise>
 		</choose>		
 </select>
+
+<select id="selectSearchRefunds" resultType="combineVO" parameterType="java.util.Map">
+	<![CDATA[ 	
+		select rfd.member_num, rfd.order_code, rfd.order_detailCode, rfd.refund_quantity AS order_quantity, rfd.refund_price AS order_totalPrice, rfd.refund_name AS address_recipent, rfd.refund_tel AS address_phone, 
+		rfd.refund_address1 AS address_1, rfd.refund_address2 AS address_2, rfd.refund_address3 AS address_3, rfd.order_status, rfd.buyer_reason, rfd.seller_reason, rfd.refund_date AS order_date,
+		odd.p_name, odd.p_price, odd.p_imageFileName, odd.p_code,
+		ord.member_name, ord.member_phone, ord.member_email, ord.order_usePoint
+		from refund AS rfd 
+		JOIN orders_detail AS odd 
+		ON rfd.order_code = odd.order_code
+		JOIN orders AS ord
+		ON odd.order_code = ord.order_code
+	]]> 
+		<choose>
+			<when test="searchBy.equals('order_code')">
+				where rfd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') AND rfd.order_status IN ('주문취소','환불요청','환불완료')
+				LIMIT #{pagination.startList}, #{pagination.listSize}
+			</when>
+			<when test="searchBy.equals('order_status')">
+				where rfd.${searchBy} LIKE CONCAT('%',#{searchContents},'%') AND rfd.order_status IN ('주문취소','환불요청','환불완료')
+				LIMIT #{pagination.startList}, #{pagination.listSize}
+			</when>
+			<otherwise>
+				where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') AND rfd.order_status IN ('주문취소','환불요청','환불완료')
+				LIMIT #{pagination.startList}, #{pagination.listSize}
+			</otherwise>
+		</choose>		
+</select>
+
+<update id="updateReturnMemberPoint" parameterType="java.util.Map">
+	<![CDATA[
+		update members set member_point = member_point + #{usePoint}
+		where member_num = #{member_num}
+	]]>
+</update>
+
+<insert id="insertAddPointHistory"  parameterType="java.util.Map">
+	<![CDATA[
+		insert into point_history
+		values(null, #{member_num}, '적립', #{usePoint}, '주문취소 사용 포인트 환불', #{order_code}, default)
+	]]>
+</insert>
+
+<update id="updateOrder" parameterType="java.util.Map">
+	<![CDATA[
+		update orders set order_totalPrice = order_totalPrice - #{orderRefund.refund_price}, order_totalQuantity = order_totalQuantity - #{orderRefund.refund_quantity},
+		order_usePoint = order_usePoint - #{usePoint}, order_addPoint = order_addPoint - #{addPoint}
+		where order_code = #{orderRefund.order_code}
+	]]>
+</update>
+
+<update id="updateStock" parameterType="java.util.Map">
+	<![CDATA[
+		update products set p_stock = p_stock + #{orderRefund.refund_quantity}
+		where p_code = #{orderRefund.p_code}
+	]]>
+</update>
+
+<update id="updateRefundStatus" parameterType="orderRefundVO">
+	<![CDATA[
+		update refund set order_status = #{order_status} 
+		where order_detailCode = #{order_detailCode}
+	]]>
+</update>
+
+<update id="updateOrderStatus2" parameterType="orderRefundVO">
+	<![CDATA[
+		update orders_detail set order_status = #{order_status} 
+		where order_detailCode = #{order_detailCode}
+	]]>
+</update>
+
+<update id="updateOrderStatus3" parameterType="combineVO">
+	<![CDATA[
+		update orders_detail set order_status = '구매확정'
+		where order_detailCode = #{order_detailCode}
+	]]>
+</update>
+
+<select id="batchSelectOrders" resultType="combineVO">
+	select odd.*, ord.order_date 
+	from orders_detail AS odd
+	JOIN orders AS ord
+	on odd.order_code = ord.order_code 
+	where order_status = '배송완료' AND DATE_FORMAT(DATE_ADD(ord.order_date, INTERVAL 10 DAY), '%Y-%m-%d') <![CDATA[<]]> DATE_FORMAT(CURDATE(), '%Y-%m-%d')
+</select>
+
+<update id="batchUpdatePoint" parameterType="combineVO">
+	<![CDATA[
+		update members set member_point =  member_point + #{order_addPoint} 
+		where member_num = #{member_num}
+	]]>
+</update>
+
+<insert id="batchInsertPointHistory"  parameterType="combineVO">
+	<![CDATA[
+		insert into point_history
+		values(null, #{member_num}, '적립', #{order_addPoint}, '상품주문 포인트 적립', #{order_code}, default)
+	]]>
+</insert>
+
 </mapper>

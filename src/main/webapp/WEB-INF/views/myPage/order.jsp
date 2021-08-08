@@ -18,18 +18,53 @@ request.setCharacterEncoding("UTF-8");
 	}
 </style>
 <script type="text/javascript">
-	function checkCancle(index) {
+	function checkCancle(index) {											
+		var form = document.orderForm;
 		
-		if (confirm('주문을 취소하시겠습니까?')){
-				var form = document.orderForm;
-				var order_detailCode = document.orderForm.order_detailCode[index];
-				
-				order_detailCode.disabled = false;
-				
-				form.submit();
-				
+		var length = form.order_detailCode.length;
+		
+		if(length>1){
+			var order_detailCode = form.order_detailCode[index];
 		}
-		else {
+		else{
+			var order_detailCode = form.order_detailCode;
+		}
+				
+		order_detailCode.disabled = false;
+				
+		form.submit();
+		
+	}
+	
+	function fn_buyConfirm(index) {											
+		if(confirm('구매확정과 동시에 적립금이 지급되며 환불이 불가능해집니다.\n구매확정 하시겠습니까?')){
+			var form = document.orderForm;
+			
+			var length = form.order_detailCode.length;
+			
+			if(length>1){
+				var order_code = form.order_code[index];
+				var order_detailCode = form.order_detailCode[index];
+				var order_quantity = form.order_quantity[index];
+				var p_price = form.p_price[index];	
+			}
+			else{
+				var order_code = form.order_code;
+				var order_detailCode = form.order_detailCode;
+				var order_quantity = form.order_quantity;
+				var p_price = form.p_price;	
+			}
+			
+			order_code.disabled = false;
+			order_detailCode.disabled = false;
+			order_quantity.disabled = false;
+			p_price.disabled = false;
+			
+			form.action = "${contextPath}/myPage/buyConfirm.do";
+			form.submit();	
+		}
+		
+		else{
 			return false;
 		}
 	}
@@ -128,11 +163,19 @@ request.setCharacterEncoding("UTF-8");
 				</td>
 				<td>${item.order_status}</td>
 				<td>
-					<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
-					<c:if test="${item.order_status eq '배송완료'}">
+					<c:if test="${item.order_status eq '배송완료' }">
+						<button type="button" class="btn btn-danger btn-sm" onclick="fn_buyConfirm(${status.index})">구매 확정</button><br>
+					</c:if>
+					<c:if test="${item.order_status eq '결제완료' || item.order_status eq '배송준비중' || item.order_status eq '배송완료' }">
+						<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
+					</c:if>
+					<c:if test="${item.order_status eq '구매확정'}">
 						<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
 					</c:if>
+					<input type="hidden" name="order_code" value="${item.order_code}" disabled/>
 					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
+					<input type="hidden" name="order_quantity" value="${item.order_quantity}" disabled/>
+					<input type="hidden" name="p_price" value="${item.p_price}" disabled/>
 				</td>
 						
 			</tr>

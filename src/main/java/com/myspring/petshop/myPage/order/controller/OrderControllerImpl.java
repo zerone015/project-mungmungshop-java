@@ -21,10 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.common.pagination.Pagination;
+import com.myspring.petshop.manager.order.vo.OrderDetailVO;
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.myPage.order.service.OrderService;
 import com.myspring.petshop.myPage.order.vo.OrderRefundVO;
 import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
+import com.myspring.petshop.payment.service.PaymentService;
 import com.myspring.petshop.payment.vo.CombineVO;
 
 
@@ -38,7 +40,7 @@ public class OrderControllerImpl implements OrderController {
 	@Autowired
 	private MemberVO memberVO;
 	@Autowired
-	private PointHistoryVO pointHistoryVO;
+	private PaymentService paymentService;
 	
 	@Override
 	@RequestMapping(value = "/myPage/getOrderList.do", method = RequestMethod.GET)
@@ -81,47 +83,50 @@ public class OrderControllerImpl implements OrderController {
 		return mav;
 	}
 	
+	@Override
 	@RequestMapping(value = "/myPage/addOrderRefund.do", method = RequestMethod.POST)
 	public ResponseEntity addOrderRefund(@ModelAttribute("orderRefund") OrderRefundVO orderRefund,Errors errors,
-										 @RequestParam("order_usePoint") int order_usePoint,
-										 @RequestParam("p_code") String p_code,
 					HttpSession session, HttpServletRequest request) throws Exception {
+			
+		memberVO = (MemberVO) session.getAttribute("member");
+		int member_num = memberVO.getMember_num();
+		orderRefund.setMember_num(member_num);
 		
 		String message;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		memberVO = (MemberVO) session.getAttribute("member");
-		int member_num = memberVO.getMember_num();
-		orderRefund.setMember_num(member_num);
-		
 		String order_status = orderRefund.getOrder_status();
-			try{
-				orderService.addOrderRefund(orderRefund, order_usePoint, p_code);
-				message = "<script>";
-				if(order_status.equals("결제완료") || order_status.equals("배송준비중")) {
-					message += "alert('주문 취소 및 환불이 완료되었습니다.');";
-				}
-				else {
-					message += "alert('환불 요청 완료');";
-				}
-				message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
-				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
-			}catch(Exception e) {
-				message = "<script>";
-				message += "alert('에러가 발생했습니다.');";
-				message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
-				message += " </script>";
-				resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
-				e.printStackTrace();
+		try{
+			orderService.addOrderRefund(orderRefund);
+			message = "<script>";
+			if(order_status.equals("결제완료") || order_status.equals("배송준비중")) {
+				message += "alert('주문 취소 및 환불이 완료되었습니다.');";
+				memberVO = paymentService.getMember(member_num);
+				session.removeAttribute("member");
+				session.setAttribute("member", memberVO);	
 			}
+			else {
+				message += "alert('환불 요청 완료');";
+			}
+			message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('에러가 발생했습니다.');";
+			message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
 		
 			
 		return resEnt;
 	}
 	
+	@Override
 	@RequestMapping(value = "/myPage/getPointHistory.do", method = RequestMethod.GET)
 	public ModelAndView getPointHistory(@RequestParam(required = false, defaultValue = "1") int page,
 									    @RequestParam(required = false, defaultValue = "1") int range,HttpSession session) throws Exception {
@@ -146,5 +151,38 @@ public class OrderControllerImpl implements OrderController {
 		mav.addObject("pagination", pagination);
 		
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/myPage/buyConfirm.do", method = RequestMethod.POST)
+	public ResponseEntity buyConfirm(@ModelAttribute("odv") OrderDetailVO odv, HttpSession session, HttpServletRequest request) throws Exception {
+		memberVO = (MemberVO) session.getAttribute("member");
+		int member_num = memberVO.getMember_num();
+		
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		try{
+			orderService.buyConfirm(odv, member_num);
+			message = "<script>";
+			message += "alert('구매 확정을 완료하였습니다.');";
+			memberVO = paymentService.getMember(member_num);
+			session.removeAttribute("member");
+			session.setAttribute("member", memberVO);	
+			message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('에러가 발생했습니다.');";
+			message += "location.href='" + request.getContextPath() + "/myPage/getOrderList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
 	}
 }

@@ -31,6 +31,8 @@ public class CombineVO {
 	private int order_totalQuantity;
 	private int order_totalPrice;
 	private Timestamp order_date;
+	private String buyer_reason;
+	private String seller_reason; 
 
 	
 	public CombineVO() {
@@ -239,5 +241,21 @@ public class CombineVO {
 	
 	public void setOrder_date(Timestamp order_date) {
 		this.order_date = order_date;
+	}
+	
+	public String getBuyer_reason() {
+		return buyer_reason;
+	}
+	
+	public void setBuyer_reason(String buyer_reason) {
+		this.buyer_reason=buyer_reason;
+	}
+	
+	public String getSeller_reason() {
+		return seller_reason;
+	}
+	
+	public void setSeller_reason(String seller_reason) {
+		this.seller_reason=seller_reason;
 	}
 }

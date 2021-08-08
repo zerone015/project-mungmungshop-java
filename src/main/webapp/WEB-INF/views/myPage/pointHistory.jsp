@@ -68,9 +68,14 @@
 			</tr>
 		</thead>
 		<tbody>
+			<c:if test="${phList.size() == 0}">
+			<tr>
+				<td align="center" colspan="5">포인트 내역이 없습니다.</td>
+			</tr>
+		</c:if>
 		<c:forEach items="${phList}" var="item" varStatus="status" >
 			<tr align="center">
-				<td>${item.point_status}</td>
+				<td><font style="color:red;"><b>${item.point_status}</b></font></td>
 				<c:choose>
 					<c:when test="${item.point_status.equals('적립')}">
 						<td>+<fmt:formatNumber value="${item.point_value}" pattern="###,###,###"/>원</td>

@@ -40,11 +40,6 @@ public class OrderDAOImpl implements OrderDAO{
 	}
 	
 	@Override
-	public void updateOrder_status(String order_detailCode) throws DataAccessException {
-		sqlSession.update("mapper.order.updateOrder_status", order_detailCode);
-	}
-	
-	@Override
 	public int selectOrder_usePoint(String order_code) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.order.selectOrder_usePoint", order_code);
@@ -54,12 +49,6 @@ public class OrderDAOImpl implements OrderDAO{
 	public List<PointHistoryVO> selectPointHistory(Map<String, Object> phMap) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.order.selectPointHistory", phMap);
-	}
-	
-	
-	@Override
-	public OrderDetailVO selectOddPrice(String order_detailCode) throws DataAccessException {
-		return sqlSession.selectOne("mapper.order.selectOddPrice", order_detailCode);
 	}
 	
 	@Override
@@ -90,5 +79,20 @@ public class OrderDAOImpl implements OrderDAO{
 	@Override
 	public void insertAddPointHistory(Map<String, Object> refundMap) throws DataAccessException {
 		 sqlSession.insert("mapper.order.insertAddPointHistory", refundMap);
+	}
+	
+	@Override
+	public void insertAddPointHistory2(Map<String, Object> confirmMap) throws DataAccessException {
+		 sqlSession.insert("mapper.order.insertAddPointHistory2", confirmMap);
+	}
+	
+	@Override
+	public void updateOrderStatus2(OrderDetailVO odv) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateOrderStatus2", odv);
+	}
+	
+	@Override
+	public void updateAddMemberPoint(Map<String, Object> confirmMap) throws DataAccessException {
+		 sqlSession.update("mapper.order.updateAddMemberPoint", confirmMap);
 	}
 }

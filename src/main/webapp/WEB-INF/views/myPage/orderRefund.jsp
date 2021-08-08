@@ -70,6 +70,61 @@
     }    
 </script>
 <script>
+	function reasonChange(e) {
+		if(e.value != ""){
+			var reason_a = ["판매자로 부터 품절 안내 받음", "상품 불량", "주문과 다른 상품이 배송됨", "주문과 다른 색상이 배송됨", "주문과 다른 디자인이 배송됨", "배송사고 안내 받음", "주문과 실측이 다름" ];
+			var target = document.getElementById("seller_reason");
+			
+			var d = reason_a;
+			
+			target.options.length = 0;
+			
+			var opt = document.createElement("option");
+			opt.value = "";
+			opt.innerHTML = "환불 사유를 선택하세요";
+			target.appendChild(opt);
+			
+			for (x in d) {
+				var opt = document.createElement("option");
+				opt.value = d[x];
+				opt.innerHTML = d[x];
+				target.appendChild(opt);	
+				
+			}	
+		}
+		else {
+			return false;
+		}
+	
+	}
+	
+	function reasonChange2(e) {
+		if(e.value != ""){
+			var reason_a = ["단순 변심", "수량을 잘못 선택함"];
+			var target = document.getElementById("buyer_reason");
+		
+			var d = reason_a;
+			
+			target.options.length = 0;
+			
+			var opt = document.createElement("option");
+			opt.value = "";
+			opt.innerHTML = "환불 사유를 선택하세요";
+			target.appendChild(opt);
+			
+			for (x in d) {
+				var opt = document.createElement("option");
+				opt.value = d[x];
+				opt.innerHTML = d[x];
+				target.appendChild(opt);
+			}			
+		}
+		else {
+			return false;
+		}
+	
+	}
+
 	function refund_check() {
 		var form = document.refundForm;
 		var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/; 				//한글,영어만 사용 가능
@@ -80,7 +135,7 @@
 		var address = form.refund_address1;
 		var detailAddress = form.refund_address3;
 		
-		if (form.buyer_reason.value == "unselected" && form.seller_reason.value == "unselected") {
+		if (form.buyer_reason.value == "" && form.seller_reason.value == "") {
 			alert("환불 사유를 선택해주세요.");
 			return false;
 		}
@@ -121,8 +176,13 @@
 			return false;
 		}
 		
+		if(confirm('정말 주문을 취소하시겠습니까?')){
+			form.submit();	
+		}
+		else{
+			return false;
+		}
 		
-		form.submit();
 	}
 </script>
 <body>
@@ -171,8 +231,8 @@
 			<tr align="center">
 				<td>구매자 책임사유</td>
 				<td>
-				<select name="buyer_reason">
-					<option value="unselected">환불 사유를 선택하세요</option>
+				<select name="buyer_reason" id="buyer_reason" onchange="reasonChange(this)">
+					<option value="">환불 사유를 선택하세요</option>
 					<option value="단순 변심">단순 변심</option>
 					<option value="수량을 잘못 선택함">수량을 잘못 선택함</option>
 				</select>
@@ -181,8 +241,8 @@
 			<tr align="center">
 				<td>판매자 책임사유</td>
 				<td>
-				<select name="seller_reason">
-					<option value="unselected">환불 사유를 선택하세요</option>
+				<select name="seller_reason" id="seller_reason" onchange="reasonChange2(this)">
+					<option value="">환불 사유를 선택하세요</option>
 					<option value="판매자로 부터 품절 안내 받음">판매자로 부터 품절 안내 받음</option>
 					<option value="상품 불량">상품 불량</option>
 					<option value="주문과 다른 상품이 배송됨">주문과 다른 상품이 배송됨</option>
@@ -344,10 +404,11 @@
 	</div>
 	<input type="hidden" name="order_code" value="${combineVO.order_code}"/>
 	<input type="hidden" name="order_detailCode" value="${combineVO.order_detailCode}"/>
-	<input type="hidden" name="order_quantity" value="${combineVO.order_quantity}"/>
+	<input type="hidden" name="refund_quantity" value="${combineVO.order_quantity}"/>
 	<input type="hidden" name="order_status" value="${combineVO.order_status}"/>
 	<input type="hidden" name="order_usePoint" value="${combineVO.order_usePoint}"/>
 	<input type="hidden" name="p_code" value="${combineVO.p_code}"/>
+	<input type="hidden" name="p_price" value="${combineVO.p_price}"/>
 </div>
 </form>
 </body>

@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 
+import com.myspring.petshop.manager.order.service.ManagerOrderService;
 import com.myspring.petshop.member.dao.MemberDAO;
 import com.myspring.petshop.member.vo.MemberVO;
 
@@ -20,6 +21,8 @@ public class BatchController{
 	private MemberDAO memberDAO;
 	@Autowired
 	private MemberVO memberVO;
+	@Autowired
+	private ManagerOrderService managerOrderService;
 	
 	
 	private static final Logger logger = LoggerFactory.getLogger(BatchController.class);
@@ -28,9 +31,8 @@ public class BatchController{
 	public void scheduleRun() {
 		String batchResult = "success";
 		try {
-			System.out.println("- - - 10초 주기마다 실행");
+			System.out.println("- - - 정오마다 실행");
 			List<MemberVO> memberList = memberDAO.batchSelectMember();
-			
 			
 			if(memberList != null) {
 				for(int i = 0; i < memberList.size(); i++) {
@@ -41,6 +43,21 @@ public class BatchController{
 			}
 		}catch(Exception e) {
 			batchResult = "failed";
+			e.printStackTrace();
+		}
+		
+		logger.info("스케쥴 실행 : [" + batchResult + "] " );	
+	}
+	
+	@Scheduled(cron="0 0 11 * * ?") //초 분 시 일 월 요일 년
+	public void scheduleRun2() {
+		String batchResult = "success";
+		try {
+			System.out.println("- - - 오전 11시마다 실행");
+			managerOrderService.batchBuyConfirm();	
+		}catch(Exception e) {
+			batchResult = "failed";
+			e.printStackTrace();
 		}
 		
 		logger.info("스케쥴 실행 : [" + batchResult + "] " );	

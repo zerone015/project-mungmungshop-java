@@ -96,6 +96,9 @@ request.setCharacterEncoding("UTF-8");
 			<b>주문 관리</b>
 		</h3>
 	</div><br><br>
+	<span class="bd_example" style="float: right; margin-bottom: 30px;">
+		<a href="${contextPath}/manager/getRefundList.do"><font style="color: #0078FF; font-size: 20px;">환불 관리</font></a>
+	</span>
 	<form name="orderList" method="GET" action="#">
 		<table class="table table-hover">
 			<thead>

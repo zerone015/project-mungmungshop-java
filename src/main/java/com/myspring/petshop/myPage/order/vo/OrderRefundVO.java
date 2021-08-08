@@ -23,6 +23,10 @@ public class OrderRefundVO {
 	private String seller_reason;
 	private Timestamp refund_date;
 	
+	private int order_usePoint;
+	private int p_price;
+	private String p_code;
+	
 	public OrderRefundVO() {
 		
 	}
@@ -154,5 +158,29 @@ public class OrderRefundVO {
 	
 	public void setRefund_date(Timestamp refund_date) {
 		this.refund_date = refund_date;
+	}
+	
+	public int getOrder_usePoint() {
+		return order_usePoint;
+	}
+	
+	public void setOrder_usePoint(int order_usePoint) {
+		this.order_usePoint = order_usePoint;
+	}
+	
+	public int getP_price() {
+		return p_price;
+	}
+	
+	public void setP_price(int p_price) {
+		this.p_price = p_price;
+	}
+	
+	public String getP_code() {
+		return p_code;
+	}
+	
+	public void setP_code(String p_code) {
+		this.p_code = p_code;
 	}
 }

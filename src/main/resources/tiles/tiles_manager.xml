@@ -44,6 +44,12 @@
 		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
 	</definition>
 	
+	<definition name="managerRefundList" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 환불 조회 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerRefundList.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
 	<definition name="managerMember" extends="baseLayout">
 		<put-attribute name="title" value="관리자 모드 회원 관리 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/manager/managerMember.jsp" />

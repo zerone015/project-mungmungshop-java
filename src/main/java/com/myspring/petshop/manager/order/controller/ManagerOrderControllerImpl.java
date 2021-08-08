@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -20,12 +22,19 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.order.service.ManagerOrderService;
 import com.myspring.petshop.manager.order.vo.OrderDetailVO;
+import com.myspring.petshop.member.vo.MemberVO;
+import com.myspring.petshop.myPage.order.vo.OrderRefundVO;
+import com.myspring.petshop.payment.service.PaymentService;
 import com.myspring.petshop.payment.vo.CombineVO;
 
 @Controller
 public class ManagerOrderControllerImpl implements ManagerOrderController {
 	@Autowired
 	private ManagerOrderService managerService;
+	@Autowired
+	private MemberVO memberVO;
+	@Autowired
+	private PaymentService paymentService;
 
 	@Override
 	@RequestMapping(value="/manager/getOrderList.do", method = RequestMethod.GET)
@@ -52,6 +61,24 @@ public class ManagerOrderControllerImpl implements ManagerOrderController {
 		
 		ModelAndView mav = new ModelAndView("managerOrderInfo");
 		mav.addObject("orderMap", orderMap);
+		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/getRefundList.do", method = RequestMethod.GET)
+	public ModelAndView getRefundList(@RequestParam(required = false, defaultValue = "1") int page,
+									 @RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+		int listCnt = managerService.getRefundsCnt();
+		
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		
+		List<CombineVO> refundList = managerService.getRefundList(pagination);
+		
+		ModelAndView mav = new ModelAndView("managerRefundList");
+		mav.addObject("refundList", refundList);
+		mav.addObject("pagination", pagination);
 		
 		return mav;
 	}
@@ -109,6 +136,66 @@ public class ManagerOrderControllerImpl implements ManagerOrderController {
 		mav.addObject("searchContents", searchContents);
 		
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/manager/getSearchRefunds.do", method = RequestMethod.GET)
+	public ModelAndView getSearchRefunds(@RequestParam("searchBy") String searchBy, @RequestParam("searchContents") String searchContents,
+										@RequestParam(required = false, defaultValue = "1") int page,
+										@RequestParam(required = false, defaultValue = "1") int range) throws Exception {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("searchBy", searchBy);
+		searchMap.put("searchContents", searchContents);
+		
+		int	listCnt = managerService.searchRefundsCnt(searchMap);
+		
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		
+		searchMap.put("pagination", pagination);
+		
+		List<CombineVO> refundList = managerService.getSearchRefunds(searchMap);
+		
+		ModelAndView mav = new ModelAndView("managerRefundList");
+		mav.addObject("refundList", refundList);
+		mav.addObject("pagination", pagination);
+		mav.addObject("searchBy", searchBy);
+		mav.addObject("searchContents", searchContents);
+		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/manager/modRefundStatus.do", method = RequestMethod.POST)
+	public ResponseEntity modRefundStatus(@ModelAttribute("orderRefund") OrderRefundVO orderRefund, HttpServletRequest request, HttpSession session) throws Exception {
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		try{
+			managerService.modRefundStatus(orderRefund);
+			
+			int member_num = orderRefund.getMember_num();
+			memberVO = paymentService.getMember(member_num);
+			session.removeAttribute("member");
+			session.setAttribute("member", memberVO);	
+			
+			message = "<script>";
+			message += "alert('환불 처리가 완료되었습니다.');";
+			message += "location.href='" + request.getContextPath() + "/manager/getRefundList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('에러가 발생했습니다.');";
+			message += "location.href='" + request.getContextPath() + "/manager/getRefundList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
 	}
 	
 }

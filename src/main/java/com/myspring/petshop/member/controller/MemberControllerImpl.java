@@ -185,7 +185,7 @@ public class MemberControllerImpl implements MemberController{
 		    JSONObject jsonobj = (JSONObject) obj; 
 		    JSONObject response = (JSONObject) jsonobj.get("response"); 
 		    String id = (String) response.get("id");
-		    String member_id = "naverID"+id;
+		    String member_id = "naver"+id;
 		    String member_name = (String) response.get("name"); 
 		    String member_email = (String) response.get("email"); 
 		    String member_phone = (String) response.get("mobile");
@@ -298,9 +298,9 @@ public class MemberControllerImpl implements MemberController{
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<MemberVO> memberList = memberService.findId(member);
 		
-		for(int i=0; i<memberList.size(); i++ ) {
+		for(int i=0; i<memberList.size(); i++ ) {	
 			MemberVO memberVO = (MemberVO) memberList.get(i);
-			if(!memberVO.getMember_type().equals("일반")) {
+			if(!memberVO.getMember_type().equals("일반")) {	
 				if(memberVO.getMember_type().equals("카카오")) {
 					memberVO.setMember_id("카카오 계정");
 				}
