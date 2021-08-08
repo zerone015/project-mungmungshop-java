@@ -92,8 +92,7 @@ public class ReviewControllerImpl implements ReviewController {
 		List reviewList = reviewService.listMyReview(info);
 		
 		mav.addObject("reviewList", reviewList);
-		mav.addObject("info", info);
-		
+		mav.addObject("info", info);		
 		
 		return mav;
 	}

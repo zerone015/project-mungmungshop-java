@@ -19,6 +19,45 @@ request.setCharacterEncoding("UTF-8");
 
 <link rel="stylesheet" href="${contextPath}/resources/css/product.css">
 <script src="${contextPath}/resources/js/product.js"></script>
+<script src="${contextPath}/resources/js/graph.js"></script>
+
+<style>
+
+.graphBody{
+	padding: 50px;
+}
+.graph {
+	height: 40px; 
+	background: #ccc; 
+	border-radius: 40px;
+}
+.graph font {
+	display: block;
+	width : 75%;
+	height: 40px;
+	padding: 0 10px;
+	line-height: 40px;
+	text-align: right;
+	background: violet;
+	border-radius: 40px;
+	box-sizing: border-box;
+	color: #fff;
+	animation: stack 2s 1;
+	margin: 0;
+}
+
+@keyframes stack{
+	0% {
+		width: 0;
+		color: rgba(255,255,255,0);
+	}
+	40% {
+		color: rgba(255,255,255,1);
+	}
+	100% {
+		width: 75%;;
+	}
+</style>
 
 <script type="text/javascript">
 function checkWrite() {
@@ -155,6 +194,11 @@ function imagePopup(type) {
   <div>
 		<h3 style="text-align: left; margin-bottom: 20;">후기</h3>
 	  	
+	  	<div class="graphBody">
+			<div class="graph">
+				<font>75%</font>
+			</div>
+		</div>
 	  	
 	  	<!-- 후기 목록 -->
 	  	<c:forEach items="${reviewList}" var="reviewVO">
@@ -215,27 +259,11 @@ function imagePopup(type) {
 		</div>
 	</div>	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-
+	
 
 </div>	
+
+
 </body>
 </html>

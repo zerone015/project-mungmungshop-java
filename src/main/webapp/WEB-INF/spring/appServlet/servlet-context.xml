@@ -65,6 +65,7 @@
 	    <mvc:mapping path="/payment/*"/>
 	    <mvc:mapping path="/address/*"/>
 	    <mvc:mapping path="/myPage/*"/>
+	    <mvc:mapping path="/reviewWriteForm.do"/>
 	    <mvc:mapping path="/board/qna*"/>
 	    <mvc:mapping path="/qna*"/>
 	    <mvc:mapping path="/manager/*"/>
