@@ -13,14 +13,11 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 <link rel="stylesheet" href="${contextPath}/resources/css/product.css">
 <script src="${contextPath}/resources/js/product.js"></script>
 <script src="${contextPath}/resources/js/graph.js"></script>
-
 <style>
 
 .graphBody{
@@ -178,7 +175,7 @@ function imagePopup(type) {
 		</div>
 	  </div>
 	  <div  style="margin-top: 50;">
-	  	<p><button type="button" class="btn btn-outline-danger btn-block" style="height: 50px;">찜</button></p>
+	  	<p><button type="button" class="btn btn-outline-danger btn-block" style="height: 50px;"><i class="far fa-heart" style="font-size: 22px;"></i><br>1234</button></p>
 	  	<p><button type="button" class="btn btn-outline-primary btn-block" style="height: 50px;" onclick="javascript:fn_addCart('${product.p_code}')">장바구니 담기</button></p>
 	  	<input type="hidden" name="p_code" value="${product.p_code}"/>
 	  	<p><input type="submit" class="btn btn-danger btn-block" style="height: 50px;" value="바로 구매하기"></p>
