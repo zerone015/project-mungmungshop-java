@@ -1,5 +1,6 @@
 package com.myspring.petshop.product.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -112,16 +113,11 @@ public class ProductControllerImpl implements ProductController {
 		
 		memberVO = (MemberVO)session.getAttribute("member");
 		
-		
-		
-		// 게시글 총 개수
 		int listCnt = reviewService.reviewCnt();
 		
 		Pagination pagination = new Pagination();
 		pagination.setListSize(10);
 		pagination.pageInfo(page, range, listCnt);
-		
-		
 		
 		Map<String, Object> info = new HashMap<String, Object>();
 		
@@ -132,6 +128,8 @@ public class ProductControllerImpl implements ProductController {
 
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("info", info);
+		
+		addProductsInQuick(product, p_code, session);
 		
 		return mav;
 	}
@@ -190,5 +188,31 @@ public class ProductControllerImpl implements ProductController {
 		mav.addObject("sortBy", sortBy);
 		
 		return mav;
+	}
+	
+	private void addProductsInQuick(ProductVO product, String p_code, HttpSession session){
+		boolean already_existed=false;
+		List<ProductVO> quickProductsList; 
+		quickProductsList=(ArrayList<ProductVO>)session.getAttribute("quickProductsList");
+		
+		if(quickProductsList!=null){
+			for(int i=0; i<quickProductsList.size();i++){
+				ProductVO _product=(ProductVO)quickProductsList.get(i);
+				if(p_code.equals(_product.getP_code())){
+					already_existed=true;
+					break;
+				}
+			}
+			if(already_existed==false){
+				quickProductsList.add(product);
+			}
+				
+		}
+		else{
+			quickProductsList = new ArrayList<ProductVO>();
+			quickProductsList.add(product);
+			
+		}
+		session.setAttribute("quickProductsList",quickProductsList);
 	}
 }

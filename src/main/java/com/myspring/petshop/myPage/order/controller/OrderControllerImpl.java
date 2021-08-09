@@ -1,5 +1,6 @@
 package com.myspring.petshop.myPage.order.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +29,7 @@ import com.myspring.petshop.myPage.order.vo.OrderRefundVO;
 import com.myspring.petshop.myPage.order.vo.PointHistoryVO;
 import com.myspring.petshop.payment.service.PaymentService;
 import com.myspring.petshop.payment.vo.CombineVO;
+import com.myspring.petshop.product.vo.ProductVO;
 
 
 @Controller
@@ -184,5 +186,26 @@ public class OrderControllerImpl implements OrderController {
 		}
 		
 		return resEnt;
+	}
+	
+	@Override
+	@RequestMapping(value = "/myPage/quickProducts.do", method = RequestMethod.GET)
+	public ModelAndView quickProducts(@RequestParam(required = false, defaultValue = "1") int page,
+									  @RequestParam(required = false, defaultValue = "1") int range, HttpServletRequest request) throws Exception {
+		ModelAndView mav = new ModelAndView("quickProducts");
+		List<ProductVO> quickProductsList;
+		HttpSession session = request.getSession();
+		quickProductsList=(ArrayList<ProductVO>)session.getAttribute("quickProductsList");
+		
+		int listCnt = 0;
+		if(quickProductsList != null) {
+			listCnt = quickProductsList.size();
+		}
+		
+		Pagination pagination = new Pagination();
+		pagination.pageInfo(page, range, listCnt);
+		mav.addObject("pagination", pagination);
+		
+		return mav;
 	}
 }

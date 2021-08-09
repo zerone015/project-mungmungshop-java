@@ -41,6 +41,11 @@
 		<put-attribute name="body" value="/WEB-INF/views/myPage/love.jsp" />
 	</definition>
 	
+	<definition name="quickProducts" extends="sideMenuLayout">
+		<put-attribute name="title" value="최근 본 상품 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/quickProducts.jsp" />
+	</definition>
+	
 	<definition name="infoCertify" extends="sideMenuLayout">
 		<put-attribute name="title" value="비밀번호 확인 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/infoCertify.jsp" />

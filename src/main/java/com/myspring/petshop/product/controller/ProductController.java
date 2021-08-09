@@ -24,5 +24,7 @@ public interface ProductController {
 	
 	public ModelAndView newProduct(String sortBy, int page, int range, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
+	
+	
 
 }

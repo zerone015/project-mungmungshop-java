@@ -22,4 +22,7 @@ public interface OrderController {
 	public ModelAndView getPointHistory(@RequestParam(required = false, defaultValue = "1") int page,
 		    @RequestParam(required = false, defaultValue = "1") int range,HttpSession session) throws Exception;
 	public ResponseEntity buyConfirm(@ModelAttribute("odv") OrderDetailVO odv, HttpSession session, HttpServletRequest request) throws Exception;
+	public ModelAndView quickProducts(@RequestParam(required = false, defaultValue = "1") int page,
+			  @RequestParam(required = false, defaultValue = "1") int range, HttpServletRequest request) throws Exception;
+	
 }
