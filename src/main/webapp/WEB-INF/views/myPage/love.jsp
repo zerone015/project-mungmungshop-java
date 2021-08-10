@@ -1,141 +1,139 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-pageEncoding="utf-8" isELIgnored="false" %>
-<!DOCTYPE html>
+	pageEncoding="utf-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
+<%
+request.setCharacterEncoding("UTF-8");
+%>
 <html>
 <head>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <meta charset="utf-8">
-<title>뭉뭉샵</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
-<script> 
-function checkSelectAll()  {
-  // 전체 체크박스
-  const checkboxes 
-    = document.querySelectorAll('input[name="love"]');
-  // 선택된 체크박스
-  const checked 
-    = document.querySelectorAll('input[name="love"]:checked');
-  // select all 체크박스
-  const selectAll 
-    = document.querySelector('input[name="animal"]');
-  
-  if(checkboxes.length === checked.length)  {
-    selectAll.checked = true;
-  }else {
-    selectAll.checked = false;
-  }
-
-}
-
-function selectAll(selectAll)  {
-  const checkboxes 
-     = document.getElementsByName('love');
-  
-  checkboxes.forEach((checkbox) => {
-    checkbox.checked = selectAll.checked
-  })
-}
-
-function cartMoveCheck() {
-	var check=document.loveForm.love;
-	var num=0;
-	
-	for(var i=0; i<check.length; i++) {
-		if (check[i].checked) {
-			num++;
-		}
-	}
-	if(!num){
-		alert("장바구니로 이동할 상품을 선택해주세요.")
-		return false;
-		}
-}
-
-function delLoveCheck() {
-	var check=document.loveForm.love;
-	var num=0;
-	
-	for(var i=0; i<check.length; i++) {
-		if (check[i].checked) {
-			num++;
-		}
-	}
-	if(!num){
-		alert("삭제하려는 상품을 선택해주세요.")
-		return false;
-		}
-}
-</script>
-
-
+<title>찜 목록</title>
 </head>
+<script>
+
+	//이전 버튼 이벤트
+	function fn_prev(page, range, rangeSize) {
+		var page = ((range - 2) * rangeSize) + 1;
+		var range = range - 1;
+		
+		
+		
+		var url = "${contextPath}/myPage/getLoveList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;
+		
+}
+
+	//페이지 번호 클릭
+	function fn_pagination(page, range, rangeSize, searchType, keyword) {
+		var url = "${contextPath}/myPage/getLoveList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;	
+	}
+
+	//다음 버튼 이벤트
+	function fn_next(page, range, rangeSize) {
+
+		var page = parseInt((range * rangeSize)) + 1;
+		var range = parseInt(range) + 1;
+
+		var url = "${contextPath}/myPage/getLoveList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+
+		location.href = url;
+	}
+</script>
+<style>
+	.product{
+	    cursor: pointer; 
+	    width: 330px; 
+	    height: 400px;
+	    margin-right: auto;
+	}
+</style>
 <body>
 <div class="container">
-  <div>
-  	<h3>찜 리스트</h3>
-	<hr>
-	<form name="loveForm" method="GET" action="">
-	<!-- 후기 목록 -->
-	<div style="margin-top: 10; ">
-		<div style="text-align: left;">
-			<label><input class="checkBox" type='checkbox' name='animal' value='selectall' onclick='selectAll(this)'/>전체 선택</label>
+	<div align="center">
+		<h4>
+			<b>찜 목록</b>
+		</h4>
+	</div>
+	<hr width="100%">
+	<div>
+		<div class="col">
+			<div class="row" >
+			<c:if test="${loveList == null}">
+				<div align="center">
+					<font>찜 목록이 없습니다.</font>
+				</div>
+			</c:if>
+			<c:forEach items="${loveList}" var="item">
+	            <div class="product">
+	                <div class="bd-placeholder-img card-img-top">
+	                <a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
+	                    <img
+	                        src="${contextPath}/download?imageFileName=${item.p_imageFileName}"
+	                        style="width: 50%; height: 225;" alt="상품 이미지" />
+	                </a>
+	                </div>
+	                <div class="card-body">
+	                   
+	                    <p style="font-size: 14px;">
+	                    <a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">${item.p_name}</a>
+	                    </p>
+	        
+	                    <p style="font-size: 14px;">
+	                     <a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
+	                        <b><fmt:formatNumber value="${item.p_price }"
+	                            pattern="###,###,###" />
+	                        </b>원
+	                     </a>
+	                    </p>
+	                    <div class="d-flex justify-content-between align-items-center">
+	                        <div class="btn-group"></div>
+	                        <p style="color: red;">♥ ${item.p_loves}</p>
+	                    </div>
+	                </div>
+	            </div>
+	            </c:forEach>
+			</div>
 		</div>
-		<div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      		<input class="checkBox" type="checkbox" name="love" onclick='checkSelectAll(this)'/>
-	      	<img class="productImg" src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-
-	        <strong class="mb-1" style="margin: 10;">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      		<input class="checkBox" type="checkbox" name="love" onclick='checkSelectAll(this)'  />
-
-	      	<img class="productImg" src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-
-	        <strong class="mb-1" style="margin: 10;">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      		<input class="checkBox" type="checkbox" name="love" onclick='checkSelectAll(this)' />
-
-	      	<img class="productImg" src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-
-	        <strong class="mb-1" style="margin: 10;">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	      </div>
-	    </div>
-	    <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      		<input class="checkBox" type="checkbox" name="love" onclick='checkSelectAll(this)'  />
-
-	      	<img class="productImg" src="resources/image/네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg.jpg" style=" width: 60px; height: 60px;"/>
-
-	        <strong class="mb-1" style="margin: 10;">네츄럴코어 홀리스틱 베네 M32 멀티프로테인 6kg</strong>
-	        </div>
-	      </div>
-	    </div>
-    </div>
-    <div style="text-align: right; margin-top: 20;">
-    	<input type="button" value="삭제" class="btn btn-outline-danger" onclick="delLoveCheck()">
-	    <input type="button" value="장바구니" class="btn btn-outline-primary" onclick="cartMoveCheck()">
-    </div>
-    </form>
- </div>
+	
+	</div>
+	<!-- pagination{s} -->
+	<div style="">
+		<ul class="pagination" style="width: 0%; justify-content: center;">
+			<c:if test="${pagination.prev}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="fn_prev('${pagination.page}', '${pagination.range}', '${pagination.rangeSize}')">Previous</a>
+				</li>
+			</c:if>
+			<c:forEach begin="${pagination.startPage}" end="${pagination.endPage}" var="idx">
+				<li class="page-item <c:out value="${pagination.page == idx ? 'active' : ''}"/> ">
+					<a class="page-link" href="#" onClick="fn_pagination('${idx}', '${pagination.range}', '${pagination.rangeSize}')"> ${idx} </a>
+				</li>
+			</c:forEach>
+			<c:if test="${pagination.next}">
+				<li class="page-item">
+					<a class="page-link" href="#" onClick="fn_next('${pagination.range}', '${pagination.range}', '${pagination.rangeSize}')" >Next</a>
+				</li>
+			</c:if>
+		</ul>
+	</div>
+	<!-- pagination{e} -->
 </div>
-
-
-
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

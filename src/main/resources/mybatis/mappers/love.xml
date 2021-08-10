@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="mapper.love">
+	<select id="selectLoveCnt" resultType="int" parameterType="loveVO">
+		<![CDATA[
+			select COUNT(*) from love 
+			where member_num = #{member_num} AND p_code = #{p_code}
+		]]>
+	</select>
+	
+	<insert id="insertLove" parameterType="loveVO">
+		<![CDATA[
+			insert into love 
+			values(#{love_num}, #{member_num}, #{p_code})
+		]]>
+	</insert>
+	
+	<delete id="deleteLove" parameterType="loveVO">
+		<![CDATA[
+			delete from love where member_num = #{member_num} AND p_code = #{p_code}
+		]]>
+	</delete>
+	
+	<select id="selectProductLove" resultType="int" parameterType="String">
+		<![CDATA[
+			select p_loves from products where p_code = #{p_code}
+		]]>
+	</select>
+	
+	<select id="selectMaxLoveNum" resultType="int">
+		<![CDATA[	
+			select MAX(love_num) from love
+		]]>
+	</select>
+	
+	<select id="selectLoveListCnt" resultType="int">
+		<![CDATA[	
+			select COUNT(*) from love
+			where member_num = #{member_num}
+		]]>
+	</select>
+	
+	<select id="selectLoveList" resultType="productVO" parameterType="java.util.Map">
+		<![CDATA[	
+			select pdt.p_code, pdt.p_name, pdt.p_loves, pdt.p_price, pdt.p_imageFileName
+			from love AS lov
+			JOIN products AS pdt
+			ON lov.p_code = pdt.p_code
+			where lov.member_num = #{member_num}
+			order by lov.love_num DESC
+			LIMIT #{pagination.startList}, #{pagination.listSize}
+		]]>
+	</select>
+</mapper>

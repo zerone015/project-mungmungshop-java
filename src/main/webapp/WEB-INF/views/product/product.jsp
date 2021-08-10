@@ -43,6 +43,11 @@ request.setCharacterEncoding("UTF-8");
 	margin: 0;
 }
 
+.btn-outline-danger:hover {
+    background-color:#fff!important;
+    color:red !important;
+}
+
 @keyframes stack{
 	0% {
 		width: 0;
@@ -98,6 +103,54 @@ function fn_addCart(p_code) {
 			else{
 				alert("에러가 발생했습니다."+data);
 			}
+		}
+	});
+}
+
+function fn_modLove() {
+	$.ajax({
+		type : "post",
+		url : "${contextPath}/love/modLove.do",
+		data : {p_code : '${product.p_code}'},
+		beforeSend : function(xmlHttpRequest) { xmlHttpRequest.setRequestHeader("AJAX", "true");},
+		success : function(result, textStatus) {
+			fn_getProductLoves(result);
+		},
+		error : function(data, textStatus) {
+			if(data.status==400) {
+			     location.href='${contextPath}/login.do';
+
+			}
+			else{
+				alert("에러가 발생했습니다."+data);
+			}
+		}
+	});
+}
+
+function fn_getProductLoves(result) {
+	$.ajax({
+		type : "post",
+		url : "${contextPath}/love/getProductLoves.do",
+		data : {p_code : '${product.p_code}'},
+		success : function(data, textStatus) {
+			if(result == 0){
+				$("#love_btn").attr('class', 'btn btn-danger');
+				$("#love_btn").attr('style', 'height: 60px;');
+				$("#love_btn").attr('style', 'width: 445px;');
+				$("#icon_heart").attr('style', 'font-size: 22px;');
+				$("#love_count").html(data);		
+				
+			}
+			else{
+				$("#love_btn").attr('class', 'btn btn-outline-danger btn-block');
+				$("#love_btn").attr('style', 'height: 60px;');
+				$("#icon_heart").attr('style', 'font-size: 22px;');
+				$("#love_count").html(data);
+			}
+		},
+		error : function(data, textStatus) {
+			alert("에러가 발생했습니다."+data);	
 		}
 	});
 }
@@ -175,7 +228,14 @@ function imagePopup(type) {
 		</div>
 	  </div>
 	  <div  style="margin-top: 50;">
-	  	<p><button type="button" class="btn btn-outline-danger btn-block" style="height: 50px;"><i class="far fa-heart" style="font-size: 22px;"></i><br>1234</button></p>
+	  <c:choose>
+	  	<c:when test="${loveCnt == 1}">
+	  		<p><button type="button" id="love_btn" class="btn btn-danger" style="height: 60px; width: 445px;" onclick="fn_modLove();"><i id="icon_heart" class="far fa-heart" style="font-size: 22px;"></i><br><font id="love_count">${product.p_loves}</font></button></p>
+	  	</c:when>
+	  	<c:otherwise>
+	  		<p><button type="button" id="love_btn" class="btn btn-outline-danger btn-block" style="height: 60px;" onclick="fn_modLove();"><i id="icon_heart" class="far fa-heart" style="font-size: 22px;"></i><br><font id="love_count">${product.p_loves}</font></button></p>
+	  	</c:otherwise>
+	  </c:choose>
 	  	<p><button type="button" class="btn btn-outline-primary btn-block" style="height: 50px;" onclick="javascript:fn_addCart('${product.p_code}')">장바구니 담기</button></p>
 	  	<input type="hidden" name="p_code" value="${product.p_code}"/>
 	  	<p><input type="submit" class="btn btn-danger btn-block" style="height: 50px;" value="바로 구매하기"></p>

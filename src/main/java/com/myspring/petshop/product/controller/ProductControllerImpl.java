@@ -18,26 +18,25 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.common.pagination.Pagination;
+import com.myspring.petshop.love.service.LoveService;
+import com.myspring.petshop.love.vo.LoveVO;
 import com.myspring.petshop.member.vo.MemberVO;
 import com.myspring.petshop.product.service.ProductService;
 import com.myspring.petshop.product.vo.ProductVO;
 import com.myspring.petshop.review.service.ReviewService;
-import com.myspring.petshop.review.vo.ReviewVO;
 
 @Controller("productController")
 public class ProductControllerImpl implements ProductController {
 	@Autowired
 	private ProductService productService;
 	@Autowired
-	private ProductVO product;
-	@Autowired
 	private MemberVO memberVO;
 	@Autowired
 	private ReviewService reviewService;
 	@Autowired
-	private ReviewVO reviewVO;
+	private LoveService loveService;
 	@Autowired
-	private HttpSession session;
+	private LoveVO love;
 	
 	@Override
 	@RequestMapping(value="/product/productList.do", method = RequestMethod.GET)
@@ -104,14 +103,14 @@ public class ProductControllerImpl implements ProductController {
 								   @RequestParam(required = false, defaultValue = "1") int page,
 								   @RequestParam(required = false, defaultValue = "1") int range, 
 						HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
 		ProductVO product = productService.getProduct(p_code);
+		
+		HttpSession session = request.getSession();
+		memberVO = (MemberVO)session.getAttribute("member");
 		
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
-		
-		session = request.getSession();
-		
-		memberVO = (MemberVO)session.getAttribute("member");
 		
 		int listCnt = reviewService.reviewCnt();
 		
@@ -129,6 +128,13 @@ public class ProductControllerImpl implements ProductController {
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("info", info);
 		
+		if(memberVO != null) {
+			int member_num = memberVO.getMember_num();
+			love.setMember_num(member_num);
+			love.setP_code(p_code);
+			int loveCnt = loveService.getLoveCnt(love);
+			mav.addObject("loveCnt", loveCnt);
+		}
 		addProductsInQuick(product, p_code, session);
 		
 		return mav;
