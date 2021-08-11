@@ -9,7 +9,7 @@ import com.myspring.petshop.review.vo.ReviewVO;
 
 public interface ReviewDAO {
 
-	public int selectReviewCnt() throws DataAccessException;
+	public int selectReviewCnt(String p_code) throws DataAccessException;
 
 	public List selectAllReviewList(Map<String, Object> info) throws DataAccessException;
 
@@ -18,4 +18,14 @@ public interface ReviewDAO {
 	public List selectMyReviewList(Map<String, Object> info) throws DataAccessException;
 
 	public int reviewWrite(Map<String, Object> map) throws DataAccessException;
+	
+	public int oneReview(String p_code) throws DataAccessException;
+	public int twoReview(String p_code) throws DataAccessException;
+	public int threeReview(String p_code) throws DataAccessException;
+	public int fourReview(String p_code) throws DataAccessException;
+	public int fiveReview(String p_code) throws DataAccessException;
+
+	public ReviewVO getReview(int review_num)throws DataAccessException;
+
+	public int reviewMod(Map<String, Object> map) throws DataAccessException;
 }

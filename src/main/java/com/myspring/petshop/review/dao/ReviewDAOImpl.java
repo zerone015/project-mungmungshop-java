@@ -17,8 +17,8 @@ public class ReviewDAOImpl implements ReviewDAO {
 	private SqlSession sqlSession;
 	
 	@Override
-	public int selectReviewCnt() throws DataAccessException {
-		return sqlSession.selectOne("mapper.review.selectReviewCnt");
+	public int selectReviewCnt(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.selectReviewCnt", p_code);
 	}
 
 	@Override
@@ -40,6 +40,35 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int reviewWrite(Map<String, Object> map) throws DataAccessException {
 		return sqlSession.insert("mapper.review.reviewInsert", map);
 	}
+	
+	@Override
+	public int oneReview(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.oneReview", p_code);
+	}
+	@Override
+	public int twoReview(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.twoReview", p_code);
+	}
+	@Override
+	public int threeReview(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.threeReview", p_code);
+	}
+	@Override
+	public int fourReview(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.fourReview", p_code);
+	}
+	@Override
+	public int fiveReview(String p_code) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.fiveReview", p_code);
+	}
 
+	@Override
+	public ReviewVO getReview(int review_num) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.getReview", review_num);
+	}
 
+	@Override
+	public int reviewMod(Map<String, Object> map) throws DataAccessException {
+		return sqlSession.update("mapper.review.reviewMod", map);
+	}
 }

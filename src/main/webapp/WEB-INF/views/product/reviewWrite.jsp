@@ -9,16 +9,17 @@ pageEncoding="utf-8" isELIgnored="false" %>
 <head>
 <meta charset="utf-8">
 <title>뭉뭉샵</title>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript">
 function checkReview() {
 	var form=document.reviewForm;
+	
 	if (form.review_content.value == "") {
 		alert("내용을 입력해주세요");
-		form.reviewWrite.focus();
+		form.review_content.focus();
 		return false;
 	} 
 	
@@ -28,7 +29,27 @@ function checkReview() {
 		return false;
 	}
 	
-	form.submit();
+	var formm = $('#reviewForm');
+ 	var formData = new FormData(formm[0]);
+
+	$.ajax({
+		url : "${contextPath}/reviewMod.do",
+		type : "POST",
+	 	enctype: 'multipart/form-data',
+	 	dataType:'json',
+	    processData:false,
+	    contentType:false,
+	    cache:false,
+		data : formData,
+		success: function(jdata){
+			window.opener.name="order"; 
+			document.reviewForm.target="order"; 
+			self.close(); 
+			window.opener.location.href="${contextPath}/myPage/reviewList.do;  
+		} 
+		
+	});
+	
 }
 
 
@@ -45,13 +66,6 @@ function fn_cancle() {
 	}
 }
 
-function fn_reviewClose(form) {
-	window.opener.name="order"; 
-	document.reviewForm.target="order";
-	self.close();
-	document.reviewForm.submit();
-	document.reviewForm.action="${contextPath}/myPage/reviewList.do";	
-}	
 </script>
 
 <style>
@@ -69,7 +83,7 @@ function fn_reviewClose(form) {
 <h3>상품 후기</h3>
 <hr>
   <!-- 후기 작성 -->
-  <form name="reviewForm" method="POST" action="${contextPath}/reviewWrite.do" enctype="multipart/form-data">
+  <form name="reviewForm" id="reviewForm" method="POST" action="${contextPath}/reviewWrite.do" enctype="multipart/form-data">
 	<div class="row g-3">
       <div class="col-12">
       	<!-- 상품코드 -->
@@ -86,9 +100,11 @@ function fn_reviewClose(form) {
       	
       	<p class="subscript" > 만족도</p>
       	<select name="review_recommend" class="form-control">
-		    <option value="good">적극 추천합니다!</option>
-		    <option value="notBad">보통이에요</option>
-		    <option value="bod">나빠요</option>
+		    <option value="5">5점</option>
+		    <option value="4">4점</option>
+		    <option value="3">3점</option>
+		    <option value="2">2점</option>
+		    <option value="1">1점</option>
 		</select>
       	
       	<input type="hidden" id = "review_date" name = "review_date" value="<%=nowTime%>" readonly>
@@ -122,7 +138,7 @@ function fn_reviewClose(form) {
 	        <p class="subscript">상품에 대한 평가를 20자 이상 작성해 주세요</p>
 	      	<p class="subscript" style="margin: none">500 포인트가 적립됩니다.</p>
         	<br>
-        	<button type="button" class="btn btn-outline-primary" style="width: 100px; height: 50px; float: right;" onclick="checkReview();fn_reviewClose();">등록</button>
+        	<button type="button" class="btn btn-outline-primary" style="width: 100px; height: 50px; float: right;" onclick="checkReview();">등록</button>
         	<button type="button" class="btn btn-danger" style="width: 100px; height: 50px; float: right;  margin-right: 10;" onclick="fn_cancle();">취소</button>
         </div>
       </div>

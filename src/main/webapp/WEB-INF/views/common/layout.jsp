@@ -6,6 +6,10 @@ pageEncoding="utf-8" isELIgnored="false" %>
 <head>
 <title><tiles:insertAttribute name="title" /></title>
 <style>
+
+* {
+	color : #57523E;
+}
 #container {
 	width: 100%;
 	margin: 0px auto;

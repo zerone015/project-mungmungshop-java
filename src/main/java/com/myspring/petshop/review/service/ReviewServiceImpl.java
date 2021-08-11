@@ -22,8 +22,8 @@ public class ReviewServiceImpl implements ReviewService {
 	private ReviewDAO reviewDAO;
 	
 	@Override
-	public int reviewCnt() throws DataAccessException {
-		return reviewDAO.selectReviewCnt();
+	public int reviewCnt(String p_code) throws DataAccessException {
+		return reviewDAO.selectReviewCnt(p_code);
 	}
 
 	@Override
@@ -50,5 +50,35 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewWrite(Map<String, Object> map) throws DataAccessException {
 		return reviewDAO.reviewWrite(map);
 	}
+	
+	@Override
+	public int oneReview(String p_code) throws DataAccessException {
+		return reviewDAO.oneReview(p_code);
+	}
+	@Override
+	public int twoReview(String p_code) throws DataAccessException {
+		return reviewDAO.twoReview(p_code);
+	}
+	@Override
+	public int threeReview(String p_code) throws DataAccessException {
+		return reviewDAO.threeReview(p_code);
+	}
+	@Override
+	public int fourReview(String p_code) throws DataAccessException {
+		return reviewDAO.fourReview(p_code);
+	}
+	@Override
+	public int fiveReview(String p_code) throws DataAccessException {
+		return reviewDAO.fiveReview(p_code);
+	}
 
+	@Override
+	public ReviewVO getReview(int review_num) throws DataAccessException {
+		return reviewDAO.getReview(review_num);
+	}
+
+	@Override
+	public int reviewMod(Map<String, Object> map) throws DataAccessException {
+		return reviewDAO.reviewMod(map);
+	}
 }
