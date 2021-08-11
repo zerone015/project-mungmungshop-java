@@ -106,6 +106,10 @@ request.setCharacterEncoding("UTF-8");
 				<img src="${contextPath}/thumbnail/download?imageFileName=PARISDOG.PNG"
 	                        style="width: 400; height: 200;" alt="브랜드 로고" />
 			</c:when>
+			<c:when test="${brandName.equals('로얄캐닌')}">
+				<img src="${contextPath}/thumbnail/download?imageFileName=ROYALCANIN.PNG"
+	                        style="width: 400; height: 200;" alt="브랜드 로고" />
+			</c:when>
 			<c:otherwise>
 				<img src="${contextPath}/thumbnail/download?imageFileName=CATTYMAN.PNG"
 	                        style="width: 300; height: 100;" alt="브랜드 로고" />
