@@ -100,10 +100,27 @@
 		select * from products where p_code = #{p_code}
 	</select>
 	
+	<select id="selectKeywordSearch" resultType="String"   parameterType="String"  >
+	    <![CDATA[
+        select p_name from products 
+        where         
+        p_name 	LIKE CONCAT('%',#{keyword},'%')
+        order by p_date DESC
+		]]>
+	</select>						
 	
+	<select id="selectSearchProductsCnt" resultType="int" parameterType="String">
+		select count(*) as listCnt from products 
+		where p_name LIKE CONCAT('%',#{searchWord},'%')
+	</select>
 	
-	
-	
+	<select id="selectSearchProducts" resultType="productVO" parameterType="java.util.Map">
+		select p_code, p_name, p_price, p_loves, p_imageFileName 
+		from products 
+		where p_name LIKE CONCAT('%',#{searchWord},'%')
+		order by p_date DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
 	
 	<!-- =========================== 신상품 =========================== -->
 	<select id="selectAllNewProducts" resultType="productVO" parameterType="HashMap">
@@ -136,5 +153,6 @@
 		
 	<select id="selectNewProductsCnt" resultType="int">
 		select count(*) as listCnt from products 
+		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
 	</select>
 </mapper>

@@ -10,7 +10,7 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>최근 본 상품</title>
 </head>
@@ -76,9 +76,9 @@ request.setCharacterEncoding("UTF-8");
 		<div class="col">
 			<div class="row" >
 			<c:if test="${quickProductsList == null}">
-				<div align="center">
-					<font>최근 본 상품이 없습니다.</font>
-				</div>
+				<div style="margin-top: 300px;">
+					<h3><b>최근 본 상품이 없습니다.</b></h3>
+				</div>	
 			</c:if>
 			<c:forEach items="${quickProductsList}" var="item">
 	            <div class="product">

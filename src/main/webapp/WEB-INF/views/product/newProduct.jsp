@@ -10,9 +10,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" ></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>신상품 목록</title>
 <style>
@@ -84,13 +82,18 @@
 		<a href="${contextPath}/product/newProduct.do?sortBy=highPrice"><font style="color: #0078FF;">높은가격</font>&nbsp;&nbsp;&nbsp;</a>
 	</div>
 	<hr width="100%">
+	<c:if test="${products.size() == 0}">
+		<div style="margin-top: 300px;">
+			<h3><b>신상품이 없습니다.</b></h3>
+		</div>	
+	</c:if>
 	<div class="col">
 		<div class="row" >
 			<c:forEach items="${products}" var="products">
 				<div class="product">
 				    <div class="bd-placeholder-img card-img-top">
 					    <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">
-							<img src="${contextPath}/resources/image/category/${products.p_imageFileName}" style="width: 50%; height: 225;" alt="상품 이미지" />
+							<img src="${contextPath}/download?imageFileName=${products.p_imageFileName}" style="width: 50%; height: 225;" alt="상품 이미지" />
 						</a>
 					</div>
 					<div class="card-body">

@@ -12,6 +12,7 @@ request.setCharacterEncoding("utf-8");
 <meta charset="utf-8">
 <title>비밀번호 변경</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
 	input[type="password"] {
 		width: 500px; height: 50px; display:inline-block;

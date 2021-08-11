@@ -2,21 +2,27 @@ package com.myspring.petshop.product.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.dao.DataAccessException;
 
 import com.myspring.petshop.product.vo.ProductVO;
 
 public interface ProductDAO {
-	public List selectProducts(HashMap productInfo) throws Exception;
-	public int selectProductsCnt(ProductVO category) throws Exception;
-	public List selectLoveRanking(HashMap productInfo) throws Exception;
-	public List selectNewRanking(HashMap productInfo) throws Exception;
-	public List selectLowPriceRanking(HashMap productInfo) throws Exception;
-	public List selectHighPriceRanking(HashMap productInfo) throws Exception;
-	public List selectAllProducts(HashMap productInfo) throws Exception;
-	public ProductVO selectProduct(String p_code) throws Exception;
-	public int selectNewProductsCnt() throws Exception;
-	public List selectAllNewProducts(HashMap productInfo) throws Exception;
-	public List selectNewLoveRanking(HashMap productInfo) throws Exception;
-	public List selectNewHighPriceRanking(HashMap productInfo) throws Exception;
-	public List selectNewLowPriceRanking(HashMap productInfo) throws Exception;
+	public List selectProducts(HashMap productInfo) throws DataAccessException;
+	public int selectProductsCnt(ProductVO category) throws DataAccessException;
+	public List selectLoveRanking(HashMap productInfo) throws DataAccessException;
+	public List selectNewRanking(HashMap productInfo) throws DataAccessException;
+	public List selectLowPriceRanking(HashMap productInfo) throws DataAccessException;
+	public List selectHighPriceRanking(HashMap productInfo) throws DataAccessException;
+	public List selectAllProducts(HashMap productInfo) throws DataAccessException;
+	public ProductVO selectProduct(String p_code) throws DataAccessException;
+	public int selectNewProductsCnt() throws DataAccessException;
+	public List selectAllNewProducts(HashMap productInfo) throws DataAccessException;
+	public List selectNewLoveRanking(HashMap productInfo) throws DataAccessException;
+	public List selectNewHighPriceRanking(HashMap productInfo) throws DataAccessException;
+	public List selectNewLowPriceRanking(HashMap productInfo) throws DataAccessException;
+	public List<String> selectKeywordSearch(String keyword) throws DataAccessException;
+	public int selectSearchProductsCnt(String searchWord) throws DataAccessException;
+	public List<ProductVO> selectSearchProducts(Map<String, Object> searchMap) throws DataAccessException;
 }

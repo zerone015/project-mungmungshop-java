@@ -12,6 +12,7 @@
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <link rel="stylesheet" href="${contextPath}/resources/css/main.css" >
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function enterSearch() {
 	    if(event.keyCode == 13){				//keyCode == 13 (엔터가 입력되면)
@@ -23,6 +24,69 @@
 	    window.location.href = "http://cybertramp.net/search/"+x;  // 검색창에 입력한 값을 주소창 뒤에 붙여서 페이지 넘어감. 
 	}
 
+
+</script>
+<script type="text/javascript">
+	var loopSearch=true;
+	
+	function keywordSearch(){
+		if(loopSearch==false){
+			return;
+		}
+		 var value=document.frmSearch.searchWord.value;
+			$.ajax({
+				type : "get",
+				async : true, //false인 경우 동기식으로 처리한다.
+				url : "${contextPath}/product/keywordSearch.do",
+				data : {keyword:value},
+				success : function(data, textStatus) {
+			    	var jsonInfo = JSON.parse(data);
+					displayResult(jsonInfo);
+				},
+				error : function(data, textStatus) {
+					alert("에러가 발생했습니다."+data);
+				},
+				complete : function(data, textStatus) {
+					//alert("작업을완료 했습니다");
+				
+				}
+		}); //end ajax	
+	}
+	
+	function displayResult(jsonInfo){
+		var count = jsonInfo.keyword.length;
+		if(count > 0) {
+		    var html = '';
+		    for(var i in jsonInfo.keyword){
+			   html += "<a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
+		    }
+		    var listView = document.getElementById("suggestList");
+		    listView.innerHTML = html;
+		    show('suggest');
+		}else{
+		    hide('suggest');
+		} 
+	}
+	
+	function select(selectedKeyword) {
+		 document.frmSearch.searchWord.value=selectedKeyword;
+		 loopSearch = false;
+		 hide('suggest');
+	}
+		
+	function show(elementId) {
+		 var element = document.getElementById(elementId);
+		 if(element) {
+		  element.style.display = 'block';
+		 }
+		}
+	
+	function hide(elementId){
+	   var element = document.getElementById(elementId);
+	   if(element){
+		  element.style.display = 'none';
+	   }
+	}
 
 </script>
 <style>
@@ -105,6 +169,15 @@
 		text-align: center;
 		font-weight: bold;
 	}
+	
+	#suggest{
+		display:none; position: absolute;  top:90px; border: 0.1px  solid #87cb42; 
+		z-index:100; font-weight: bold; background-color:#ffffff; width:350;
+	}
+	
+	#suggest a {
+		padding: 5 0 5 0;
+	}
 </style>
 <div id="header">
 
@@ -118,8 +191,13 @@
 			
 			<!-- 검색창 -->
 			<div class="row">
-				<input class="form-control" type="text" placeholder="Search" aria-label="Search" style="width: 350px;">
-				<button class=" btn btn-outline-success " type="submit" style="text-align: left; margin-left: 5;">Search</button>
+			<form name="frmSearch" action="${contextPath}/product/searchProducts.do">
+				<input class="form-control" name="searchWord" type="text" onKeyUp="keywordSearch()" placeholder="Search" aria-label="Search" style="width: 350px; height: 50px; display: inline-block;">
+				<input class=" btn btn-outline-success " type="submit" style="text-align: left; margin-left: 5;" value="Search">
+				<div id="suggest">
+			      	<div id="suggestList"></div>
+				</div>
+			</form>
 			</div>
 		      
 		     <!-- 상단 오른쪽 -->
@@ -244,6 +322,7 @@
 </div>
 </nav>
 <hr>
+
 </header>
 
 </div>

@@ -9,6 +9,7 @@ request.setCharacterEncoding("UTF-8");
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>관리자 환불 관리 페이지</title>
 </head>

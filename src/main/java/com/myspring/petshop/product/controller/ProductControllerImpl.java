@@ -9,12 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.common.pagination.Pagination;
@@ -196,6 +198,59 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/product/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
+	public String  keywordSearch(@RequestParam("keyword") String keyword,
+			                                  HttpServletRequest request, HttpServletResponse response) throws Exception{
+		response.setContentType("text/html;charset=utf-8");
+		response.setCharacterEncoding("utf-8");
+		
+		if(keyword == null || keyword.equals(""))
+		   return null ;
+	
+		keyword = keyword.toUpperCase();
+	    List<String> keywordList =productService.keywordSearch(keyword);
+	    
+
+		JSONObject jsonObject = new JSONObject();
+		jsonObject.put("keyword", keywordList);
+		 		
+	    String jsonInfo = jsonObject.toString();
+	  
+	    return jsonInfo ;
+	}
+	
+	@Override
+	@RequestMapping(value="/product/searchProducts.do", method = RequestMethod.GET)
+	public ModelAndView searchProducts(
+			@RequestParam(value="searchWord", required=false, defaultValue="null") String searchWord,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		request.setCharacterEncoding("utf-8");
+		ModelAndView mav = new ModelAndView("searchList");
+		
+		int listCnt = productService.getSearchProductsCnt(searchWord);
+		
+		Pagination pagination = new Pagination();
+		pagination.setListSize(9);
+		pagination.pageInfo(page, range, listCnt);
+		
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("pagination", pagination);
+		searchMap.put("searchWord", searchWord);
+		
+		List<ProductVO> products = productService.getSearchProducts(searchMap);
+		
+		mav.addObject("pagination", pagination);
+		mav.addObject("products", products);
+		mav.addObject("searchWord", searchWord);
+		
+		return mav;
+	}
+	
+	
 	private void addProductsInQuick(ProductVO product, String p_code, HttpSession session){
 		boolean already_existed=false;
 		List<ProductVO> quickProductsList; 
@@ -210,7 +265,7 @@ public class ProductControllerImpl implements ProductController {
 				}
 			}
 			if(already_existed==false){
-				quickProductsList.add(product);
+				quickProductsList.add(0, product);
 			}
 				
 		}
@@ -221,4 +276,5 @@ public class ProductControllerImpl implements ProductController {
 		}
 		session.setAttribute("quickProductsList",quickProductsList);
 	}
+	
 }

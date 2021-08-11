@@ -2,6 +2,7 @@ package com.myspring.petshop.product.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,6 +93,20 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectNewProductsCnt();
 	}
 	
+	@Override
+	public int getSearchProductsCnt(String searchWord) throws Exception {
+		return productDAO.selectSearchProductsCnt(searchWord);
+	}
 	
+	@Override
+	public List<String> keywordSearch(String keyword) throws Exception {
+		return productDAO.selectKeywordSearch(keyword);
+	}
+	
+	@Override
+	public List<ProductVO> getSearchProducts(Map<String, Object> searchMap) throws Exception {
+	
+		return productDAO.selectSearchProducts(searchMap);
+	}
 	
 }

@@ -25,6 +25,10 @@ public interface ProductController {
 	public ModelAndView newProduct(String sortBy, int page, int range, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 	
-	
+	public ModelAndView searchProducts(
+			@RequestParam(value="searchWord", required=false, defaultValue="null") String searchWord,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

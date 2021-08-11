@@ -46,6 +46,10 @@ request.setCharacterEncoding("UTF-8");
 .btn-outline-danger:hover {
     background-color:#fff!important;
     color:red !important;
+} 
+
+.btn.focus, .btn:focus {
+	box-shadow : none!important;	
 }
 
 @keyframes stack{
@@ -136,16 +140,12 @@ function fn_getProductLoves(result) {
 		success : function(data, textStatus) {
 			if(result == 0){
 				$("#love_btn").attr('class', 'btn btn-danger');
-				$("#love_btn").attr('style', 'height: 60px;');
-				$("#love_btn").attr('style', 'width: 445px;');
-				$("#icon_heart").attr('style', 'font-size: 22px;');
+				$("#love_btn").css('width', '445px');
 				$("#love_count").html(data);		
 				
 			}
 			else{
 				$("#love_btn").attr('class', 'btn btn-outline-danger btn-block');
-				$("#love_btn").attr('style', 'height: 60px;');
-				$("#icon_heart").attr('style', 'font-size: 22px;');
 				$("#love_count").html(data);
 			}
 		},
