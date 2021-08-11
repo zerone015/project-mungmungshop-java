@@ -27,7 +27,7 @@
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=Hills.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=쥬쥬베"><img src="${contextPath}/download?imageFileName=JUJUBE.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
@@ -60,7 +60,7 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=RAWZ.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=패리스독"><img src="${contextPath}/download?imageFileName=PARISDOG.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
@@ -70,7 +70,7 @@
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=ZIWIPEAK.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=캐티맨"><img src="${contextPath}/download?imageFileName=CATTYMAN.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 

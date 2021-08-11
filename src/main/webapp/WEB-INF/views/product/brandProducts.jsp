@@ -76,31 +76,39 @@ request.setCharacterEncoding("UTF-8");
 </style>
 <body>
 <div class="container">
-	<div align="left">
+	<div align="center">
 		<c:choose>
 			<c:when test="${brandName.equals('아카나')}">
 				<img src="${contextPath}/thumbnail/download?imageFileName=ACANA.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+	                        style="width: 300; height: 150;" alt="브랜드 로고" />
 			</c:when>
 			<c:when test="${brandName.equals('내츄럴발란스')}">
 				<img src="${contextPath}/thumbnail/download?imageFileName=NaturalBalance.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+	                        style="width: 300; height: 200;" alt="브랜드 로고" />
 			</c:when>
 			<c:when test="${brandName.equals('나우')}">
 				<img src="${contextPath}/thumbnail/download?imageFileName=NOW.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+	                        style="width: 300; height: 150;" alt="브랜드 로고" />
 			</c:when>
 			<c:when test="${brandName.equals('오리젠')}">
 				<img src="${contextPath}/thumbnail/download?imageFileName=ORIGEN.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+	                        style="width: 300; height: 200;" alt="브랜드 로고" />
 			</c:when>
 			<c:when test="${brandName.equals('퓨리나')}">
 				<img src="${contextPath}/thumbnail/download?imageFileName=purinaProplan.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+	                        style="width: 400; height: 200;" alt="브랜드 로고" />
+			</c:when>
+			<c:when test="${brandName.equals('쥬쥬베')}">
+				<img src="${contextPath}/thumbnail/download?imageFileName=JUJUBE.PNG"
+	                        style="width: 300; height: 120;" alt="브랜드 로고" />
+			</c:when>
+			<c:when test="${brandName.equals('패리스독')}">
+				<img src="${contextPath}/thumbnail/download?imageFileName=PARISDOG.PNG"
+	                        style="width: 400; height: 200;" alt="브랜드 로고" />
 			</c:when>
 			<c:otherwise>
-				<img src="${contextPath}/thumbnail/download?imageFileName=ROYALCANIN.PNG"
-	                        style="width: 200; height: 100;" alt="브랜드 로고" />
+				<img src="${contextPath}/thumbnail/download?imageFileName=CATTYMAN.PNG"
+	                        style="width: 300; height: 100;" alt="브랜드 로고" />
 			</c:otherwise>
 		</c:choose>
 	</div>
@@ -120,7 +128,7 @@ request.setCharacterEncoding("UTF-8");
 	                <div class="bd-placeholder-img card-img-top">
 	                <a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">
 	                    <img
-	                        src="${contextPath}/download?imageFileName=${products.p_imageFileName}"
+	                        src="${contextPath}/thumbnail/download?imageFileName=${products.p_imageFileName}"
 	                        style="width: 50%; height: 225;" alt="상품 이미지" />
 	                </a>
 	                </div>
