@@ -145,4 +145,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.selectSearchProducts(searchMap);
 	}
 	
+	@Override
+	public List<ProductVO> getRankProducts() throws Exception {
+	
+		return productDAO.selectRankProducts();
+	}
+	
 }

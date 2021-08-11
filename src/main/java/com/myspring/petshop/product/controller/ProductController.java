@@ -37,4 +37,5 @@ public interface ProductController {
 			@RequestParam(required = false, defaultValue = "1") int range,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public ModelAndView getRankProducts(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

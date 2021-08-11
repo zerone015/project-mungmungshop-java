@@ -154,4 +154,10 @@ public class ProductDAOImpl implements ProductDAO {
 	   return sqlSession.selectList("mapper.product.selectSearchProducts", searchMap);
 	}
 	
+	@Override
+	public List<ProductVO> selectRankProducts() throws DataAccessException {
+	   
+	   return sqlSession.selectList("mapper.product.selectRankProducts");
+	}
+	
 }

@@ -31,4 +31,5 @@ public interface ProductDAO {
 	public List selectBrandNewRanking(HashMap productInfo) throws DataAccessException;
 	public List selectBrandLowPriceRanking(HashMap productInfo) throws DataAccessException;
 	public List selectBrandHighPriceRanking(HashMap productInfo) throws DataAccessException;
+	public List<ProductVO> selectRankProducts() throws DataAccessException;
 }

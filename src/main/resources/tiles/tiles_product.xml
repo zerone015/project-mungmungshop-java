@@ -53,9 +53,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/product/brandList.jsp" />
 	</definition>
 	
-	<definition name="rankList" extends="baseLayout">
+	<definition name="rankProducts" extends="baseLayout">
 		<put-attribute name="title" value="랭크별 상품 목록 페이지" />
-		<put-attribute name="body" value="/WEB-INF/views/product/rankList.jsp" />
+		<put-attribute name="body" value="/WEB-INF/views/product/rankProducts.jsp" />
 	</definition>
 	
 	<definition name="searchList" extends="baseLayout">

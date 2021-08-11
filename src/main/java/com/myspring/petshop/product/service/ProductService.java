@@ -30,4 +30,5 @@ public interface ProductService {
 	public List getBrandNewRanking(HashMap productInfo) throws Exception;
 	public List getBrandLowPriceRanking(HashMap productInfo) throws Exception;
 	public List getBrandHighPriceRanking(HashMap productInfo) throws Exception;
+	public List<ProductVO> getRankProducts() throws Exception;
 }

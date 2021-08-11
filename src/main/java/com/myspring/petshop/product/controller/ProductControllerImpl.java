@@ -309,6 +309,19 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 	
+	@Override
+	@RequestMapping(value="/product/getRankProducts.do", method = RequestMethod.GET)
+	public ModelAndView getRankProducts(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("rankProducts");
+		
+		List<ProductVO> rankList = productService.getRankProducts();
+		
+		mav.addObject("rankList", rankList);
+		
+		return mav;
+	}
+	
 	
 	private void addProductsInQuick(ProductVO product, String p_code, HttpSession session){
 		boolean already_existed=false;

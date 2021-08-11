@@ -309,7 +309,7 @@
         <li><a href="${contextPath}/board/eventList.do">Event</a></li>
         <li><a href="${contextPath}/product/newProduct.do">신상품</a></li>
         <li><a href="${contextPath}/brandList.do">브랜드</a></li>
-		<li><a href="#">랭킹</a></li>
+		<li><a href="${contextPath}/product/getRankProducts.do">랭킹</a></li>
 		<li><a href="#">할인</a></li>
 		<li><a href="#">고객센터</a>
             <ul class="main2">

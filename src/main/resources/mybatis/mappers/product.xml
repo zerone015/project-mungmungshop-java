@@ -191,4 +191,12 @@
 		select count(*) as listCnt from products 
 		where DATE_SUB(NOW(), INTERVAL 1 MONTH) <![CDATA[<]]> p_date
 	</select>
+	
+	<select id="selectRankProducts" resultType="productVO">
+		select p_code, p_name, p_price, p_loves, p_imageFileName
+		from products
+		order by p_loves DESC
+		LIMIT 0, 15
+	</select>
+	
 </mapper>
