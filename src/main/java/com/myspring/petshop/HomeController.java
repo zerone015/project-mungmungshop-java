@@ -29,6 +29,34 @@ public class HomeController {
 		return "joinWelcome";
 	}
 	
+	@RequestMapping(value = "/findId.do", method = RequestMethod.GET)
+	public String findId(Model model) {
+
+
+		return "findId";
+	}
+
+	@RequestMapping(value = "/findPw.do", method = RequestMethod.GET)
+	public String findPw(Locale locale, Model model) {
+
+
+		return "findPw";
+	}
+
+	@RequestMapping(value = "/resultId.do", method = RequestMethod.GET)
+	public String resultId(Locale locale, Model model) {
+
+
+		return "resultId";
+	}
+
+	@RequestMapping(value = "/joinMember.do", method = RequestMethod.POST)
+	public String joinMember(Locale locale, Model model) {
+
+
+		return "joinMember";
+	}
+	
 	@RequestMapping(value = "/joinAgree.do", method = RequestMethod.GET)
 	public String joinAgree(Locale locale, Model model) {
 		
@@ -41,6 +69,13 @@ public class HomeController {
 	public String findPwResult(Model model) {
 		
 		return "changePwResult";
+	}
+	
+	@RequestMapping(value = "/member/findPwCheck.do", method = RequestMethod.GET)
+	public String findPwCheck(Locale locale, Model model) {
+
+
+		return "findPwCheck";
 	}
 	
 
