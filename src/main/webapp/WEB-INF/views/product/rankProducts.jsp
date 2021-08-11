@@ -42,7 +42,7 @@
             </div>
             <div class="card-body">
               <p style="font-size: 14px;">${item.p_name}</p>
-              <p style="font-size: 14px;"><fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/></p>
+              <p style="font-size: 14px;"><b><fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/></b>원</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                  
