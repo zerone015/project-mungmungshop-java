@@ -22,7 +22,20 @@
 <div class="row">
 	<c:forEach items="${rankList}" var="item" varStatus="status">
         <div class="col-md-4" style="display: inline-block; float: left;">
-        <h3><span class="badge rounded-pill bg-warning text-dark">${status.count}위</span></h3>
+        <c:choose>
+        	<c:when test="${status.count == 1 }">
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #ffd700 !important; color: white !important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
+        	</c:when>
+        	<c:when test="${status.count == 2 }">
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c0c0c0 !important; color: white !important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
+        	</c:when>
+        	<c:when test="${status.count == 3 }">
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c68a12 !important; color: white !Important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
+        	</c:when>
+        	<c:otherwise>
+        		<font style="font-size:18px; font-weight: bold;">${status.count}</font><font style="font-size:14px;">위</font>
+        	</c:otherwise>
+        </c:choose>
           <div class="card mb-4 shadow-sm" style="cursor: pointer;" onclick="location.href='${contextPath}/product/getProduct.do?p_code=${item.p_code}';">
             <div class="bd-placeholder-img card-img-top">
             	<img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"/>
