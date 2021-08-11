@@ -22,7 +22,7 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=ACANA.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=아카나"><img src="${contextPath}/download?imageFileName=ACANA.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
@@ -32,7 +32,7 @@
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=NaturalBalance.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=내츄럴발란스"><img src="${contextPath}/download?imageFileName=NaturalBalance.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 </div>
@@ -40,17 +40,17 @@
 <div class="row">
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=NOW.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=나우"><img src="${contextPath}/download?imageFileName=NOW.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=ORIGEN.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=오리젠"><img src="${contextPath}/download?imageFileName=ORIGEN.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=purinaProplan.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=퓨리나"><img src="${contextPath}/download?imageFileName=purinaProplan.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 
@@ -65,7 +65,7 @@
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">
 <div class="bd-placeholder-img card-img-top">
-            	<a href="#"><img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG" style=" width: 400px;  height: 225;"/></a>
+            	<a href="${contextPath}/product/brandProducts.do?brandName=로얄캐닌"><img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG" style=" width: 400px;  height: 225;"/></a>
 </div>
 </div>
 <div class="col-md-4" style="display: inline-block; float: left;">

@@ -31,6 +31,12 @@
 		LIMIT #{pagination.startList}, #{pagination.listSize}
 	</select>
 	
+	<select id="selectBrandProducts" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		where p_brand = #{brandName}
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
 	<select id="selectProductsCnt" resultType="int" parameterType="productVO">
 		select count(*) as listCnt from products 
 		<choose>
@@ -41,6 +47,11 @@
 				where p_cl1 = #{p_cl1} AND p_cl2 = #{p_cl2}
 			</otherwise>
 		</choose>
+	</select>
+	
+	<select id="selectBrandProductsCnt" resultType="int" parameterType="String">
+		select count(*) as listCnt from products 
+		where p_brand = #{brandName}
 	</select>
 	
 	<select id="selectLoveRanking" resultType="productVO" parameterType="HashMap">
@@ -56,6 +67,12 @@
 		order by p_loves DESC LIMIT #{pagination.startList}, #{pagination.listSize}
 	</select>
 	
+	<select id="selectBrandLoveRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		where p_brand = #{brandName}
+		order by p_loves DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
 	<select id="selectNewRanking" resultType="productVO" parameterType="HashMap">
 		select * from products 
 		<choose>
@@ -66,6 +83,12 @@
 				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
 			</otherwise>
 		</choose>
+		order by p_date DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectBrandNewRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		where p_brand = #{brandName}
 		order by p_date DESC LIMIT #{pagination.startList}, #{pagination.listSize}
 	</select>
 	
@@ -83,6 +106,13 @@
 		
 	</select>
 	
+	<select id="selectBrandLowPriceRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		where p_brand = #{brandName}
+		order by p_price LIMIT #{pagination.startList}, #{pagination.listSize}
+		
+	</select>
+	
 	<select id="selectHighPriceRanking" resultType="productVO" parameterType="HashMap">
 		select * from products 
 		<choose>
@@ -93,6 +123,12 @@
 				where p_cl1 = #{category.p_cl1} AND p_cl2 = #{category.p_cl2} 	
 			</otherwise>
 		</choose>	
+		order by p_price DESC LIMIT #{pagination.startList}, #{pagination.listSize}
+	</select>
+	
+	<select id="selectBrandHighPriceRanking" resultType="productVO" parameterType="HashMap">
+		select * from products 
+		where p_brand = #{brandName}	
 		order by p_price DESC LIMIT #{pagination.startList}, #{pagination.listSize}
 	</select>
 	

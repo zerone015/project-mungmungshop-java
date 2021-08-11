@@ -25,9 +25,21 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public List selectBrandProducts(HashMap productInfo) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.product.selectBrandProducts", productInfo);
+	}
+	
+	@Override
 	public int selectProductsCnt(ProductVO category) throws DataAccessException {
 		
 		return sqlSession.selectOne("mapper.product.selectProductsCnt", category);
+	}
+	
+	@Override
+	public int selectBrandProductsCnt(String brandName) throws DataAccessException {
+		
+		return sqlSession.selectOne("mapper.product.selectBrandProductsCnt", brandName);
 	}
 	
 	@Override
@@ -37,9 +49,21 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public List selectBrandLoveRanking(HashMap productInfo) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.product.selectBrandLoveRanking", productInfo);
+	}
+	
+	@Override
 	public List selectNewRanking(HashMap productInfo) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.product.selectNewRanking", productInfo);
+	}
+	
+	@Override
+	public List selectBrandNewRanking(HashMap productInfo) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.product.selectBrandNewRanking", productInfo);
 	}
 	
 	@Override
@@ -49,9 +73,22 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 	
 	@Override
+	public List selectBrandLowPriceRanking(HashMap productInfo) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.product.selectBrandLowPriceRanking", productInfo);
+	}
+	
+	
+	@Override
 	public List selectHighPriceRanking(HashMap productInfo) throws DataAccessException {
 		
 		return sqlSession.selectList("mapper.product.selectHighPriceRanking", productInfo);
+	}
+	
+	@Override
+	public List selectBrandHighPriceRanking(HashMap productInfo) throws DataAccessException {
+		
+		return sqlSession.selectList("mapper.product.selectBrandHighPriceRanking", productInfo);
 	}
 	
 	@Override

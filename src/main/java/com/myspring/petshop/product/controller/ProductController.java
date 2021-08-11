@@ -22,6 +22,12 @@ public interface ProductController {
 	public ModelAndView getProduct(String p_code, int page, int range, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 	
+	public ModelAndView brandProducts(@RequestParam("brandName") String brandName,
+			@RequestParam(value="sortBy", required=false, defaultValue="default") String sortBy,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView newProduct(String sortBy, int page, int range, HttpServletRequest request,
 			HttpServletResponse response) throws Exception;
 	

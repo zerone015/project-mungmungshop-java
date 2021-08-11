@@ -198,6 +198,65 @@ public class ProductControllerImpl implements ProductController {
 		return mav;
 	}
 	
+	@Override
+	@RequestMapping(value="/product/brandProducts.do", method = RequestMethod.GET)
+	public ModelAndView brandProducts(@RequestParam("brandName") String brandName,
+			@RequestParam(value="sortBy", required=false, defaultValue="default") String sortBy,
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "1") int range,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("brandProducts");
+		
+		int listCnt = productService.brandProductsCnt(brandName);
+		
+		Pagination pagination = new Pagination();
+		pagination.setListSize(9);
+		pagination.pageInfo(page, range, listCnt);
+		
+		HashMap<String, Object> productInfo = new HashMap<String, Object>();
+		productInfo.put("brandName", brandName);
+		productInfo.put("pagination", pagination);
+		
+		List products = null;
+		
+		
+		if(sortBy.equals("default")) {
+			products = productService.getBrandProducts(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("love")) {
+			products = productService.getBrandLoveRanking(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("new")) {
+			products = productService.getBrandNewRanking(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("lowPrice")) {
+			products = productService.getBrandLowPriceRanking(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else if(sortBy.equals("highPrice")) {
+			products = productService.getBrandHighPriceRanking(productInfo);
+			mav.addObject("products", products);
+		}
+		
+		else{
+			mav.setViewName("pageError");
+		}
+	
+		mav.addObject("pagination", pagination);
+		mav.addObject("brandName", brandName);
+		mav.addObject("sortBy", sortBy);
+		
+		return mav;
+	}
+	
 	@ResponseBody
 	@RequestMapping(value="/product/keywordSearch.do",method = RequestMethod.GET,produces = "application/text; charset=utf8")
 	public String  keywordSearch(@RequestParam("keyword") String keyword,

@@ -26,9 +26,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List getBrandProducts(HashMap productInfo) throws Exception {
+		
+		return productDAO.selectBrandProducts(productInfo);
+	}
+	
+	@Override
 	public int productsCnt(ProductVO category) throws Exception {
 		
 		return productDAO.selectProductsCnt(category);
+	}
+	
+	@Override
+	public int brandProductsCnt(String brandName) throws Exception {
+		
+		return productDAO.selectBrandProductsCnt(brandName);
 	}
 	
 	@Override
@@ -38,9 +50,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List getBrandLoveRanking(HashMap productInfo) throws Exception {
+		
+		return productDAO.selectBrandLoveRanking(productInfo);
+	}
+	
+	@Override
 	public List getNewRanking(HashMap productInfo) throws Exception {
 		
 		return productDAO.selectNewRanking(productInfo);
+	}
+	
+	@Override
+	public List getBrandNewRanking(HashMap productInfo) throws Exception {
+		
+		return productDAO.selectBrandNewRanking(productInfo);
 	}
 	
 	@Override
@@ -50,9 +74,21 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 	@Override
+	public List getBrandLowPriceRanking(HashMap productInfo) throws Exception {
+		
+		return productDAO.selectBrandLowPriceRanking(productInfo);
+	}
+	
+	@Override
 	public List getHighPriceRanking(HashMap productInfo) throws Exception {
 		
 		return productDAO.selectHighPriceRanking(productInfo);
+	}
+	
+	@Override
+	public List getBrandHighPriceRanking(HashMap productInfo) throws Exception {
+		
+		return productDAO.selectBrandHighPriceRanking(productInfo);
 	}
 	
 	@Override

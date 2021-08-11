@@ -10,6 +10,7 @@ import com.myspring.petshop.product.vo.ProductVO;
 public interface ProductService {
 	public List getProducts(HashMap productInfo) throws Exception;
 	public int productsCnt(ProductVO category) throws Exception;
+	public int brandProductsCnt(String brandName) throws Exception;
 	public List getLoveRanking(HashMap productInfo) throws Exception;
 	public List getNewRanking(HashMap productInfo) throws Exception;
 	public List getLowPriceRanking(HashMap productInfo) throws Exception;
@@ -24,4 +25,9 @@ public interface ProductService {
 	public List<String> keywordSearch(String keyword) throws Exception;
 	public int getSearchProductsCnt(String searchWord) throws Exception;
 	public List<ProductVO> getSearchProducts(Map<String, Object> searchMap) throws Exception;
+	public List getBrandProducts(HashMap productInfo) throws Exception;
+	public List getBrandLoveRanking(HashMap productInfo) throws Exception;
+	public List getBrandNewRanking(HashMap productInfo) throws Exception;
+	public List getBrandLowPriceRanking(HashMap productInfo) throws Exception;
+	public List getBrandHighPriceRanking(HashMap productInfo) throws Exception;
 }
