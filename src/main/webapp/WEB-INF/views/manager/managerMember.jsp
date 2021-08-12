@@ -39,46 +39,82 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <script>
 
-	//이전 버튼 이벤트
-	function fn_prev(page, range, rangeSize) {
 
-		var page = ((range - 2) * rangeSize) + 1;
-		var range = range - 1;
-
-		
+//이전 버튼 이벤트
+function fn_prev(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var searchBy = "${searchBy}";
+	var searchContents = "${searchContents}";
+	
+	if(searchBy == null){
 		var url = "${contextPath}/manager/getMembersList.do";
 		
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
-
-		location.href = url;
 	}
-
-	//페이지 번호 클릭
-	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-
+	else {
 		var url = "${contextPath}/manager/getMembersList.do";
-
-		url = url + "?page=" + page;
-		url = url + "&range=" + range;
-
-		location.href = url;	
-	}
-
-	//다음 버튼 이벤트
-	function fn_next(page, range, rangeSize) {
-
-		var page = parseInt((range * rangeSize)) + 1;
-		var range = parseInt(range) + 1;
-
 		
-		var url = "${contextPath}/manager/getMembersList.do";
+		url = url + "?searchBy=" + searchBy;
+		url = url + "&searchContents=" + searchContents;
+		
+		url = url + "&page=" + page;
+		url = url + "&range=" + range;
+	}
 
+	location.href = url;		
+}
+
+//페이지 번호 클릭
+function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	var searchBy = "${searchBy}";
+	var searchContents = "${searchContents}";
+	
+	if(searchBy == null){
+		var url = "${contextPath}/manager/getMembersList.do";
+		
 		url = url + "?page=" + page;
 		url = url + "&range=" + range;
-
-		location.href = url;
 	}
+	else {
+		var url = "${contextPath}/manager/getMembersList.do";
+		
+		url = url + "?searchBy=" + searchBy;
+		url = url + "&searchContents=" + searchContents;
+		
+		url = url + "&page=" + page;
+		url = url + "&range=" + range;
+	}
+}
+
+//다음 버튼 이벤트
+function fn_next(page, range, rangeSize) {
+	var searchBy = "${searchBy}";
+	var searchContents = "${searchContents}";
+	
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+
+	if(searchBy == null){
+		var url = "${contextPath}/manager/getMembersList.do";
+		
+		url = url + "?page=" + page;
+		url = url + "&range=" + range;
+	}
+	else {
+		var url = "${contextPath}/manager/getMembersList.do";
+		
+		url = url + "?searchBy=" + searchBy;
+		url = url + "&searchContents=" + searchContents;
+		
+		url = url + "&page=" + page;
+		url = url + "&range=" + range;
+	}
+
+	location.href = url;
+}
 	
 	function member_kickOut(member_num,id) {
 		if(confirm("정말 '"+id+ "' 회원을 회원탈퇴 시키시겠습니까?\n\n"+"확인을 누르면 해당 회원이 강제로 회원탈퇴 됩니다.")){
@@ -226,7 +262,7 @@ request.setCharacterEncoding("UTF-8");
 			<option value="member_email" <c:if test="${searchBy == 'member_email'}">selected</c:if>>이메일</option>
 			<option value="member_phone" <c:if test="${searchBy == 'member_phone'}">selected</c:if>>휴대폰 번호</option>
 		</select>
-		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
+		<input style="width: 300px; height: 35px;" type="text" name="searchContents" value="${searchContents}"/>
 		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
 	</form><br>
 	

@@ -111,6 +111,11 @@ request.setCharacterEncoding("UTF-8");
 			alert("상품 이미지를 첨부해주세요.");
 			return false;
 		}
+		
+		if (form.p_imageFileName2.value == "") {
+			alert("상품 이미지를 첨부해주세요.");
+			return false;
+		}
 
 		if (form.p_cl1.value == "") {
 			alert("1차 분류를 선택해주세요.");
@@ -168,8 +173,12 @@ request.setCharacterEncoding("UTF-8");
 			상품 소개
 			<textarea id="textarea" name="p_description" cols="60" rows="6"></textarea>
 		</p>
-		<input type="file" id="imgUp" name="p_imageFileName" />
+		<input type="file" id="imgUp" name="p_imageFileName"/>
 		<div class="select_img">
+			<img src="" />
+		</div>
+		<input type="file" id="imgUp2" name="p_imageFileName2"/>
+		<div class="select_img2">
 			<img src="" />
 		</div>
 
@@ -180,6 +189,19 @@ request.setCharacterEncoding("UTF-8");
 							var reader = new FileReader;
 							reader.onload = function(data) {
 								$(".select_img img").attr("src",
+										data.target.result).width(200);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+		</script>
+			<script>
+			$("#imgUp2").change(
+					function() {
+						if (this.files && this.files[0]) {
+							var reader = new FileReader;
+							reader.onload = function(data) {
+								$(".select_img2 img").attr("src",
 										data.target.result).width(200);
 							}
 							reader.readAsDataURL(this.files[0]);

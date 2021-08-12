@@ -15,11 +15,13 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/product.css">
 <script src="${contextPath}/resources/js/product.js"></script>
 <script src="${contextPath}/resources/js/graph.js"></script>
 <style type="text/css">
+
 .row {
 	align-items: center;
 }
@@ -191,13 +193,17 @@ function fn_getProductLoves(result) {
 		data : {p_code : '${product.p_code}'},
 		success : function(data, textStatus) {
 			if(result == 0){
-				$("#love_btn").attr('class', 'btn btn-danger');
-				$("#love_btn").css('width', '445px');
+				$("#love_btn").attr('class', 'btn btn-danger'); 
+				$("#love_btn").css('width', '100%');
+				$("#icon_heart").css('color', 'white');
+				$("#love_count").css('color', 'white');
 				$("#love_count").html(data);		
 				
 			}
 			else{
-				$("#love_btn").attr('class', 'btn btn-outline-danger btn-block');
+				$("#love_btn").attr('class', 'btn btn-outline-danger btn-block ');
+				$("#icon_heart").css('color', 'red');
+				$("#love_count").css('color', 'red');
 				$("#love_count").html(data);
 			}
 		},
@@ -210,16 +216,16 @@ function fn_getProductLoves(result) {
 function imagePopup(type) {
 	if (type == 'open') {
 		// 팝업창을 연다.
-		$(this).jQuery('#layer').attr('style', 'visibility:visible');
+		jQuery('#layer').attr('style', 'visibility:visible');
 
 		// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
-		$(this).jQuery('#layer').height(jQuery(document).height());
+		jQuery('#layer').height(jQuery(document).height());
 	}
 
 	else if (type == 'close') {
 
 		// 팝업창을 닫는다.
-		$(this).jQuery('#layer').attr('style', 'visibility:hidden');
+		jQuery('#layer').attr('style', 'visibility:hidden');
 	}
 }
 
@@ -282,9 +288,9 @@ function imagePopup(type) {
 	  <div  style="margin-top: 50;">
 	  <c:choose>
 	  	<c:when test="${loveCnt == 1}">
-	  		<p><button type="button" id="love_btn" class="btn btn-danger" style="height: 60px; width: 445px;" onclick="fn_modLove();"><i id="icon_heart" class="far fa-heart" style="font-size: 22px;"></i><br><font id="love_count">${product.p_loves}</font></button></p>
+	  		<p><button type="button" id="love_btn" class="btn btn-danger" style="height: 60px; width:100%;" onclick="fn_modLove();"><i id="icon_heart" class="far fa-heart" style="font-size: 22px; color: white;"></i><br><font id="love_count" style="color: white;">${product.p_loves}</font></button></p>
 	  	</c:when>
-	  	<c:otherwise>
+	  	<c:otherwise> 
 	  		<p><button type="button" id="love_btn" class="btn btn-outline-danger btn-block" style="height: 60px;" onclick="fn_modLove();"><i id="icon_heart" class="far fa-heart" style="font-size: 22px;"></i><br><font id="love_count">${product.p_loves}</font></button></p>
 	  	</c:otherwise>
 	  </c:choose>
@@ -319,6 +325,9 @@ function imagePopup(type) {
 	  	</nav>
 
 <div class="container">
+  	<div>
+  		<img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}"/>
+  	</div>
   	<div id="section1" style="padding: 100 0 100 0; border-bottom: 1px solid #CCCCCC ">
   		${product.p_description}
   	</div>

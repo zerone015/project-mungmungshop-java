@@ -160,7 +160,7 @@ request.setCharacterEncoding("UTF-8");
 			<option value="order_code" <c:if test="${searchBy == 'order_code'}">selected</c:if>>주문 번호</option>
 			<option value="member_phone" <c:if test="${searchBy == 'member_phone'}">selected</c:if>>휴대폰 번호</option>
 		</select>
-		<input style="width: 300px; height: 35px;" type="text" name="searchContents"/>
+		<input style="width: 300px; height: 35px;" type="text" name="searchContents" value="${searchContents}"/>
 		<input style="margin-bottom: 5px; height: 35px;" class="btn btn-primary btn-sm" type="submit" value="검색"/>
 	</form> <br>
 	<!-- pagination{s} -->

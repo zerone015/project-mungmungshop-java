@@ -8,8 +8,8 @@
 	
 	<insert id="insertProduct" parameterType="java.util.Map">
 		<![CDATA[ 
-			insert into products(p_code,p_cl1, p_cl2, p_brand, p_name, p_price, p_stock, p_imageFileName, p_description, p_date, p_loves, p_origin)
-			values(default, #{p_cl1}, #{p_cl2}, #{p_brand}, #{p_name}, #{p_price}, #{p_stock}, #{p_imageFileName}, #{p_description}, default, default, #{p_origin})
+			insert into products(p_code,p_cl1, p_cl2, p_brand, p_name, p_price, p_stock, p_imageFileName, p_imageFileName2, p_description, p_date, p_loves, p_origin)
+			values(default, #{p_cl1}, #{p_cl2}, #{p_brand}, #{p_name}, #{p_price}, #{p_stock}, #{p_imageFileName}, #{p_imageFileName2}, #{p_description}, default, default, #{p_origin})
 		]]>
 	</insert>
 	
@@ -40,7 +40,7 @@
 	<update id="updateProduct" parameterType="java.util.Map">
 		<![CDATA[ 
 			update products set p_cl1=#{p_cl1}, p_cl2=#{p_cl2}, p_brand=#{p_brand}, p_name=#{p_name}, p_price=#{p_price},
-			 p_stock=#{p_stock}, p_imageFileName=#{p_imageFileName}, p_description=#{p_description}, p_date=current_timestamp, p_origin=#{p_origin}
+			 p_stock=#{p_stock}, p_imageFileName=#{p_imageFileName}, p_imageFileName2=#{p_imageFileName2}, p_description=#{p_description}, p_date=current_timestamp, p_origin=#{p_origin}
 			 where p_code = #{p_code}
 		]]>
 	</update>

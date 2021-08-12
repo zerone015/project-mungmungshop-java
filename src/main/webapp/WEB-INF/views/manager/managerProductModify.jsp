@@ -113,6 +113,11 @@ request.setCharacterEncoding("UTF-8");
 			alert("상품 이미지를 첨부해주세요.");
 			return false;
 		}
+		
+		if (form.p_imageFileName2.value == "") {
+			alert("상품 이미지를 첨부해주세요.");
+			return false;
+		}
 
 		if (form.p_cl1.value == "") {
 			alert("1차 분류를 선택해주세요.");
@@ -136,6 +141,7 @@ request.setCharacterEncoding("UTF-8");
 	<br>
 	<br>
 	<form name="productModify" method="POST" action="${contextPath}/manager/modifyProduct.do" enctype="multipart/form-data">
+	<input type="hidden" name="p_code" value="${product.p_code}"/>
 		<span>1차 분류</span>&nbsp; <span><select class="form-select"
 			onchange="categoryChange(this)" name="p_cl1">
 				<option value=""> </option>
@@ -170,9 +176,12 @@ request.setCharacterEncoding("UTF-8");
 			상품 소개
 			<textarea id="textarea" name="p_description" cols="60" rows="6">${product.p_description}</textarea>
 		</p>
-		<input type="file" id="imgUp" name="p_imageFileName" value="${product.p_imageFileName}" />
-		<input type="hidden" name="p_code" value="${product.p_code}">
+		<input type="file" id="imgUp" name="p_imageFileName"/>
 		<div class="select_img">
+			<img src="" />
+		</div>
+		<input type="file" id="imgUp2" name="p_imageFileName2"/>
+		<div class="select_img2">
 			<img src="" />
 		</div>
 
@@ -183,6 +192,19 @@ request.setCharacterEncoding("UTF-8");
 							var reader = new FileReader;
 							reader.onload = function(data) {
 								$(".select_img img").attr("src",
+										data.target.result).width(200);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+		</script>
+			<script>
+			$("#imgUp2").change(
+					function() {
+						if (this.files && this.files[0]) {
+							var reader = new FileReader;
+							reader.onload = function(data) {
+								$(".select_img2 img").attr("src",
 										data.target.result).width(200);
 							}
 							reader.readAsDataURL(this.files[0]);

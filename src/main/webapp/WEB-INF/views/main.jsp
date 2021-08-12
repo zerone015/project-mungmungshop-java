@@ -60,7 +60,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 슬라이드 쇼 --> 
 			<div class="carousel-item active"> 
 				<!--가로--> 
-				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide4.png" alt="First slide"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide"> 
 			</div> 
 			<div class="carousel-item"> 
 				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide"> 

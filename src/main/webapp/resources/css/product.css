@@ -38,7 +38,6 @@
 	width: none!important;
 	object-fit: contain;
 }
-
 #layer {
 	z-index: 2;
 	position: absolute;
@@ -87,7 +86,9 @@ summary {
 
 
 
-
+#icon_heart, #love_count {
+	color: red;
+}
 
 
 

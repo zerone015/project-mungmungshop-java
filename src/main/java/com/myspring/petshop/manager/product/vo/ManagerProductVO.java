@@ -15,6 +15,7 @@ public class ManagerProductVO{
 	private int p_salePrice;
 	private int p_stock;
 	private String p_imageFileName;
+	private String p_imageFileName2;
 	private String p_description;
 	private Timestamp p_date;
 	private int p_loves;
@@ -93,6 +94,14 @@ public class ManagerProductVO{
 	
 	public void setP_imageFileName(String p_imageFileName) {
 		this.p_imageFileName = p_imageFileName;
+	}
+	
+	public String getP_imageFileName2() {
+		return p_imageFileName2;
+	}
+	
+	public void setP_imageFileName2(String p_imageFileName2) {
+		this.p_imageFileName2 = p_imageFileName2;
 	}
 	
 	public String getP_description() {

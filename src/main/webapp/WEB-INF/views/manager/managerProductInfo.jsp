@@ -34,6 +34,9 @@ request.setCharacterEncoding("UTF-8");
 </h1>
 </div>	
 	<br>
+<div style="margin-left: 900px;">
+	<button type="button" class="btn btn-info" onClick="javascript:location.href='${contextPath}/product/getProduct.do?p_code=${product.p_code}';">상품으로 이동</button>
+</div>
 	<br>
 	<form name="productInfo" method="GET" action="#">
 		<table align="center">
@@ -93,12 +96,18 @@ request.setCharacterEncoding("UTF-8");
 		<tr>
 			<td><img src="${contextPath}/thumbnail/download?imageFileName=${product.p_imageFileName}" alt="상품 이미지"></td>
 		</tr>
+		<tr>
+			<td><b style="color:blue;">상세 이미지</b></td>
+		</tr>
+		<tr>
+			<td><img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}" style="width: 30%;" alt="상세 이미지"></td>
+		</tr>
 		</table>
 		<br><br>
 		<div align="center">
-			<button type="button" class="btn btn-primary"
+			<button type="button" class="btn btn-primary btn-lg"
 				onclick="location.href='${contextPath}/manager/managerProductModify.do?p_code=${product.p_code}'">수정</button>
-			<button type="button" class="btn btn-danger" onclick="fn_delete()">삭제</button>
+			<button type="button" class="btn btn-danger btn-lg" onclick="fn_delete()">삭제</button>
 		</div><br>
 		<div align="center">
 			<button type="button" class="btn btn-outline-primary btn-lg" onClick="location.href='${contextPath}/manager/managerProduct.do'">목록으로</button>

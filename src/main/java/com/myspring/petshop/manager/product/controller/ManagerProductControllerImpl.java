@@ -1,6 +1,7 @@
 package com.myspring.petshop.manager.product.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -48,8 +49,11 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 			System.out.println(name+value);
 		}
 		
-		String p_imageFileName = upload(multipartRequest);
+		List fileList = upload(multipartRequest);
+		String p_imageFileName = (String) fileList.get(0);
+		String p_imageFileName2 = (String) fileList.get(1);
 		map.put("p_imageFileName", p_imageFileName);
+		map.put("p_imageFileName2", p_imageFileName2);
 		managerService.addProduct(map);
 		
 		ModelAndView mav = new ModelAndView("redirect:/manager/managerProduct.do");
@@ -121,9 +125,12 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 			map.put(name, value);
 			System.out.println(name+value);
 		}
-		String p_imageFileName = upload(multipartRequest);
-		map.put("p_imageFileName", p_imageFileName);
 		
+		List fileList = upload(multipartRequest);
+		String p_imageFileName = (String) fileList.get(0);
+		String p_imageFileName2 = (String) fileList.get(1);
+		map.put("p_imageFileName", p_imageFileName);
+		map.put("p_imageFileName2", p_imageFileName2);
 		String p_code = multipartRequest.getParameter("p_code");
 		
 		String message;
@@ -206,13 +213,14 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 		return mav;
 	}
 	
-	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
-		String imageFileName = null;
+	private List<String> upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		List<String> fileList= new ArrayList<String>();
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		while (fileNames.hasNext()) {
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
-			imageFileName = mFile.getOriginalFilename();//
+			String imageFileName=mFile.getOriginalFilename();
+			fileList.add(imageFileName);
 			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);
 			if (mFile.getSize() != 0) {
 				if (!file.exists()) {
@@ -223,7 +231,7 @@ public class ManagerProductControllerImpl implements ManagerProductController {
 					}
 				}
 			}
-		return imageFileName;
+		return fileList;
 		}
 	
 }
