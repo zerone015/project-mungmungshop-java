@@ -93,15 +93,18 @@ request.setCharacterEncoding("UTF-8");
 		<div class="container">
 			<div class="col">
 				<!-- 신상품 목록 -->
-				<div class="row">
-					<h3 style="margin: 0; margin-right: 950px;">신상품</h3>
-					<a href="${contextPath}/product/newProduct.do" style="float: right; margin: auto;">+ 더보기</a>
+				<div class="row title" >
+					<div style="margin-right: 880;">
+						<font style="font-size: 30px; ">신상품</font>
+					</div>
+					<div>
+						<a href="${contextPath}/product/newProduct.do">+ 더보기</a>
+					</div>
 				</div>
-				<hr width="100%">
-				<div class="row">
+				<div class="row" >
 					<c:forEach items="${newProductList}" var="item">
 						<div class="product">
-							<div class="bd-placeholder-img card-img-top">
+							<div class="bd-placeholder-img card-img-top" style="position: relative;">
 								<a
 									href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
 									<img
@@ -110,61 +113,79 @@ request.setCharacterEncoding("UTF-8");
 								</a>
 							</div>
 							<div class="card-body">
-								<p style="font-size: 14px;">${item.p_name}</p>
-								<p style="font-size: 14px;">
-									<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
-									원
-								</p>
-								<div class="d-flex justify-content-between align-items-center">
-									<div class="btn-group"></div>
-									<p style="color: red;">♥ ${item.p_loves}</p>
+								<p style="font-size: 14px;"><font class="badge badge-danger" style="font-size: 14px;">new </font>&nbsp;&nbsp;${item.p_name}</p>
+								<div class="productInfo">
+									<div>
+									<p style="font-size: 14px;">
+										<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
+										원 
+									</p>
 								</div>
+									<div>
+									<font style="color: red;">♥ ${item.p_loves}</font>
+									</div>
+								</div>
+								
+									
+
+							</div>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			
+			<div class="col">
+			<!-- 랭킹 목록 -->
+				<div class="row title" >
+					<div style="margin-right: 880;">
+						<font style="font-size: 30px; ">랭킹</font>
+					</div>
+					<div>
+						<a href="${contextPath}/product/rankProduct.do">+ 더보기</a>
+					</div>
+				</div>
+				
+				<div class="row">
+					<c:forEach items="${rankProductList}" var="item" varStatus="status">
+						<div class="product">
+							<div class="bd-placeholder-img card-img-top" style="position: relative;">
+								<a
+									href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
+									<img
+									src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
+									style="width: 50%; height: 225;" alt="상품 이미지" />
+								</a>
+								<p class="rank">${status.count}</p>
+							</div>
+							<div class="card-body">
+								<p style="font-size: 14px;">${item.p_name}</p>
+								<div class="productInfo">
+										<div>
+										<p style="font-size: 14px;">
+											<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
+											원 
+										</p>
+									</div>
+										<div>
+										<font style="color: red;">♥ ${item.p_loves}</font>
+										</div>
+									</div>
 							</div>
 						</div>
 					</c:forEach>
 				</div>
 			</div>
 
-			<!-- 랭킹 목록 -->
-			<div class="row">
-				<h3 style="margin: 0; margin-right: 950px;">랭킹</h3>
-				<a href="#" style="float: right; margin: auto;">+ 더보기</a>
+			<!-- 브랜드 목록 -->
+			<div class="row title" >
+				<div style="margin-right: 880;">
+					<font style="font-size: 30px; ">브랜드</font>
+				</div>
+				<div>
+					<a href="${contextPath}/product/rankProduct.do">+ 더보기</a>
+				</div>
 			</div>
-			<hr width="100%">
-			<div class="row">
-				<c:forEach items="${rankProductList}" var="item" varStatus="status">
-					<div class="product">
-						<div class="bd-placeholder-img card-img-top" style="position: relative;">
-							<a
-								href="${contextPath}/product/getProduct.do?p_code=${item.p_code}">
-								<img
-								src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
-								style="width: 50%; height: 225;" alt="상품 이미지" />
-							</a>
-							<p class="rank">${status.count}</p>
-						</div>
-						<div class="card-body">
-							<p style="font-size: 14px;">${item.p_name}</p>
-							<p style="font-size: 14px;">
-								<fmt:formatNumber value="${item.p_price}" pattern="###,###,###" />
-								원
-							</p>
-							<div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group"></div>
-								<p style="color: red;">♥ ${item.p_loves}</p>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-		
-
-		<!-- 브랜드 목록 -->
-			<div class="row">
-				<h3 style="margin: 0; margin-right: 950px;">브랜드</h3>
-				<a href="#" style="float: right; margin: auto;">+ 더보기</a>
-			</div>
-			<hr width="100%">
+			
 
 			<div style="text-align: center;">
 				<div class="col-md-4" style="display: inline-block; float: left;">
