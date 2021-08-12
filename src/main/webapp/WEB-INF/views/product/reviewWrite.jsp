@@ -33,7 +33,7 @@ function checkReview() {
  	var formData = new FormData(formm[0]);
 
 	$.ajax({
-		url : "${contextPath}/reviewMod.do",
+		url : "${contextPath}/reviewWrite.do",
 		type : "POST",
 	 	enctype: 'multipart/form-data',
 	 	dataType:'json',
