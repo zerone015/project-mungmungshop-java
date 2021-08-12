@@ -32,6 +32,11 @@ function delReview(){
   	<h3>상품 후기</h3>
 	<hr>
 	<!-- 후기 목록 -->
+	<c:if test="${reviewList.size() == 0 }">
+		<div style="margin-top: 300px;">
+			<h3>작성한 후기가 없습니다.</h3>
+		</div>	
+	</c:if>
 	<div style="margin-top: 10; ">
 		<c:forEach items="${reviewList}" var="reviewVO">		
 		<div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
@@ -40,7 +45,8 @@ function delReview(){
 	      	  <img class="reviewImage"src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}"/>
 	      	</div>
 	      	<div class="titleDiv">
-	          <strong>${reviewVO.review_title}</strong>
+	          <strong>${reviewVO.review_title}</strong><br>
+	          ${reviewVO.review_content}
 	        </div>
 	        <div class="dateDiv">
 	          <font><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></font>

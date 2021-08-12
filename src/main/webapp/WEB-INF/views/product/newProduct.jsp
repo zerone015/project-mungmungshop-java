@@ -84,7 +84,7 @@
 	<hr width="100%">
 	<c:if test="${products.size() == 0}">
 		<div style="margin-top: 300px;">
-			<h3><b>신상품이 없습니다.</b></h3>
+			<h3>신상품이 없습니다.</h3>
 		</div>	
 	</c:if>
 	<div class="col">

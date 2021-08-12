@@ -77,7 +77,7 @@ request.setCharacterEncoding("UTF-8");
 			<div class="row" >
 			<c:if test="${quickProductsList == null}">
 				<div style="margin-top: 300px;">
-					<h3><b>최근 본 상품이 없습니다.</b></h3>
+					<h3>최근 본 상품이 없습니다.</h3>
 				</div>	
 			</c:if>
 			<c:forEach items="${quickProductsList}" var="item">

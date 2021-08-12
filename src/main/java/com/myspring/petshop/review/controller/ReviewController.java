@@ -20,7 +20,7 @@ public interface ReviewController {
 	public ModelAndView reviewWriteForm(String p_code, HttpServletRequest request, HttpServletResponse response)
 			throws Exception;
 
-	public String reviewWrite(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	public int reviewWrite(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception;
 
 	public ModelAndView reviewModForm(int review_num, HttpServletRequest request, HttpServletResponse response)

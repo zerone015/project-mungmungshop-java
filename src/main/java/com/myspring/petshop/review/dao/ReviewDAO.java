@@ -10,7 +10,7 @@ import com.myspring.petshop.review.vo.ReviewVO;
 public interface ReviewDAO {
 
 	public int selectReviewCnt(String p_code) throws DataAccessException;
-
+	public int selectReviewCnt2(Map<String, Object> map) throws DataAccessException;
 	public List selectAllReviewList(Map<String, Object> info) throws DataAccessException;
 
 	public int selectMyReviewCnt() throws DataAccessException;

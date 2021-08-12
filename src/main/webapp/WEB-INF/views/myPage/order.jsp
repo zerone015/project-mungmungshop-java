@@ -3,9 +3,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-<%
-request.setCharacterEncoding("UTF-8");
-%>
+<c:set var="result" value="${param.result}"/>	
+<c:if test="${result=='reviewFailed'}">
+		<script>
+			window.onload = function() {
+				alert("이미 해당 상품의 후기를 작성하셨습니다.");
+			}
+		</script>
+	</c:if>
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -165,9 +170,6 @@ request.setCharacterEncoding("UTF-8");
 				<td>${item.order_status}</td>
 				<td>
 					<div class="col">
-						<c:if test="${item.order_status eq '배송완료' }">
-							<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
-						</c:if>
 						<c:if test="${item.order_status eq '결제완료' || item.order_status eq '배송준비중' || item.order_status eq '배송완료' }">
 							<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
 						</c:if>
@@ -179,8 +181,7 @@ request.setCharacterEncoding("UTF-8");
 					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
 					<input type="hidden" name="order_quantity" value="${item.order_quantity}" disabled/>
 					<input type="hidden" name="p_price" value="${item.p_price}" disabled/>
-				</td>
-						
+				</td>						
 			</tr>
 		</c:forEach>
 		</tbody>

@@ -20,6 +20,12 @@ function checkReview() {
 	
 	var form=document.reviewModForm;
 	
+	if (form.review_title.value == ""){
+		alert("제목을 입력해주세요.");
+		form.review_title.focus();
+		return false;
+	} 
+	
 	if (form.review_title.value.length > 45) {
 		alert("제목은 45자까지만 입력 가능합니다.");
 		form.review_title.focus();
@@ -38,7 +44,10 @@ function checkReview() {
 		return false;
 	}
 	
-	
+	if (form.review_imageFileName.value == "") {
+		alert("수령하신 상품의 이미지를 첨부해주셔야 합니다.");
+		return false;
+	} 
 	
 	var formm = $('#reviewModForm');
  	var formData = new FormData(formm[0]);
@@ -53,7 +62,6 @@ function checkReview() {
 	    cache:false,
 		data : formData,
 		success: function(jdata){
-			var p_code = '${product.p_code}';
 			window.opener.name="reviewList"; 
 			document.reviewModForm.target="reviewList"; 
 			self.close(); 

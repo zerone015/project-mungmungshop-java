@@ -38,6 +38,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public int myReviewCnt() throws DataAccessException {
 		return reviewDAO.selectMyReviewCnt();
 	}
+	
+	@Override
+	public int getReviewCnt(Map<String, Object> map) throws DataAccessException {
+		return reviewDAO.selectReviewCnt2(map);
+	}
 
 	@Override
 	public List listMyReview(Map<String, Object> info) throws DataAccessException {

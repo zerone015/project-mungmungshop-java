@@ -26,8 +26,14 @@
 
 	</select> 
 	
+	<select id="selectReviewCnt2" resultType="int" parameterType="java.util.Map">					
+
+		select count(*) as listCnt from reviews where member_nick = #{member_nick} AND p_code = #{p_code}
+
+	</select> 
+	
 	<!-- 게시글 개수 -->
-	<select id="selectMyReviewCnt" resultType="int">
+	<select id="selectMyReviewCnt" resultType="int">					
 
 		select count(*) as listCnt from reviews where member_nick = #{member_nick}
 

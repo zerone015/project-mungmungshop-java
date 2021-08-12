@@ -30,6 +30,11 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int selectMyReviewCnt() throws DataAccessException {
 		return sqlSession.selectOne("mapper.review.selectMyReviewCnt");
 	}
+	
+	@Override
+	public int selectReviewCnt2(Map<String, Object> map) throws DataAccessException {
+		return sqlSession.selectOne("mapper.review.selectReviewCnt2", map);
+	}
 
 	@Override
 	public List selectMyReviewList(Map<String, Object> info) throws DataAccessException {
