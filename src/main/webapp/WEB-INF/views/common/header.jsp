@@ -11,7 +11,9 @@
 	<title>상단부</title>
 </head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="${contextPath}/resources/css/header.css" >
 <link rel="stylesheet" href="${contextPath}/resources/css/main.css" >
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"/>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function enterSearch() {
@@ -58,7 +60,7 @@
 		if(count > 0) {
 		    var html = '';
 		    for(var i in jsonInfo.keyword){
-			   html += "<a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a><br/>";
+			   html += "<li><a href=\"javascript:select('"+jsonInfo.keyword[i]+"')\">"+jsonInfo.keyword[i]+"</a></li>";
 		    }
 		    var listView = document.getElementById("suggestList");
 		    listView.innerHTML = html;
@@ -90,110 +92,25 @@
 
 </script>
 <style>
-	* {
-		list-style: none;
-	}
-	a {
-		text-decoration: none!important;
-		color: #57523E!important;
-	}
-	#menu {
-	    height: 50px;
-	    background: #fcc;
-	    text-align: center;
-	}
-	.main1 {
-	    height: 100%;
-	    width: 1000px;
-	    margin: 0 auto;
-	    display: inline-block;
-	}
-	.main1>li {
-	    float: left;
-	    width: 13%;
-	    line-height: 50px;
-	    position: relative;
-	}
-	.main1>li:hover .main2 {
-	    left: 0;
-	}
-	.main1>li a {
-	    display: block;
-	}
-	.main1>li a:hover {
-	    background: #f6efef;
-	    font-weight: bold;
-	}
-	.main2 {
-	    position: absolute;
-	    top: 50px;
-	    left: -9999px;
-	    background: #eddede;
-	    width: 100%;
-	    padding: 0px;
-	}
-	.main2>li {
-	    position: relative;
-	}
-	.main2>li:hover .main3 {
-	    left: 100%;
-	}
-	.main2>li a, .main3>li a {
-	    border-radius: 10px;
-	    margin: 10px;
-	}
-	.main3 {
-	    position: absolute;
-	    top: 0;
-	    background: #dbbdbd;
-	    width: 100%;
-	    left: -9999px;
-	    padding: 0px;
-	    /*left: 100%;*/
-	    /*display: none;*/
-	}
-	.main3>li a:hover {
-	    background: #eddede;
-	    color: #fff;
-	}
-	nav {
-		margin-top: 20px;
-	}
-	.divider {
-		margin-left: 10;
-		margin-right: 10;
-		color: #eddede;
-	}
 	
-	.rightMenu:hover {
-		text-align: center;
-		font-weight: bold;
-	}
-	
-	#suggest{
-		display:none; position: absolute;  top:90px; border: 0.1px  solid #87cb42; 
-		z-index:100; font-weight: bold; background-color:#ffffff; width:350;
-	}
-	
-	#suggest a {
-		padding: 5 0 5 0;
-	}
 </style>
 <div id="header">
 
 <header class="blog-header py-3">
 	<div class="container">
-		<div class="row flex-nowrap justify-content-around align-items-center" style="width: 1200px;">
+		<div class="row flex-nowrap justify-content-around align-items-center" style="width: 1080px; margin: 0 auto;">
 			<!-- 상단 로고 -->
 			<div style="margin : 0;">
 				<a class="blog-header-logo text-dark" href="${contextPath}/main.do"><img src="${contextPath}/download?imageFileName=logo.png" style="width: 200; height: 80;" alt="이미지"></a>
 			</div>
 			
 			<!-- 검색창 -->
-			<div class="row">
+			<div class="row search">
 			<form name="frmSearch" action="${contextPath}/product/searchProducts.do">
-				<input class="form-control" name="searchWord" type="text" onKeyUp="keywordSearch()" placeholder="Search" aria-label="Search" style="width: 350px; height: 50px; display: inline-block;">
-				<input class=" btn btn-outline-success " type="submit" style="text-align: left; margin-left: 5;" value="Search">
+				<div class="searchForm">
+					<input class="form-control searchBar" name="searchWord" type="text" onKeyUp="keywordSearch()" placeholder="Search" aria-label="Search"/>
+					<button class="btn btn-outline-success searchBtn" type="submit"  ><i class="fa fa-search" aria-hidden="true"></i></button>
+				</div>
 				<div id="suggest">
 			      	<div id="suggestList"></div>
 				</div>

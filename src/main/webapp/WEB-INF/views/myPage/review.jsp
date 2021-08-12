@@ -20,7 +20,7 @@ function checkReview() {
 	
 	var form=document.reviewModForm;
 	
-	if (form.review_title.value.length < 45) {
+	if (form.review_title.value.length > 45) {
 		alert("제목은 45자까지만 입력 가능합니다.");
 		form.review_title.focus();
 		return false;

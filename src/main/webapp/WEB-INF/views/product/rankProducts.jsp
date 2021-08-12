@@ -15,22 +15,24 @@
 <title>랭킹순 목록</title>
 </head>
 <body>
+<div class="container">
 <div align="left">
 <h2 class="display-5 fw-bold">랭킹</h2>
 </div>
 <hr width="100%">
+
 <div class="row">
 	<c:forEach items="${rankList}" var="item" varStatus="status">
         <div class="col-md-4" style="display: inline-block; float: left;">
         <c:choose>
         	<c:when test="${status.count == 1 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #ffd700 !important; color: white !important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #ffd700 !important; color: white !important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
         	</c:when>
         	<c:when test="${status.count == 2 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c0c0c0 !important; color: white !important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c0c0c0 !important; color: white !important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
         	</c:when>
         	<c:when test="${status.count == 3 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c68a12 !important; color: white !Important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c68a12 !important; color: white !Important;"><font style="font-size:18px;">${status.count}</font><font style="font-size:14px;">위</font></span></h3>
         	</c:when>
         	<c:otherwise>
         		<font style="font-size:18px; font-weight: bold;">${status.count}</font><font style="font-size:14px;">위</font>
@@ -54,5 +56,6 @@
         </div>
     </c:forEach>
 	  </div>
+</div>
 </body>
 </html>
