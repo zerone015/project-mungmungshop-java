@@ -11,23 +11,21 @@ request.setCharacterEncoding("UTF-8");
 <head>
 <meta charset="utf-8">
 <title>뭉뭉샵</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript">
-//배너 기본 5초
-	 $('.carousel').carousel({ 
-		 interval: 2000
-	 })
-
-</script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" ></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <style> 
-	.carousel-inner{
-		width: 1200!important;
+	.carousel {
+		width: 1080;
+		margin-bottom: 100;
 	}
-	.carousel-inner > .carousel-item > img { 
-	width: 1200!important; height: 500px;
-	} 
+	
+	.slideImg {
+		width: 1080;
+		height: 600;
+	}
+	
+	
 	.rank {
 	color:red; 
 	position: absolute; 
@@ -52,44 +50,44 @@ request.setCharacterEncoding("UTF-8");
 </head>
 <body>
 	<!-- 배너 -->
-
-	<section>
-	   <div class="container" style="z-index: 0;"> 
-	      	<div id="demo" class="carousel slide" data-ride="carousel" style="text-align: center; margin-left: -35;">
-		      	<div class="carousel-inner" style="display: inline;"> 
-		      		<!-- 슬라이드 쇼 --> 
-		      		<div class="carousel-item active"> 
-		      			<!--가로--> 
-		      			<img class="d-block" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide" >
-		      		</div> 
-		      		<div class="carousel-item"> 
-		      			<img class="d-block " src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide" > 
-		      		</div> 
-		      		<div class="carousel-item"> 
-		      			<img class="d-block " src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
-		      		</div> 
-		      		<!-- / 슬라이드 쇼 끝 --> 
-		      		<!-- 왼쪽 오른쪽 화살표 버튼 --> 
-		      		<a class="carousel-control-prev" href="#demo" data-slide="prev"> 
-			      		<span class="carousel-control-prev-icon" aria-hidden="true">
-			      		</span> <!-- <span>Previous</span> --> 
-		      		</a> 
-		      		<a class="carousel-control-next" href="#demo" data-slide="next"> 
-		      			<span class="carousel-control-next-icon" aria-hidden="true"></span> 
-		      			<!-- <span>Next</span> --> 
-		      		</a> 
-		      		<!-- / 화살표 버튼 끝 --> 
-		      		<!-- 인디케이터 --> 
-		      		<ul class="carousel-indicators"> 
-		      			<li data-target="#demo" data-slide-to="0" class="active"></li> <!--0번부터시작--> 
-		      			<li data-target="#demo" data-slide-to="1"></li> 
-		      			<li data-target="#demo" data-slide-to="2"></li> 
-		      		</ul> <!-- 인디케이터 끝 --> 
-		      	</div>
-		     </div>
-			 </div>
-	</section>
-
+	<script>
+		$('.carousel').carousel({ 
+			interval: 2000 //기본 5초 
+		}) 
+	</script>
+	<div id="demo" class="carousel slide" data-ride="carousel"> 
+		<div class="carousel-inner"> 
+		<!-- 슬라이드 쇼 --> 
+			<div class="carousel-item active"> 
+				<!--가로--> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide4.png" alt="First slide"> 
+			</div> 
+			<div class="carousel-item"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide"> 
+			</div> 
+			<div class="carousel-item"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
+			</div> 
+			<!-- / 슬라이드 쇼 끝 --> 
+			<!-- 왼쪽 오른쪽 화살표 버튼 --> 
+			<a class="carousel-control-prev" href="#demo" data-slide="prev"> 
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span> 
+				<!-- <span>Previous</span> --> 
+			</a> 
+			<a class="carousel-control-next" href="#demo" data-slide="next"> 
+				<span class="carousel-control-next-icon" aria-hidden="true"></span> 
+				<!-- <span>Next</span> --> 
+			</a> 
+			<!-- / 화살표 버튼 끝 --> 
+			<!-- 인디케이터 --> 
+			<ul class="carousel-indicators"> 
+				<li data-target="#demo" data-slide-to="0" class="active"></li> 
+				<!--0번부터시작--> 
+				<li data-target="#demo" data-slide-to="1"></li> 
+				<li data-target="#demo" data-slide-to="2"></li> 
+			</ul> <!-- 인디케이터 끝 --> 
+		</div>
+	</div>
 	<!-- 목록 -->
 	<div style="margin-top: 20;">
 		<div class="container">

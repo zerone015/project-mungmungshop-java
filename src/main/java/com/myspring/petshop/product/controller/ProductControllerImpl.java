@@ -114,11 +114,21 @@ public class ProductControllerImpl implements ProductController {
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
 		
-		int listCnt = reviewService.reviewCnt();
+		int listCnt = reviewService.reviewCnt(p_code);
 		
 		Pagination pagination = new Pagination();
 		pagination.setListSize(10);
 		pagination.pageInfo(page, range, listCnt);
+		
+		int fiveCnt = 0, fourCnt = 0, threeCnt = 0, twoCnt = 0, oneCnt = 0;
+
+		if(listCnt != 0) {
+			fiveCnt = reviewService.fiveReview(p_code);
+			fourCnt = reviewService.fourReview(p_code);
+			threeCnt = reviewService.threeReview(p_code);
+			twoCnt = reviewService.twoReview(p_code);
+			oneCnt = reviewService.oneReview(p_code);
+		}
 		
 		Map<String, Object> info = new HashMap<String, Object>();
 		
@@ -129,6 +139,14 @@ public class ProductControllerImpl implements ProductController {
 
 		mav.addObject("reviewList", reviewList);
 		mav.addObject("info", info);
+		
+		mav.addObject("fiveCnt", fiveCnt);
+		mav.addObject("fourCnt", fourCnt);
+		mav.addObject("threeCnt", threeCnt);
+		mav.addObject("twoCnt", twoCnt);
+		mav.addObject("oneCnt", oneCnt);
+
+		mav.addObject("listCnt", listCnt);
 		
 		if(memberVO != null) {
 			int member_num = memberVO.getMember_num();

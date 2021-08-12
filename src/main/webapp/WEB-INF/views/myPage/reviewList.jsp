@@ -9,11 +9,14 @@ pageEncoding="utf-8" isELIgnored="false" %>
 <meta charset="utf-8">
 <title>뭉뭉샵</title>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css" integrity="undefined" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
+<link rel="stylesheet" href="${contextPath}/resources/css/reviewList.css">
 <script> 
-function modReview(){ 
-	if(confirm('후기를 수정하시겠습니까?'))window.close();
+function fn_reviewMod(url,title,width,height,top,left) {
+	window.name = "reviewList";
+	
+	window.open(url,title,"width="+width+",height="+height+",top="+top+",left="+left);
 }
 
 function delReview(){ 
@@ -32,19 +35,18 @@ function delReview(){
 	<div style="margin-top: 10; ">
 		<c:forEach items="${reviewList}" var="reviewVO">		
 		<div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
-	      <div class="d-flex w-100 align-items-center justify-content-between">
-	      	<div>
-	      	  <img src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" style=" width: 60px; height: 60px; border: 1px solid #CCCCCC"/>
+	       <div class="d-flex align-items-center justify-content-between">
+	      	<div class="imageDiv">
+	      	  <img class="reviewImage"src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}"/>
 	      	</div>
-	      	<div>
-	          <strong class="mb-1">${reviewVO.review_title}</strong>
+	      	<div class="titleDiv">
+	          <strong>${reviewVO.review_title}</strong>
 	        </div>
-	        <div>
-	          <font class="mb-1"><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></font>
+	        <div class="dateDiv">
+	          <font><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></font>
 	        </div>
-	        <div>
-	          <button class="btn btn-outline-primary" onclick="javascript:modReview()">수정</button>
-	          <button class="btn btn-outline-danger" onclick="javascript:delReview()">삭제</button>
+	        <div class="btnDiv">
+	          <button class="btn btn-outline-primary modBtn" onclick="javascript:fn_reviewMod('${contextPath}/reviewModForm.do?review_num=${reviewVO.review_num}','reviewModForm',460,700,50,50)">수정</button><br>
 	        </div>
 	      </div>
 	    </div>
@@ -52,5 +54,7 @@ function delReview(){
     </div>
  </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" ></script>
 </body>
 </html>

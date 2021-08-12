@@ -14,32 +14,50 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="${contextPath}/resources/css/product.css">
 <script src="${contextPath}/resources/js/product.js"></script>
 <script src="${contextPath}/resources/js/graph.js"></script>
-<style>
-
+<style type="text/css">
+.row {
+	align-items: center;
+}
+.row.graphText {
+	float: right;
+	margin-bottom: 10;
+}
+.row.graphText i {
+	font-weight: 900;
+	color: F2BE24;
+}
 .graphBody{
-	padding: 50px;
+	padding: 30px;
+	width: 50%;
+	height: 300;
+}
+.graphBody span {
+	vertical-align:middle;
+	margin: 0;
+	
 }
 .graph {
-	height: 40px; 
+	height: 30px; 
 	background: #ccc; 
 	border-radius: 40px;
+	margin: 0 0 0 10;
+	width: 300px;
 }
 .graph font {
 	display: block;
-	width : 75%;
-	height: 40px;
+	height: 30px;
 	padding: 0 10px;
-	line-height: 40px;
+	line-height: 30px;
 	text-align: right;
-	background: violet;
+	background: #F2BE24;
 	border-radius: 40px;
 	box-sizing: border-box;
 	color: #fff;
-	animation: stack 2s 1;
 	margin: 0;
 }
 
@@ -52,17 +70,51 @@ request.setCharacterEncoding("UTF-8");
 	box-shadow : none!important;	
 }
 
-@keyframes stack{
-	0% {
-		width: 0;
-		color: rgba(255,255,255,0);
-	}
-	40% {
-		color: rgba(255,255,255,1);
-	}
-	100% {
-		width: 75%;;
-	}
+.subNav {
+	margin: 20 0 20 0;
+	border-top: solid 1px #D7D8C9;
+	border-bottom: solid 1px #D7D8C9;
+	position:-webkit-sticky;position:sticky; top:0;
+	background-color: white;
+	z-index: 1;
+}
+[class*="subMenu"] {
+	width: 25%;
+	font-size: 20px;
+	height: 60px;
+	line-height: 60px;
+}
+[class*="subMenu"]:hover {
+	cursor: pointer;
+	font-weight: bold;
+}
+[class*="subMenu"] font{
+	vertical-align:middle;
+	margin: 0;
+}
+.inner-star::before{color: F2BE24;}
+.outer-star {position: relative;display: inline-block;color: #CCCCCC;}
+.inner-star {position: absolute;left: 0;top: 0;width: 0%;overflow: hidden;white-space: nowrap;}
+.outer-star::before, .inner-star::before {content: '\f005 \f005 \f005 \f005 \f005';font-family: 'Font Awesome 5 free';font-weight: 900;}
+.RatingStar {font-size: 50px;}
+.graph.stack1 font {animation: stack1 2s 1;}
+.graph.stack2 font {animation: stack2 2s 1;}
+.graph.stack3 font {animation: stack3 2s 1;}
+@keyframes stack1{
+	0% {width: 0; color: rgba(255,255,255,0);}
+	40% {color: rgba(255,255,255,1);}
+	100% {width: ${goodReviewPercent}%;}
+	
+@keyframes stack2{
+	0% {width: 0; color: rgba(255,255,255,0);}
+	40% {color: rgba(255,255,255,1);}
+	100% {width: ${notBadReviewPercent}%;}
+	
+@keyframes stack3{
+	0% {width: 0; color: rgba(255,255,255,0);}
+	40% {color: rgba(255,255,255,1);}
+	100% {width: ${badReviewPercent}%;}
+}
 </style>
 
 <script type="text/javascript">
@@ -158,16 +210,16 @@ function fn_getProductLoves(result) {
 function imagePopup(type) {
 	if (type == 'open') {
 		// 팝업창을 연다.
-		jQuery('#layer').attr('style', 'visibility:visible');
+		$(this).jQuery('#layer').attr('style', 'visibility:visible');
 
 		// 페이지를 가리기위한 레이어 영역의 높이를 페이지 전체의 높이와 같게 한다.
-		jQuery('#layer').height(jQuery(document).height());
+		$(this).jQuery('#layer').height(jQuery(document).height());
 	}
 
 	else if (type == 'close') {
 
 		// 팝업창을 닫는다.
-		jQuery('#layer').attr('style', 'visibility:hidden');
+		$(this).jQuery('#layer').attr('style', 'visibility:hidden');
 	}
 }
 
@@ -243,33 +295,124 @@ function imagePopup(type) {
 	</div>
   </div>
  </form> 
-  <hr>
-  
-  ${product.p_description}
-  
-  <hr>
-  <div>
-		<h3 style="text-align: left; margin-bottom: 20;">후기</h3>
-	  	
-	  	<div class="graphBody">
-			<div class="graph">
-				<font>75%</font>
+ </div>  
+<script >
+	
+</script>
+	<nav class="subNav" >
+		<div class="container">
+			<div class="row">
+				<div class="subMenu1" onclick="location.href='#section1';">
+					<font>상세 설명</font>
+				</div>
+				<div class="subMenu2" onclick="location.href='#section2';">
+					<font>후기</font>
+				</div>
+				<div class="subMenu3">
+					<font>QnA</font>
+				</div>
+				<div class="subMenu4">
+					<font>취소/교환</font>
+				</div>
 			</div>
 		</div>
-	  	
+	  	</nav>
+
+<div class="container">
+  	<div id="section1" style="padding: 100 0 100 0; border-bottom: 1px solid #CCCCCC ">
+  		${product.p_description}
+  	</div>
+
+  <div id="section2" style="padding-top: 50px;" >
+
+	  	<div class="row">
+	  		<h2>평 점</h2>
+	  		<script type="text/javascript">
+			ratings = {RatingScore: ${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt};}
+			totalRating = 5;
+			table = document.querySelector('.RatingStar');
+			function rateIt() {
+				for (rating in ratings) {
+					ratingPercentage = ratings[rating] / totalRating * 100;
+					ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
+					star = table.querySelector('${rating} .inner-star');
+					numberRating = table.querySelector('${rating} .numberRating');
+					star.style.width = ratingRounded;
+					numberRating.innerText = ratings[rating];
+					}
+				} rateIt()
+			</script>
+
+	  		<div class="RatingStar">
+		      <div class="RatingScore">
+		        <div class="outer-star"><div class="inner-star" style="width: 70%;"></div></div>
+		      </div>
+		    </div>
+
+
+	  		(${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt})
+
+		  	<div class="graphBody">
+		  		<div class="row graphText" >
+		  			<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					(${fiveCnt})
+					<div class="graph stack1">
+						<font style="width : ${fiveCnt/listCnt*100}%;"> ${fiveCnt/listCnt*100}% </font>
+					</div>
+				</div>
+				<div class="row graphText" >
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					(${fourCnt})
+					<div class="graph stack2">
+						<font style="width : ${fourCnt/listCnt*100}%;"> ${fourCnt/listCnt*100}% </font>
+					</div>
+				</div>
+				<div class="row graphText" >
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					(${threeCnt})
+					<div class="graph stack3">
+						<font style="width : ${threeCnt/listCnt*100}%;"> ${threeCnt/listCnt*100}% </font>
+					</div>
+				</div>
+				<div class="row graphText" >
+					<i class="far fa-star"></i>
+					<i class="far fa-star"></i>
+					(${twoCnt})
+					<div class="graph stack3">
+						<font style="width : ${twoCnt/listCnt*100}%;"> ${twoCnt/listCnt*100}% </font>
+					</div>
+				</div>
+				<div class="row graphText" >
+					<i class="far fa-star"></i>
+					(${oneCnt})
+					<div class="graph stack3">
+						<font style="width : ${oneCnt/listCnt*100}%;"> ${oneCnt/listCnt*100}% </font>
+					</div>
+				</div>
+			</div>
+	  	</div>
 	  	<!-- 후기 목록 -->
 	  	<c:forEach items="${reviewList}" var="reviewVO">
 	  	<div class="row" style="align-items: center;">
 			<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_recommend}.png" />
-					<c:if test="${reviewVO.review_recommend eq 'good'}">
+					<c:if test="${reviewVO.review_recommend eq '5'}">
 						<font>적극 추천!</font>
 					</c:if>
 					
-					<c:if test="${reviewVO.review_recommend eq 'notBad'}">
+					<c:if test="${reviewVO.review_recommend eq '3'}">
 						<font>보통이에요.</font>
 					</c:if>
 					
-					<c:if test="${reviewVO.review_recommend eq 'bad'}">
+					<c:if test="${reviewVO.review_recommend eq '1'}">
 						<font>별로에요.</font>
 					</c:if>
 			<details>
@@ -278,17 +421,9 @@ function imagePopup(type) {
 			    </summary>
 				<div class="" style="padding: 5;">
 					<div id="wrap">
-					  <a href="javascript:openModal('reviewImage');" class="button modal-open">
-					  	<img class="reviewImg" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+					  <a href="javascript:openModal('reviewImg${reviewVO.review_imageFileName}');" class="button modal-open">
+					  	<img class="reviewImg${reviewVO.review_imageFileName}" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
 					  </a>
-					</div>
-					
-					<div id="modal"></div>
-					<div class="modal-con reviewImage">
-						 <a href="javascript:;" class="close">X</a>
-						 <div class="con">
-							<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
-						 </div>
 					</div>
 					<p> ${reviewVO.review_content}</p>
 			    </div>
@@ -300,7 +435,7 @@ function imagePopup(type) {
   </div>
   
   
-  
+  <div style="background-color: red; height: 300px"></div>
 
 	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
@@ -315,7 +450,13 @@ function imagePopup(type) {
 			</form>
 		</div>
 	</div>	
-	
+	<div id="modal"></div>
+	<div class="modal-con reviewImg${reviewVO.review_imageFileName}">
+		 <a href="javascript:;" class="close">X</a>
+		 <div class="con">
+			<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+		 </div>
+	</div>
 
 	
 
