@@ -164,15 +164,17 @@ request.setCharacterEncoding("UTF-8");
 				</td>
 				<td>${item.order_status}</td>
 				<td>
-					<c:if test="${item.order_status eq '배송완료' }">
-						<button type="button" class="btn btn-danger btn-sm" onclick="fn_buyConfirm(${status.index})">구매 확정</button><br>
-					</c:if>
-					<c:if test="${item.order_status eq '결제완료' || item.order_status eq '배송준비중' || item.order_status eq '배송완료' }">
-						<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
-					</c:if>
-					<c:if test="${item.order_status eq '구매확정'}">
-						<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
-					</c:if>
+					<div class="col">
+						<c:if test="${item.order_status eq '배송완료' }">
+							<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
+						</c:if>
+						<c:if test="${item.order_status eq '결제완료' || item.order_status eq '배송준비중' || item.order_status eq '배송완료' }">
+							<button type="button" class="btn btn-primary btn-sm" onclick="checkCancle(${status.index})">환불 요청</button><br>
+						</c:if>
+						<c:if test="${item.order_status eq '구매확정'}">
+							<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
+						</c:if>
+					</div>
 					<input type="hidden" name="order_code" value="${item.order_code}" disabled/>
 					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
 					<input type="hidden" name="order_quantity" value="${item.order_quantity}" disabled/>

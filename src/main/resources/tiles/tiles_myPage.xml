@@ -96,5 +96,10 @@
 		<put-attribute name="title" value="내 상품 후기 목록 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/myPage/reviewList.jsp" />
 	</definition>
+	
+	<definition name="review" extends="Layout">
+		<put-attribute name="title" value="내 상품 후기 목록 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/myPage/review.jsp" />
+	</definition>
 
 </tiles-definitions>

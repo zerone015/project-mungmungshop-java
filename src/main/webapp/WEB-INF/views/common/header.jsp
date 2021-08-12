@@ -95,7 +95,7 @@
 	}
 	a {
 		text-decoration: none!important;
-		color: black!important;
+		color: #57523E!important;
 	}
 	#menu {
 	    height: 50px;

@@ -1,3 +1,6 @@
+*{
+	color: #57523E;
+}
 #modal{
   z-index: 100;
   display:none;
@@ -83,3 +86,30 @@ summary {
 	width: 200px;
 	margin-bottom: 20;
 }
+
+
+
+
+
+
+
+.clicked {
+	border-bottom: 3px solid #D94C1A;
+}
+
+
+
+
+
+
+
+
+
+
+/* Color Theme Swatches in Hex */
+.Grey-Yellow-orange-1-hex { color: #D7D8C9; }
+.Grey-Yellow-orange-2-hex { color: #A4A68A; }
+.Grey-Yellow-orange-3-hex { color: #F2BE24; }
+.Grey-Yellow-orange-4-hex { color: #57523E; }
+.Grey-Yellow-orange-5-hex { color: #D94C1A; }
+
