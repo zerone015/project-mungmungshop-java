@@ -1,0 +1,29 @@
+th, td{
+	vertical-align: middle!important;
+}
+
+[class*="section"] {
+	margin-bottom: 70px;
+}
+
+select {
+	height: 30px;
+    width: 250;
+    float: left;
+}
+
+.adress input {
+	width: 500!important;
+	margin: 5 5 5 0;
+	float: left;
+	margin-right: 5px;
+}
+
+.idx {
+	width: 120px;
+	
+}
+
+.subScript{
+	color: #A4A68A;
+}

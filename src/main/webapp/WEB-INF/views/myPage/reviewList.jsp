@@ -19,9 +19,14 @@ function fn_reviewMod(url,title,width,height,top,left) {
 	window.open(url,title,"width="+width+",height="+height+",top="+top+",left="+left);
 }
 
-function delReview(){ 
-	if(confirm('후기를 삭제하시겠습니까?'))window.close();
+function fn_reviewRemove(review_num){ 
+	if(confirm('후기를 삭제하시겠습니까?')){
+		location.href="${contextPath}/myPage/removeReview.do?review_num=" + review_num; 
+	}else{
+		return false;
+	}
 }
+
 
 </script>
 
@@ -41,6 +46,10 @@ function delReview(){
 		<c:forEach items="${reviewList}" var="reviewVO">		
 		<div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
 	       <div class="d-flex align-items-center justify-content-between">
+	      	<div class="titleDiv">
+	      	  <img class="reviewImage"src="${contextPath}/download?imageFileName=${reviewVO.p_imageFileName}"/><br>
+	      	  <a href="${contextPath}/product/getProduct.do?p_code=${reviewVO.p_code}"><font style="color: #828282;">${reviewVO.p_name}</font></a>
+	      	</div>
 	      	<div class="imageDiv">
 	      	  <img class="reviewImage"src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}"/>
 	      	</div>
@@ -51,8 +60,27 @@ function delReview(){
 	        <div class="dateDiv">
 	          <font><fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></font>
 	        </div>
+	        
+	         <div class="dateDiv">
+	         	<c:choose>
+	         		<c:when test="${reviewVO.review_test.equals('Y')}">
+	         			<font style="color: red; font-weight: bold;">포인트 지급완료</font>
+	         		</c:when>
+	         		<c:when test="${reviewVO.review_test.equals('C')}">
+	         			<font style="color: red; font-weight: bold;">검수 불합격</font><br>
+	         			<font style="color: #828282;">(리뷰를<br>수정해주세요.)</font>
+	         		</c:when>
+	         		<c:otherwise>
+	         			<font style="color: red; font-weight: bold;">검수중</font><br>
+	         			<font style="color: #828282;">(검수 합격시<br>포인트가<br>지급됩니다.)</font>
+	         		</c:otherwise>
+	         	</c:choose>
+	        </div>
 	        <div class="btnDiv">
-	          <button class="btn btn-outline-primary modBtn" onclick="javascript:fn_reviewMod('${contextPath}/reviewModForm.do?review_num=${reviewVO.review_num}','reviewModForm',460,700,50,50)">수정</button><br>
+	        <c:if test="${reviewVO.review_test.equals('N') || reviewVO.review_test.equals('C')}">
+	          	<button class="btn btn-outline-primary modBtn" onclick="javascript:fn_reviewMod('${contextPath}/reviewModForm.do?review_num=${reviewVO.review_num}','reviewModForm',460,700,50,50)">수정</button>
+	          	<button class="btn btn-danger modBtn" onclick="javascript:fn_reviewRemove(${reviewVO.review_num})">삭제</button>
+	        </c:if>
 	        </div>
 	      </div>
 	    </div>

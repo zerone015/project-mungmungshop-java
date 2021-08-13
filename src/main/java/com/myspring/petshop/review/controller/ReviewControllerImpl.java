@@ -15,6 +15,9 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.petshop.board.event.controller.EventControllerImpl;
 import com.myspring.petshop.common.pagination.Pagination;
@@ -96,6 +98,34 @@ public class ReviewControllerImpl implements ReviewController {
 		mav.addObject("info", info);		
 		
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/myPage/removeReview.do", method = RequestMethod.GET)
+	public ResponseEntity review(@RequestParam("review_num") int review_num,
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			reviewService.removeReview(review_num);
+			message = "<script>";
+			message += "alert('후기를 삭제했습니다.');";
+			message += "location.href='" + request.getContextPath() + "/myPage/reviewList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류 발생. 다시 시도해주세요.');";
+			message += "location.href='" + request.getContextPath() + "/myPage/reviewList.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
 	}
 	
 	@Override

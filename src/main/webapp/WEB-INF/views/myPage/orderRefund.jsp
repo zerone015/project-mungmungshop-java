@@ -7,6 +7,8 @@
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="${contextPath}/resources/css/orderRefund.css">
+<link  rel =" stylesheet " href =" https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta2/dist/css/bootstrap- select.min.css " >
 <meta charset="utf-8">
 <title>주문 상품 환불</title>
 </head>
@@ -189,217 +191,229 @@
 <body>
 <form name="refundForm" method="post" action="${contextPath}/myPage/addOrderRefund.do">
 <div class="container">
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>환불 상품</b></h4>
-</div>	
-	<table class="table table-hover">
-		<thead>
-			<tr align="center">
-				<th>&nbsp;</th>
-				<th>상품명</th>
-				<th>포인트 할인</th>
-				<th>주문 금액(수량)</th>
-				<th>적립 포인트</th>
-				<th>배송 정보</th>
-				<th>주문 상태</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr align="center">
-				<td><img src="${contextPath}/thumbnail/download?imageFileName=${combineVO.p_imageFileName}"/></td>
-				<td>${combineVO.p_name}</td>
-				<c:choose>
-					<c:when test="${order_usePoint != 0}">
-						<td>-<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br></td>
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
-					</c:when>
-					<c:otherwise>
-						<td>-0원</td>
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
-					</c:otherwise>
-				</c:choose>
-				<td>+<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 60}" pattern="###,###,###"/>원<br>적립</td>
-				<td>뭉뭉샵<br>본사배송<br>평균배송일 2일</td>
-				<td>${combineVO.order_status}</td>
-			</tr>
-		</tbody>
-	</table>
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>환불 사유</b></h4>
-</div>	
+	<div class="section1">
+		<div align="left">
+			<h4 style="margin-bottom: 30px;"><b>환불 상품</b></h4>
+		</div>	
 		<table class="table table-hover">
-		<tbody>
-			<tr align="center">
-				<td>구매자 책임사유</td>
-				<td>
-				<select name="buyer_reason" id="buyer_reason" onchange="reasonChange(this)">
-					<option value="">환불 사유를 선택하세요</option>
-					<option value="단순 변심">단순 변심</option>
-					<option value="수량을 잘못 선택함">수량을 잘못 선택함</option>
-				</select>
-				</td>
-			</tr>
-			<tr align="center">
-				<td>판매자 책임사유</td>
-				<td>
-				<select name="seller_reason" id="seller_reason" onchange="reasonChange2(this)">
-					<option value="">환불 사유를 선택하세요</option>
-					<option value="판매자로 부터 품절 안내 받음">판매자로 부터 품절 안내 받음</option>
-					<option value="상품 불량">상품 불량</option>
-					<option value="주문과 다른 상품이 배송됨">주문과 다른 상품이 배송됨</option>
-					<option value="주문과 다른 색상이 배송됨">주문과 다른 색상이 배송됨</option>
-					<option value="주문과 다른 디자인이 배송됨">주문과 다른 디자인이 배송됨</option>
-					<option value="배송사고 안내 받음">배송사고 안내 받음</option>
-					<option value="주문과 실측이 다름">주문과 실측이 다름</option>
-				</select>
-				</td>
-		</tbody>
-	</table>
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>반품 방법 선택</b></h4>
-</div>	
-	<table class="table table-hover">
-		<tbody>
-			<tr align="center">
-				<td>반품 방법</td>
-				<td><input type="radio" name="" value="" checked/> 회수해 주세요 <font style="font-size: 8px">뭉뭉샵 자동 회수 서비스입니다. 환불 요청 후 회수지 주소로 택배 기사님이 방문하여 회수합니다.</font></td>
-			</tr>
-		</tbody>
-	</table>
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>회수지 정보</b></h4>
-</div>	
-<table class="table table-hover">
-		<tbody>
-			<tr align="center">
-				<td>이름</td>
-				<td><input class="form-control" type="text" name="refund_name" maxlength="20" placeholder="이름을 입력해주세요." value="${combineVO.address_recipent}"></td>
-			</tr>
-			<tr align="center">
-				<td>휴대전화</td>
-				<td><input class="form-control" type="text" name="refund_tel" maxlength="13" placeholder="-없이 번호만 입력해주세요" value="${combineVO.address_phone}"></td>
-			</tr>
-			<tr align="center">
-				<td>회수지 주소</td>
-				<td>
-					<input type="text" class="form-control" style="display: inline-block; width: 80%;" id="sample4_postcode" placeholder="우편번호" maxlength="10" name="refund_address1" value="${combineVO.address_1}" readonly>
-					<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="btn btn-outline-secondary"><br><br>
-					<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명,지번주소" maxlength="30" size="30" name="refund_address2" value="${combineVO.address_2}" readonly><br>
-                    <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="30">
-					<span id="guide" style="color:#999; display:none;"></span>
-					<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="refund_address3" maxlength="40" value="${combineVO.address_3}" ><br>
-                    <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="30">
-					<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="30" ><br>
-				</td>
-			</tr>
-			<tr align="center">
-				<td colspan="2">＊접수 후 1~3일(영업일 기준) 내로 택배 기사님이 직접 연락드린 후 방문합니다.</td>
-			</tr>
-		</tbody>
-	</table>
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>회수 예정 택배사</b></h4>
-</div>	
-<table class="table table-hover">
-		<tbody>
-			<tr align="center">
-				<td>택배사</td>
-				<td>CJ대한통운</td>
-			</tr>
-			<tr align="center">
-				<td>반품 배송비</td>
-				<c:choose>
-					<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중')}">
-						<td>0원</td>
-					</c:when>
-					<c:otherwise>
-						<td>5,000원</td>
-					</c:otherwise>
-				</c:choose>
-			</tr>
-			<tr align="center">
-				<td colspan="2">
-					*현금을 동봉하여 반송하실 필요가 없습니다.<br>
-					*판매자 안내 등에 따라 임의 동봉한 반품 배송비 분실이나 자동회수 당시 발생한 상품 분실은 뭉뭉샵에서 책임지지 않습니다.<br>
-					*동일 업체의 여러 상품을 한꺼번에 환불 요청하여 "한 번만" 배송비 결제를 한 경우, 반드시 하나의 박스로 묶음 포장해야 합니다.<br>
-					*이미 사용했거나, 제품 박스 테이핑 등의 상품 훼손, 주문제작 상품인 경우 환불이 불가능합니다.<br>
-					*최초에 동봉된 사은품이 있었다면 미사용 상태의 사은품까지 함께 반품하여야 환불이 가능합니다.<br>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-<div align="left">
-	<h4 style="margin-bottom: 30px;"><b>환불 금액</b></h4>
-</div>
-<table class="table table-hover">
-		<tbody>
-			<tr align="center">
-				<td>상품 합계</td>
-				<c:choose>
-					<c:when test="${order_usePoint != 0}">
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
-					</c:when>
-					<c:otherwise>
-						<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
-					</c:otherwise>
-				</c:choose>
-			</tr>
-			<tr align="center">
-				<td>포인트 사용</td>
-				<c:choose>
-					<c:when test="${order_usePoint != 0}">
-						<td>-<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br></td>
-					</c:when>
-					<c:otherwise>
-						<td>-0원</td>
-					</c:otherwise>
-				</c:choose>
-			</tr>
-			<tr align="center">
-				<td>포인트 적립</td>
-				<td>+<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 60}" pattern="###,###,###"/>원</td>
-			</tr>
-			<tr align="center">
-				<td>환불 금액</td>
-				<c:choose>
-					<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
-						<td>
-							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원
-							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" />
-							<input type="hidden" name="refund_price" value="${i}"/>
-						</td>
-					</c:when>
-					<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint == 0}">
-						<td>
-							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원
-							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity}" />
-							<input type="hidden" name="refund_price" value="${i}"/>
-						</td>
-					</c:when>
-					<c:when test="${!combineVO.order_status.equals('결제완료') && !combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
-						<td>
-							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" pattern="###,###,###"/>원
-							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" />
-							<input type="hidden" name="refund_price" value="${i}"/>
-						</td>
-					</c:when>
-					<c:otherwise>
-						<td>
-							<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - 5000}" pattern="###,###,###"/>원
-							<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - 5000}" />
-							<input type="hidden" name="refund_price" value="${i}"/>
-						</td>
-					</c:otherwise>
-				</c:choose>
-			</tr>
-			<tr align="center">
-				<td colspan="2">
-					*환불 완료 시 사용한 포인트는 즉시 반환됩니다.<br>
-					*부분 환불 시 사용하신 포인트는 사용한 비율만큼 각 상품에 적용되어 반환됩니다.
-				</td>
-			</tr>
-		</tbody>
-	</table>
+			<thead>
+				<tr align="center">				
+					<th colspan="2">상품명</th>
+					<th>포인트 할인</th>
+					<th>주문 금액(수량)</th>
+					<th>적립 포인트</th>
+					<th>배송 정보</th>
+					<th>주문 상태</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr align="center">
+					<td><img src="${contextPath}/thumbnail/download?imageFileName=${combineVO.p_imageFileName}" style="width: 60px;"/></td>
+					<td>${combineVO.p_name}</td>
+					<c:choose>
+						<c:when test="${order_usePoint != 0}">
+							<td>-<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br></td>
+							<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
+						</c:when>
+						<c:otherwise>
+							<td>-0원</td>
+							<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
+						</c:otherwise>
+					</c:choose>
+					<td>+<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 60}" pattern="###,###,###"/>원<br>적립</td>
+					<td>뭉뭉샵<br>본사배송<br>평균배송일 2일</td>
+					<td>${combineVO.order_status}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="section2">
+		<div align="left">
+			<h4 style="margin-bottom: 30px;"><b>환불 사유</b></h4>
+		</div>	
+		<table class="table table-hover">
+			<tbody>
+				<tr align="center">
+					<td>구매자 책임사유</td>
+					<td>
+						<select class="selectpicker" name="buyer_reason" id="buyer_reason" onchange="reasonChange(this)">
+							<option value="">환불 사유를 선택하세요</option>
+							<option value="단순 변심">단순 변심</option>
+							<option value="수량을 잘못 선택함">수량을 잘못 선택함</option>
+						</select>
+					</td>
+				</tr>
+				<tr align="center">
+					<td>판매자 책임사유</td>
+					<td>
+						<select class="selectpicker" name="seller_reason" id="seller_reason" onchange="reasonChange2(this)">
+							<option value="">환불 사유를 선택하세요</option>
+							<option value="판매자로 부터 품절 안내 받음">판매자로 부터 품절 안내 받음</option>
+							<option value="상품 불량">상품 불량</option>
+							<option value="주문과 다른 상품이 배송됨">주문과 다른 상품이 배송됨</option>
+							<option value="주문과 다른 색상이 배송됨">주문과 다른 색상이 배송됨</option>
+							<option value="주문과 다른 디자인이 배송됨">주문과 다른 디자인이 배송됨</option>
+							<option value="배송사고 안내 받음">배송사고 안내 받음</option>
+							<option value="주문과 실측이 다름">주문과 실측이 다름</option>
+						</select>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="section3">
+		<div align="left">
+			<h4 style="margin-bottom: 30px;"><b>반품 방법 선택</b></h4>
+		</div>	
+		<table class="table table-hover">
+			<tbody>
+				<tr align="center">
+					<td>반품 방법</td>
+					<td><input type="radio" name="" value="" checked/> 회수해 주세요 <font style="font-size: 13px"> * 뭉뭉샵 자동 회수 서비스입니다. 환불 요청 후 회수지 주소로 택배 기사님이 방문하여 회수합니다.</font></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="section4">
+	<div align="left">
+		<h4 style="margin-bottom: 30px;"><b>회수지 정보</b></h4>
+	</div>	
+		<table class="table table-hover">
+			<tbody class="adress">
+				<tr align="center">
+					<td class="idx">이름</td>
+					<td><input class="form-control" type="text" name="refund_name" maxlength="20" placeholder="이름을 입력해주세요." value="${combineVO.address_recipent}"></td>
+				</tr>
+				<tr align="center">
+					<td class="idx">휴대전화</td>
+					<td><input class="form-control" type="text" name="refund_tel" maxlength="13" placeholder="-없이 번호만 입력해주세요" value="${combineVO.address_phone}"></td>
+				</tr>
+				<tr align="center">
+					<td class="idx">회수지 주소</td>
+					<td >
+						<input type="text" class="form-control" style="display: inline-block;" id="sample4_postcode" placeholder="우편번호" maxlength="10" name="refund_address1" value="${combineVO.address_1}" readonly>
+						<input type="button" onclick="sample4_execDaumPostcode()" value="검색" class="btn btn-outline-secondary" style="width: 70px!important; "><br><br>
+						<input type="text" class="form-control" id="sample4_roadAddress" placeholder="도로명,지번주소" maxlength="30" size="30" name="refund_address2" value="${combineVO.address_2}" readonly><br>
+	                    <input type="hidden" id="sample4_jibunAddress" placeholder="지번주소"  size="30">
+						<span id="guide" style="color:#999; display:none;"></span>
+						<input type="text" class="form-control" id="sample4_detailAddress" placeholder="상세주소"  size="30" name="refund_address3" maxlength="40" value="${combineVO.address_3}" ><br>
+	                    <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="30">
+						<input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="30" ><br>
+					</td>
+				</tr>
+				<tr align="left">
+					<td colspan="2" class="subScript" >＊접수 후 1~3일(영업일 기준) 내로 택배 기사님이 직접 연락드린 후 방문합니다.</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="section5">
+	<div align="left">
+		<h4 style="margin-bottom: 30px;"><b>회수 예정 택배사</b></h4>
+	</div>	
+		<table class="table table-hover">
+			<tbody>
+				<tr align="center">
+					<td>택배사</td>
+					<td>CJ대한통운</td>
+				</tr>
+				<tr align="center">
+					<td>반품 배송비</td>
+					<c:choose>
+						<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중')}">
+							<td>0원</td>
+						</c:when>
+						<c:otherwise>
+							<td>5,000원</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<tralign="left">
+					<td colspan="2" class="subScript" >
+						*현금을 동봉하여 반송하실 필요가 없습니다.<br>
+						*판매자 안내 등에 따라 임의 동봉한 반품 배송비 분실이나 자동회수 당시 발생한 상품 분실은 뭉뭉샵에서 책임지지 않습니다.<br>
+						*동일 업체의 여러 상품을 한꺼번에 환불 요청하여 "한 번만" 배송비 결제를 한 경우, 반드시 하나의 박스로 묶음 포장해야 합니다.<br>
+						*이미 사용했거나, 제품 박스 테이핑 등의 상품 훼손, 주문제작 상품인 경우 환불이 불가능합니다.<br>
+						*최초에 동봉된 사은품이 있었다면 미사용 상태의 사은품까지 함께 반품하여야 환불이 가능합니다.<br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="section6">
+		<div align="left">
+			<h4 style="margin-bottom: 30px;"><b>환불 금액</b></h4>
+		</div>
+		<table class="table table-hover">
+			<tbody>
+				<tr align="center">
+					<td>상품 합계</td>
+					<c:choose>
+						<c:when test="${order_usePoint != 0}">
+							<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원 (${combineVO.order_quantity}개)</td>
+						</c:when>
+						<c:otherwise>
+							<td><fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원<br>${combineVO.order_quantity}개</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<tr align="center">
+					<td>포인트 사용</td>
+					<c:choose>
+						<c:when test="${order_usePoint != 0}">
+							<td>-<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원<br></td>
+						</c:when>
+						<c:otherwise>
+							<td>-0원</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<tr align="center">
+					<td>포인트 적립</td>
+					<td>+<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity / 60}" pattern="###,###,###"/>원</td>
+				</tr>
+				<tr align="center">
+					<td>환불 금액</td>
+					<c:choose>
+						<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
+							<td>
+								<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" pattern="###,###,###"/>원
+								<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10}" />
+								<input type="hidden" name="refund_price" value="${i}"/>
+							</td>
+						</c:when>
+						<c:when test="${combineVO.order_status.equals('결제완료') || combineVO.order_status.equals('배송준비중') && order_usePoint == 0}">
+							<td>
+								<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity}" pattern="###,###,###"/>원
+								<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity}" />
+								<input type="hidden" name="refund_price" value="${i}"/>
+							</td>
+						</c:when>
+						<c:when test="${!combineVO.order_status.equals('결제완료') && !combineVO.order_status.equals('배송준비중') && order_usePoint != 0}">
+							<td>
+								<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" pattern="###,###,###"/>원
+								<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - combineVO.p_price * combineVO.order_quantity / 10 - 5000}" />
+								<input type="hidden" name="refund_price" value="${i}"/>
+							</td>
+						</c:when>
+						<c:otherwise>
+							<td>
+								<fmt:formatNumber value="${combineVO.p_price * combineVO.order_quantity - 5000}" pattern="###,###,###"/>원
+								<fmt:parseNumber var="i" integerOnly="true" value="${combineVO.p_price * combineVO.order_quantity - 5000}" />
+								<input type="hidden" name="refund_price" value="${i}"/>
+							</td>
+						</c:otherwise>
+					</c:choose>
+				</tr>
+				<tr align="left">
+					<td colspan="2"  class="subScript">
+						*환불 완료 시 사용한 포인트는 즉시 반환됩니다.<br>
+						*부분 환불 시 사용하신 포인트는 사용한 비율만큼 각 상품에 적용되어 반환됩니다.
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
 	<div align="center">
 		<button class="btn btn-primary btn-lg" type="button" onClick="refund_check();">환불 요청</button>
 	</div>

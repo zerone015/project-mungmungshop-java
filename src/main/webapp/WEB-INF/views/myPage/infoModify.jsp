@@ -143,40 +143,68 @@ function fn_nickChk() {
 	}
 }
 </script>
+<style>
+	.infoDiv {
+		width: 500px;
+	    height: 40px;
+	    display: flex;
+	    font-size: 16px;
+	    line-height: 40px;
+	    margin-top: 10px;
+	    margin-left: 30;
+	}
+	.infoDiv font {
+		height: 40px;
+		width: 80px;
+		margin: 5px;
+	}
+	.infoDiv input {
+		height: 40px;
+		width: 300px;
+		vertical-align: middle;
+	}
+	#nickChk {
+		margin-left: 10px;
+	}
+	.infoBtn {
+		margin: 50 0 0 0;
+	}
+	.info {
+		width: 500px;   		
+	}
+</style>
 <body>
  <h4><b>회원 정보 수정</b></h4><br><br>
-<form name="infoModify" method="post" action="${contextPath}/myPage/modifyInfo.do">
- <table align="center" >
-   <tr>
-     <td width="200"><p align="right" >아이디</td>
-     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_id" value="${memberVO.member_id}" readonly ></td>
-   </tr>
-   <tr>
-     <td width="200"><p align="right" >이름</td>
-     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_name" value="${memberVO.member_name}" maxlength="45" ></td>
-   </tr>
-   <tr>
-     <td width="200"><p align="right" >닉네임</td>
-     <td width="400">
-     <input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" id="member_nick" name="member_nick" value="${memberVO.member_nick}" onkeydown="inputNickChk()"  maxlength="20" >	
-     <button class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"value="N">중복확인</button>
-     <input type="hidden" name="nickDuplication" value="nickUncheck">
-	</td>
-   </tr>
-   <tr>
-     <td width="200"><p align="right" >이메일</td>
-     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_email"  value="${memberVO.member_email}" maxlength="50" readonly></td>
-   </tr>
-   <tr>
-     <td width="200"><p align="right" >휴대전화</td>
-     <td width="400"><input  class="form-control" style="width: 300; margin: 0 auto;"  type="text" name="member_phone" value="${memberVO.member_phone}" ></td>
-   </tr>
-   <tr align="center" >
-    <td colspan="2" width="400"><br><br><input class="btn btn-primary btn-lg" type="button" value="수정하기" onclick="checkinfoModify();" >
-    <h1></h1>
- 	<button class="btn btn-danger btn-lg" type="button" onclick="location.href='${contextPath}/myPage/quit.do'">회원탈퇴</button>
-   </tr>
- </table>
+<form name="infoModify" method="post" action="${contextPath}/myPage/modifyInfo.do" >
+	<div align="center" class="info">
+	   <div class="infoDiv">
+	     <font >아이디</font>
+		 <input class="form-control" type="text" name="member_id" value="${memberVO.member_id}" readonly >
+		</div>
+	   <div class="infoDiv">
+	     <font>이름</font>
+	     <input class="form-control" type="text" name="member_name" value="${memberVO.member_name}" maxlength="45" >
+	   </div>
+	   <div class="infoDiv">
+	     <font>닉네임</font>
+	     <input class="form-control" type="text" id="member_nick" name="member_nick" value="${memberVO.member_nick}" onkeydown="inputNickChk()"  maxlength="20" >	
+	   
+	   	 <button class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"value="N">중복확인</button>
+	     <input type="hidden" name="nickDuplication" value="nickUncheck">
+	   </div>
+	   <div class="infoDiv">
+	     <font>이메일</font>
+	     <input class="form-control" type="text" name="member_email"  value="${memberVO.member_email}" maxlength="50" readonly>
+	   </div>
+	   <div class="infoDiv">
+	     <font>휴대전화</font>
+	     <input class="form-control" type="text" name="member_phone" value="${memberVO.member_phone}" >
+	   </div>
+	   <div class="infoBtn" align="center" >
+	     <button class="btn btn-outline-dark" type="button"  onclick="checkinfoModify();" > 수정하기 </button>
+	 	 <button class="btn btn-outline-danger " type="button" onclick="location.href='${contextPath}/myPage/quit.do'">회원탈퇴</button>
+	  </div>
+  </div>
 </form>
 </body>
 </html>

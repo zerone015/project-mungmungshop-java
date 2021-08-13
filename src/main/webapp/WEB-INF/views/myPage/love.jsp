@@ -75,10 +75,10 @@ request.setCharacterEncoding("UTF-8");
 	<div>
 		<div class="col">
 			<div class="row" >
-			<c:if test="${loveList == null}">
-				<div align="center">
-					<font>찜 목록이 없습니다.</font>
-				</div>
+			<c:if test="${loveList.size() == 0}">
+				<div style="margin-top: 300px;">
+					<h3>찜 목록이 없습니다.</h3>
+				</div>	
 			</c:if>
 			<c:forEach items="${loveList}" var="item">
 	            <div class="product">

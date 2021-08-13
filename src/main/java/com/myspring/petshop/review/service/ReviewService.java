@@ -29,4 +29,5 @@ public interface ReviewService {
 	public ReviewVO getReview(int review_num) throws DataAccessException;
 
 	public int reviewMod(Map<String, Object> map) throws DataAccessException;
+	public void removeReview(int review_num) throws DataAccessException;
 }

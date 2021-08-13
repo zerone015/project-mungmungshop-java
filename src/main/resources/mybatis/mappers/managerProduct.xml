@@ -59,7 +59,8 @@
 	
 	<select id="selectSearchProducts" resultType="productVO" parameterType="HashMap">
 		<![CDATA[ 
-			select * from products where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
+			select * from products where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') 
+			LIMIT #{pagination.startList}, #{pagination.listSize}
 		]]>
 	</select>
 

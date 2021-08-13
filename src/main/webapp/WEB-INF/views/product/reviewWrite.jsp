@@ -76,7 +76,6 @@ function checkReview() {
 			document.reviewForm.target="order"; 
 			self.close(); 
 			if(data == 0){
-				alert("후기 작성을 완료하였습니다.");
 				window.opener.location.href="${contextPath}/myPage/reviewList.do";  				
 			}
 			else{

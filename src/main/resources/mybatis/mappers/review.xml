@@ -13,7 +13,7 @@
 	<select id="selectAllReviewList" resultType="ReviewVO" parameterType="HashMap">
 
 		select * from reviews 
-		where p_code = #{p_code}
+		where p_code = #{p_code} AND review_test = 'Y'
 		order by review_num DESC
 		LIMIT #{pagination.startList}, #{pagination.listSize}
 
@@ -44,8 +44,11 @@
 	<!-- 나의 상품 리뷰 조회 -->
 	<select id="selectMyReviewList" resultType="ReviewVO" parameterType="HashMap">
 
-		select * from reviews 
-		where member_nick = #{member_nick} 
+		select rev.*, pdt.p_imageFileName, pdt.p_name 
+		from reviews AS rev
+		JOIN products AS pdt
+		ON rev.p_code = pdt.p_code
+		where rev.member_nick = #{member_nick} 
 		order by review_num DESC
 		LIMIT #{pagination.startList}, #{pagination.listSize}
 
@@ -55,35 +58,35 @@
 	<!-- 게시글 등록 -->
 	<insert id="reviewInsert" parameterType="map">
 		
-		insert into reviews(review_num, p_code, member_nick, review_title, review_content, review_recommend, review_date, review_imageFileName)
-				values(null, #{p_code}, #{member_nick}, #{review_title}, #{review_content}, #{review_recommend}, #{review_date}, #{review_imageFileName})
+		insert into reviews(review_num, p_code, member_nick, review_title, review_content, review_recommend, review_date, review_imageFileName, review_test)
+				values(null, #{p_code}, #{member_nick}, #{review_title}, #{review_content}, #{review_recommend}, #{review_date}, #{review_imageFileName}, 'N')
 	
 	</insert>
 	
 	<!-- 리뷰 점수별 개수 -->
 	<select id="oneReview" resultType="int" parameterType="String">
 
-		select count(*) as oneReview from reviews where  p_code = #{p_code} and review_recommend = 1;
+		select count(*) as oneReview from reviews where  p_code = #{p_code} and review_recommend = 1 and review_test = 'Y'
 
 	</select> 
 	<select id="twoReview" resultType="int" parameterType="String">
 
-		select count(*) as twoReview from reviews where  p_code = #{p_code} and review_recommend = 2;
+		select count(*) as twoReview from reviews where  p_code = #{p_code} and review_recommend = 2 and review_test = 'Y'
 
 	</select>
 	<select id="threeReview" resultType="int" parameterType="String">
 
-		select count(*) as threeReview from reviews where  p_code = #{p_code} and review_recommend = 3;
+		select count(*) as threeReview from reviews where  p_code = #{p_code} and review_recommend = 3 and review_test = 'Y'
 
 	</select>
 	<select id="fourReview" resultType="int" parameterType="String">
 
-		select count(*) as fourReview from reviews where  p_code = #{p_code} and review_recommend = 4;
+		select count(*) as fourReview from reviews where  p_code = #{p_code} and review_recommend = 4 and review_test = 'Y'
 
 	</select>
 	<select id="fiveReview" resultType="int" parameterType="String">
 
-		select count(*) as fiveReview from reviews where  p_code = #{p_code} and review_recommend = 5;
+		select count(*) as fiveReview from reviews where  p_code = #{p_code} and review_recommend = 5 and review_test = 'Y'
 
 	</select>
 	
@@ -103,8 +106,15 @@
 		set review_title = #{review_title}, 
 			review_content = #{review_content}, 
 			review_recommend = #{review_recommend}, 
-			review_imageFileName = #{review_imageFileName}
+			review_imageFileName = #{review_imageFileName},
+			review_test = 'N'
 		where review_num = #{review_num};
 				
 	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="deleteReview" parameterType="int">
+		delete from reviews
+		where review_num = #{review_num}
+	</delete>
 </mapper>

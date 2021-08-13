@@ -86,4 +86,9 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewMod(Map<String, Object> map) throws DataAccessException {
 		return reviewDAO.reviewMod(map);
 	}
+	
+	@Override
+	public void removeReview(int review_num) throws DataAccessException {
+		reviewDAO.deleteReview(review_num);
+	}
 }

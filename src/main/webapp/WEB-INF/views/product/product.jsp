@@ -411,35 +411,37 @@ function imagePopup(type) {
 	  	</div>
 	  	<!-- 후기 목록 -->
 	  	<c:forEach items="${reviewList}" var="reviewVO">
-	  	<div class="row" style="align-items: center;">
-			<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_recommend}.png" />
-					<c:if test="${reviewVO.review_recommend eq '5'}">
-						<font>적극 추천!</font>
-					</c:if>
+	  		<c:if test="${reviewVO.review_test.equals('Y')}">
+	  		<div class="row" style="align-items: center;">
+				<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+						<c:if test="${reviewVO.review_recommend eq '5'}">
+							<font>적극 추천!</font>
+						</c:if>
 					
-					<c:if test="${reviewVO.review_recommend eq '3'}">
-						<font>보통이에요.</font>
-					</c:if>
+						<c:if test="${reviewVO.review_recommend eq '3'}">
+							<font>보통이에요.</font>
+						</c:if>
 					
-					<c:if test="${reviewVO.review_recommend eq '1'}">
-						<font>별로에요.</font>
-					</c:if>
-			<details>
-			    <summary>
-			    	${reviewVO.review_title}
-			    </summary>
-				<div class="" style="padding: 5;">
-					<div id="wrap">
-					  <a href="javascript:openModal('reviewImg${reviewVO.review_imageFileName}');" class="button modal-open">
-					  	<img class="reviewImg${reviewVO.review_imageFileName}" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
-					  </a>
-					</div>
-					<p> ${reviewVO.review_content}</p>
-			    </div>
-			    <p style="color: graytext;">${reviewVO.memberNick} | <fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></p>
-			</details>
-		</div>
-			<hr>
+						<c:if test="${reviewVO.review_recommend eq '1'}">
+							<font>별로에요.</font>
+						</c:if>
+				<details>
+			    	<summary>
+			    		${reviewVO.review_title}
+			   		</summary>
+					<div class="" style="padding: 5;">
+						<div id="wrap">
+					  	<a href="javascript:openModal('reviewImg${reviewVO.review_imageFileName}');" class="button modal-open">
+					  		<img class="reviewImg${reviewVO.review_imageFileName}" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+					  	</a>
+						</div>
+						<p> ${reviewVO.review_content}</p>
+			    	</div>
+			    	<p style="color: graytext;">${reviewVO.memberNick} | <fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></p>
+				</details>
+			</div>
+				<hr>
+		</c:if>
 		</c:forEach>
   </div>
   

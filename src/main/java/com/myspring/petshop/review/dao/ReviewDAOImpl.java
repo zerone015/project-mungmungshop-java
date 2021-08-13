@@ -76,4 +76,9 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public int reviewMod(Map<String, Object> map) throws DataAccessException {
 		return sqlSession.update("mapper.review.reviewMod", map);
 	}
+	
+	@Override
+	public void deleteReview(int review_num) throws DataAccessException {
+		sqlSession.delete("mapper.review.deleteReview", review_num);
+	}
 }

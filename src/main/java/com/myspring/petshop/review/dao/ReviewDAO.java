@@ -28,4 +28,5 @@ public interface ReviewDAO {
 	public ReviewVO getReview(int review_num)throws DataAccessException;
 
 	public int reviewMod(Map<String, Object> map) throws DataAccessException;
+	public void deleteReview(int review_num) throws DataAccessException;
 }
