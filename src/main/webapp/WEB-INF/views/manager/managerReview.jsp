@@ -172,13 +172,13 @@ request.setCharacterEncoding("UTF-8");
 				</td>
 				<td>
 					<c:if test="${item.review_test.equals('N')}">
-						검수중
+						<font style="color: blue;">검수중</font>
 					</c:if>
 					<c:if test="${item.review_test.equals('Y')}">
-						포인트 지급완료
+						<font style="color: blue;">포인트 지급완료</font>
 					</c:if>
 					<c:if test="${item.review_test.equals('C')}">
-						불합격
+						<font style="color: red;">불합격</font>
 					</c:if>
 				</td>
 				<td>

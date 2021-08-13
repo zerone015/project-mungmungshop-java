@@ -13,7 +13,7 @@
 </head>
 <body>
 <footer class="text-muted py-5">
-	<div class="item-wrap" style="background-color:#f6efef; color: gray;">
+	<div class="item-wrap" style="background-color:#D7D8C9; color: gray;">
       <div class="site-logo" style="text-align:left; display: inline-block; vertical-align:top;">
         <span>
            <br>
@@ -21,8 +21,8 @@
 		</span>
       </div>
       <div class="site-discription" style="text-align:right;  display: inline-block;">
-        <span>
-			 <strong>㈜뭉뭉샵</strong> <br>
+        <span style="color: #57523E!important;">
+			 <b style="color: #57523E!important;">㈜뭉뭉샵</b> <br>
 			 대표이사: 5조 | 사업자등록번호 : 123-456-78910 <br>
 			 개인정보보호최고책임자 : 5조<br>
 			 주소 : 대전광역시 서구 둔산동 305호 <br>  

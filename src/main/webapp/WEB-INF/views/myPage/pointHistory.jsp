@@ -76,7 +76,7 @@
 		</c:if>
 		<c:forEach items="${phList}" var="item" varStatus="status" >
 			<tr align="center">
-				<td><font style="color:red;"><b>${item.point_status}</b></font></td>
+				<td><font><b style="color:red !important;">${item.point_status}</b></font></td>
 				<c:choose>
 					<c:when test="${item.point_status.equals('적립')}">
 						<td>+<fmt:formatNumber value="${item.point_value}" pattern="###,###,###"/>원</td>

@@ -142,7 +142,7 @@ function fn_next(page, range, rangeSize) {
 	}
 	
 	function manager_grant(member_num,id) {
-		if(confirm("관리자로 지정할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"정말 해당 회원을 관리자로 지정하시겠습니까?\n\n"+"잘못 지정할 경우 막대한 피해를 입을 수 있습니다.")){
+		if(confirm("관리자로 지정할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"정말 해당 회원을 관리자로 지정하시겠습니까?")){
 			$.ajax({
 				url : "${contextPath}/manager/modMemberGrant.do",
 				type : "POST",
@@ -198,7 +198,7 @@ function fn_next(page, range, rangeSize) {
 <b>회원 관리</b>
 </h4>
 <br>
-	<table class="table table-sm table-bordered">
+	<table class="table table-hover">
 		<thead>
 			<tr>
 				<td>회원 번호</td>

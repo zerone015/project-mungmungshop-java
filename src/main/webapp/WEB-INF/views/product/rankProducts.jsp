@@ -26,13 +26,16 @@
         <div class="col-md-4" style="display: inline-block; float: left;">
         <c:choose>
         	<c:when test="${status.count == 1 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #ffd700 !important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<img src="${contextPath}/download?imageFileName=ranking1.png" 
+        			style="width: 30px; height: 25px;" alt="랭킹 왕관" />
         	</c:when>
         	<c:when test="${status.count == 2 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c0c0c0 !important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<img src="${contextPath}/download?imageFileName=ranking2.png" 
+        			style="width: 30px; height: 25px;" alt="랭킹 왕관" />
         	</c:when>
         	<c:when test="${status.count == 3 }">
-        		<h3><span class="badge rounded-pill bg-warning text-dark" style="background-color: #c68a12 !important;"><font style="font-size:18px; color: white !important;">${status.count}</font><font style="font-size:14px; color: white !important;">위</font></span></h3>
+        		<img src="${contextPath}/download?imageFileName=ranking3.png" 
+        			style="width: 30px; height: 25px;" alt="랭킹 왕관" />
         	</c:when>
         	<c:otherwise>
         		<font style="font-size:18px; font-weight: bold;">${status.count}</font><font style="font-size:14px;">위</font>

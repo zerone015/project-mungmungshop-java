@@ -141,7 +141,7 @@ request.setCharacterEncoding("UTF-8");
 						<font style="font-size: 30px; ">랭킹</font>
 					</div>
 					<div>
-						<a href="${contextPath}/product/rankProduct.do">+ 더보기</a>
+						<a href="${contextPath}/product/getRankProducts.do">+ 더보기</a>
 					</div>
 				</div>
 				
@@ -155,10 +155,11 @@ request.setCharacterEncoding("UTF-8");
 									src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}"
 									style="width: 50%; height: 225;" alt="상품 이미지" />
 								</a>
-								<p class="rank">${status.count}</p>
 							</div>
 							<div class="card-body">
-								<p style="font-size: 14px;">${item.p_name}</p>
+								<img
+									src="${contextPath}/download?imageFileName=ranking${status.count}.png"
+									style="width: 30px; height: 25px;" alt="랭킹 왕관" /><p style="font-size: 14px;">${item.p_name}</p>
 								<div class="productInfo">
 										<div>
 										<p style="font-size: 14px;">
@@ -182,7 +183,7 @@ request.setCharacterEncoding("UTF-8");
 					<font style="font-size: 30px; ">브랜드</font>
 				</div>
 				<div>
-					<a href="${contextPath}/product/rankProduct.do">+ 더보기</a>
+					<a href="${contextPath}/brandList.do">+ 더보기</a>
 				</div>
 			</div>
 			
@@ -190,7 +191,7 @@ request.setCharacterEncoding("UTF-8");
 			<div style="text-align: center;">
 				<div class="col-md-4" style="display: inline-block; float: left;">
 					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-						onclick="location.href='#';">
+						onclick="location.href='${contextPath}/product/brandProducts.do?brandName=아카나';">
 						<div class="bd-placeholder-img card-img-top">
 							<img src="${contextPath}/download?imageFileName=ACANA.PNG"
 								style="width: 100%; height: 250;" />
@@ -199,7 +200,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 				<div class="col-md-4" style="display: inline-block; float: left;">
 					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-						onclick="location.href='#';">
+						onclick="location.href='${contextPath}/product/brandProducts.do?brandName=오리젠';">
 						<div class="bd-placeholder-img card-img-top">
 							<img src="${contextPath}/download?imageFileName=ORIGEN.PNG"
 								style="width: 100%; height: 250;" />
@@ -208,7 +209,7 @@ request.setCharacterEncoding("UTF-8");
 				</div>
 				<div class="col-md-4" style="display: inline-block; float: left;">
 					<div class="card mb-4 shadow-sm" style="cursor: pointer;"
-						onclick="location.href='#';">
+						onclick="location.href='${contextPath}/product/brandProducts.do?brandName=로얄캐닌';">
 						<div class="bd-placeholder-img card-img-top">
 							<img src="${contextPath}/download?imageFileName=ROYALCANIN.PNG"
 								style="width: 100%; height: 250;" />

@@ -15,34 +15,39 @@ request.setCharacterEncoding("utf-8");
 </head>
 <style>
 	.sideMenu2 {
-		font-size: 14;
-		margin: 5;
+		font-size: 16;
+		margin-top: 20px;
 	}
 	.sideMenu2 > a:hover {
 		font-weight: 700;
 	}
+	
+	.sideMenu {
+		padding: 10px;
+	}
+	
+	#sideLink {
+		font-weight: 900;
+	}
 </style>
+
 <body>
 	<div class="container">
-		<hr style=" width:120px; margin: auto; margin-top: 75; margin-bottom: 5;">
-		<p style="font-size: 16;">나의 쇼핑 활동</p>
-           <ul  class="sideMenu">
-            <li class="sideMenu2"><a href="${contextPath}/myPage/getOrderList.do">주문 내역 조회</a><li>
-            <li class="sideMenu2"><a href="${contextPath}/myPage/getPointHistory.do">포인트 내역</a></li>
-            <li class="sideMenu2"><a href="${contextPath}/myPage/getLoveList.do">찜 리스트</a></li>
-            <li class="sideMenu2"><a href="${contextPath}/myPage/reviewList.do">나의 리뷰</a></li>
-            <li class="sideMenu2"><a href="${contextPath}/myPage/quickProducts.do">최근 본 상품</a><li>
-            <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
-            <li class="sideMenu2"><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
-           </ul>
-        <c:if test="${member.member_type != '네이버' && member.member_type != '카카오'}">
-    		<hr style=" width:120px; margin: auto; margin-top: 20; margin-bottom: 5;">
-			<p style="font-size: 16;">내 정보 관리</p>       
-            <ul class="sideMenu">
-            	<li class="sideMenu2"><a href="${contextPath}/myPage/infoCertify.do">회원 정보 수정</a></li>
-            	<li class="sideMenu2"><a href="${contextPath}/myPage/pwCertify.do">비밀번호 변경</a></li>
-           </ul>
-        </c:if>
+		<div class="col" style="text-align: left;">
+	           <ul  class="sideMenu">
+	            <li class="sideMenu2"><a href="${contextPath}/myPage/getOrderList.do">주문 내역 조회</a><li>
+	            <li class="sideMenu2"><a href="${contextPath}/myPage/getPointHistory.do">포인트 내역</a></li>
+	            <li class="sideMenu2"><a href="${contextPath}/myPage/getLoveList.do">찜 리스트</a></li>
+	            <li class="sideMenu2"><a href="${contextPath}/myPage/reviewList.do">나의 리뷰</a></li>
+	            <li class="sideMenu2"><a href="${contextPath}/myPage/quickProducts.do">최근 본 상품</a><li>
+	            <li class="sideMenu2"><a href="${contextPath}/address/addressList.do">배송지 관리</a></li>
+	            <li class="sideMenu2"><a  href="${contextPath}/board/qnaList.do">1:1 문의</a></li>
+		        <c:if test="${member.member_type != '네이버' && member.member_type != '카카오'}">
+	            	<li class="sideMenu2"><a href="${contextPath}/myPage/infoCertify.do">회원 정보 수정</a></li>
+	            	<li class="sideMenu2"><a href="${contextPath}/myPage/pwCertify.do">비밀번호 변경</a></li>
+		        </c:if>
+	        </ul>
+        </div>
 	</div>
 		
 

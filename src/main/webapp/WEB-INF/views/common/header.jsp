@@ -122,13 +122,13 @@
 		
 		  	
 			<div class="col-4 d-flex justify-content-end align-items-center" style="text-align: center; margin:0;">
-				<div class="col" >
+				<div class="col" style="padding: 0px;">
 					<div style="text-align: center; margin-bottom: 5;">
 						<c:if test="${isLogOn == true && member != null}">
 							<font style="color: graytext;"><b>${member.member_nick}</b>님 환영합니다 ! 포인트 : <fmt:formatNumber value="${member.member_point}" pattern="###,###,###"/>원</font>
 						</c:if>
 					</div>
-					<div style="display: flex;">
+					<div style="display: flex; ">
 						<c:if test="${member.getMember_manager() == 1}">
 							<a class="rightMenu" href="${contextPath}/managerMain.do"><font style="color: #0078FF;">관리자</font></a> 
 							<font class="divider">|</font>
@@ -153,8 +153,8 @@
 
 <nav>
 <div id="menu" style="position:relative; z-index: 99; background-color: white;">
-    <ul class="main1" style=" padding-left: 0px; margin-left: -100;">
-        <li><a href="#"><b style="font-size: 20px;"><span style="font-size: 20px;">≡</span> 카테고리</b></a>
+    <ul class="main1" style=" padding-left: 0px;">
+        <li style="border: none;"><a href="#"><b style="font-size: 20px;"><span style="font-size: 20px;">≡</span> 카테고리</b></a>
             <ul class="main2">
                 <li><a href="#">사료</a>
 					<ul class="main3">
@@ -228,8 +228,8 @@
         <li><a href="${contextPath}/brandList.do">브랜드</a></li>
 		<li><a href="${contextPath}/product/getRankProducts.do">랭킹</a></li>
 		<li><a href="#">할인</a></li>
-		<li><a href="#">고객센터</a>
-            <ul class="main2">
+		<li style="border: none;"><a href="#">고객센터</a>
+            <ul class="main2" style="width:110%">
 				<li><a href="${contextPath}/board/noticeList.do">공지사항</a></li>
 				<li><a href="${contextPath}/board/faqList.do">자주 묻는 질문</a></li>
 				<li><a href="${contextPath}/board/qnaList.do">1:1 문의</a></li>

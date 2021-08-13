@@ -56,6 +56,12 @@
 		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
 	</definition>
 	
+	<definition name="managerMemberInfo" extends="baseLayout">
+		<put-attribute name="title" value="관리자 모드 상세 회원 관리 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/manager/managerMemberInfo.jsp" />
+		<put-attribute name="side" value="/WEB-INF/views/common/sideManager.jsp"/>
+	</definition>
+	
 	<definition name="managerReview" extends="baseLayout">
 		<put-attribute name="title" value="관리자 모드 후기 관리 페이지" />
 		<put-attribute name="body" value="/WEB-INF/views/manager/managerReview.jsp" />
