@@ -64,15 +64,15 @@ function fn_reviewRemove(review_num){
 	         <div class="dateDiv">
 	         	<c:choose>
 	         		<c:when test="${reviewVO.review_test.equals('Y')}">
-	         			<font style="color: red; font-weight: bold;">승인</font>
+	         			<font style="color: #008000; font-weight: bold;">승인</font>
 	         		</c:when>
 	         		<c:when test="${reviewVO.review_test.equals('C')}">
 	         			<font style="color: red; font-weight: bold;">취소</font><br>
-	         			<font style="color: #828282;">(리뷰를<br>수정해주세요.)</font>
+	         			<font style="color: #B2B2B2;">(리뷰를<br>수정해주세요.)</font>
 	         		</c:when>
 	         		<c:otherwise>
-	         			<font style="color: red; font-weight: bold;">검수중</font><br>
-	         			<font style="color: #828282;">(승인되면<br>포인트가<br>지급됩니다.)</font>
+	         			<font style="color: blue; font-weight: bold;">검수중</font><br>
+	         			<font style="color: #B2B2B2;">(승인되면<br>포인트가<br>지급됩니다.)</font>
 	         		</c:otherwise>
 	         	</c:choose>
 	        </div>
