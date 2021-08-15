@@ -67,7 +67,7 @@ function checkBoard() {
 			<tr>
 				<th style="background: #e6e6e6;">작성자</th>
 				<td>
-					<input type="text" id = "faq_writer" name = "faq_writer" />
+					<input type="text" id = "faq_writer" name = "faq_writer" value="${memberVO.member_nick}" readonly/>
 				</td>
 				<th style="background: #e6e6e6;">날짜</th>
 				<td>

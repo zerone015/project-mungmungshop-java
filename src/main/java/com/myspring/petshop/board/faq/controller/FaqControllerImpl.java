@@ -62,9 +62,13 @@ public class FaqControllerImpl implements FaqController {
 	}
 	
 	@RequestMapping(value = "/board/faqWrite.do", method = RequestMethod.GET)
-	public String faqWrite(Locale locale, Model model) {
+	public ModelAndView faqWrite(HttpSession session) {
+		ModelAndView mav = new ModelAndView("/board/faqWrite");
 		
-		return "/board/faqWrite";
+		memberVO = (MemberVO)session.getAttribute("member");
+		mav.addObject("memberVO", memberVO);
+		
+		return mav;
 	}
 	
 	@Override
@@ -88,7 +92,7 @@ public class FaqControllerImpl implements FaqController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/faqView");
 		mav.addObject("faqVO", faqVO);
-		// Á¶È¸¼ö Áõ°¡
+		// ï¿½ï¿½È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		faqService.increaseHits(faq_no);
 		return mav;
 	}

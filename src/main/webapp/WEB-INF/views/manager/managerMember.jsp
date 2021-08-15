@@ -181,7 +181,7 @@ function fn_getMember(index){
 						<font style="color: red">접근 불가</font>
 					</c:when>
 					<c:otherwise>
-						<button class="btn btn-danger" type="button" onclick="fn_getMember(${status.index});"><font style="font-size:11px; color:white;">관리하기</font></button>
+						<button class="btn btn-primary" type="button" onclick="fn_getMember(${status.index});"><font style="font-size:11px; color:white;">관리하기</font></button>
 					</c:otherwise>
 				</c:choose>
 				</td>
