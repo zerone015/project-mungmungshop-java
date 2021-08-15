@@ -182,8 +182,8 @@ request.setCharacterEncoding("UTF-8");
 					</c:if>
 				</td>
 				<td>
-					<button class="btn btn-success" style="width: 100%;" type="button" onClick="fn_reviewPass(${status.index});">승인</button><br>
-					<button class="btn btn-warning" style="width: 100%;" type="button" onClick="fn_reviewFail(${status.index});">미승인</button><br>
+					<button class="btn btn-success" style="width: 100%;" type="button" onClick="fn_reviewPass(${status.index});">승인</button><br><br>
+					<button class="btn btn-warning" style="width: 100%;" type="button" onClick="fn_reviewFail(${status.index});">미승인</button><br><br>
 					<button class="btn btn-danger" style="width: 100%;" type="button" onClick="fn_reviewRemove(${status.index});">삭제</button>
 					<input type="hidden" name="p_code" value="${item.p_code}" disabled/>
 					<input type="hidden" name="member_nick" value="${item.member_nick}" disabled/>

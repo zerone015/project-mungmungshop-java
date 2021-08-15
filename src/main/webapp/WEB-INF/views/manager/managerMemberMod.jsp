@@ -8,7 +8,7 @@ request.setCharacterEncoding("utf-8");
 <html>
 <head>
 <meta charset="utf-8">
-<title>회원가입</title>
+<title>관리자 회원정보수정</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <style>
@@ -30,16 +30,8 @@ request.setCharacterEncoding("utf-8");
 	}
 </style>
 </head>
-<script>
-	window.onload = function() {
-		document.userInfo.member_id.focus();
-	}
-</script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-	var code = "";
-	var codeCheck = false;
-
 	function inputIdChk() {
 		document.userInfo.idDuplication.value = "idUncheck";
 	}
@@ -52,7 +44,6 @@ request.setCharacterEncoding("utf-8");
 		var form = document.userInfo;
 
 		var regExpId = /^[A-Za-z0-9+]*$/; // 영문,숫자만 사용 가능
-		var regExpPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/ //8자이상 영문,슛자,특수문자 포함 필수
 		var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i; //여
 		var regExpName = /^[ㄱ-ㅎ|가-힣|a-z|A-Z]+$/; //한글,영문만 사용 가능
 		var regExpPhone = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/; //-포함 휴대폰 번호 형식
@@ -62,13 +53,10 @@ request.setCharacterEncoding("utf-8");
 		var nickDuplication = form.nickDuplication;
 
 		var id = form.member_id;
-		var pw = form.member_pw;
-		var checkPw = form.joinPwCheck;
 		var email = form.member_email;
 		var name = form.member_name;
 		var nickName = form.member_nick;
 		var phoneNumb = form.member_phone;
-		var passcode = form.passcode;
 
 		if (id.value == "") {
 			alert("아이디를 입력해주세요.");
@@ -93,29 +81,6 @@ request.setCharacterEncoding("utf-8");
 			return false;
 		}
 
-		if (pw.value == "") {
-			alert("비밀번호를 입력해주세요.");
-			pw.focus();
-			return false;
-		}
-
-		else if (!regExpPw.test(pw.value)) {
-			alert("비밀번호를 영문,슛자,특수문자 포함 8자 이상 입력해주세요.")
-			pw.select();
-			return false;
-		}
-
-		if (checkPw.value == "") {
-			alert("비밀번호 확인을 입력해주세요.");
-			checkPw.focus();
-			return false;
-		}
-
-		else if (pw.value != checkPw.value) {
-			alert("비밀번호가 비밀번호 확인과 일치하지 않습니다.");
-			checkPw.select();
-			return false;
-		}
 
 		if (email.value == "") {
 			alert("이메일을 입력해주세요.");
@@ -126,12 +91,6 @@ request.setCharacterEncoding("utf-8");
 		else if (!regExpEmail.test(email.value)) {
 			alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
 			email.select();
-			return false;
-		}
-
-		if (passcode.value == "") {
-			alert("인증번호를 입력해주세요.");
-			passcode.focus();
 			return false;
 		}
 
@@ -180,11 +139,6 @@ request.setCharacterEncoding("utf-8");
 		else if (!regExpPhone.test(phoneNumb.value)) {
 			alert("잘못된 휴대폰 번호 입니다. -를 포함한 숫자만 입력해주세요.");
 			phoneNumb.select();
-			return false;
-		}
-
-		if (codeCheck == false) {
-			alert("이메일 인증을 완료해주세요.")
 			return false;
 		}
 
@@ -283,107 +237,37 @@ request.setCharacterEncoding("utf-8");
 		}
 	}
 
-	function fn_mailSend() {
-		var form = document.userInfo;
-		
-		var email = $("#mail_input").val();
-		var checkBox = $("#mail_check_input");
-		
-		var regExpEmail = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-		
-		if (form.member_email.value == "") {
-			alert("이메일을 입력해주세요.");
-			email.focus();
-			return false;
-		}
-		
-		if (!regExpEmail.test(form.member_email.value)) {
-			alert("이메일 형식이 잘못되었습니다. 다시 입력해주세요.");
-			form.member_email.select();
-			return false;
-		}
-		
-		$.ajax({
 
-			type : "GET",
-			url : "${contextPath}/mail/sendMailByJoin.do?email=" + email,
-			success : function(data) {
-				const checkNum = $.trim(data);
-				if (checkNum == 0) {
-					alert("해당 이메일로 더 이상 계정을 생성하실 수 없습니다.");
-				}else{
-					checkBox.attr("disabled", false);
-					code = data;
-					alert("입력하신 이메일로 인증번호를 전송했습니다.");
-				}
-			}
-		});
-	}
-
-	function fn_codeCheck() {
-		var inputCode = $("#mail_check_input").val();
-		
-		if (document.userInfo.passcode.value == "") {
-			alert("인증번호를 입력해주세요.");
-			passcode.focus();
-		}
-		
-		if (inputCode == code) {
-			codeCheck = true;
-			alert("인증번호가 일치합니다.");
-		} else {
-			codeCheck = false;
-			alert("인증번호가 일치하지 않습니다.");
-		}
-	}
 </script>
 <body>
 	<div>
-		<h4 style="margin-bottom: 60px;"><b>회원 가입</b></h4>
-		<form method="POST" action="${contextPath}/member/addMember.do"
+		<h4 style="margin-bottom: 60px;"><b>회원정보수정</b></h4>
+		<form method="POST" action="${contextPath}/manager/modMember.do"
 			name="userInfo">
 			<table>
 				<tr>
 					<td><b>아이디</b><font>*</font></td>
 					<td><input class="form-control" type="text" maxlength="11"
 						placeholder="5~11자 이내 입력" name="member_id" id="Member_ID"
-						onkeydown="inputIdChk()">
+						onkeydown="inputIdChk()" value="${memberVO.member_id}">
 						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" id="idChk" onclick="fn_idChk();" value="N">중복확인</button>
 						<input type="hidden" name="idDuplication" value="idUncheck">
 					</td>
 				</tr>
 				<tr>
-					<td><b>비밀번호</b><font>*</font></td>
-					<td><input class="form-control" type="password" maxlength="20"
-						placeholder="영문,숫자,특수문자 포함 8자 이상" name="member_pw"></td>
-				</tr>
-				<tr>
-					<td><b>비밀번호 확인</b><font>*</font></td>
-					<td><input class="form-control" type="password" maxlength="20"
-						placeholder="다시 한번 입력해주세요." name="joinPwCheck"></td>
-				</tr>
-				<tr>
 					<td><b>이메일</b><font>*</font></td>
 					<td><input class="form-control" type="text" maxlength="50"
-						placeholder="@을 포함한 이메일 주소" id="mail_input" name="member_email">
-						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" onclick="fn_mailSend();">인증번호 전송</button></td>
-				</tr>
-				<tr>
-					<td><b>인증번호</b><font>*</font></td>
-					<td><input class="form-control" type="text" maxlength="6"
-						placeholder="인증번호를 입력하세요." id="mail_check_input" name="passcode"
-						disabled="disabled">
-						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" onclick="fn_codeCheck();">인증</button></td>
-
+						placeholder="@을 포함한 이메일 주소" id="mail_input" name="member_email" value="${memberVO.member_email}">
+					</td>
 				</tr>
 				<tr>
 					<td><b>이름</b><font>*</font></td>
-					<td><input class="form-control" type="text" maxlength="45" placeholder="이름"
+					<td><input class="form-control" type="text" maxlength="45" placeholder="이름" value="${memberVO.member_name}"
 						name="member_name"></td>
 				</tr>
 				<tr>
 					<td><b>닉네임</b><font>*</font></td>
-					<td><input class="form-control" type="text" maxlength="20" placeholder="닉네임"
+					<td><input class="form-control" type="text" maxlength="20" placeholder="닉네임" value="${memberVO.member_nick}"
 						id="Member_Nick" name="member_nick" onkeydown="inputNickChk()">
 						<button style="margin-bottom: 5px; margin-left: 5px;" class="btn btn-outline-dark" type="button" id="nickChk" onclick="fn_nickChk();"
 							value="N">중복확인</button> <input type="hidden"
@@ -391,11 +275,12 @@ request.setCharacterEncoding("utf-8");
 				</tr>
 				<tr>
 					<td><b>휴대전화</b><font>*</font></td>
-					<td><input class="form-control" type="text" placeholder="-를 포함한 휴대폰 번호"
+					<td><input class="form-control" type="text" placeholder="-를 포함한 휴대폰 번호" value="${memberVO.member_phone}"
 						name="member_phone" /></td>
 				</tr>
 			</table>
-			<br> <button class="btn btn-dark btn-lg" type="button" onclick="fn_checkJoin()">회원가입</button>
+			<br> <button class="btn btn-primary btn-lg" type="button" onclick="fn_checkJoin()">수정</button>
+			<input type="hidden" name="member_num" value="${memberVO.member_num}"/>
 		</form>
 	</div>
 </body>

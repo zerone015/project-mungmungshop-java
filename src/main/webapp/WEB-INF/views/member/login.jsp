@@ -136,7 +136,7 @@
 				<td>
 				<button class="btn btn-primary" type="button" onclick="fn_checkLogin();" style="width: 370; height: 60px; margin-top: 35px;">로그인</button>
 				<div id="naver_id_login" style="text-align:center; margin-top: 15px;"><a href="${naver_url}"><img style="width: 370; height: 60px;" src="${contextPath}/download?imageFileName=btnG_완성형.png" alt="네이버 로그인 이미지"/></a></div>
-				<div id="kakao_id_login" style="text-align: center"> <a href="#" onclick="kakaoLogin();"> <img style="width: 370; height: 60px; margin-top: 15px;" src="${contextPath}/download?imageFileName=kakao_login_medium_narrow.png" /></a> </div>
+				<div id="kakao_id_login" style="text-align: center"> <a href="#" onclick="kakaoLogin();"> <img style="width: 370; height: 70px; margin-top: 15px;" src="${contextPath}/download?imageFileName=kakao_login_medium_narrow.png" /></a> </div>
 				</td>
 			</tr>
 		</table>

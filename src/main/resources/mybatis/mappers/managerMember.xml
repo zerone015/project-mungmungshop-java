@@ -11,6 +11,12 @@
 		]]>
 	</select>
 	
+	<select id="selectMemberInfo" resultType="memberVO">
+		<![CDATA[ 
+			select * from members where member_num = #{member_num}
+		]]>
+	</select>
+	
 	<select id="selectMembersCnt" resultType="int">
 		<![CDATA[ 
 			select count(*) as listCnt from members
@@ -56,4 +62,12 @@
 			select * from members where ${searchBy} LIKE CONCAT('%',#{searchContents},'%') LIMIT #{pagination.startList}, #{pagination.listSize}
 		]]>
 	</select>
+	
+	<update id="updateMember" parameterType="memberVO">
+		<![CDATA[ 
+			update members 
+			set member_id = #{member_id}, member_email = #{member_email}, member_name = #{member_name}, member_nick = #{member_nick}, member_phone = #{member_phone}
+			where member_num = #{member_num}
+		]]>
+	</update>
 </mapper>

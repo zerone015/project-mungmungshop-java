@@ -35,7 +35,7 @@
 				
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "&page=" + page;
+		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 
 		location.href = url;
@@ -46,7 +46,7 @@
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "&page=" + page;
+		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 
 		location.href = url;	
@@ -60,7 +60,7 @@
 		
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "&page=" + page;
+		url = url + "?page=" + page;
 		url = url + "&range=" + range;
 
 		location.href = url;
@@ -95,7 +95,7 @@
 					<div class="card-body">
 				   
 				    <p style="font-size: 14px;">
-						<a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">${products.p_name}</a>
+						<font class="badge badge-danger" style="font-size: 14px;">new </font>&nbsp;&nbsp;<a href="${contextPath}/product/getProduct.do?p_code=${products.p_code}">${products.p_name}</a>
 					</p>
 				
 					<p style="font-size: 14px;">

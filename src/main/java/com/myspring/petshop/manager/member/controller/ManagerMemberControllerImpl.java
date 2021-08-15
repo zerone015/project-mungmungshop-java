@@ -4,8 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.member.service.ManagerMemberService;
+import com.myspring.petshop.member.vo.MemberVO;
 
 @Controller
 public class ManagerMemberControllerImpl implements ManagerMemberController {
@@ -32,6 +39,17 @@ public class ManagerMemberControllerImpl implements ManagerMemberController {
 		ModelAndView mav = new ModelAndView("managerMember");
 		mav.addObject("pagination", pagination);
 		mav.addObject("members", members);
+		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/getMemberInfo.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public ModelAndView getMemberInfo(@RequestParam("member_num") int member_num) throws Exception {
+		ModelAndView mav = new ModelAndView("managerMemberInfo");
+	
+		MemberVO memberVO = managerService.getMemberInfo(member_num);
+		mav.addObject("memberVO", memberVO);
 		
 		return mav;
 	}
@@ -103,5 +121,42 @@ public class ManagerMemberControllerImpl implements ManagerMemberController {
 		mav.addObject("searchContents", searchContents);
 		
 		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/modMemberForm.do", method = RequestMethod.POST)
+	public ModelAndView modMemberForm(@RequestParam("member_num") int member_num) throws Exception {
+		ModelAndView mav = new ModelAndView("managerMemberMod");
+		
+		MemberVO memberVO = managerService.getMemberInfo(member_num);
+		mav.addObject("memberVO", memberVO);
+		
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/manager/modMember.do", method = RequestMethod.POST)
+	public ResponseEntity modMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request) throws Exception {
+		String message;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		try {
+			managerService.modMember(memberVO);
+			message = "<script>";
+			message += "alert('회원정보 수정을 완료하였습니다.');";
+			message += "location.href='" + request.getContextPath() + "/manager/getMemberInfo.do?member_num=" + memberVO.getMember_num() + "';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.OK);
+		}catch(Exception e) {
+			message = "<script>";
+			message += "alert('오류 발생. 다시 시도해주세요.');";
+			message += "location.href='" + request.getContextPath() + "/manager/getMemberInfo.do';";
+			message += " </script>";
+			resEnt = new ResponseEntity(message, responseHeaders, HttpStatus.BAD_REQUEST);
+			e.printStackTrace();
+		}
+		
+		return resEnt;
 	}
 }

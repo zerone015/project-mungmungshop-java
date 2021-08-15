@@ -116,84 +116,26 @@ function fn_next(page, range, rangeSize) {
 	location.href = url;
 }
 	
-	function member_kickOut(member_num,id) {
-		if(confirm("정말 '"+id+ "' 회원을 회원탈퇴 시키시겠습니까?\n\n"+"확인을 누르면 해당 회원이 강제로 회원탈퇴 됩니다.")){
-			$.ajax({
-				url : "${contextPath}/manager/removeMembers.do",
-				type : "POST",
-				data : {member_num : member_num},
-				success: function(data) {
-					if(data == "remove_success"){
-						alert("해당 회원이 회원탈퇴 되었습니다.");
-						location.href = "${contextPath}/manager/getMembersList.do";
-					}
-					else {
-						alert("시도 실패");
-					}
-				},
-				error : function(data, textStatus) {
-					 alert("에러"+data);
-				}
-			});
-		}
-		else{
-			return false;
-		}
+function fn_getMember(index){
+	var form = document.memberForm;
+	
+	var length = form.member_num.length;
+	
+	if(length > 1) {
+		var member_num = form.member_num[index];
+	}else{
+		var member_num = form.member_num;
 	}
 	
-	function manager_grant(member_num,id) {
-		if(confirm("관리자로 지정할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"정말 해당 회원을 관리자로 지정하시겠습니까?")){
-			$.ajax({
-				url : "${contextPath}/manager/modMemberGrant.do",
-				type : "POST",
-				data : {member_num : member_num},
-				success: function(data) {
-					if(data == "grant_success"){
-						alert(id+" 회원을 관리자로 지정하였습니다.");
-						location.href = "${contextPath}/manager/getMembersList.do";
-					}
-					else {
-						alert("해당 회원은 이미 관리자입니다.");
-					}
-				},
-				error : function(data, textStatus) {
-					alert("에러"+data);
-				}
-			});
-		}
-		else{
-			return false;
-		}
-	}
+	member_num.disabled = false;
 	
-	function manager_revoke(member_num,id) {
-		if(confirm("관리자 권한을 회수할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"정말 해당 회원의 관리자 권한을 회수하시겠습니까?")){
-			$.ajax({
-				url : "${contextPath}/manager/modMemberRevoke.do",
-				type : "POST",
-				data : {member_num : member_num},
-				success: function(data) {
-					if(data == "revoke_success"){
-						alert(id+" 회원의 관리자 권한을 회수했습니다.");
-						location.href = "${contextPath}/manager/getMembersList.do";
-					}
-					else {
-						alert("해당 회원은 이미 관리자가 아닙니다.");
-					}
-				},
-				error : function(data, textStatus) {
-					alert("에러"+data);
-				}
-			});
-		}
-		else {
-			return false;
-		}
-	}
+	form.submit();
+}
 </script>
 <body>
 <div class="content">
 	<div class="container">
+<form name="memberForm" method="POST" action="${contextPath}/manager/getMemberInfo.do">
 <h4 style="margin-bottom: 40px;">
 <b>회원 관리</b>
 </h4>
@@ -201,14 +143,12 @@ function fn_next(page, range, rangeSize) {
 	<table class="table table-hover">
 		<thead>
 			<tr>
-				<td>회원 번호</td>
 				<td>아이디</td>
 				<td>이름</td>
 				<td>닉네임</td>
 				<td>휴대폰 번호</td>
 				<td>이메일</td>
-				<td>가입 날짜</td>
-				<td>최근 접속 날짜</td>
+				<!-- <td>최근 접속 날짜</td> -->
 				<td>권한</td>
 				<td>관리하기</td>
 			</tr>
@@ -219,40 +159,38 @@ function fn_next(page, range, rangeSize) {
 				<td align="center" colspan="10">회원 검색 결과가 없습니다.</td>
 			</tr>
 		</c:if>
-			<c:forEach items="${members}" var="members">
+			<c:forEach items="${members}" var="members" varStatus="status">
 			<tr>
-				<td>${members.member_num}</td>
 				<td>${members.member_id}</td>
 				<td>${members.member_name}</td>
 				<td>${members.member_nick}</td>
 				<td>${members.member_phone}</td>
 				<td>${members.member_email}</td>
-				<td><fmt:formatDate value="${members.member_joindate}" type="date" dateStyle="long"></fmt:formatDate></td>
-				<td><fmt:formatDate value="${members.member_logindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
+				<%-- <td><fmt:formatDate value="${members.member_logindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td> --%>
 				<c:choose>
 					<c:when test="${members.member_manager == 1}">
 						<td><font style="color: red">관리자</font></td>
 					</c:when>
 					<c:otherwise>
-						<td><font style="color: blue">일반 회원</font></td>
+						<td><font style="color: blue">회원</font></td>
 					</c:otherwise>
 				</c:choose>
 				<td>
 				<c:choose>
 					<c:when test="${members.member_id == 'manager' }">
-						<font style="color: red">해당 아이디는 권한 회수 및 탈퇴 불가</font>
+						<font style="color: red">접근 불가</font>
 					</c:when>
 					<c:otherwise>
-						<button class="btn btn-primary" type="button" onclick="manager_grant(${members.member_num},'${members.member_id}');"><font style="font-size: 11px">관리자 지정</font></button>
-						<button class="btn btn-secondary" type="button" onclick="manager_revoke(${members.member_num},'${members.member_id}');"><font style="font-size: 11px">관리자 회수</font></button>
-						<button class="btn btn-danger" type="button" onclick="member_kickOut(${members.member_num},'${members.member_id}');"><font style="font-size: 11px">강제 탈퇴</font></button>
+						<button class="btn btn-danger" type="button" onclick="fn_getMember(${status.index});"><font style="font-size:11px; color:white;">관리하기</font></button>
 					</c:otherwise>
 				</c:choose>
 				</td>
 			</tr>
+			<input type="hidden" name="member_num" value="${members.member_num}" disabled/>
 			</c:forEach>
 		</tbody>
 	</table>
+	</form>
 	<form method="GET" action="${contextPath}/manager/getSearchMembers.do">
 		<select style="height: 35px;" name="searchBy">
 			<option value="member_id" <c:if test="${searchBy == 'member_id'}">selected</c:if>>ID</option>

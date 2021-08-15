@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.myspring.petshop.common.pagination.Pagination;
 import com.myspring.petshop.manager.member.dao.ManagerMemberDAO;
+import com.myspring.petshop.member.vo.MemberVO;
 
 @Service
 @Transactional(propagation = Propagation.REQUIRED)
@@ -28,6 +29,12 @@ public class ManagerMemberServiceImpl implements ManagerMemberService{
 	public List getMembersList(Pagination pagination) throws Exception {
 		
 		return managerDAO.selectMembers(pagination);
+	}
+	
+	@Override
+	public MemberVO getMemberInfo(int member_num) throws Exception {
+		
+		return managerDAO.selectMemberInfo(member_num);
 	}
 	
 	@Override
@@ -74,6 +81,13 @@ public class ManagerMemberServiceImpl implements ManagerMemberService{
 		
 		return managerDAO.selectSearchMembers(searchMap);
 	}
+	
+	@Override
+	public void modMember(MemberVO memberVO) throws Exception {
+		
+		managerDAO.updateMember(memberVO);
+	}
+	
 	
 	private int getMemberManager(int member_num) throws Exception {
 		

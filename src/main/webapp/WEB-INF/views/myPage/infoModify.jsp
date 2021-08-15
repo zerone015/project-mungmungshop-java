@@ -128,18 +128,19 @@ function fn_nickChk() {
 			type : "post",
 			dataType : "json",
 			data : {
-				"member_nick" : $("#member_nick").val()
+				"member_nick" : $("#Member_Nick").val()
 			},
 			success : function(data) {
-				if (data == 1) {
-					alert("중복된 닉네임입니다.");
-				} else if (data == 0) {
+				if (data == 0) {
 					$("#nickChk").attr("value", "Y");
-					document.infoModify.nickDuplication.value = "nickCheck";
+					document.userInfo.nickDuplication.value = "nickCheck";
 					alert("사용 가능한 닉네임입니다.");
+					
+				} else{
+					alert("중복된 닉네임입니다.");	
 				}
 			}
-		})
+		});
 	}
 }
 </script>

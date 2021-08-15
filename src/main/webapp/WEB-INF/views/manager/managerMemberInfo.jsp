@@ -19,141 +19,141 @@ request.setCharacterEncoding("UTF-8");
 .paymentHr {
 		border:solid 1px gray;
 	}
+	
+tr { display: block; float: left; }
+td, th { display: block; }
 </style>
 </head>
 <script>
-function modOrderStatus(index) {
-	if(confirm("정말 주문 상태를 변경하시겠습니까?")){
-		document.orderForm[index].submit();
+function member_kickOut(member_num,id) {
+	if(confirm("정말 '"+id+ "' 회원을 회원탈퇴 시키시겠습니까?\n\n"+"확인을 누르면 해당 회원이 회원탈퇴 됩니다.")){
+		$.ajax({
+			url : "${contextPath}/manager/removeMembers.do",
+			type : "POST",
+			data : {member_num : member_num},
+			success: function(data) {
+				if(data == "remove_success"){
+					alert("해당 회원이 회원탈퇴 되었습니다.");
+					location.href = "${contextPath}/manager/getMembersList.do";
+				}
+				else {
+					alert("시도 실패");
+				}
+			},
+			error : function(data, textStatus) {
+				 alert("에러"+data);
+			}
+		});
 	}
 	else{
 		return false;
-	}	
+	}
+}
+
+function manager_grant(member_num,id) {
+	if(confirm("관리자로 지정할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"해당 회원을 관리자로 지정하시겠습니까?")){
+		$.ajax({
+			url : "${contextPath}/manager/modMemberGrant.do",
+			type : "POST",
+			data : {member_num : member_num},
+			success: function(data) {
+				if(data == "grant_success"){
+					alert(id+" 회원을 관리자로 지정하였습니다.");
+					location.href = "${contextPath}/manager/getMembersList.do";
+				}
+				else {
+					alert("해당 회원은 이미 관리자입니다.");
+				}
+			},
+			error : function(data, textStatus) {
+				alert("에러"+data);
+			}
+		});
+	}
+	else{
+		return false;
+	}
+}
+
+function manager_revoke(member_num,id) {
+	if(confirm("관리자 권한을 회수할 회원의 아이디는 '"+id+"' 입니다.\n\n"+"해당 회원의 관리자 권한을 회수하시겠습니까?")){
+		$.ajax({
+			url : "${contextPath}/manager/modMemberRevoke.do",
+			type : "POST",
+			data : {member_num : member_num},
+			success: function(data) {
+				if(data == "revoke_success"){
+					alert(id+" 회원의 관리자 권한을 회수했습니다.");
+					location.href = "${contextPath}/manager/getMembersList.do";
+				}
+				else {
+					alert("해당 회원은 이미 관리자가 아닙니다.");
+				}
+			},
+			error : function(data, textStatus) {
+				alert("에러"+data);
+			}
+		});
+	}
+	else {
+		return false;
+	}
 }
 
 </script>
 <body>
+<form name="modForm" method="POST" action="${contextPath}/manager/modMemberForm.do">
 	<div class="col-md-5" style="float: center;">
 		<h3>
-			<b>주문 상세</b><br>
+			<b>회원 정보</b><br>
 		</h3>
-		<h4>
-			주문번호 : ${orderVO.order_code}
-		</h4>
 	</div><br><br>
-	<hr class="paymentHr">
+	<div align="right" style="margin-bottom:20px;">
+		<input type="submit" class="btn btn-info" value="회원정보수정"/>
+	</div>
 		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th>&nbsp;</th>
-					<th>주문번호</th>
-					<th>상품명</th>
-					<th>상품 가격</th>
-					<th>수량</th>
-					<th>사용 포인트</th>
-					<th>합계</th>
-					<th>적립금</th>
-					<th>현황</th>
-					<th>변경</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach items="${orderDetailList}" var="item" varStatus="status">
-				<tr>
-					<td><img src="${contextPath}/thumbnail/download?imageFileName=${item.p_imageFileName}" alt="상품 이미지" /></td>
-					<td>${item.order_code}</td>
-					<td><a href="${contextPath}/product/getProduct.do?p_code=${item.p_code}"><b>${item.p_name}</b></a></td>
-					<td><fmt:formatNumber value="${item.p_price}" pattern="###,###,###"/>원</td>
-					<td>${item.order_quantity}개</td>
+			<tr style="width:30%;">
+				<th>회원번호</th>
+				<th>이름</th>
+				<th>아이디</th>
+				<th>닉네임</th>
+				<th>이메일</th>
+				<th>휴대폰</th>
+				<th>가입일</th>
+				<th>최근접속</th>
+				<th>포인트</th>
+				<th>로그인</th>
+				<th>유형</th>
+			</tr>
+			<tr style="width:70%;">
+				<td>${memberVO.member_num}</td>
+				<td>${memberVO.member_name}</td>
+				<td>${memberVO.member_id}</td>
+				<td>${memberVO.member_nick}</td>
+				<td>${memberVO.member_email}</td>
+				<td>${memberVO.member_phone}</td>
+				<td><fmt:formatDate value="${memberVO.member_joindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
+				<td><fmt:formatDate value="${memberVO.member_logindate}" type="both" dateStyle="long" timeStyle="short"></fmt:formatDate></td>
+				<td><fmt:formatNumber value="${memberVO.member_point}" pattern="###,###,###"/>원</td>
+				<td>${memberVO.member_type} 로그인</td>
+				<td>
 					<c:choose>
-						<c:when test="${orderVO.order_usePoint != 0}">
-							<td>-<fmt:formatNumber value="${item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
-							<td><fmt:formatNumber value="${item.p_price * item.order_quantity - item.p_price * item.order_quantity / 10}" pattern="###,###,###"/>원</td>
+						<c:when test="${memberVO.member_manager == 1}">
+							<font style="color:red;">관리자</font>
 						</c:when>
 						<c:otherwise>
-							<td>-0원</td>
-							<td><fmt:formatNumber value="${item.p_price * item.order_quantity}" pattern="###,###,###"/>원</td>
+							<font style="color:blue;">일반 회원</font>
 						</c:otherwise>
 					</c:choose>
-					<td>+<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원</td>
-					<td>${item.order_status}</td>
-					<td>
-					<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">
-						<select class="form-select" name="order_status">
-							<option value="결제완료">결제완료</option>
-							<option value="배송준비중">배송준비중</option>
-							<option value="배송중">배송중</option>
-							<option value="배송완료">배송완료</option>
-							<option value="구매확정">구매확정</option>
-							<option value="주문취소">주문취소</option>
-							<option value="환불요청">환불요청</option>
-							<option value="환불완료">환불완료</option>
-						</select>
-						<input type="hidden" name="order_detailCode" value="${item.order_detailCode}"/>
-						<input type="hidden" name="order_code" value="${item.order_code}"/>
-						<button type="button" class="btn btn-outline-dark"
-							onclick="modOrderStatus(${status.count - 1})">상태 수정</button>
-						</form>
-					</td>
-				</tr>
-			</c:forEach>	
-			</tbody>
+				</td>
+			</tr>
 		</table>
-		<hr class="paymentHr"><br><br>
-			<div class="col-md-5" style="float: center;">
-		<h3>
-			<b>배송 정보</b>
-		</h3>
-	</div><br><br>
-	<table class="table table-hover">
-		<thead>
-		 <tr>
-			<th>수령인</th>
-			<th>휴대폰</th>
-			<th>주소</th>
-			<th>배송 요청사항</th>	
-		 </tr>
-		</thead>
-		<tbody>
-		 <tr>
-			<td>${deliveryVO.deli_name}</td>
-			<td>${deliveryVO.deli_tel}</td>
-			<td>${deliveryVO.deli_address1} ${deliveryVO.deli_address2} ${deliveryVO.deli_address3}</td>
-			<td>${deliveryVO.deli_request}</td>
-		 </tr>
-		</tbody>
-	</table>
-	<hr class="paymentHr"><br><br>
-		<div class="col-md-5" style="float: center;">
-		<h3>
-			<b>결제 정보</b>
-		</h3>
-	</div><br><br>
-	<table class="table table-hover">
-		<thead>
-		 <tr>
-		 	<th>회원번호</th>
-		 	<th>주문자 이름</th>
-		 	<th>주문자 휴대폰</th>
-		 	<th>주문자 이메일</th>
-			<th>할인 포인트</th>
-			<th>적립 포인트</th>
-			<th>총 구매수량</th>
-			<th>총 결제금액</th>	
-		 </tr>
-		</thead>
-		<tbody>
-		 <tr>
-		 	<td>${orderVO.member_num}</td>
-		 	<td>${orderVO.member_name}</td>
-		 	<td>${orderVO.member_phone}</td>
-		 	<td>${orderVO.member_email}</td>
-			<td><fmt:formatNumber value="${orderVO.order_usePoint}" pattern="###,###,###"/>원</td>
-			<td><fmt:formatNumber value="${orderVO.order_addPoint}" pattern="###,###,###"/>원</td>
-			<td>${orderVO.order_totalQuantity}</td>
-			<td><b style="font-size: 20px;"><fmt:formatNumber value="${orderVO.order_totalPrice}" pattern="###,###,###"/>원</b></td>
-		 </tr>
-		</tbody>
-	</table>
+		<input type="hidden" name="member_num" value="${memberVO.member_num}"/>
+</form>
+<div align="center">		
+	<button class="btn btn-primary" type="button" onclick="manager_grant(${memberVO.member_num},'${memberVO.member_id}');"><font style="color:white;">관리자 지정</font></button>
+	<button class="btn btn-secondary" type="button" onclick="manager_revoke(${memberVO.member_num},'${memberVO.member_id}');"><font style="color:white;">관리자 회수</font></button>
+	<button class="btn btn-danger" type="button" onclick="member_kickOut(${memberVO.member_num},'${memberVO.member_id}');"><font style="color:white;">강제 탈퇴</font></button>
+</div>
 </body>
 </html>

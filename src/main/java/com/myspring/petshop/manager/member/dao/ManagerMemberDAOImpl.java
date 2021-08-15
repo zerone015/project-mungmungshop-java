@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.petshop.common.pagination.Pagination;
-import com.myspring.petshop.product.vo.ProductVO;
+import com.myspring.petshop.member.vo.MemberVO;
 
 @Repository
 public class ManagerMemberDAOImpl implements ManagerMemberDAO {
@@ -25,6 +25,12 @@ public class ManagerMemberDAOImpl implements ManagerMemberDAO {
 	public List selectMembers(Pagination pagination) throws Exception {
 		
 		return sqlSession.selectList("mapper.managerMember.selectMembers", pagination);
+	}
+	
+	@Override
+	public MemberVO selectMemberInfo(int member_num) throws Exception {
+		
+		return sqlSession.selectOne("mapper.managerMember.selectMemberInfo", member_num);
 	}
 	
 	@Override
@@ -59,4 +65,11 @@ public class ManagerMemberDAOImpl implements ManagerMemberDAO {
 		
 		return sqlSession.selectList("mapper.managerMember.selectSearchMembers", searchMap);
 	}
+	
+	@Override
+	public void updateMember(MemberVO memberVO) throws Exception {
+		
+		sqlSession.update("mapper.managerMember.updateMember", memberVO);
+	}
+
 }
