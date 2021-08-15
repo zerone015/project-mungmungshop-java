@@ -40,7 +40,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="col" style="text-align: left;">
            <ul  class="sideMenu">
             <li class="sideMenu2"><a href="${contextPath}/manager/managerProduct.do"><font <c:if test="${products != null}">class="active"</c:if> style="color: B2B2B2;">상품 관리</font></a><li>
-            <li class="sideMenu2"><a href="${contextPath}/manager/getOrderList.do"><font <c:if test="${orderList != null}">class="active"</c:if> style="color: B2B2B2;">주문 관리</font></a><li>
+            <li class="sideMenu2"><a href="${contextPath}/manager/getOrderList.do"><font <c:if test="${orderList != null || refundList != null}">class="active"</c:if> style="color: B2B2B2;">주문 관리</font></a><li>
             <li class="sideMenu2"><a href="${contextPath}/manager/getMembersList.do"><font <c:if test="${members != null}">class="active"</c:if> style="color: B2B2B2;">회원 관리</font></a><li>
             <li class="sideMenu2"><a href="${contextPath}/manager/getReviewList.do"><font <c:if test="${reviewList != null}">class="active"</c:if> style="color: B2B2B2;">후기 관리</font></a><li>
            </ul>
