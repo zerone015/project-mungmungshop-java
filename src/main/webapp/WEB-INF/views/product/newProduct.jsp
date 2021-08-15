@@ -20,6 +20,11 @@
 	    height: 400px;
 	    margin-right: auto;
 	}
+	
+	.active{
+		color: black !important;
+		font-weight: bold;	
+	}
 </style>
 <script>
 
@@ -27,12 +32,9 @@
 	function fn_prev(page, range, rangeSize) {
 		var page = ((range - 2) * rangeSize) + 1;
 		var range = range - 1;
-		
-		var sortBy = "${sortBy}";
-		
+				
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "?sortBy=" + sortBy;
 		url = url + "&page=" + page;
 		url = url + "&range=" + range;
 
@@ -42,11 +44,8 @@
 
 	//페이지 번호 클릭
 	function fn_pagination(page, range, rangeSize, searchType, keyword) {
-		var sortBy = "${sortBy}";
-		
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "?sortBy=" + sortBy;
 		url = url + "&page=" + page;
 		url = url + "&range=" + range;
 
@@ -58,12 +57,9 @@
 
 		var page = parseInt((range * rangeSize)) + 1;
 		var range = parseInt(range) + 1;
-
-		var sortBy = "${sortBy}";
 		
 		var url = "${contextPath}/product/newProduct.do";
 		
-		url = url + "?sortBy=" + sortBy;
 		url = url + "&page=" + page;
 		url = url + "&range=" + range;
 
@@ -76,11 +72,11 @@
 	<div align="left">
 		<h1 class="display-5 fw-bold">신상품</h1>
 	</div>
-	<div align="right">
+<%-- 	<div align="right">
 		<a href="${contextPath}/product/newProduct.do?sortBy=love"><font style="color: #0078FF;">인기상품</font>&nbsp;&nbsp;&nbsp;</a> 
 		<a href="${contextPath}/product/newProduct.do?sortBy=lowPrice"><font style="color: #0078FF;">낮은가격</font>&nbsp;&nbsp;&nbsp;</a> 
 		<a href="${contextPath}/product/newProduct.do?sortBy=highPrice"><font style="color: #0078FF;">높은가격</font>&nbsp;&nbsp;&nbsp;</a>
-	</div>
+	</div> --%>
 	<hr width="100%">
 	<c:if test="${products.size() == 0}">
 		<div style="margin-top: 300px;">

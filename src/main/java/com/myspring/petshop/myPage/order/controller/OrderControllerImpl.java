@@ -204,6 +204,7 @@ public class OrderControllerImpl implements OrderController {
 		
 		Pagination pagination = new Pagination();
 		pagination.pageInfo(page, range, listCnt);
+		mav.addObject("quickClick", true);
 		mav.addObject("pagination", pagination);
 		
 		return mav;

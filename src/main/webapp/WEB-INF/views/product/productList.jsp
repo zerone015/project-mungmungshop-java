@@ -73,6 +73,11 @@ request.setCharacterEncoding("UTF-8");
 	    height: 400px;
 	    margin-right: auto;
 	}
+	
+	.active{
+		color: black !important;
+		font-weight: bold;	
+	}
 </style>
 <body>
 <div class="container">
@@ -81,11 +86,11 @@ request.setCharacterEncoding("UTF-8");
 			<b>${category.p_cl1} - ${category.p_cl2}</b>
 		</h2>
 	</div>
-	<div align="right">
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=love"><font style="color: #0078FF;">인기상품</font>&nbsp;&nbsp;&nbsp;</a> 
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=new"><font style="color: #0078FF;">신상품</font>&nbsp;&nbsp;&nbsp;</a>
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=lowPrice"><font style="color: #0078FF;">낮은가격</font>&nbsp;&nbsp;&nbsp;</a> 
-		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=highPrice"><font style="color: #0078FF;">높은가격</font>&nbsp;&nbsp;&nbsp;</a>
+	<div align="right"> 
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=new"><font <c:if test="${sortBy.equals('new') || sortBy.equals('default')}"> class="active"</c:if> style="color: #B2B2B2;">신상품</font>&nbsp;&nbsp;&nbsp;</a>
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=love"><font <c:if test="${sortBy.equals('love')}"> class="active"</c:if> style="color: #B2B2B2;">인기상품</font>&nbsp;&nbsp;&nbsp;</a>
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=lowPrice"><font <c:if test="${sortBy.equals('lowPrice')}"> class="active"</c:if> style="color: #B2B2B2;">낮은가격</font>&nbsp;&nbsp;&nbsp;</a> 
+		<a href="${contextPath}/product/productList.do?p_cl1=${category.p_cl1}&p_cl2=${category.p_cl2}&sortBy=highPrice"><font <c:if test="${sortBy.equals('highPrice')}"> class="active"</c:if> style="color: #B2B2B2;">높은가격</font>&nbsp;&nbsp;&nbsp;</a>
 	</div>
 	<hr width="100%">
 	<div>

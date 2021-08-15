@@ -14,19 +14,37 @@ request.setCharacterEncoding("UTF-8");
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <style>
-ul{
-   list-style:none;
-   }
+	.sideMenu2 {
+		font-size: 16;
+		margin-top: 20px;
+	}
+	.sideMenu2 > a:hover {
+		font-weight: 700;
+	}
+	
+	.sideMenu {
+		padding: 10px;
+	}
+	
+	#sideLink {
+		font-weight: 900;
+	}
+	
+	.active{
+		color: black !important;
+		font-weight: bold;	
+	}
 </style>
 <body>
 	<div class="container">
+		<div class="col" style="text-align: left;">
            <ul  class="sideMenu">
-           	<h3><p>주요 기능</p></h3><br>
-            <li><h5><a href="${contextPath}/manager/managerProduct.do">상품 관리</a></h5><li>
-            <li><h5><a href="${contextPath}/manager/getOrderList.do">주문 관리</a></h5><li>
-            <li><h5><a href="${contextPath}/manager/getMembersList.do">회원 관리</a></h5><li>
-            <li><h5><a href="${contextPath}/manager/getReviewList.do">후기 관리</a></h5><li>
+            <li class="sideMenu2"><a href="${contextPath}/manager/managerProduct.do"><font <c:if test="${products != null}">class="active"</c:if> style="color: B2B2B2;">상품 관리</font></a><li>
+            <li class="sideMenu2"><a href="${contextPath}/manager/getOrderList.do"><font <c:if test="${orderList != null}">class="active"</c:if> style="color: B2B2B2;">주문 관리</font></a><li>
+            <li class="sideMenu2"><a href="${contextPath}/manager/getMembersList.do"><font <c:if test="${members != null}">class="active"</c:if> style="color: B2B2B2;">회원 관리</font></a><li>
+            <li class="sideMenu2"><a href="${contextPath}/manager/getReviewList.do"><font <c:if test="${reviewList != null}">class="active"</c:if> style="color: B2B2B2;">후기 관리</font></a><li>
            </ul>
+		</div>
 	</div>
 </body>
 </html>

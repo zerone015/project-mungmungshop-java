@@ -33,30 +33,32 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 	
 	@Override
 	@RequestMapping(value ="/myPage/pwCertify.do", method = RequestMethod.GET)
-	public String pwCertifyForm() throws Exception {
+	public String pwCertifyForm(Model model) throws Exception {
+		model.addAttribute("pwClick", true);
 		
 		return "pwCertify";
 	}
 	
 	@Override
 	@RequestMapping(value ="/myPage/newPW.do", method = RequestMethod.GET)
-	public String newPwForm() throws Exception {
+	public String newPwForm(Model model) throws Exception {
+		model.addAttribute("pwClick", true);
 		
 		return "newPW";
 	}
 	
 	@Override
 	@RequestMapping(value = "/myPage/infoCertify.do", method = RequestMethod.GET)
-	public String infoCertifyForm() throws Exception {
-
+	public String infoCertifyForm(Model model) throws Exception {
+		model.addAttribute("infoClick", true);
 
 		return "infoCertify";
 	}
 	
 	@Override
 	@RequestMapping(value = "/myPage/quit.do", method = RequestMethod.GET)
-	public String quitForm() throws Exception {
-
+	public String quitForm(Model model) throws Exception {
+		model.addAttribute("infoClick", true);
 
 		return "quit";
 	}
@@ -69,6 +71,7 @@ public class MyPageMemberControllerImpl implements MyPageMemberController {
 		
 		ModelAndView mav = new ModelAndView("infoModify");
 		mav.addObject("memberVO", memberVO);
+		mav.addObject("infoClick", true);
 
 		return mav;
 	}

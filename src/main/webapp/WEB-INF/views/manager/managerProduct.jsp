@@ -12,6 +12,12 @@ request.setCharacterEncoding("UTF-8");
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>관리자 상품 관리 페이지</title>
+<style>
+	.active{
+		color: black !important;
+		font-weight: bold;	
+	}
+</style>
 </head>
 <script>
 	//이전 버튼 이벤트
@@ -130,8 +136,8 @@ request.setCharacterEncoding("UTF-8");
 <br>
 <form method="GET" action="${contextPath}/managerProductAdd.do">	
 <span class="bd_example" style="float: left; margin-bottom: 10px;">
-	<a href="${contextPath}/manager/managerProduct.do?sortBy=stock"><font style="color: #0078FF;">재고 없는순</font></a> <font style="color: #AAAAAA;">|</font> 
-	<a href="${contextPath}/manager/managerProduct.do"><font style="color: #0078FF;">상품 등록순</font></a>
+	<a href="${contextPath}/manager/managerProduct.do"><font <c:if test="${sortBy.equals('default')}"> class="active"</c:if> style="color: #B2B2B2;">신상품순</font></a> <font style="color: #AAAAAA;">|</font> 
+	<a href="${contextPath}/manager/managerProduct.do?sortBy=stock"><font <c:if test="${sortBy.equals('stock')}"> class="active"</c:if> style="color: #B2B2B2;">재고 없는순</font></a>
 </span>
 <span class="bd-example" style="float: right; margin-bottom: 10px;">
 		<button type="submit" class="btn btn-primary btn-lg">상품 등록</button>

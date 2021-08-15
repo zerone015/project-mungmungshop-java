@@ -12,6 +12,12 @@ request.setCharacterEncoding("UTF-8");
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>관리자 주문 관리 페이지</title>
+<style>
+	.active{
+		color: black !important;
+		font-weight: bold;	
+	}
+</style>
 </head>
 <script>
 
@@ -97,8 +103,9 @@ request.setCharacterEncoding("UTF-8");
 			<b>주문 관리</b>
 		</h3>
 	</div><br><br>
-	<span class="bd_example" style="float: right; margin-bottom: 30px;">
-		<a href="${contextPath}/manager/getRefundList.do"><font style="color: #0078FF; font-size: 20px;">환불 관리</font></a>
+	<span class="bd_example" style="float: right; margin-bottom: 40px;">
+		<a href="${contextPath}/manager/getOrderList.do"><font <c:if test="${orderList != null}"> class="active"</c:if> style="color: #B2B2B2;">주문 관리</font></a> <font style="color: #AAAAAA;">|</font> 
+		<a href="${contextPath}/manager/getRefundList.do"><font <c:if test="${refundList != null}"> class="active"</c:if> style="color: #B2B2B2;">환불 관리</font></a>
 	</span>
 	<form name="orderList" method="GET" action="#">
 		<table class="table table-hover">
