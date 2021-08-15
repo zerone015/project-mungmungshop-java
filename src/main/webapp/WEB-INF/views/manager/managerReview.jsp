@@ -57,7 +57,7 @@ request.setCharacterEncoding("UTF-8");
 </script>
 <script>
 	function fn_reviewPass(index) {
-		if(confirm("해당 후기를 검수 합격하시겠습니까?\n500포인트가 지급되며 후기가 노출됩니다.")){
+		if(confirm("해당 후기를 승인하시겠습니까?\n500포인트가 지급되며 후기가 노출됩니다.")){
 			var form = document.reviewForm;
 			
 			var p_code;
@@ -85,7 +85,7 @@ request.setCharacterEncoding("UTF-8");
 	}
 	
 	function fn_reviewFail(index) {
-		if(confirm("해당 후기를 불합격 처리하시겠습니까?")){
+		if(confirm("해당 후기를 취소 처리 하시겠습니까?")){
 			var form = document.reviewForm;
 			
 			var review_num;
@@ -109,7 +109,7 @@ request.setCharacterEncoding("UTF-8");
 	}
 	
 	function fn_reviewRemove(index) {
-		if(confirm("정말 해당 후기를 삭제하시겠습니까?")){
+		if(confirm("해당 후기를 삭제하시겠습니까?")){
 			var form = document.reviewForm;
 			
 			var review_num;
@@ -175,15 +175,15 @@ request.setCharacterEncoding("UTF-8");
 						<font style="color: blue;">검수중</font>
 					</c:if>
 					<c:if test="${item.review_test.equals('Y')}">
-						<font style="color: blue;">포인트 지급완료</font>
+						<font style="color: blue;">승인</font>
 					</c:if>
 					<c:if test="${item.review_test.equals('C')}">
-						<font style="color: red;">불합격</font>
+						<font style="color: red;">취소</font>
 					</c:if>
 				</td>
 				<td>
-					<button class="btn btn-success" style="width: 100%;" type="button" onClick="fn_reviewPass(${status.index});">합격</button><br>
-					<button class="btn btn-warning" style="width: 100%;" type="button" onClick="fn_reviewFail(${status.index});">불합격</button><br>
+					<button class="btn btn-success" style="width: 100%;" type="button" onClick="fn_reviewPass(${status.index});">승인</button><br>
+					<button class="btn btn-warning" style="width: 100%;" type="button" onClick="fn_reviewFail(${status.index});">미승인</button><br>
 					<button class="btn btn-danger" style="width: 100%;" type="button" onClick="fn_reviewRemove(${status.index});">삭제</button>
 					<input type="hidden" name="p_code" value="${item.p_code}" disabled/>
 					<input type="hidden" name="member_nick" value="${item.member_nick}" disabled/>
