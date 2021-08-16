@@ -63,9 +63,10 @@ function checkBoard() {
 		
 		<input type="hidden" name="qna_no" value="${qnaVO.qna_no}"/>
 		<input type="hidden" id = "qna_originNo" name = "qna_originNo" value="${qnaVO.qna_originNo}" />
-		<input type="hidden" id = "qna_groupOrd" name = "qna_groupOrd" value="${qnaVO.qna_groupOrd + 1}" />
-		<input type="hidden" id = "qna_groupLayer" name = "qna_groupLayer" value="${qnaVO.qna_groupLayer + 1}" />
+		<input type="hidden" id = "qna_groupOrd" name = "qna_groupOrd" value="${qnaVO.qna_groupOrd+1}" />
+		<input type="hidden" id = "qna_groupLayer" name = "qna_groupLayer" value="${qnaVO.qna_groupLayer+1}" />
 		<input type="hidden" name="qna_secret" value="${qnaVO.qna_secret}"/>
+		<input type="hidden" name="qna_originWriter" value="${qnaVO.qna_originWriter}"/>
 		
 		<table class="table table-sm table-bordered" border="1" >
 			<tr>

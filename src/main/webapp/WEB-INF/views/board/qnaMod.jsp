@@ -78,6 +78,7 @@ function checkBoard() {
 			<button class= "btn btn-outline-danger"
 				type="button" onclick="javascript:history.back();">취소</button>
 		</div>
+		<input type="hidden" name="qna_originWriter" value="${qnaVO.qna_originWriter}"/>
 	</form>
 	
 	<hr width="100%">

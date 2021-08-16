@@ -168,13 +168,21 @@
 	
 	
 	
-	
-	
+
 	<!--================================== Q&A 게시판 ==================================-->
 	<!-- 게시글 리스트 조회 -->
-	<select id="selectAllQnaList" resultType="qnaVO">
+	<select id="selectQnaList" resultType="qnaVO" parameterType="java.util.Map">
 	<![CDATA[
-		select * from qnaBoard 
+		select * from qnaBoard
+		where qna_originWriter = #{member_nick} 
+		order by  qna_originNo desc, qna_groupOrd asc, qna_groupLayer DESC
+		LIMIT #{pagination.startList}, #{pagination.listSize}
+	]]>
+	</select>
+	
+	<select id="selectAllQnaList" resultType="qnaVO" parameterType="java.util.Map">
+	<![CDATA[
+		select * from qnaBoard
 		order by  qna_originNo desc, qna_groupOrd
 		LIMIT #{startList}, #{listSize}
 	]]>
@@ -184,14 +192,22 @@
 	<select id="selectQnaCnt" resultType="int">
 	<![CDATA[
 		select count(*) as listCnt from qnaBoard 
+		where qna_originWriter = #{member_nick}
+	]]>
+	</select> 
+	
+	<!-- 게시글 개수 -->
+	<select id="selectQnaAllCnt" resultType="int">
+	<![CDATA[
+		select count(*) as listCnt from qnaBoard
 	]]>
 	</select> 
 	
 	<!-- 게시글 등록 -->
 	<insert id="qnaInsert" parameterType="qnaVO">
 	<![CDATA[
-		insert into qnaBoard(qna_no, qna_originNo, qna_title, qna_writer, qna_content, qna_date, qna_secret,qna_hits)
-						values(null, #{qna_originNo}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date}, #{qna_secret} , 0)
+		insert into qnaBoard(qna_no, qna_originNo, qna_title, qna_writer, qna_content, qna_date, qna_secret,qna_hits,qna_originWriter)
+						values(null, #{qna_no}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date}, #{qna_secret} , 0, #{qna_writer})
 	]]>
 	</insert>
 	
@@ -230,17 +246,29 @@
 	]]>
 	</select> 
 	
+	<select id="qnaDelete2" parameterType="int">
+	<![CDATA[
+		update qnaBoard set qna_title = '삭제된 게시글입니다.', qna_content = '삭제된 게시글입니다.'
+		where qna_no = #{qna_no}
+	]]>
+	</select> 
+	
 	<!-- 게시글 번호 Max -->
-	<select id="qnaMaxNo" resultType="Integer">
+	<select id="qnaMaxNo" resultType="int">
 		select Max(qna_no) as maxId from qnaBoard
 	</select>
 	
 	<!-- 게시글 답변 등록 -->
 	<insert id = "qnaReplyInsert" parameterType="qnaVO">
-		insert into qnaBoard(qna_no, qna_originNo, qna_groupOrd, qna_groupLayer, qna_title, qna_writer, qna_content, qna_date, qna_secret, qna_hits)
-						values(null, #{qna_originNo}, #{qna_groupOrd}, #{qna_groupLayer}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date},  #{qna_secret}, 0)
+		insert into qnaBoard(qna_no, qna_originNo, qna_groupOrd, qna_groupLayer, qna_title, qna_writer, qna_content, qna_date, qna_secret, qna_hits, qna_originWriter)
+						values(null, #{qna_originNo}, #{qna_groupOrd}, #{qna_groupLayer}, #{qna_title}, #{qna_writer}, #{qna_content}, #{qna_date},  #{qna_secret}, 0, #{qna_originWriter})
 	</insert>
 	
+	<!-- groupOrd +1 -->
+	<update id = "addGroupOrd" parameterType="qnaVO">
+		update qnaBoard set qna_groupOrd = qna_groupOrd+1
+		where qna_groupOrd = #{qna_groupOrd} AND qna_originNo = #{qna_originNo}
+	</update>
 	
 	<!-- =================================================공지사항 게시판============================================================= -->
 	

@@ -25,6 +25,9 @@ public interface QnaController {
 
 	public ModelAndView qnaRemove(int qna_no, HttpServletRequest request, HttpServletResponse response) throws Exception;
 
+	public ModelAndView qnaRemove2(@RequestParam("qna_no") int qna_no, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	public ModelAndView qnaReply(@ModelAttribute("qnaVO") QnaVO qnaVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception;
 

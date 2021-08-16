@@ -1,7 +1,9 @@
 package com.myspring.petshop.board.qna.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,39 +47,34 @@ public class QnaControllerImpl implements QnaController {
 			HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView mav = new ModelAndView("/board/qnaList");
 		session = request.getSession();
-		// 게시글 총 개수
-		int listCnt = qnaService.qnaCnt();
+		memberVO = (MemberVO) session.getAttribute("member");
+		String member_nick = memberVO.getMember_nick();
+		int member_manager = memberVO.getMember_manager();
 		
+		List qnaList = null;
 		Pagination pagination = new Pagination();
 		pagination.setListSize(10);
-		pagination.pageInfo(page, range, listCnt);
-		
-		// 매니저 권한 여부 
-		memberVO = (MemberVO)session.getAttribute("member");
-		int manager;
-		
-		if(memberVO != null) {
-			 manager = memberVO.getMember_manager();
+		if (member_manager == 1) {
+			int listCnt = qnaService.qnaAllCnt();
+			
+			pagination.pageInfo(page, range, listCnt);
+			
+			qnaList = qnaService.listAllQna(pagination);
 		}
 		else {
-			 manager = 1234;
+			int listCnt = qnaService.qnaCnt(member_nick);
+			
+			pagination.pageInfo(page, range, listCnt);
+			
+			Map<String, Object> qnaMap = new HashMap<String, Object>();
+			qnaMap.put("member_nick", member_nick);
+			qnaMap.put("pagination", pagination);
+			
+			qnaList = qnaService.listQna(qnaMap);
 		}
-		
-		// 회원 닉네임 정보
-		String memberNick;
-		if(memberVO != null) {
-			memberNick = memberVO.getMember_nick();
-		}
-		else {
-			memberNick = "!*";
-		}
-		
-		List qnaList = qnaService.listQna(pagination);
 		
 		mav.addObject("pagination", pagination);
 		mav.addObject("qnaList", qnaList);
-		mav.addObject("manager", manager);
-		mav.addObject("memberNick", memberNick);
 		
 		return mav;
 	}
@@ -93,13 +90,10 @@ public class QnaControllerImpl implements QnaController {
 	public ModelAndView qnaWrite(@ModelAttribute("qna") QnaVO qnaVO, HttpServletRequest request,
 			HttpServletResponse response)throws Exception {
 		int result=0;
-		
-//		게시글이 없을 경우 originNo = 1, 
-//		게시글 있을 경우 originNo = 게시글 번호 + 1
-		Integer qnaMaxNo = qnaService.qnaMaxNo();
-		System.out.println(qnaMaxNo);
-		int i = qnaMaxNo != null ? qnaMaxNo + 1 : 1;
-		qnaVO.setQna_originNo(i);
+	
+		int qnaMaxNo = qnaService.qnaMaxNo();
+
+		qnaVO.setQna_no(qnaMaxNo);
 		
 		result = qnaService.qnaWrite(qnaVO);
 
@@ -118,18 +112,13 @@ public class QnaControllerImpl implements QnaController {
 		session = request.getSession();
 		
 		memberVO = (MemberVO)session.getAttribute("member");
-		int manager;
-		
-		if(memberVO != null) {
-			 manager = memberVO.getMember_manager();
-		}
-		else {
-			 manager = 1234;
-		}
+		String member_nick = memberVO.getMember_nick();
+		int member_manager = memberVO.getMember_manager();
 
 		mav.setViewName("/board/qnaView");
 		mav.addObject("qnaVO", qnaVO);
-		mav.addObject("manager", manager);
+		mav.addObject("member_nick", member_nick);
+		mav.addObject("member_manager", member_manager);
 		// 조회수 증가
 		qnaService.increaseHits(qna_no);
 		return mav;
@@ -150,7 +139,6 @@ public class QnaControllerImpl implements QnaController {
 	@RequestMapping(value="/qnaMod.do", method=RequestMethod.POST)
 	public ModelAndView qnaModify(@ModelAttribute("qna_no") QnaVO qnaVO,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		qnaVO.getQna_no();
 		qnaService.qnaModify(qnaVO);
 		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
 		return mav;
@@ -161,6 +149,15 @@ public class QnaControllerImpl implements QnaController {
 	public ModelAndView qnaRemove(@RequestParam("qna_no") int qna_no, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		qnaService.qnaRemove(qna_no);
+		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value="/board/qnaRemove2.do", method= RequestMethod.POST)
+	public ModelAndView qnaRemove2(@RequestParam("qna_no") int qna_no, 
+			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		qnaService.qnaRemove2(qna_no);
 		ModelAndView mav = new ModelAndView("redirect:/board/qnaList.do");
 		return mav;
 	}

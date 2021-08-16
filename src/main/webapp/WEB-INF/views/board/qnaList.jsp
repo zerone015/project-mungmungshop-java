@@ -54,23 +54,6 @@
 		
 		location.href = url;
 	}
-	
-	
-	function fn_qnaView(qna_writer, memberNick, manager, qna_no){
-		if (qna_writer == memberNick) {
-			url = "${contextPath}/board/qnaView.do"
-			url = url + "?qna_no=" + qna_no;
-			location.href = url;
-		 }
-		else if (manager == 1) {
-			url = "${contextPath}/board/qnaView.do"
-			url = url + "?qna_no=" + qna_no;
-			location.href = url;
-		 }
-		else {
-			alert('권한이 없습니다.');
-		}
-	}
 </script>
 
 </head>
@@ -106,21 +89,16 @@
 				      
 				      
 				      <!-- 제목 -->
-
-				      <c:if test="${qnaVO.qna_groupLayer == 0}">
-				      	<td> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
-				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" >${qnaVO.qna_title}</a></td>
-				      </c:if>
-				      <c:if test="${qnaVO.qna_groupLayer == 1}">
-				      	<td class="reply1"> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
-				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" > ㄴ[답변] ${qnaVO.qna_title}</a></td>
-				      </c:if>
-				      <c:if test="${qnaVO.qna_groupLayer == 2}">
-				      	<td class="reply2"> <a href="#" onclick="fn_qnaView('${qnaVO.qna_writer}', '${memberNick}', '${manager}', '${qnaVO.qna_no}')">
-				      			<img class="secret" alt="비밀" src="${contextPath}/resources/image/lock.png" > ㄴ[답변] ${qnaVO.qna_title}</a></td>
-				      </c:if>
-				      
-				      
+					  <c:choose>
+					  	<c:when test="${qnaVO.qna_groupLayer == 0}">
+					  		<td > <a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
+				      			${qnaVO.qna_title}</a></td>
+					  	</c:when>
+					  	<c:otherwise>
+					  			<td style="text-indent: ${qnaVO.qna_groupLayer}em;"> <a href="${contextPath}/board/qnaView.do?qna_no=${qnaVO.qna_no}">
+				      			<font> ㄴ[답변] ${qnaVO.qna_title}</font></a></td>
+					  	</c:otherwise>
+					  </c:choose>						      				   
 				      <!-- 작성자 -->
 				      <td class="center">${qnaVO.qna_writer}</td>
 				      <!-- 작성일 --> 

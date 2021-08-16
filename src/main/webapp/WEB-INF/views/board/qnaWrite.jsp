@@ -85,7 +85,6 @@ function checkBoard() {
 			</table>
 			<hr width="100%">
 			<textarea name="qna_content" rows="10" id="qna_content" name="qna_content" placeholder="내용을 작성하세요."></textarea>
-			
 			<div class="bd-example" align="right">
 				<button type="reset" class="btn btn-outline-dark">다시쓰기</button>
 				<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">작성</button>

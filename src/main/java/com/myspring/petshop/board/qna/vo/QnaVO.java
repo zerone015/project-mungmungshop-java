@@ -16,6 +16,7 @@ public class QnaVO {
 	private Timestamp qna_date;
 	private String qna_secret;
 	private int qna_hits;
+	private String qna_originWriter;
 	
 	public QnaVO () {
 		
@@ -52,7 +53,9 @@ public class QnaVO {
 	public int getQna_hits() {
 		return qna_hits;
 	}
-	
+	public String getQna_originWriter() {
+		return qna_originWriter;
+	}
 	
 	public void setQna_no(int qna_no) {
 		this.qna_no = qna_no;
@@ -83,5 +86,8 @@ public class QnaVO {
 	}
 	public void setQna_hits(int qna_hits) {
 		this.qna_hits = qna_hits;
+	}
+	public void setQna_originWriter(String qna_originWriter) {
+		this.qna_originWriter = qna_originWriter;
 	}
 }

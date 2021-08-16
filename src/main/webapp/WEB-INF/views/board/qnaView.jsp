@@ -9,7 +9,7 @@
 <html>
 <head>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>t>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <meta charset="utf-8">
 <title>자주 묻는 질문 글</title>
 
@@ -29,7 +29,6 @@
 		background: #e6e6e6;
 	}
 </style>
-
 </head>
 <body>
 <div class="container">
@@ -60,17 +59,49 @@
 		<button class= "btn btn-outline-primary"
 			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaList.do';">목록으로</button>
 		
-		<button class= "btn btn-outline-warning"
-			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaMod.do?qna_no=${qnaVO.qna_no}';">수정</button>
+		<c:if test="${!qnaVO.qna_title.equals('삭제된 게시글입니다.')}">
 		
-		<c:if test="${manager == 1}">
-			<button class= "btn btn-outline-dark"
-			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaReply.do?qna_no=${qnaVO.qna_no}';">답변</button>
+			<c:if test="${member_nick == qnaVO.qna_writer || member_manager == 1}">
+				<button class= "btn btn-outline-warning"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaMod.do?qna_no=${qnaVO.qna_no}';">수정</button>
+			</c:if>
+		
+			<c:if test="${member_nick != qnaVO.qna_writer}">
+				<button class= "btn btn-outline-dark"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaReply.do?qna_no=${qnaVO.qna_no}';">답변</button>
+			</c:if>
+	
+			<c:if test="${member_nick == qnaVO.qna_writer && member_manager != 1}">
+				<button class= "btn btn-outline-danger"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove2.do?qna_no=${qnaVO.qna_no}';">삭제</button>
+			</c:if>
+			<c:if test="${member_manager == 1}">
+				<button class= "btn btn-outline-danger"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove.do?qna_no=${qnaVO.qna_no}';">삭제</button>
+			</c:if>
 		</c:if>
 		
-		<button class= "btn btn-outline-danger"
-			type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove.do?qna_no=${qnaVO.qna_no}';">삭제</button>
-
+			<c:if test="${qnaVO.qna_title.equals('삭제된 게시글입니다.') && member_manager == 1}">
+		
+			<c:if test="${member_nick == qnaVO.qna_writer || member_manager == 1}">
+				<button class= "btn btn-outline-warning"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaMod.do?qna_no=${qnaVO.qna_no}';">수정</button>
+			</c:if>
+		
+			<c:if test="${member_nick != qnaVO.qna_writer}">
+				<button class= "btn btn-outline-dark"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaReply.do?qna_no=${qnaVO.qna_no}';">답변</button>
+			</c:if>
+	
+			<c:if test="${member_nick == qnaVO.qna_writer && member_manager != 1}">
+				<button class= "btn btn-outline-danger"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove2.do?qna_no=${qnaVO.qna_no}';">삭제</button>
+			</c:if>
+			<c:if test="${member_manager == 1}">
+				<button class= "btn btn-outline-danger"
+					type="submit" onclick="javascript: form.action='${contextPath}/board/qnaRemove.do?qna_no=${qnaVO.qna_no}';">삭제</button>
+			</c:if>
+		</c:if>
 	</div>
 	</form>
 	
