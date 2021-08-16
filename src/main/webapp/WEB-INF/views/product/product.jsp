@@ -446,7 +446,7 @@ function imagePopup(type) {
   </div>
   
   
-  <div style="background-color: red; height: 300px"></div>
+  <div style=" height: 300px"></div>
 
 	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
