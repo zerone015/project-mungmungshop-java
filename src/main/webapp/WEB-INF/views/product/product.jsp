@@ -325,10 +325,10 @@ function imagePopup(type) {
 	  	</nav>
 
 <div class="container">
-  	<div>
-  		<img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}"/>
-  	</div>
   	<div id="section1" style="padding: 100 0 100 0; border-bottom: 1px solid #CCCCCC ">
+	  	<div>
+	  		<img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}"/>
+	  	</div>
   		${product.p_description}
   	</div>
 
