@@ -325,10 +325,10 @@ function imagePopup(type) {
 	  	</nav>
 
 <div class="container">
-  	<div>
-  		<img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}"/>
-  	</div>
   	<div id="section1" style="padding: 100 0 100 0; border-bottom: 1px solid #CCCCCC ">
+	  	<div>
+	  		<img src="${contextPath}/download?imageFileName=${product.p_imageFileName2}"/>
+	  	</div>
   		${product.p_description}
   	</div>
 
@@ -417,11 +417,15 @@ function imagePopup(type) {
 						<c:if test="${reviewVO.review_recommend eq '5'}">
 							<font>적극 추천!</font>
 						</c:if>
-					
+						<c:if test="${reviewVO.review_recommend eq '4'}">
+							<font>추천!</font>
+						</c:if>
 						<c:if test="${reviewVO.review_recommend eq '3'}">
 							<font>보통이에요.</font>
 						</c:if>
-					
+						<c:if test="${reviewVO.review_recommend eq '2'}">
+							<font>그냥 그래요.</font>
+						</c:if>
 						<c:if test="${reviewVO.review_recommend eq '1'}">
 							<font>별로에요.</font>
 						</c:if>
@@ -446,7 +450,7 @@ function imagePopup(type) {
   </div>
   
   
-  <div style="background-color: red; height: 300px"></div>
+  <div style=" height: 300px"></div>
 
 	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
