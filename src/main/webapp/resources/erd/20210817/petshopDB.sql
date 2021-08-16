@@ -31,8 +31,10 @@ CREATE TABLE `address` (
   `address_2` varchar(30) NOT NULL,
   `address_3` varchar(40) NOT NULL,
   `address_request` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`address_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`address_num`),
+  KEY `member_num` (`member_num`),
+  CONSTRAINT `address_ibfk_1` FOREIGN KEY (`member_num`) REFERENCES `members` (`member_num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +43,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (8,10,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123','ㅁㄴㅇㄹ'),(16,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(18,12,'gdgd','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄻㄴㅇㄹ','없음'),(19,12,'asdf','010-1234-1234','39596','경북 김천시 중앙공원4길 10','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(20,12,'ASDF','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(21,12,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(22,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(23,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 62-1','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(24,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ',''),(25,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(26,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(28,0,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(29,21,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ');
+INSERT INTO `address` VALUES (8,10,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','123123','ㅁㄴㅇㄹ'),(16,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(18,12,'gdgd','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄻㄴㅇㄹ','없음'),(19,12,'asdf','010-1234-1234','39596','경북 김천시 중앙공원4길 10','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(20,12,'ASDF','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(21,12,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(22,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(23,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 62-1','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(24,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ',''),(25,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(26,12,'ㅁㄴㅇㄹ','010-1234-1234','34578','대전 동구 가양로123번길 60','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ'),(29,21,'ㅁㄴㅇㄹ','010-1234-1234','34589','대전 동구 우암로 181','ㅁㄴㅇㄹ','ㅁㄴㅇㄹ');
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -75,7 +77,7 @@ CREATE TABLE `backup_members` (
 
 LOCK TABLES `backup_members` WRITE;
 /*!40000 ALTER TABLE `backup_members` DISABLE KEYS */;
-INSERT INTO `backup_members` VALUES (16,'son12345','아아','아아','아아','2021-08-01 16:26:14',0,'2021-08-01 16:26:14',12,'삭제','2021-08-01 16:26:29','root@localhost'),(17,'son12345','손영원','010-1231-1234','아아아','2021-08-01 16:27:51',0,'2021-08-01 16:29:14',500,'삭제','2021-08-01 16:29:50','root@localhost'),(21,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-02 03:45:19',0,'2021-08-02 06:13:31',2630,'삭제','2021-08-03 01:49:56','root@localhost'),(23,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 01:50:04',0,'2021-08-03 01:50:04',500,'삭제','2021-08-03 02:14:10','root@localhost'),(24,'mungmungshopKakaoID1832531817','손영원','123123','손영원','2021-08-03 02:13:59',0,'2021-08-03 02:13:59',500,'삭제','2021-08-03 02:16:37','root@localhost'),(25,'mungmungshopNaverIDYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 02:14:37',0,'2021-08-03 02:14:37',500,'삭제','2021-08-03 02:16:37','root@localhost'),(26,'naverYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 02:19:20',0,'2021-08-03 02:19:20',3000,'삭제','2021-08-16 08:14:09','root@localhost'),(27,'Kakao1832531817','손영원','null','손영원','2021-08-03 02:19:35',0,'2021-08-03 02:19:35',3000,'삭제','2021-08-16 08:14:09','root@localhost');
+INSERT INTO `backup_members` VALUES (16,'son12345','아아','아아','아아','2021-08-01 16:26:14',0,'2021-08-01 16:26:14',12,'삭제','2021-08-01 16:26:29','root@localhost'),(17,'son12345','손영원','010-1231-1234','아아아','2021-08-01 16:27:51',0,'2021-08-01 16:29:14',500,'삭제','2021-08-01 16:29:50','root@localhost'),(21,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-02 03:45:19',0,'2021-08-02 06:13:31',2630,'삭제','2021-08-03 01:49:56','root@localhost'),(23,'YB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 01:50:04',0,'2021-08-03 01:50:04',500,'삭제','2021-08-03 02:14:10','root@localhost'),(24,'mungmungshopKakaoID1832531817','손영원','123123','손영원','2021-08-03 02:13:59',0,'2021-08-03 02:13:59',500,'삭제','2021-08-03 02:16:37','root@localhost'),(25,'mungmungshopNaverIDYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 02:14:37',0,'2021-08-03 02:14:37',500,'삭제','2021-08-03 02:16:37','root@localhost'),(26,'naverYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','손영원','010-9163-5375','손영원','2021-08-03 02:19:20',0,'2021-08-03 02:19:20',3000,'삭제','2021-08-16 08:14:09','root@localhost'),(27,'Kakao1832531817','손영원','null','손영원','2021-08-03 02:19:35',0,'2021-08-03 02:19:35',3000,'삭제','2021-08-16 08:14:09','root@localhost'),(29,'kakao1832531817','�넀�쁺�썝','null','�넀�쁺�썝','2021-08-16 09:21:07',0,'2021-08-16 09:21:07',500,'삭제','2021-08-16 09:21:43','root@localhost'),(30,'kakao1832531817','�넀�쁺�썝','null','�넀�쁺�썝','2021-08-16 09:22:11',0,'2021-08-16 09:22:11',500,'삭제','2021-08-16 09:22:41','root@localhost');
 /*!40000 ALTER TABLE `backup_members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,8 +94,10 @@ CREATE TABLE `cart` (
   `p_code` char(7) NOT NULL,
   `cart_quantity` int(11) NOT NULL,
   `cart_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`cart_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`cart_code`),
+  KEY `p_code` (`p_code`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`p_code`) REFERENCES `products` (`p_code`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +106,7 @@ CREATE TABLE `cart` (
 
 LOCK TABLES `cart` WRITE;
 /*!40000 ALTER TABLE `cart` DISABLE KEYS */;
-INSERT INTO `cart` VALUES (87,10,'PRD0003',1,'2021-08-10 14:41:00'),(92,12,'PRD0100',1,'2021-08-11 13:36:25'),(93,12,'PRD0002',1,'2021-08-11 13:36:29'),(94,12,'PRD0083',1,'2021-08-11 13:36:33'),(95,26,'PRD0002',1,'2021-08-14 08:15:35'),(96,10,'PRD0052',1,'2021-08-15 09:12:32');
+INSERT INTO `cart` VALUES (92,12,'PRD0100',1,'2021-08-11 13:36:25'),(93,12,'PRD0002',1,'2021-08-11 13:36:29'),(94,12,'PRD0083',1,'2021-08-11 13:36:33'),(95,26,'PRD0002',1,'2021-08-14 08:15:35');
 /*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -240,7 +244,8 @@ CREATE TABLE `love` (
   `p_code` char(7) NOT NULL,
   PRIMARY KEY (`love_num`),
   KEY `fk_love_memberNum` (`member_num`),
-  KEY `fk_love_pCode` (`p_code`)
+  KEY `fk_love_pCode` (`p_code`),
+  CONSTRAINT `love_ibfk_1` FOREIGN KEY (`p_code`) REFERENCES `products` (`p_code`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -252,31 +257,6 @@ LOCK TABLES `love` WRITE;
 /*!40000 ALTER TABLE `love` DISABLE KEYS */;
 INSERT INTO `love` VALUES (1,12,'PRD0144'),(2,10,'PRD0003');
 /*!40000 ALTER TABLE `love` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `manager`
---
-
-DROP TABLE IF EXISTS `manager`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
- SET character_set_client = utf8mb4 ;
-CREATE TABLE `manager` (
-  `manager_num` int(11) NOT NULL AUTO_INCREMENT,
-  `manager_id` varchar(11) NOT NULL,
-  `manager_pw` varchar(20) NOT NULL,
-  PRIMARY KEY (`manager_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `manager`
---
-
-LOCK TABLES `manager` WRITE;
-/*!40000 ALTER TABLE `manager` DISABLE KEYS */;
-INSERT INTO `manager` VALUES (1,'admin','asdf1234!!');
-/*!40000 ALTER TABLE `manager` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -301,7 +281,7 @@ CREATE TABLE `members` (
   `member_type` varchar(10) NOT NULL,
   PRIMARY KEY (`Member_Num`),
   KEY `idx_test` (`Member_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -310,7 +290,7 @@ CREATE TABLE `members` (
 
 LOCK TABLES `members` WRITE;
 /*!40000 ALTER TABLE `members` DISABLE KEYS */;
-INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-16 08:37:39',24270,'일반'),(12,'son1234','$2a$10$vWdiQcFiDNSXGmTokHdM1eAGmwMZ2EKHSaEV0qnr.VsFk90W13g8m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-16 08:22:43',31303,'일반'),(22,'test123','$2a$10$x3jL72BFEpfO9OlgYL3HKu1p1BHr9D5sV7uMRGAG7WnLl49nmUQK6','테스트','test@naver.com','010-1234-1234','테스트','2021-08-02 04:10:06',0,'2021-08-16 08:25:57',3000,'일반'),(28,'naverYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','zerone015@naver.com','010-9163-5375','손영원','2021-08-16 08:14:16',0,'2021-08-16 08:14:16',500,'�꽕�씠踰�');
+INSERT INTO `members` VALUES (10,'manager','$2a$10$ek4onq7.04pzAY8JvVJVs.3KIPCbIqaIwH.U4cxhLNKxNVF1EW9Rq','손영원','zerone015@naver.com','010-1234-1234','운영자','2021-07-16 08:44:50',1,'2021-08-16 09:22:33',24270,'일반'),(12,'son1234','$2a$10$vWdiQcFiDNSXGmTokHdM1eAGmwMZ2EKHSaEV0qnr.VsFk90W13g8m','손영원','zerone015@naver.com','010-1234-1234','gkdl','2021-07-22 05:43:18',0,'2021-08-16 08:48:30',31303,'일반'),(22,'test123','$2a$10$x3jL72BFEpfO9OlgYL3HKu1p1BHr9D5sV7uMRGAG7WnLl49nmUQK6','테스트','test@naver.com','010-1234-1234','테스트','2021-08-02 04:10:06',0,'2021-08-16 08:25:57',3000,'일반'),(28,'naverYB_9O6Ks26wcDNqVYeJkvjJJDfhkVEe4BJsiZLQ4fXY','null','손영원','zerone015@naver.com','010-9163-5375','손영원','2021-08-16 08:14:16',0,'2021-08-16 08:14:16',500,'�꽕�씠踰�');
 /*!40000 ALTER TABLE `members` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -470,8 +450,10 @@ CREATE TABLE `point_history` (
   `point_contents` varchar(50) NOT NULL,
   `order_code` char(7) DEFAULT NULL,
   `point_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`point_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  PRIMARY KEY (`point_num`),
+  KEY `member_num` (`member_num`),
+  CONSTRAINT `point_history_ibfk_1` FOREIGN KEY (`member_num`) REFERENCES `members` (`member_num`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -530,7 +512,7 @@ DROP TABLE IF EXISTS `products_seq`;
 CREATE TABLE `products_seq` (
   `p_code` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`p_code`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -539,7 +521,7 @@ CREATE TABLE `products_seq` (
 
 LOCK TABLES `products_seq` WRITE;
 /*!40000 ALTER TABLE `products_seq` DISABLE KEYS */;
-INSERT INTO `products_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(27),(28),(29),(30),(31),(32),(33),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58),(59),(60),(61),(62),(63),(64),(65),(66),(67),(68),(69),(70),(71),(72),(73),(74),(75),(76),(77),(78),(79),(80),(81),(82),(83),(84),(85),(86),(87),(88),(89),(90),(91),(92),(93),(94),(95),(96),(97),(98),(99),(100),(101),(102),(103),(104),(105),(106),(107),(108),(109),(110),(111),(112),(113),(114),(115),(116),(117),(118),(119),(120),(121),(122),(123),(124),(125),(126),(127),(128),(129),(130),(131),(132),(133),(134),(135),(136),(137),(138),(139),(140),(141),(142),(143),(144),(145),(149),(150),(151),(152),(153),(154),(155),(156),(160);
+INSERT INTO `products_seq` VALUES (1),(2),(3),(4),(5),(6),(7),(8),(9),(10),(11),(12),(13),(14),(15),(16),(17),(18),(19),(20),(21),(22),(23),(24),(25),(26),(27),(28),(29),(30),(31),(32),(33),(34),(35),(36),(37),(38),(39),(40),(41),(42),(43),(44),(45),(46),(47),(48),(49),(50),(51),(52),(53),(54),(55),(56),(57),(58),(59),(60),(61),(62),(63),(64),(65),(66),(67),(68),(69),(70),(71),(72),(73),(74),(75),(76),(77),(78),(79),(80),(81),(82),(83),(84),(85),(86),(87),(88),(89),(90),(91),(92),(93),(94),(95),(96),(97),(98),(99),(100),(101),(102),(103),(104),(105),(106),(107),(108),(109),(110),(111),(112),(113),(114),(115),(116),(117),(118),(119),(120),(121),(122),(123),(124),(125),(126),(127),(128),(129),(130),(131),(132),(133),(134),(135),(136),(137),(138),(139),(140),(141),(142),(143),(144),(145),(149),(150),(151),(152),(153),(154),(155),(156),(160),(161),(162);
 /*!40000 ALTER TABLE `products_seq` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -652,4 +634,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-08-16 17:41:36
+-- Dump completed on 2021-08-16 18:23:49
