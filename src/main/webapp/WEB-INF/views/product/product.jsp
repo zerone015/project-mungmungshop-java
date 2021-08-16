@@ -417,11 +417,15 @@ function imagePopup(type) {
 						<c:if test="${reviewVO.review_recommend eq '5'}">
 							<font>적극 추천!</font>
 						</c:if>
-					
+						<c:if test="${reviewVO.review_recommend eq '4'}">
+							<font>추천!</font>
+						</c:if>
 						<c:if test="${reviewVO.review_recommend eq '3'}">
 							<font>보통이에요.</font>
 						</c:if>
-					
+						<c:if test="${reviewVO.review_recommend eq '2'}">
+							<font>그냥 그래요.</font>
+						</c:if>
 						<c:if test="${reviewVO.review_recommend eq '1'}">
 							<font>별로에요.</font>
 						</c:if>
