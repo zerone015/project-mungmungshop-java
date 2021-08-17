@@ -60,13 +60,13 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 슬라이드 쇼 --> 
 			<div class="carousel-item active"> 
 				<!--가로--> 
-				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide1.jpg" alt="First slide"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide2.jpg" alt="First slide"> 
 			</div> 
 			<div class="carousel-item"> 
-				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide2.jpg" alt="Second slide"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide4.png" alt="Second slide"> 
 			</div> 
 			<div class="carousel-item"> 
-				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide3.jpg" alt="Third slide"> 
+				<img class="d-block slideImg" src="${contextPath}/download?imageFileName=slide5.jpeg" alt="Third slide"> 
 			</div> 
 			<!-- / 슬라이드 쇼 끝 --> 
 			<!-- 왼쪽 오른쪽 화살표 버튼 --> 

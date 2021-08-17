@@ -133,7 +133,7 @@ function fn_nickChk() {
 			success : function(data) {
 				if (data == 0) {
 					$("#nickChk").attr("value", "Y");
-					document.userInfo.nickDuplication.value = "nickCheck";
+					form.nickDuplication.value = "nickCheck";
 					alert("사용 가능한 닉네임입니다.");
 					
 				} else{

@@ -176,6 +176,9 @@
 						<c:if test="${item.order_status eq '구매확정'}">
 							<button type="button" class="btn btn-outline-danger btn-sm" style="margin-top: 2;" onclick="fn_reviewWrite('${contextPath}/reviewWriteForm.do?p_code=${item.p_code}','reviewForm',460,700,50,50)">후기 작성</button>
 						</c:if>
+						<c:if test="${item.order_status eq '배송완료'}">
+							<button type="button" class="btn btn-danger btn-sm" style="margin-top: 2;" onclick="fn_buyConfirm(${status.index})">구매 확정</button>
+						</c:if>
 					</div>
 					<input type="hidden" name="order_code" value="${item.order_code}" disabled/>
 					<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>

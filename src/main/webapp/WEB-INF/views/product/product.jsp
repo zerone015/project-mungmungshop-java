@@ -358,8 +358,9 @@ function imagePopup(type) {
 		      </div>
 		    </div>
 
-
-	  		(${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt})
+		(<fmt:formatNumber value="${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt}" pattern=".00"/>점)
+	
+	
 
 		  	<div class="graphBody">
 		  		<div class="row graphText" >
@@ -370,7 +371,7 @@ function imagePopup(type) {
 					<i class="far fa-star"></i>
 					(${fiveCnt})
 					<div class="graph stack1">
-						<font style="width : ${fiveCnt/listCnt*100}%;"> ${fiveCnt/listCnt*100}% </font>
+						<font style="width : ${fiveCnt/listCnt*100}%;"><fmt:formatNumber value="${fiveCnt/listCnt*100}" pattern="###"/>% </font>
 					</div>
 				</div>
 				<div class="row graphText" >
@@ -380,7 +381,7 @@ function imagePopup(type) {
 					<i class="far fa-star"></i>
 					(${fourCnt})
 					<div class="graph stack2">
-						<font style="width : ${fourCnt/listCnt*100}%;"> ${fourCnt/listCnt*100}% </font>
+						<font style="width : ${fourCnt/listCnt*100}%;"><fmt:formatNumber value="${fourCnt/listCnt*100}" pattern="###"/>% </font>
 					</div>
 				</div>
 				<div class="row graphText" >
@@ -389,7 +390,7 @@ function imagePopup(type) {
 					<i class="far fa-star"></i>
 					(${threeCnt})
 					<div class="graph stack3">
-						<font style="width : ${threeCnt/listCnt*100}%;"> ${threeCnt/listCnt*100}% </font>
+						<font style="width : ${threeCnt/listCnt*100}%;"><fmt:formatNumber value="${threeCnt/listCnt*100}" pattern="###"/>% </font>
 					</div>
 				</div>
 				<div class="row graphText" >
@@ -397,14 +398,14 @@ function imagePopup(type) {
 					<i class="far fa-star"></i>
 					(${twoCnt})
 					<div class="graph stack3">
-						<font style="width : ${twoCnt/listCnt*100}%;"> ${twoCnt/listCnt*100}% </font>
+						<font style="width : ${twoCnt/listCnt*100}%;"> <fmt:formatNumber value="${twoCnt/listCnt*100}" pattern="###"/>% </font>
 					</div>
 				</div>
 				<div class="row graphText" >
 					<i class="far fa-star"></i>
 					(${oneCnt})
 					<div class="graph stack3">
-						<font style="width : ${oneCnt/listCnt*100}%;"> ${oneCnt/listCnt*100}% </font>
+						<font style="width : ${oneCnt/listCnt*100}%;"> <fmt:formatNumber value="${oneCnt/listCnt*100}" pattern="###"/>% </font>
 					</div>
 				</div>
 			</div>
@@ -413,7 +414,7 @@ function imagePopup(type) {
 	  	<c:forEach items="${reviewList}" var="reviewVO">
 	  		<c:if test="${reviewVO.review_test.equals('Y')}">
 	  		<div class="row" style="align-items: center;">
-				<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+				<img class="reviewRecommend" src="${contextPath}/download?imageFileName=${reviewVO.review_recommend}.png" />
 						<c:if test="${reviewVO.review_recommend eq '5'}">
 							<font>적극 추천!</font>
 						</c:if>
@@ -435,9 +436,16 @@ function imagePopup(type) {
 			   		</summary>
 					<div class="" style="padding: 5;">
 						<div id="wrap">
-					  	<a href="javascript:openModal('reviewImg${reviewVO.review_imageFileName}');" class="button modal-open">
-					  		<img class="reviewImg${reviewVO.review_imageFileName}" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+					  	<a href="javascript:openModal('reviewImg');" class="button modal-open">
+					  		<img class="reviewImg" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" style="width: 200px;"/>
 					  	</a>
+					  	<div id="modal"></div>
+							<div class="modal-con reviewImg">
+								 <a href="javascript:;" class="close">X</a>
+								 <div class="con">
+									<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
+								 </div>
+							</div>
 						</div>
 						<p> ${reviewVO.review_content}</p>
 			    	</div>
@@ -465,13 +473,7 @@ function imagePopup(type) {
 			</form>
 		</div>
 	</div>	
-	<div id="modal"></div>
-	<div class="modal-con reviewImg${reviewVO.review_imageFileName}">
-		 <a href="javascript:;" class="close">X</a>
-		 <div class="con">
-			<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
-		 </div>
-	</div>
+	
 
 	
 

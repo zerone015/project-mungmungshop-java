@@ -70,7 +70,7 @@ function fn_agreeChk(){
 				</div>
 				<div>
 					<textarea name="#" style="resize: none; width: 500px;" cols="30"
-						rows="5">이용 약관 동의하십니까(향후추가)</textarea>
+						rows="5">이용 약관 동의</textarea>
 					<br>
 				</div>
 			</div>
@@ -82,7 +82,7 @@ function fn_agreeChk(){
 				</div>
 				<div>
 					<textarea name="#" style="resize: none; width: 500px;" cols="30"
-						rows="5">개인정보 수집 및 이용에 동의 하십니까(향후추가)</textarea>
+						rows="5">개인정보 수집 및 이용 동의 </textarea>
 					<br>
 				</div>
 			</div>

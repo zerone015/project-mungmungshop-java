@@ -31,7 +31,7 @@ request.setCharacterEncoding("utf-8");
 			<td>
 				<button style="margin-top: 30px;" class="btn btn-lg btn-primary btn-block" type="submit"
 					onclick="location.href='${contextPath}/login.do'">
-					<font style="vertical-align: inherit;">로그인 하기</font>
+					<font style="color: white;">로그인 하기</font>
 				</button>
 			</td>
 		</tr>
@@ -39,7 +39,7 @@ request.setCharacterEncoding("utf-8");
 			<td>
 				<button style="margin-top: 10px;" class="btn btn-lg btn-outline-primary btn-block" type="submit"
 					onclick="location.href='${contextPath}/findPw.do'">
-					<font style="vertical-align: inherit;">비밀번호 찾기</font>
+					<font style="color: #0d6efd;">비밀번호 찾기</font>
 				</button>
 			</td>
 		</tr>

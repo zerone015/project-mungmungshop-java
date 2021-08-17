@@ -79,18 +79,18 @@ request.setCharacterEncoding("utf-8");
 	<form name="changePw" method="POST" action="${contextPath}/member/updatePw.do">
 		<table>
 			<tr align="center">
-				<td><b style="font-size: 13px;">새로운 비밀번호</b><font>*</font><input style="margin-left: 12px; margin-bottom: 15px;" class="form-control" name="member_pw"
+				<td><b style="font-size: 13px;">새로운 비밀번호</b><font>*</font><input style="width:340px; margin-left: 12px; margin-bottom: 15px;" class="form-control" name="member_pw"
 					placeholder="새로운 비밀번호를 입력하세요." type="password" size="30"
 					maxlength="20" onkeyup="enterkey();"></td>
 			</tr>
 			<tr align="center">
-				<td><b style="font-size: 13px;">비밀번호 확인</b><font>*</font><input style="margin-left: 25px; margin-bottom: 15px;" class="form-control" name="checkPw"
+				<td><b style="font-size: 13px;">비밀번호 확인</b><font>*</font><input style="width:340px; margin-left: 25px; margin-bottom: 15px;" class="form-control" name="checkPw"
 					placeholder="새로운 비밀번호를 입력하세요." type="password" size="30"
 					maxlength="20" onkeyup="enterkey();"></td>
 			</tr>
 			<tr>
 				<td align="center">
-				<input style="margin-top: 30px; width: 600px;" class="btn btn-lg btn-primary btn-block" type="button" onclick="checkChangePw()" value="확인">
+				<input style="margin-top: 30px; width: 300px;" class="btn btn-lg btn-primary btn-block" type="button" onclick="checkChangePw()" value="확인">
 				<input type="hidden" name="member_id" value="${id}">
 				<input type="hidden" name="member_email" value="${email}">
 				</td>

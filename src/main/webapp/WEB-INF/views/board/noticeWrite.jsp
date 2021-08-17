@@ -28,7 +28,7 @@
 		<tr>
 			<th style="background: #e6e6e6;">제목</th>
 			<td colspan="3">
-				<input type="text" id="notice_title" name="notice_title" style="width:100%; border: 0;" />
+				<input type="text" id="notice_title" name="notice_title" style="width:100%; border: 0;" placeholder="제목 입력" />
 			</td>
 		</tr>
 		<tr>
@@ -43,8 +43,8 @@
 		</tr>
 	</table>
 	<hr width="100%">
-	<textarea name="notice_content" rows="10" style="width:100%; border: 0; resize: none;" 
-		id="notice_content" name="notice_content">공지사항입니다.</textarea>
+	<textarea name="notice_content" rows="10" style="width:100%; border: 0; resize: none;" placeholder="내용 입력"
+		id="notice_content" name="notice_content"></textarea>
 	<div class="bd-example" align="right">
 		<button type="submit" class="btn btn-primary btn-lg">작성</button>
 		<button type="reset" class="btn btn-outline-primary btn-lg">다시쓰기</button>

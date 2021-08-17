@@ -24,7 +24,25 @@ request.setCharacterEncoding("UTF-8");
 <script>
 function modOrderStatus(index) {
 	if(confirm("정말 주문 상태를 변경하시겠습니까?")){
-		document.orderForm[index].submit();
+		var form = document.orderForm;
+		var length = form.order_detailCode.length;
+		
+		if(length>1){
+			var order_detailCode = form.order_detailCode[index];
+			var order_code = form.order_code[index];
+			var order_status = form.order_status[index];
+		}
+		else{
+			var order_detailCode = form.order_detailCode;
+			var order_code = form.order_code;
+			var order_status = form.order_status;
+		}
+		
+		order_detailCode.disabled = false;
+		order_code.disabled = false;
+		order_status.disabled = false;
+		
+		form.submit();
 	}
 	else{
 		return false;
@@ -33,6 +51,7 @@ function modOrderStatus(index) {
 
 </script>
 <body>
+<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">
 	<div class="col-md-5" style="float: center;">
 		<h3>
 			<b>주문 상세</b><br>
@@ -78,7 +97,6 @@ function modOrderStatus(index) {
 					<td>+<fmt:formatNumber value="${item.p_price * item.order_quantity / 60}" pattern="###,###,###"/>원</td>
 					<td>${item.order_status}</td>
 					<td>
-					<form name="orderForm" method="POST" action="${contextPath}/manager/modOrderStatus.do">
 						<select class="form-select" name="order_status">
 							<option value="결제완료">결제완료</option>
 							<option value="배송준비중">배송준비중</option>
@@ -89,16 +107,17 @@ function modOrderStatus(index) {
 							<option value="환불요청">환불요청</option>
 							<option value="환불완료">환불완료</option>
 						</select>
-						<input type="hidden" name="order_detailCode" value="${item.order_detailCode}"/>
-						<input type="hidden" name="order_code" value="${item.order_code}"/>
+						<input type="hidden" name="order_detailCode" value="${item.order_detailCode}" disabled/>
+						<input type="hidden" name="order_code" value="${item.order_code}" disabled/>
 						<button type="button" class="btn btn-outline-dark"
 							onclick="modOrderStatus(${status.count - 1})">상태 수정</button>
-						</form>
+						
 					</td>
 				</tr>
 			</c:forEach>	
 			</tbody>
 		</table>
+	</form>
 		<hr class="paymentHr"><br><br>
 			<div class="col-md-5" style="float: center;">
 		<h3>

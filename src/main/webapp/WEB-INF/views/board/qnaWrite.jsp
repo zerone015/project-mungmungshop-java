@@ -66,7 +66,6 @@ function checkBoard() {
 					<th style="background: #e6e6e6;">제목</th>
 					<td colspan="3">
 						<input type="text" id="qna_title" name="qna_title" maxlength = "45" placeholder="제목을 작성하세요."/>
-						<input type="checkbox" id = "qna_secret" name="qna_secret" value="Y" style="width: 30px;"/> 비밀글
 					</td>
 				</tr>
 				<tr>

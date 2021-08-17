@@ -61,7 +61,7 @@ function checkBoard() {
 			<tr>
 				<th style="background: #e6e6e6;">제목</th>
 				<td colspan="3">
-					<input type="text" id="faq_title" name="faq_title" maxlength = "45" placeholder="이벤트 제목을 작성하세요."/>
+					<input type="text" id="faq_title" name="faq_title" maxlength = "45" placeholder="FAQ 제목을 작성하세요."/>
 				</td>
 			</tr>
 			<tr>
@@ -76,7 +76,7 @@ function checkBoard() {
 			</tr>
 		</table>
 		<hr width="100%">
-		<textarea name="faq_content" rows="10" id="faq_content" name="faq_content" placeholder="내용을 작성하세요."></textarea>
+		<textarea name="faq_content" rows="10" id="faq_content" name="faq_content" placeholder="FAQ 내용을 작성하세요."></textarea>
 		
 		<div class="bd-example" align="right">
 			<button type="reset" class="btn btn-outline-dark">다시쓰기</button>
