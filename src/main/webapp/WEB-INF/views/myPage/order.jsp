@@ -125,9 +125,9 @@
 </script>
 <body>
 	<div>
-		<h2 class="display-5 fw-bold" style="margin-bottom: 50px;">
+		<h4 style="margin-bottom: 50px;">
 			<b>주문 내역 조회</b>
-		</h2>
+		</h4>
 	</div>
 	<form name="orderForm" method="POST" action="${contextPath}//myPage/getRefundPage.do">
 	<table class="table table-hover">

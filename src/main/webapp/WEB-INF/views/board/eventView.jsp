@@ -27,7 +27,10 @@
 	textarea {
 		width:100%; border: 0; 
 		resize: none;
+		padding: 30px 0;
+		text-align: center;
 	}
+	
 	th {
 		background: #e6e6e6;
 	}
@@ -56,19 +59,19 @@
 		</tr>
 	</table>
 	<hr width="100%">
-	<textarea name="event_content" rows="10"  
-		id="event_content" name="event_content" readonly>${event.event_content}</textarea>
-	<div class="bd-example" align="center">
-		
+	<img class="productImage" src="${contextPath}/download?imageFileName=${event.event_image_FileName}" style="width:80%; height:80%;"/>
+		<textarea name="event_content" rows="10"  
+			id="event_content" name="event_content" readonly>${event.event_content}</textarea>
+	<div class="bd-example" align="center">	
 		<button class= "btn btn-outline-primary"
-			type="submit" onclick="javascript: form.action='${contextPath}/board/eventList.do';">목록으로</button>
-		
+			type="submit" onclick="javascript: form.action='${contextPath}/board/eventList.do';">목록으로</button>	
+	<c:if test="${member_manager == 1}">
 		<button class= "btn btn-outline-warning"
 			type="submit" onclick="javascript: form.action='${contextPath}/board/eventMod.do?event_no=${event.event_no}';">수정</button>
 		
 		<button class= "btn btn-outline-danger"
-			type="submit" onclick="javascript: form.action='${contextPath}/board/eventRemove.do?event_no=${event.event_no}';"">삭제</button>
-		
+			type="submit" onclick="javascript: form.action='${contextPath}/board/eventRemove.do?event_no=${event.event_no}';">삭제</button>
+	</c:if>	
 	</div>
 	</form>
 	

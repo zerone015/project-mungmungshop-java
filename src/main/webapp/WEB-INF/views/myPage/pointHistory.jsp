@@ -54,9 +54,9 @@
 </script>
 <body>
 	<div>
-		<h2 class="display-5 fw-bold" style="margin-bottom: 50px;">
+		<h4 style="margin-bottom: 50px;">
 			<b>포인트 내역</b>
-		</h2>
+		</h4>
 	</div>
 	<table class="table table-hover">
 		<thead>

@@ -72,14 +72,10 @@ request.setCharacterEncoding("UTF-8");
 	<div align="left">
 		<c:choose>
 			<c:when test="${searchWord.equals('null')}">
-				<h4>
-					<b>''</b>에 대한 검색 결과
-				</h4>
+				<h4 style="display:inline-block;"><b>''</b></h4><h5 style="display:inline-block;">에 대한 검색 결과</h5>
 			</c:when>
 			<c:otherwise>
-				<h4>
-					<b>'${searchWord}'</b>에 대한 검색 결과
-				</h4>
+				<h4 style="display:inline-block;"><b>'${searchWord}'</b></h4><h5 style="display:inline-block;">에 대한 검색 결과</h5>
 			</c:otherwise>
 		</c:choose>
 	</div>

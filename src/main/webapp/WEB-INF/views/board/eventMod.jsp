@@ -16,16 +16,15 @@ function checkBoard() {
 	var form=document.eventModify;		
 
 	var title = form.event_title;
-	var content = form.event_content;
+	var image = form.event_image_filename;
 	
 	if (title.value == "") {
 		alert("제목을 입력해주세요.");
 		title.focus();
 		return false;
 	}
-	if (content.value == "") {
-		alert("내용을 입력해주세요.");
-		content.focus();
+	if (image.value == "") {
+		alert("사진을 첨부해주세요.");
 		return false;
 	}
 	form.submit();
@@ -50,7 +49,7 @@ function checkBoard() {
 
 </head>
 <body>
-	<form name="eventModify" method="POST" action="${contextPath}/eventMod.do?event_no=${eventVO.event_no}">
+	<form name="eventModify" method="POST" action="${contextPath}/eventMod.do?event_no=${eventVO.event_no}" enctype="multipart/form-data">
 		<table class="table table-sm table-bordered" border="1" >
 			<tr>
 				<th>제목</th>
@@ -77,10 +76,24 @@ function checkBoard() {
 			<button type="button" class="btn btn-outline-primary" onclick="checkBoard()">작성</button>
 			<button class= "btn btn-outline-danger"	type="button" onclick="javascript:history.back();">취소</button>
 		</div>
-	</form>
-	
 	<hr width="100%">
-	
-	
+	<input type="file" id="imgUp" name="event_image_filename"/>
+		<div style="float:left;" class="select_img">
+			<img src="" />
+		</div>
+		<script>
+			$("#imgUp").change(
+					function() {
+						if (this.files && this.files[0]) {
+							var reader = new FileReader;
+							reader.onload = function(data) {
+								$(".select_img img").attr("src",
+										data.target.result).width(200);
+							}
+							reader.readAsDataURL(this.files[0]);
+						}
+					});
+		</script>
+	</form>
 </body>
 </html>

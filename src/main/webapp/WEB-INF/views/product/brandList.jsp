@@ -16,7 +16,7 @@
 </head>
 <body>
 <div align="left">
-<h2 class="display-5 fw-bold"><b>인기 브랜드</b></h2>
+<h2 class="display-5 fw-bold">인기 브랜드</h2>
 </div>
 <hr width="100%">
 <div class="row">

@@ -1,7 +1,12 @@
 package com.myspring.petshop.board.event.controller;
 
+import java.io.File;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +22,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myspring.petshop.board.event.service.EventService;
@@ -39,6 +46,7 @@ public class EventControllerImpl implements EventController {
 	private HttpSession session;
 
 	private static final Logger logger = LoggerFactory.getLogger(EventControllerImpl.class);
+	private static final String CURR_IMAGE_REPO_PATH = "C:\\mungmungshop\\image_repo";
 	
 	@Override
 	@RequestMapping(value = "/board/eventList.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -77,18 +85,24 @@ public class EventControllerImpl implements EventController {
 	}
 	
 	@RequestMapping(value = "/board/eventWrite.do", method = RequestMethod.GET)
-	public String eventWrite(Locale locale, Model model) {
+	public String eventWrite(HttpSession session, Model model) throws Exception {
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String member_nick = memberVO.getMember_nick();
 		
-		
+		model.addAttribute("member_nick", member_nick);
 		
 		return "eventWrite";
 	}
 	
 	@Override
 	@RequestMapping(value="/eventWrite.do", method=RequestMethod.POST)
-	public ModelAndView eventWrite(@ModelAttribute("event")EventVO event, HttpServletRequest request,
+	public ModelAndView eventWrite(@ModelAttribute("event") EventVO event, MultipartHttpServletRequest multipartRequest,
 			HttpServletResponse response)throws Exception {
-		request.setCharacterEncoding("utf-8");
+		multipartRequest.setCharacterEncoding("utf-8");
+	
+		String event_image_filename = upload(multipartRequest);
+		event.setEvent_image_FileName(event_image_filename);
+		
 		int result=0;
 		result = eventService.eventWrite(event);
 
@@ -101,11 +115,24 @@ public class EventControllerImpl implements EventController {
 	@RequestMapping(value="/board/eventView.do", method= RequestMethod.GET)
 	public ModelAndView eventView(@RequestParam("event_no") int event_no, 
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		
+		int member_manager = 0;
+		if(memberVO != null) {
+			member_manager = memberVO.getMember_manager();
+		}
+		
+		
 		EventVO eventVO = eventService.viewEvent(event_no);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/eventView");
 		mav.addObject("event", eventVO);
+		mav.addObject("member_manager", member_manager);
+		
 		eventService.increaseHits(event_no);
+		
 		return mav;
 	}
 	
@@ -123,10 +150,16 @@ public class EventControllerImpl implements EventController {
 	@Override
 	@RequestMapping(value="/eventMod.do", method=RequestMethod.POST)
 	public ModelAndView eventModify(@ModelAttribute("event") EventVO event,
-			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		eventVO.getEvent_no();
+			MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+
+		String event_image_filename = upload(multipartRequest);
+		event.setEvent_image_FileName(event_image_filename);
+		
 		eventService.eventModify(event);
+		
 		ModelAndView mav = new ModelAndView("redirect:/board/eventList.do");
+		
 		return mav;
 	}
 	
@@ -140,5 +173,23 @@ public class EventControllerImpl implements EventController {
 		return mav;
 	}
 	
-
+	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		String imageFileName = null;
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		while (fileNames.hasNext()) {
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			imageFileName = mFile.getOriginalFilename();//
+			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);
+			if (mFile.getSize() != 0) {
+				if (!file.exists()) {
+					if(file.getParentFile().mkdirs()) { 
+						file.createNewFile();
+					}
+					mFile.transferTo(new File(CURR_IMAGE_REPO_PATH +"\\"+ imageFileName));
+					}
+				}
+			}
+		return imageFileName;
+	}
 }

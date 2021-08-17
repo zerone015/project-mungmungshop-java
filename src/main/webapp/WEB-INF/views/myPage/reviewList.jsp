@@ -34,7 +34,7 @@ function fn_reviewRemove(review_num){
 <body>
 <div class="container">
   <div>
-  	<h3>상품 후기</h3>
+  	<h4><b>상품 후기</b></h4>
 	<hr>
 	<!-- 후기 목록 -->
 	<c:if test="${reviewList.size() == 0 }">

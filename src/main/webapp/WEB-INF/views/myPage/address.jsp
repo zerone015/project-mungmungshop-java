@@ -31,7 +31,7 @@ function fn_delete(address_num) {
 </script>
 <body>
 	<div align="center">
-		<h2><b>배송지 관리</b></h2>
+		<h4><b>배송지 관리</b></h4>
 		<br>
 		<table class="table table-hover">
 			<thead>

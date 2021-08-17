@@ -70,7 +70,7 @@
 <body>
 <div class="container">
 	<div align="left">
-		<h1 class="display-5 fw-bold">신상품</h1>
+		<h2 class="display-5 fw-bold">신상품</h2>
 	</div>
 <%-- 	<div align="right">
 		<a href="${contextPath}/product/newProduct.do?sortBy=love"><font style="color: #0078FF;">인기상품</font>&nbsp;&nbsp;&nbsp;</a> 

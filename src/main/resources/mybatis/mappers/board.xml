@@ -72,8 +72,9 @@
 	<![CDATA[
 		update eventBoard 
 		set event_title = #{event_title},
-			event_content = #{event_content}
-		where event_no = #{event_no};
+			event_content = #{event_content},
+			event_image_FileName = #{event_image_FileName}
+		where event_no = #{event_no}
 	]]>
 	</select> 
 	
