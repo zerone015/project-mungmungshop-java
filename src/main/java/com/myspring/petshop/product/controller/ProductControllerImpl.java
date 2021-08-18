@@ -114,20 +114,31 @@ public class ProductControllerImpl implements ProductController {
 		ModelAndView mav = new ModelAndView("product");
 		mav.addObject("product", product);
 		
-		int listCnt = reviewService.reviewCnt(p_code);
+		int total = reviewService.reviewCnt(p_code);
 		
 		Pagination pagination = new Pagination();
 		pagination.setListSize(10);
-		pagination.pageInfo(page, range, listCnt);
+		pagination.pageInfo(page, range, total);
 		
-		int fiveCnt = 0, fourCnt = 0, threeCnt = 0, twoCnt = 0, oneCnt = 0;
+		float listCnt = total;
+		float fiveCnt = 0, fourCnt = 0, threeCnt = 0, twoCnt = 0, oneCnt = 0;
+		float fiveAve = 0, fourAve = 0, threeAve = 0, twoAve = 0, oneAve = 0;
+		float totalAve = 0;
 
-		if(listCnt != 0) {
+		if(!(listCnt == 0)) {
 			fiveCnt = reviewService.fiveReview(p_code);
 			fourCnt = reviewService.fourReview(p_code);
 			threeCnt = reviewService.threeReview(p_code);
 			twoCnt = reviewService.twoReview(p_code);
 			oneCnt = reviewService.oneReview(p_code);
+			
+			fiveAve = (fiveCnt/listCnt)*100;
+			fourAve = (fourCnt/listCnt)*100;
+			threeAve = (threeCnt/listCnt)*100;
+			twoAve = (twoCnt/listCnt)*100;
+			oneAve = (oneCnt/listCnt)*100;
+			
+			totalAve = ((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt ;
 		}
 		
 		Map<String, Object> info = new HashMap<String, Object>();
@@ -145,7 +156,17 @@ public class ProductControllerImpl implements ProductController {
 		mav.addObject("threeCnt", threeCnt);
 		mav.addObject("twoCnt", twoCnt);
 		mav.addObject("oneCnt", oneCnt);
-
+		
+		mav.addObject("fiveAve", fiveAve);
+		mav.addObject("fourAve", fourAve);
+		mav.addObject("threeAve", threeAve);
+		mav.addObject("twoAve", twoAve);
+		mav.addObject("oneAve", oneAve);
+		
+		
+		mav.addObject("totalAve", totalAve);
+		mav.addObject("star", totalAve*20);
+		
 		mav.addObject("listCnt", listCnt);
 		
 		if(memberVO != null) {

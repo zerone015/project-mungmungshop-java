@@ -337,78 +337,89 @@ function imagePopup(type) {
 	  	<div class="row">
 	  		<h2>평 점</h2>
 	  		<script type="text/javascript">
-			ratings = {RatingScore: ${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt};}
-			totalRating = 5;
-			table = document.querySelector('.RatingStar');
-			function rateIt() {
-				for (rating in ratings) {
-					ratingPercentage = ratings[rating] / totalRating * 100;
-					ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
-					star = table.querySelector('${rating} .inner-star');
-					numberRating = table.querySelector('${rating} .numberRating');
-					star.style.width = ratingRounded;
-					numberRating.innerText = ratings[rating];
-					}
-				} rateIt()
+				ratings = {RatingScore: ${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt};}				
+				totalRating = 5;
+				table = document.querySelector('.RatingStar');
+				function rateIt() {
+					for (rating in ratings) {
+						ratingPercentage = ratings[rating] / totalRating * 100;
+						ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
+						star = table.querySelector('${rating} .inner-star');
+						numberRating = table.querySelector('${rating} .numberRating');
+						star.style.width = ratingRounded;
+						numberRating.innerText = ratings[rating];
+						}
+					} rateIt()
 			</script>
-
-	  		<div class="RatingStar">
-		      <div class="RatingScore">
-		        <div class="outer-star"><div class="inner-star" style="width: 70%;"></div></div>
-		      </div>
-		    </div>
-
-		(<fmt:formatNumber value="${((5 * fiveCnt) + (4 * fourCnt) + (3 * threeCnt) + (2 * twoCnt) + oneCnt) / listCnt}" pattern=".00"/>점)
+			<c:if test="${listCnt != 0}">
+		  		<div class="RatingStar">
+			      <div class="RatingScore">
+			        <div class="outer-star"><div class="inner-star" style="width: ${star}%"></div></div>
+			      </div>
+			    </div>
 	
+				(<fmt:formatNumber value="${totalAve}" pattern=".00"/>점)
+			</c:if>
+			
+			<c:if test="${listCnt == 0}">
+		  		<div class="RatingStar">
+			      <div class="RatingScore">
+			        <div class="outer-star"><div class="inner-star" style="width: 0%;"></div></div>
+			      </div>
+			    </div>
 	
-
-		  	<div class="graphBody">
-		  		<div class="row graphText" >
-		  			<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					(${fiveCnt})
-					<div class="graph stack1">
-						<font style="width : ${fiveCnt/listCnt*100}%;"><fmt:formatNumber value="${fiveCnt/listCnt*100}" pattern="###"/>% </font>
+				(리뷰 없음)
+			</c:if>
+			
+			  	<div class="graphBody">
+			  		<div class="row graphText" >
+			  			<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						
+						(<fmt:formatNumber value="${fiveCnt}" pattern="###"/>)
+						<div class="graph stack1">
+							<font style="width : ${fiveAve}%;"><fmt:formatNumber value="${fiveAve}" pattern="###"/>% </font>
+						</div>
+					</div>
+					<div class="row graphText" >
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						(<fmt:formatNumber value="${fourCnt}" pattern="###"/>)
+						<div class="graph stack2">
+							<font style="width : ${fourAve}%;"><fmt:formatNumber value="${fourAve}" pattern="###"/>% </font>
+						</div>
+					</div>
+					<div class="row graphText" >
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						(<fmt:formatNumber value="${threeCnt}" pattern="###"/>)
+						<div class="graph stack3">
+							<font style="width : ${threeAve}%;"><fmt:formatNumber value="${threeAve}" pattern="###"/>% </font>
+						</div>
+					</div>
+					<div class="row graphText" >
+						<i class="far fa-star"></i>
+						<i class="far fa-star"></i>
+						(<fmt:formatNumber value="${twoCnt}" pattern="###"/>)
+						<div class="graph stack3">
+							<font style="width : ${twoAve}%;"> <fmt:formatNumber value="${twoAve}" pattern="###"/>% </font>
+						</div>
+					</div>
+					<div class="row graphText" >
+						<i class="far fa-star"></i>
+						(<fmt:formatNumber value="${oneCnt}" pattern="###"/>)
+						<div class="graph stack3">
+							<font style="width : ${oneAve}%;"> <fmt:formatNumber value="${oneAve}" pattern="###"/>% </font>
+						</div>
 					</div>
 				</div>
-				<div class="row graphText" >
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					(${fourCnt})
-					<div class="graph stack2">
-						<font style="width : ${fourCnt/listCnt*100}%;"><fmt:formatNumber value="${fourCnt/listCnt*100}" pattern="###"/>% </font>
-					</div>
-				</div>
-				<div class="row graphText" >
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					(${threeCnt})
-					<div class="graph stack3">
-						<font style="width : ${threeCnt/listCnt*100}%;"><fmt:formatNumber value="${threeCnt/listCnt*100}" pattern="###"/>% </font>
-					</div>
-				</div>
-				<div class="row graphText" >
-					<i class="far fa-star"></i>
-					<i class="far fa-star"></i>
-					(${twoCnt})
-					<div class="graph stack3">
-						<font style="width : ${twoCnt/listCnt*100}%;"> <fmt:formatNumber value="${twoCnt/listCnt*100}" pattern="###"/>% </font>
-					</div>
-				</div>
-				<div class="row graphText" >
-					<i class="far fa-star"></i>
-					(${oneCnt})
-					<div class="graph stack3">
-						<font style="width : ${oneCnt/listCnt*100}%;"> <fmt:formatNumber value="${oneCnt/listCnt*100}" pattern="###"/>% </font>
-					</div>
-				</div>
-			</div>
+			
 	  	</div>
 	  	<!-- 후기 목록 -->
 	  	<c:forEach items="${reviewList}" var="reviewVO">
