@@ -28,19 +28,21 @@ function modOrderStatus(index) {
 		var length = form.order_detailCode.length;
 		
 		if(length>1){
+			for (var i = 0; i < length; i++) {
+			  if(i != index){
+				  form.order_status[i].disabled = true;	  
+			  }
+			}
 			var order_detailCode = form.order_detailCode[index];
 			var order_code = form.order_code[index];
-			var order_status = form.order_status[index];
 		}
 		else{
 			var order_detailCode = form.order_detailCode;
 			var order_code = form.order_code;
-			var order_status = form.order_status;
 		}
 		
 		order_detailCode.disabled = false;
 		order_code.disabled = false;
-		order_status.disabled = false;
 		
 		form.submit();
 	}
