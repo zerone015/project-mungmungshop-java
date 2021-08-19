@@ -447,21 +447,15 @@ function imagePopup(type) {
 			   		</summary>
 					<div class="" style="padding: 5;">
 						<div id="wrap">
-					  	<a href="javascript:openModal('reviewImg');" class="button modal-open">
-					  		<img class="reviewImg" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" style="width: 200px;"/>
-					  	</a>
-					  	<div id="modal"></div>
-							<div class="modal-con reviewImg">
-								 <a href="javascript:;" class="close">X</a>
-								 <div class="con">
-									<img class="popImage" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" />
-								 </div>
-							</div>
-						</div>
+						  	<a class="imgC"> 
+						  		<img class="reviewImg" src="${contextPath}/download?imageFileName=${reviewVO.review_imageFileName}" style="width: 200px;"/>
+						  	</a>
+						  	
 						<p> ${reviewVO.review_content}</p>
+			    		</div>
+			    		<p style="color: graytext;">${reviewVO.memberNick} | <fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></p>
 			    	</div>
-			    	<p style="color: graytext;">${reviewVO.memberNick} | <fmt:formatDate value="${reviewVO.review_date}" pattern="YYYY-MM-dd"/></p>
-				</details>
+				</details> 
 			</div>
 				<hr>
 		</c:if>
@@ -470,7 +464,16 @@ function imagePopup(type) {
   
   
   <div style=" height: 300px"></div>
-
+	
+	
+	<div class="modal1">
+		<button>&times;</button>
+		<div class="modalBox">
+			<img src="" alt="">
+		</div>
+	</div>
+	
+	
 	<div class="clear"></div>
 	<div id="layer" style="visibility: hidden">
 		<!-- visibility:hidden 으로 설정하여 해당 div안의 모든것들을 가려둔다. -->
