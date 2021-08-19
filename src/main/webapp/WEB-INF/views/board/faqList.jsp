@@ -78,19 +78,9 @@
 <div class="container">
 	<div>
 		<h3 class="mb-3">자주 묻는 질문</h3>
-		<c:choose>
-			<c:when test="${manager == 1}">
-				<button class="btn btn-outline-dark" onclick="location.href='${contextPath}/board/faqWrite.do'" style="float: right;margin-bottom: 20px;">FaQ 등록</button>
-			</c:when>
-			<c:otherwise>
-			<a href="#">
-				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;margin-left: 10;">1:1 문의내역</button>
-			</a>
-			<a href="${contextPath }/board/qnaWrite.do">
-				<button class="btn btn-outline-dark" style="float: right;margin-bottom: 20px;">1:1 문의하기</button>
-			</a>
-			</c:otherwise>
-		</c:choose>
+		<c:if test="${manager == 1}">
+			<button class="btn btn-outline-dark" onclick="location.href='${contextPath}/board/faqWrite.do'" style="float: right;margin-bottom: 20px;">FaQ 등록</button>
+		</c:if>
 		<form name="faqForm" method="POST" action="#">
 		 <div style="margin-top: 100;">
 			 <c:forEach items="${faqList}" var="faqVO" varStatus="status">
