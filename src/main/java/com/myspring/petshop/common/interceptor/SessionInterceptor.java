@@ -54,7 +54,10 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 						!referer.equals("http://localhost:8080/petshop/board/qnaReply.do") &&
 						!referer.equals("http://localhost:8080/petshop/qnaReply.do") &&
 						!referer.equals("http://localhost:8080/petshop/board/qnaRemove.do") &&
-						!referer.equals("http://localhost:8080/petshop/board/qnaRemove2.do")
+						!referer.equals("http://localhost:8080/petshop/board/qnaRemove2.do") &&
+						!referer.equals("http://localhost:8080/petshop/login.do?result=loginFailed") &&
+						!referer.equals("http://localhost:8080/petshop/member/naverLogin.do") &&
+						!referer.equals("http://localhost:8080/petshop/member/kakaoLogin.do")
 					){
 					session.setAttribute("referer", referer);
 				}	
