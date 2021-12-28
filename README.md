@@ -7,12 +7,9 @@
 - 팀원 : 손영원, 유미성, 조은수
 
 ### 개발 환경
-
 <img width="1008" alt="스크린샷 2021-12-28 오후 9 40 11" src="https://user-images.githubusercontent.com/84886265/147568313-f4861ec1-02e9-4e64-8a39-070e3f83d798.png">
 
-
 ### ERD
-
 <img width="1008" alt="스크린샷 2021-12-28 오후 9 41 17" src="https://user-images.githubusercontent.com/84886265/147569156-e515cea0-2f61-41bd-bb4d-b08e08410676.png">
 
 ### 주요 기능
