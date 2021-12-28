@@ -12,6 +12,11 @@
 ### ER다이어그램
 <img width="1008" alt="스크린샷 2021-12-28 오후 9 41 17" src="https://user-images.githubusercontent.com/84886265/147569156-e515cea0-2f61-41bd-bb4d-b08e08410676.png">
 
+### 서비스 개요
+<img width="1008" alt="스크린샷 2021-12-28 오후 9 37 30" src="https://user-images.githubusercontent.com/84886265/147569430-06e9296e-cb70-43ed-88ba-26261c966e0f.png">
+
+<img width="1008" alt="스크린샷 2021-12-28 오후 9 38 54" src="https://user-images.githubusercontent.com/84886265/147569498-cb1d8a1b-b8fd-4ae7-8618-48f1848aaa9a.png">
+
 ### 주요 기능 및 적용 기술
 - 상품 검색 및 Ajax를 이용한 검색어 자동 완성
 - OAuth를 이용한 로그인 기능(네이버, 카카오)
