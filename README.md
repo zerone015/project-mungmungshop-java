@@ -7,17 +7,15 @@
 - 팀원 : 손영원, 유미성, 조은수
 
 ### 개발 환경
+
 <img width="1008" alt="스크린샷 2021-12-28 오후 9 40 11" src="https://user-images.githubusercontent.com/84886265/147568313-f4861ec1-02e9-4e64-8a39-070e3f83d798.png">
 
-### ER다이어그램
+
+### ERD
+
 <img width="1008" alt="스크린샷 2021-12-28 오후 9 41 17" src="https://user-images.githubusercontent.com/84886265/147569156-e515cea0-2f61-41bd-bb4d-b08e08410676.png">
 
-### 서비스 개요
-<img width="1008" alt="스크린샷 2021-12-28 오후 9 37 30" src="https://user-images.githubusercontent.com/84886265/147569430-06e9296e-cb70-43ed-88ba-26261c966e0f.png">
-
-<img width="1008" alt="스크린샷 2021-12-28 오후 9 38 54" src="https://user-images.githubusercontent.com/84886265/147569498-cb1d8a1b-b8fd-4ae7-8618-48f1848aaa9a.png">
-
-### 주요 기능 및 적용 기술
+### 주요 기능
 - 상품 검색 및 Ajax를 이용한 검색어 자동 완성
 - OAuth를 이용한 로그인 기능(네이버, 카카오)
 - 로그인이 필요한 메뉴 접근 시 Interceptor를 이용하여 로그인 체크 하므로써 효율적인 유지보수 및 세션 관리가 가능하도록 구현
